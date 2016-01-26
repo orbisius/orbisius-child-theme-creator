@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: theme,child theme,childtheme,childthemes,parent theme,child themes,CSS,styling,resposive design,design,custom themeing, shared hosting,theme editor theme,themes,wp,wordpress,orbisius,theme creator,custom theme,theme generator,css,css editor
 Requires at least: 3.4
 Tested up to: 4.4
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv2 or later
 
 Create Child Themes quickly and easily from any theme that you have currently installed on your site/blog.
@@ -30,6 +30,7 @@ This plugin allows you to quickly edit theme files from Appearance &gt; Orbisius
 It features two editors and you can pick snippets from one theme and paste into another.
 
 = Theme Editor Features =
+
 * Edit two theme files at the same time
 * Ajax -> No page refresh
 * Easy to use interface
@@ -42,6 +43,7 @@ It features two editors and you can pick snippets from one theme and paste into 
 * Since (v1.1.3) Implemented theme files to be listed recursively (i.e. all files from the selected theme)
 * Since (v1.1.9) Both editors have the same buttons (in older versions only the left editor had all of the buttons).
 * Since (v1.2.2) Can create a blank functions.php file (Thanks Tobias Kaupat for the suggestion)
+
  = Important Reasons to Create Child Themes =
 * Keep your changes when the parent theme is updated.
 * Reduce duplicated code i.e. you need to copy and customize only the files that need to be customized
@@ -147,6 +149,9 @@ Todo
 	- Orbisius Edit
 
 == Changelog ==
+
+= 1.3.1 =
+* For some reason WordPress.org didn't register the 1.3.0 release or the stable tag didn't get set to 1.3.0 on time.
 
 = 1.3.0 =
 * Happy new year!
