@@ -3,8 +3,8 @@ Contributors: lordspace,orbisius
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7APYDVPBCSY9A
 Tags: theme,child theme,childtheme,childthemes,parent theme,child themes,CSS,styling,resposive design,design,custom themeing, shared hosting,theme editor theme,themes,wp,wordpress,orbisius,theme creator,custom theme,theme generator,css,css editor
 Requires at least: 3.4
-Tested up to: 4.3.1
-Stable tag: 1.2.9
+Tested up to: 4.4
+Stable tag: 1.3.0
 License: GPLv2 or later
 
 Create Child Themes quickly and easily from any theme that you have currently installed on your site/blog.
@@ -147,6 +147,11 @@ Todo
 	- Orbisius Edit
 
 == Changelog ==
+
+= 1.3.0 =
+* Happy new year!
+* Copying parent theme's options (if any).
+* Tested with WP 4.4.
 
 = 1.2.9 =
 * Added a link in the plugin's settings page to point to Appearance → Orbisius Child Theme Creator ( to save 1-2 seconds to the user :) )

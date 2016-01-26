@@ -3,7 +3,7 @@
   Plugin Name: Orbisius Child Theme Creator
   Plugin URI: http://club.orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/
   Description: This plugin allows you to quickly create child themes from any theme that you have currently installed on your site/blog.
-  Version: 1.2.9
+  Version: 1.3.0
   Author: Svetoslav Marinov (Slavi)
   Author URI: http://orbisius.com
  */
@@ -753,6 +753,7 @@ function orbisius_child_theme_creator_tools_action() {
                 $installer->check_permissions();
                 $installer->copy_main_files();
                 $installer->generate_style();
+                $installer->copy_parent_themes_options();
 
                 // Does the user want to copy the functions.php?
                 if (!empty($_REQUEST['create_blank_functions_file'])) {
@@ -1537,6 +1538,97 @@ class orbisius_child_theme_creator {
                 . "\n<br/>Next go to <a href='$themes_url'><strong>Appearance &gt; Themes</strong></a> and Activate the new theme "
                 . "or <a href='$edit_new_theme_url'>edit the new theme</a>.";
     }
+
+    /**
+     *
+     * @param str $parent_theme_slug
+     * @return boolean
+     */
+    function get_parent_themes_options( $parent_theme_slug = '' ) {
+       global $wpdb;
+       $theme = wp_get_theme( $parent_theme_slug );
+
+       // Do we have a theme? We should!
+       if ( empty( $theme ) || ! $theme->exists() ) {
+           return false;
+       }
+
+       // The parent theme's folder will be
+       // e.g. twentysixteen and we'll use that to look in the db
+       // for any settings (if any).
+       $tpl_dir = get_template_directory();
+       $theme_slug = basename( $tpl_dir );
+       $text_domain = $theme->get( 'TextDomain' );
+
+       $where_arr = $bind_params = array();
+       $where_arr[] = " `option_name` = '%s' "; // exact match; twentysixteen
+       $where_arr[] = " `option_name` LIKE '%%%s' "; // the match must be trailing theme_mods_twentysixteen
+       $bind_params[] = $theme_slug;
+       $bind_params[] = $theme_slug;
+
+       if ( ! empty( $text_domain ) && $text_domain != $theme_slug ) {
+           $where_arr[] = " `option_name` = '%s' "; // exact match; twentysixteen
+           $where_arr[] = " `option_name` LIKE '%%%s'"; // the match must be trailing theme_mods_twentysixteen
+           $bind_params[] = $text_domain;
+           $bind_params[] = $text_domain;
+       }
+
+       // http://wordpress.stackexchange.com/questions/67292/how-to-use-wildcards-in-wpdb-queries-using-wpdb-get-results-wpdb-prepare
+       $sql_prep = $wpdb->prepare("
+           SELECT option_name
+           FROM {$wpdb->prefix}options
+           WHERE ( " . join( ' OR ', $where_arr ) . " )
+           LIMIT 25",
+           $bind_params
+       );
+
+       $opts = array();
+       $results = $wpdb->get_results( $sql_prep, ARRAY_A );
+
+       foreach ( $results as $rec ) {
+           $option_name = $rec['option_name'];
+           $option_val = get_option( $option_name );
+           $opts[ $option_name ] = $option_val;
+       }
+
+       $result = array(
+           'options' => $opts,
+           'parent_theme_slug' => $theme_slug,
+           'parent_theme_text_domain' => $text_domain,
+       );
+
+       return $result;
+    }
+
+    /**
+    * Searches the options table for option names that match the slug of the current theme.
+    * We'll prefix them with the child theme's folder so it has some data.
+    * @global obj $wpdb
+    * @param str $theme
+    */
+   function copy_parent_themes_options( $child_theme_slug = '' ) {
+       $child_theme_slug = empty( $child_theme_slug ) ? $this->target_base_dirname : $child_theme_slug;
+       $result = $this->get_parent_themes_options();
+
+       foreach ( $result['options'] as $option_name => $option_val ) {
+           // boxed-wp or theme_mods_boxed-wp
+           if ( ! empty( $result['parent_theme_slug'] ) ) {
+               $child_theme_option_name = str_ireplace( $result['parent_theme_slug'], $child_theme_slug, $option_name );
+           }
+
+           if ( ! empty( $result['parent_theme_text_domain'] ) ) {
+               $child_theme_option_name = str_ireplace( $result['parent_theme_text_domain'], $child_theme_slug, $option_name );
+           }
+
+           $child_theme_val = get_option( $child_theme_option_name );
+           
+           if ( ( $child_theme_val === false ) && ( $option_val !== false ) ) {
+               update_option( $child_theme_option_name, $option_val );
+           }
+       }
+
+       return true;
+   }
 
     /**
      *
