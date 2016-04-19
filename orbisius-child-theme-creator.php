@@ -2541,7 +2541,6 @@ function orbisius_ctc_theme_editor_generate_dropdown() {
     $all_files = orbisius_child_theme_creator_util::load_files($theme_dir);
 
     foreach ($all_files as $file) {
-        // Listing
         if (preg_match('#\.(php|js|txt|css|sass|scss)(?:_error_.*)?$#si', $file)) {
             $files[] = $file;
         }
