@@ -3,7 +3,7 @@
   Plugin Name: Orbisius Child Theme Creator
   Plugin URI: http://club.orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/
   Description: This plugin allows you to quickly create child themes from any theme that you have currently installed on your site/blog.
-  Version: 1.3.1
+  Version: 1.3.2
   Author: Svetoslav Marinov (Slavi)
   Author URI: http://orbisius.com
  */
@@ -1512,7 +1512,7 @@ class orbisius_child_theme_creator {
 
         $buff .= "@import url('../$this->parent_theme_basedir/style.css');\n";
 
-        file_put_contents($this->target_dir_path . 'style.css', $buff);
+        file_put_contents($this->target_dir_path . 'style.css', $buff, LOCK_EX);
 
         // RTL langs; make rtl.css to point to the parent file as well
         if (file_exists($this->parent_theme_dir . 'rtl.css')) {
@@ -1526,7 +1526,7 @@ class orbisius_child_theme_creator {
 
             $rtl_buff .= "@import url('../$this->parent_theme_basedir/rtl.css');\n";
 
-            file_put_contents($this->target_dir_path . 'rtl.css', $rtl_buff);
+            file_put_contents($this->target_dir_path . 'rtl.css', $rtl_buff, LOCK_EX);
         }
 
         $themes_url = admin_url('themes.php');
@@ -2444,9 +2444,16 @@ function orbisius_ctc_theme_editor_zip_theme($theme_base_dir, $to) {
  */
 function orbisius_ctc_theme_editor_check_syntax($theme_file_contents) {
     $status_rec = array(
-        'status' => 0,
         'msg' => '',
+        'status' => 0,
     );
+
+    // Not a php thing so don't bother.
+    if (stripos($theme_file_contents, '<?') === false) {
+        $status_rec['msg'] = 'Syntax OK.';
+        $status_rec['status'] = 1;
+        return $status_rec;
+    }
 
     $temp = tmpfile();
     fwrite($temp, $theme_file_contents);
@@ -2479,6 +2486,7 @@ function orbisius_ctc_theme_editor_check_syntax($theme_file_contents) {
         } else {
             $status_rec['msg'] = 'Syntax check failed. Error: ' . $error;
         }
+        $status_rec['syntax_check_ran'] = 1;
     } else {
         $status_rec['msg'] = 'Syntax check: n/a. functiona: exec() and shell_exec() are not available.';
     }
@@ -2533,7 +2541,8 @@ function orbisius_ctc_theme_editor_generate_dropdown() {
     $all_files = orbisius_child_theme_creator_util::load_files($theme_dir);
 
     foreach ($all_files as $file) {
-        if (preg_match('#\.(php|css|js|txt)$#si', $file)) {
+        // Listing
+        if (preg_match('#\.(php|js|txt|css|sass|scss)(?:_error_.*)?$#si', $file)) {
             $files[] = $file;
         }
     }
@@ -2576,21 +2585,29 @@ function orbisius_ctc_theme_editor_manage_file( $cmd_id = 1 ) {
         return 'Missing data!';
     }
     
-    //$theme_dir = $theme_root . "$theme_base_dir/";
     if (empty($theme_base_dir) || !is_dir($theme_dir)) {
         return 'Selected theme is invalid.';
     } elseif (!file_exists($theme_file) && $cmd_id == 1) {
-    //} elseif (!file_exists($theme_dir . $theme_file) && $cmd_id == 1) {
         return 'Selected file is invalid.';
     }
-
-    //$theme_file = $theme_dir . $theme_file; //
 
     if ($cmd_id == 1) {
         $buff = file_get_contents($theme_file);
     } elseif ($cmd_id == 2) {
-        $status = file_put_contents($theme_file, $theme_file_contents);
-        $buff = !empty($status) ? $theme_file_contents : '';
+        $suff = '';
+        
+        // This should prevent people from crashing their WP by missing something.
+        // The changes will be saved in another file.
+        $syntax_check_rec = orbisius_ctc_theme_editor_check_syntax($theme_file_contents);
+
+        if (!empty($syntax_check_rec['syntax_check_ran']) && empty($syntax_check_rec['status'])) {
+            $suff = microtime(true);
+            $suff = preg_replace('#[^\w-]#si', '_', $suff);
+            $suff = '_error_' . date('Y-m-d') . '_' . $suff;
+        }
+
+        $status = file_put_contents($theme_file . $suff, $theme_file_contents, LOCK_EX);
+        $buff = $theme_file_contents;
     } elseif ($cmd_id == 3 && (!empty($req['theme_1_file']) || !empty($req['theme_2_file']))) {
         $status = unlink($theme_file);
     }

@@ -3,7 +3,7 @@ Contributors: lordspace,orbisius
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7APYDVPBCSY9A
 Tags: theme,child theme,childtheme,childthemes,parent theme,child themes,CSS,styling,resposive design,design,custom themeing, shared hosting,theme editor theme,themes,wp,wordpress,orbisius,theme creator,custom theme,theme generator,css,css editor
 Requires at least: 3.4
-Tested up to: 4.4
+Tested up to: 4.5
 Stable tag: 1.3.1
 License: GPLv2 or later
 
@@ -150,6 +150,13 @@ Todo
 	- Orbisius Edit
 
 == Changelog ==
+
+= 1.3.2 =
+* Added locking when saving files.
+* Syntax check is performed only for php files. Saving other files should be quicker now.
+* Perform a syntax check before saving to avoid crashing good people's WordPress. Changes are saved in a file with the same name but there's suffix added to it _error_
+* Listing _error_ files as well as sass, scss (if any)
+* Tested with WP 4.5
 
 = 1.3.1 =
 * For some reason WordPress.org didn't register the 1.3.0 release or the stable tag didn't get set to 1.3.0 on time.
