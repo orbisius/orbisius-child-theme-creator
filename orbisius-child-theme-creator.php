@@ -1679,7 +1679,7 @@ class orbisius_child_theme_creator {
 /**
  * Loads parent and child themes' style.css
  */
-function {$func_prefix}_enqueue_styles() {
+function {$func_prefix}_child_theme_enqueue_styles() {
     \$parent_style = '{$func_prefix}_parent_style';
     \$parent_base_dir = '$parent_base_dir';
 
@@ -1696,7 +1696,7 @@ function {$func_prefix}_enqueue_styles() {
     );
 }
 
-add_action( 'wp_enqueue_scripts', '{$func_prefix}_enqueue_styles' );
+add_action( 'wp_enqueue_scripts', '{$func_prefix}_child_theme_enqueue_styles' );
 
 BUFF_EOF;
 
