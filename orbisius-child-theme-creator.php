@@ -391,11 +391,11 @@ function orbisius_child_theme_creator_settings_page() {
                                 <script type="text/javascript">
                                     var addthis_config = {"data_track_clickback": true};
                                     var addthis_share = {
-                                        templates: {twitter: 'Check out {{title}} #WordPress #plugin at {{lurl}} (via @orbisius)'}
+                                        templates: {twitter: 'Check out {{title}} #WordPress #plugin at {{lurl}}'}
                                     }
                                 </script>
                                 <!-- AddThis Button START part2 -->
-                                <script type="text/javascript" src="//s7.addthis.com/js/250/addthis_widget.js#pubid=lordspace"></script>
+                                <script type="text/javascript" src="//s7.addthis.com/js/250/addthis_widget.js"></script>
                                 <!-- AddThis Button END part2 -->
                         </div> <!-- .postbox -->
                         
@@ -1718,26 +1718,19 @@ class orbisius_child_theme_creator_util {
      */
     public static function output_orb_widget($obj = '', $return = 0) {
         $buff = '';
+        ob_start();
         ?>
-        <!-- Orbisius JS Widget -->
-            <?php
-                $naked_domain = !empty($_SERVER['DEV_ENV']) ? 'orbclub.com.clients.com' : 'club.orbisius.com';
-
-                if (!empty($_SERVER['DEV_ENV']) && is_ssl()) {
-                    $naked_domain = 'ssl.orbisius.com/club';
-                }
-
-				// obj could be 'author'
-                $obj = empty($obj) ? str_replace('.php', '', basename(__FILE__)) : sanitize_title($obj);
-                $obj_id = 'orb_widget_' . sha1($obj);
-
-                $params = '?' . http_build_query(array('p' => $obj, 't' => $obj_id, 'layout' => 'plugin', ));
-                $buff .= "<div id='$obj_id' class='$obj_id orbisius_ext_content'></div>\n";
-                $buff .= "<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://$naked_domain/wpu/widget/$params';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'orbsius-js-$obj_id');</script>";
-            ?>
-            <!-- /Orbisius JS Widget -->
+            <!-- Orbisius -->
+            <div class="postbox">
+                <h3><span>Curious about our other products?</span></h3>
+                <div class="inside">
+                    Visit <a href="http://orbisius.com/products/" target="_blank">http://orbisius.com/products/</a>
+                </div> <!-- .inside -->
+            </div> <!-- .postbox -->
+            <!-- /Orbisius -->
         <?php
-
+        $buff = ob_get_clean();
+        
         if ($return) {
             return $buff;
         } else {

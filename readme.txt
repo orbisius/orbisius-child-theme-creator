@@ -160,6 +160,7 @@ Todo
 * Uses the recommended approach for loading css (since v.1.3.4)
 * Fixes, updated FAQ
 * Removed a notice about depricated function: https://wordpress.org/support/topic/depricated-functions-3/
+* Removed some snippets that contained some 3rd party tracking info e.g. twitter's via or some user id to the addthis widget.
 
 = 1.3.3 =
 * Tested with WP 4.6
