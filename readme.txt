@@ -18,6 +18,7 @@ It also creates rtl.css if exists in the parent theme.
 
 = Child Theme Creator Features =
 * Create a theme with a click of a button
+* Uses the recommended approach for loading css (since v.1.3.4)
 * Never forget what files to copy and what to skip when creating child themes.
 * Copies parent theme's options (since v.1.3)
 * Easy to use interface
