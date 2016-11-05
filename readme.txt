@@ -157,8 +157,9 @@ Todo
 == Changelog ==
 
 = 1.3.4 =
+* Uses the recommended approach for loading css (since v.1.3.4)
 * Fixes, updated FAQ
-* Removed a noticed about depricated function: https://wordpress.org/support/topic/depricated-functions-3/
+* Removed a notice about depricated function: https://wordpress.org/support/topic/depricated-functions-3/
 
 = 1.3.3 =
 * Tested with WP 4.6
