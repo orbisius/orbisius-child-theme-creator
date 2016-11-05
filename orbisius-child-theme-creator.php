@@ -1329,7 +1329,7 @@ class orbisius_child_theme_creator {
         // Let's create multiple folders in case the script is run multiple times.
         do {
             $i++;
-            $target_dir = $all_themes_root . '/' . $parent_theme_basedir . '-sub-theme-' . sprintf("%02d", $i) . '/';
+            $target_dir = $all_themes_root . '/' . $parent_theme_basedir . '-child-theme-' . sprintf("%02d", $i) . '/';
         } while (is_dir($target_dir));
 
         $this->target_dir_path = $target_dir;
