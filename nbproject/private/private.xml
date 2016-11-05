@@ -30,12 +30,12 @@
             </bookmark>
             <bookmark id="13">
                 <name/>
-                <line>2462</line>
+                <line>2469</line>
                 <key/>
             </bookmark>
             <bookmark id="3">
                 <name/>
-                <line>2506</line>
+                <line>2514</line>
                 <key/>
             </bookmark>
         </file>
@@ -52,6 +52,7 @@
         <group name="qsandbox"/>
         <group>
             <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/orbisius-child-theme-creator.php</file>
+            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/readme.txt</file>
         </group>
     </open-files>
 </project-private>

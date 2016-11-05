@@ -3,8 +3,8 @@ Contributors: lordspace,orbisius
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7APYDVPBCSY9A
 Tags: theme,child theme,childtheme,childthemes,parent theme,child themes,CSS,styling,resposive design,design,custom themeing, shared hosting,theme editor theme,themes,wp,wordpress,orbisius,theme creator,custom theme,theme generator,css,css editor
 Requires at least: 3.4
-Tested up to: 4.5
-Stable tag: 1.3.2
+Tested up to: 4.6
+Stable tag: 1.3.3
 License: GPLv2 or later
 
 Create Child Themes quickly and easily from any theme that you have currently installed on your site/blog.
@@ -114,6 +114,10 @@ n/a
 Just install the plugin and activate it. Then go to Admin > Appearance > Orbisius Child Theme Creator.
 Then click on a theme and the plugin will create a child theme for you.
 
+= After my child theme is created can I remove the plugin safely? =
+Yes, you can, however, the plugin comes with a double editor which is pretty awesome.
+It allows you to copy and paste from one theme to another without changing screens.
+
 = How to disable Orbisius Theme Editor Plugin? =
 Just put this line right after the first <?php tag in the wp-config.php. This will also remove the WordPress' Theme/Plugin editors as well.
 
@@ -150,6 +154,14 @@ Todo
 	- Orbisius Edit
 
 == Changelog ==
+
+= 1.3.4 =
+* Fixes, updated FAQ
+* Removed a noticed about depricated function: https://wordpress.org/support/topic/depricated-functions-3/
+
+= 1.3.3 =
+* Tested with WP 4.6
+* TODO: when saving return JSON and show an error on invalid syntax.
 
 = 1.3.2 =
 * Added locking when saving files.
