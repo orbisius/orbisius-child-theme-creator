@@ -1681,9 +1681,15 @@ class orbisius_child_theme_creator {
  */
 function {$func_prefix}_enqueue_styles() {
     \$parent_style = '{$func_prefix}_parent_style';
+    \$parent_base_dir = '$parent_base_dir';
 
-    wp_enqueue_style( \$parent_style, get_template_directory_uri() . '/style.css' );
-    wp_enqueue_style( '{$func_prefix}_child_style',
+    wp_enqueue_style( \$parent_style,
+        get_template_directory_uri() . '/style.css',
+        array(),
+        wp_get_theme( \$parent_base_dir ) ? wp_get_theme( \$parent_base_dir )->get('Version') : ''
+    );
+
+    wp_enqueue_style( \$parent_style . '_child_style',
         get_stylesheet_directory_uri() . '/style.css',
         array( \$parent_style ),
         wp_get_theme()->get('Version')
