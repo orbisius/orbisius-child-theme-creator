@@ -124,6 +124,11 @@ Just put this line right after the first <?php tag in the wp-config.php. This wi
 
 define('DISALLOW_FILE_EDIT', true);
 
+= How to edit a logo or colours? = 
+The theme should have an option to do that.
+Please, check the customizer or within the admin area for a menu that matches the theme's name.
+Our plugin doesn't know how each theme works so it's better to direct those kind of questions to the theme designer.
+
 = The child theme is created but doesn't have some styles or doesn't show the admin panel of the parent theme =
 OK. Please contact the theme author if his/her theme is child theme friendly.
 Also which files does the theme need in order to work well.

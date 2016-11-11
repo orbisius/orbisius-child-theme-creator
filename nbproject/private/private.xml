@@ -1,41 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="13">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="16">
         <file>
             <url>orbisius-child-theme-creator.php</url>
+            <bookmark id="15">
+                <name/>
+                <line>1372</line>
+                <key/>
+            </bookmark>
+            <bookmark id="16">
+                <name/>
+                <line>1513</line>
+                <key/>
+            </bookmark>
             <bookmark id="6">
                 <name/>
-                <line>1582</line>
+                <line>1585</line>
+                <key/>
+            </bookmark>
+            <bookmark id="14">
+                <name/>
+                <line>1663</line>
                 <key/>
             </bookmark>
             <bookmark id="12">
                 <name/>
-                <line>2057</line>
+                <line>2082</line>
                 <key/>
             </bookmark>
             <bookmark id="9">
                 <name/>
-                <line>2062</line>
+                <line>2087</line>
                 <key/>
             </bookmark>
             <bookmark id="5">
                 <name/>
-                <line>2104</line>
+                <line>2129</line>
                 <key/>
             </bookmark>
             <bookmark id="4">
                 <name/>
-                <line>2256</line>
+                <line>2281</line>
                 <key/>
             </bookmark>
             <bookmark id="13">
                 <name/>
-                <line>2469</line>
+                <line>2494</line>
                 <key/>
             </bookmark>
             <bookmark id="3">
                 <name/>
-                <line>2514</line>
+                <line>2539</line>
                 <key/>
             </bookmark>
         </file>
@@ -51,6 +66,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="qsandbox"/>
         <group>
+            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/orbisius-child-theme-creator.php</file>
+            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/readme.txt</file>
+        </group>
+        <group name="Go359">
             <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/orbisius-child-theme-creator.php</file>
             <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/readme.txt</file>
         </group>
