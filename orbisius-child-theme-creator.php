@@ -473,7 +473,7 @@ function orbisius_child_theme_creator_settings_page() {
                         <div class="postbox">
                             <div class="inside">
                                 <!-- Twitter: code -->
-                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
                                 <!-- /Twitter: code -->
 
                                 <!-- Twitter: Orbisius_Follow:js -->
@@ -484,7 +484,7 @@ function orbisius_child_theme_creator_settings_page() {
                                 &nbsp;
 
                                 <!-- Twitter: Tweet:js -->
-                                <a href="https://twitter.com/share" class="twitter-share-button"
+                                <a href="//twitter.com/share" class="twitter-share-button"
                                    data-lang="en" data-text="Checkout Orbisius Child Theme Creator #WordPress #plugin.Create Child Themes in Seconds"
                                    data-count="none" data-via="orbisius" data-related="orbisius"
                                    data-url="<?php echo $product_page_tweet_link;?>">Tweet</a>
@@ -1127,18 +1127,18 @@ function orbisius_child_theme_creator_tools_action() {
                         <div class="postbox">
                             <div class="inside">
                                 <!-- Twitter: code -->
-                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
                                 <!-- /Twitter: code -->
 
                                 <!-- Twitter: Orbisius_Follow:js -->
-                                    <a href="https://twitter.com/orbisius" class="twitter-follow-button"
+                                    <a href="//twitter.com/orbisius" class="twitter-follow-button"
                                        data-align="right" data-show-count="false">Follow @orbisius</a>
                                 <!-- /Twitter: Orbisius_Follow:js -->
 
                                 &nbsp;
 
                                 <!-- Twitter: Tweet:js -->
-                                <a href="https://twitter.com/share" class="twitter-share-button"
+                                <a href="//twitter.com/share" class="twitter-share-button"
                                    data-lang="en" data-text="Checkout Orbisius Child Theme Creator #WordPress #plugin.Create Child Themes in Seconds"
                                    data-count="none" data-via="orbisius" data-related="orbisius"
                                    data-url="<?php echo $product_page_tweet_link;?>">Tweet</a>
