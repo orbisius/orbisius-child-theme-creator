@@ -2473,7 +2473,7 @@ function orbisius_ctc_theme_editor_check_syntax($theme_file_contents) {
         'status' => 0,
     );
 
-    // Not a php thing so don't bother.
+    // Not a php file so don't do a syntax check.
     if (stripos($theme_file_contents, '<?') === false) {
         $status_rec['msg'] = 'Syntax OK.';
         $status_rec['status'] = 1;
