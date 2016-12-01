@@ -134,3 +134,8 @@
 .orbisius_ctc_theme_editor_container .primary_buttons {
     margin-top:5px;
 }
+
+.orbisius_ctc_theme_editor_theme_1_form .modified_content,
+.orbisius_ctc_theme_editor_theme_2_form .modified_content {
+    border: 1px dashed #D54E21/* !important*/;
+}

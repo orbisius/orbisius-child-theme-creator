@@ -2139,6 +2139,7 @@ function orbisius_ctc_theme_editor() {
                         <span class="orbisius_ctc_theme_editor_theme_1_primary_buttons primary_buttons">
                             <button type='submit' class='button button-primary' id="theme_1_submit" name="theme_1_submit">Save</button>
                             <span class="status"></span>
+                            <?php do_action('orbisius_child_theme_creator_editors_ext_action_left_primary_buttons', array( 'place' => 'left' ) ); ?>
                         </span>
 
                         <div id="theme_1_file_contents_container">
@@ -2198,10 +2199,17 @@ function orbisius_ctc_theme_editor() {
                             </div>
                             <!-- /send -->
 
+                            <?php do_action('orbisius_child_theme_creator_editors_ext_action_left_start', array( 'place' => 'left' ) ); ?>
+                            <?php do_action('orbisius_child_theme_creator_editors_ext_action_left_end', array( 'place' => 'left' ) ); ?>
+
                             <div style="border:1px solid #ccc;margin:10px 0;padding:3px 5px;">
                                 <h3>Pro Addon 
                                     <?php if ( ! orbisius_child_theme_creator_is_pro_installed() ) : ?>
-                                    - starts at just $2<strong>.</strong>99 (limit time offer)
+                                    <ul>
+                                        <li>Syntax Highlighting</li>
+                                        <li>Better dropdown for selecting themes and files</li>
+                                        <li></li>
+                                    </ul>
                                     <?php endif; ?>
                                 </h3>
 
@@ -2239,7 +2247,6 @@ function orbisius_ctc_theme_editor() {
                             <!-- /new folder -->
                         </div> <!-- /secondary_buttons -->
                     </form>
-
                 </td>
                 <td width="50%">
                     <form id="orbisius_ctc_theme_editor_theme_2_form" class="orbisius_ctc_theme_editor_theme_2_form">
@@ -2253,6 +2260,7 @@ function orbisius_ctc_theme_editor() {
 
                         <span class="orbisius_ctc_theme_editor_theme_2_primary_buttons primary_buttons">
                             <button type='submit' class='button button-primary' id="theme_2_submit" name="theme_2_submit">Save</button>
+                            <?php do_action('orbisius_child_theme_creator_editors_ext_action_right_primary_buttons', array( 'place' => 'right' ) ); ?>
                             <span class="status"></span>
                         </span>
 
@@ -2309,6 +2317,8 @@ function orbisius_ctc_theme_editor() {
                 </td>
             </tr>
         </table>
+
+        <?php do_action('orbisius_child_theme_creator_editors_ext_action_footer', array() ); ?>
 
         <br/>
         <?php orbisius_child_theme_creator_util::output_orb_widget(); ?>

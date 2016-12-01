@@ -164,6 +164,9 @@ Todo
 = 1.3.5 =
 * Changed twitter non-ssl links to protocol relative URLs.
 * Added LOCK_SH for the file read operation
+* Added a flag to tell if the content editors are 'dirty' i.e. their content was modified.
+* Added a border to the content box if modified.
+* TODO: check php syntax before saving for php files - remove button to check syntax?
 
 = 1.3.4 =
 * Uses the recommended approach for loading css (since v.1.3.4)

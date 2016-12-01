@@ -86,6 +86,25 @@ function orbisius_ctc_theme_editor_setup() {
         app_load('#orbisius_ctc_theme_editor_theme_1_form', 'generate_dropdown', '#theme_1_file', app_handle_theme_change);
     }
 
+    $( '#theme_1_file_contents,#theme_2_file_contents' ).on( 'keyup keypress input paste', function (e) { // keydown propertychange change click 
+        var custm_event_data = {
+            target : $( this ),
+            event : e
+        };
+
+        jQuery(document).trigger('orbisius_child_theme_editor_event_content_updated', [ custm_event_data ] );
+    } );
+
+    jQuery(document).on('orbisius_child_theme_editor_event_content_updated', function ( e, ctx_data ) {
+        jQuery( ctx_data.target ).data( 'orb_ctc_modified_content', 1 );
+        jQuery( ctx_data.target ).addClass( 'modified_content' );
+    } );
+
+    jQuery(document).on('orbisius_child_theme_editor_event_content_saved', function ( e, ctx_data ) {
+        jQuery( ctx_data.target ).removeData( 'orb_ctc_modified_content' );
+        jQuery( ctx_data.target ).removeClass( 'modified_content' );
+    } );
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     // Delete File #1
     ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -811,6 +830,13 @@ function app_load(form_id, action, target_container, callback) {
                     setTimeout(function () {
                         jQuery('.status', jQuery(target_container).parent()).empty().removeClass('app-alert-success app-alert-error');
                     }, 2000);
+
+                    var custm_event_data = {
+                        target : jQuery( target_container ),
+                        event : {}
+                    };
+                    jQuery(document).trigger('orbisius_child_theme_editor_event_content_saved', [ custm_event_data ] );
+
                 }
             } else if (is_save_action) { // save action
                 jQuery('.status', jQuery(target_container).parent()).html('Oops. Cannot save.').addClass('app-alert-error');
