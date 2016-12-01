@@ -78,6 +78,26 @@ jQuery(document).ready(function($) {
  */
 function orbisius_ctc_theme_editor_setup() {
     var $ = jQuery;
+    var onbeforeunload_old = window.onbeforeunload;
+
+    // Let's warn the user if there's unsaved content.
+    // The browser don't display the actual message I've provided which is stupid.
+    $(window).on('beforeunload', function(e) {
+        var message = '';
+
+        if ( jQuery( '#theme_1_file_contents' ).data( 'orb_ctc_modified_content' ) ) {
+            message = "Left Editor: Content was modified. Are you sure you want to leave without saving?";
+        } else if ( jQuery( '#theme_2_file_contents' ).data( 'orb_ctc_modified_content' ) ) {
+            message = "Right Editor: Content was modified. Are you sure you want to leave without saving?";
+        }
+
+        if ( message != '' ) {
+            e.returnValue = message;
+            return message;
+        } else if ( typeof onbeforeunload_old != 'undefined' ) {
+            return onbeforeunload_old(e);
+        }
+    });
 
     var current_theme_dir = $('#theme_1').val();
 
