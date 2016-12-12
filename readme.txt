@@ -111,6 +111,9 @@ n/a
 
 == Frequently Asked Questions ==
 
+= How to change Child thme screenshot? =
+currently, only via ftp.
+
 = How to use this plugin? =
 Just install the plugin and activate it. Then go to Admin > Appearance > Orbisius Child Theme Creator.
 Then click on a theme and the plugin will create a child theme for you.
