@@ -45,6 +45,7 @@ It features two editors and you can pick snippets from one theme and paste into 
 * Since (v1.1.3) Implemented theme files to be listed recursively (i.e. all files from the selected theme)
 * Since (v1.1.9) Both editors have the same buttons (in older versions only the left editor had all of the buttons).
 * Since (v1.2.2) Can create a blank functions.php file (Thanks Tobias Kaupat for the suggestion)
+* Since (v1.3.5)* Users can create new files in non-existing folders e.g. headers/header-two.php
 
  = Important Reasons to Create Child Themes =
 * Keep your changes when the parent theme is updated.
@@ -171,6 +172,8 @@ Todo
 * Added a border to the content box if modified.
 * Warn the user if there's unsaved content in either of the editors. The browser won't display the actual message I've provided which is stupid.
 * TODO: check php syntax before saving for php files - remove button to check syntax?
+* Users now can create new files in non-existing folders e.g. headers/header-two.php
+* Tested with WP 4.7
 
 = 1.3.4 =
 * Uses the recommended approach for loading css (since v.1.3.4)

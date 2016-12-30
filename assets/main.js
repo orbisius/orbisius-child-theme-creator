@@ -15,7 +15,7 @@ var orbisius_child_theme_creator = {
      * @returns str
      */
     sanitize_file_name : function (val) {
-        val = val.replace(/[^\w-.\s]/ig, '');
+        val = val.replace(/[^\w\-\.\s\/\\]/ig, '');
         val = val.replace(/\s+/ig, '-');
         val = val.replace(/\.+/ig, '.');
         val = val.replace(/-+/ig, '-');
@@ -223,6 +223,13 @@ function orbisius_ctc_theme_editor_setup() {
         $('#theme_1_new_file_container').hide('slow');
         $('#theme_1_new_file').val(''); // text box for new file
         $('#theme_1_file_contents').val('').focus(); // textarea
+
+        var custum_event_data = {
+            file : val,
+            file_selector : '#theme_1_file',
+            content_selector : '#theme_1_file_contents'
+        };
+        jQuery(document).trigger( 'orbisius_child_theme_editor_event_new_file', [ custum_event_data ] );
     });
 
     // This is when the cancel button is clicked so the user doesn't want a new file.
@@ -308,6 +315,13 @@ function orbisius_ctc_theme_editor_setup() {
         $('#theme_2_new_file_container').hide('slow');
         $('#theme_2_new_file').val(''); // text box for new file
         $('#theme_2_file_contents').val('').focus(); // textarea
+
+        var custum_event_data = {
+            file : val,
+            file_selector : '#theme_2_file',
+            content_selector : '#theme_2_file_contents'
+        };
+        jQuery(document).trigger( 'orbisius_child_theme_editor_event_new_file', [ custum_event_data ] );
     });
 
     // This is when the cancel button is clicked so the user doesn't want a new file.

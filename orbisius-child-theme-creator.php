@@ -3,7 +3,7 @@
   Plugin Name: Orbisius Child Theme Creator
   Plugin URI: http://club.orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/
   Description: This plugin allows you to quickly create child themes from any theme that you have currently installed on your site/blog.
-  Version: 1.3.4
+  Version: 1.3.5
   Author: Svetoslav Marinov (Slavi)
   Author URI: http://orbisius.com
  */
@@ -2169,7 +2169,7 @@ function orbisius_ctc_theme_editor() {
                             <div id='theme_1_new_file_container' class="theme_1_new_file_container app-hide">
                                 <strong>New File</strong>
                                 <input type="text" id="theme_1_new_file" name="theme_1_new_file" value="" />
-                                <span>e.g. test.js, extra.css etc</span>
+                                <span>e.g. test.js, extra.css, headers/header-two.php etc</span>
 
                                 <!--<br/>
                                 <label>
@@ -2605,20 +2605,29 @@ function orbisius_ctc_theme_editor_manage_file( $cmd_id = 1 ) {
 
     $theme_root = trailingslashit( get_theme_root() );
 
+    $theme_dir_regex = '#[^\w\-]#si';
+
     if (!empty($req['theme_1']) && !empty($req['theme_1_file'])) {
-        $theme_base_dir = empty($req['theme_1']) ? '______________' : preg_replace('#[^\w-]#si', '', $req['theme_1']);
+        $theme_base_dir = empty($req['theme_1']) ? '______________' : preg_replace( $theme_dir_regex, '', $req['theme_1']);
         $theme_dir = $theme_root . "$theme_base_dir/";
-        $theme_file = empty($req['theme_1_file']) ? $theme_dir . 'style.css' : orbisius_child_theme_creator_util::sanitize_file_name($req['theme_1_file'], $theme_dir);
+        $theme_file = empty($req['theme_1_file']) 
+                ? $theme_dir . 'style.css'
+                : orbisius_child_theme_creator_util::sanitize_file_name($req['theme_1_file'], $theme_dir);
+
         $theme_file_contents = empty($req['theme_1_file_contents']) ? '' : $req['theme_1_file_contents'];
     } elseif (!empty($req['theme_2']) && !empty($req['theme_2_file'])) {
-        $theme_base_dir = empty($req['theme_2']) ? '______________' : preg_replace('#[^\w-]#si', '', $req['theme_2']);
+        $theme_base_dir = empty($req['theme_2'])
+                ? '______________'
+                : preg_replace( $theme_dir_regex, '', $req['theme_2']);
         $theme_dir = $theme_root . "$theme_base_dir/";
-        $theme_file = empty($req['theme_2_file']) ? $theme_dir . 'style.css' : orbisius_child_theme_creator_util::sanitize_file_name($req['theme_2_file'], $theme_dir);
+        $theme_file = empty($req['theme_2_file']) 
+                ? $theme_dir . 'style.css'
+                : orbisius_child_theme_creator_util::sanitize_file_name($req['theme_2_file'], $theme_dir);
         $theme_file_contents = empty($req['theme_2_file_contents']) ? '' : $req['theme_2_file_contents'];
     } else {
         return 'Missing data!';
     }
-    
+
     if (empty($theme_base_dir) || !is_dir($theme_dir)) {
         return 'Selected theme is invalid.';
     } elseif (!file_exists($theme_file) && $cmd_id == 1) {
@@ -2629,7 +2638,7 @@ function orbisius_ctc_theme_editor_manage_file( $cmd_id = 1 ) {
         $buff = file_get_contents($theme_file, LOCK_SH);
     } elseif ($cmd_id == 2) {
         $suff = '';
-        
+
         // This should prevent people from crashing their WP by missing something.
         // The changes will be saved in another file.
         $syntax_check_rec = orbisius_ctc_theme_editor_check_syntax($theme_file_contents);
@@ -2638,6 +2647,16 @@ function orbisius_ctc_theme_editor_manage_file( $cmd_id = 1 ) {
             $suff = microtime(true);
             $suff = preg_replace('#[^\w-]#si', '_', $suff);
             $suff = '_error_' . date('Y-m-d') . '_' . $suff;
+        }
+
+        // This a case where the file resides in a new folder that doesn't exist yet.
+        // e.g. headers/header-two.php
+        $cur_file_parent_dir = dirname( $theme_file );
+
+        if ( ! is_dir( $cur_file_parent_dir ) ) {
+            if ( ! mkdir( $cur_file_parent_dir, 0755, 1 ) ) {
+                trigger_error( "Cannot create folder: [$cur_file_parent_dir]. Please, check folder permissions.", E_USER_NOTICE );
+            }
         }
 
         $status = file_put_contents($theme_file . $suff, $theme_file_contents, LOCK_EX);
