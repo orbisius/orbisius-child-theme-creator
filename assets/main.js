@@ -232,6 +232,12 @@ function orbisius_ctc_theme_editor_setup() {
         jQuery(document).trigger( 'orbisius_child_theme_editor_event_new_file', [ custum_event_data ] );
     });
 
+    // When the admin creates a new file we'll scroll to the element so he/she can start typing
+    // http://stackoverflow.com/questions/6682451/animate-scroll-to-id-on-page-load
+    jQuery(document).on( 'orbisius_child_theme_editor_event_new_file', function(obj, custom_data) {
+        $("html, body").animate({ scrollTop: jQuery( custom_data.file_selector ).offset().top - 50 }, 1000);
+    } );
+
     // This is when the cancel button is clicked so the user doesn't want a new file.
     $('#theme_1_new_file_btn_cancel').on("click", function () {
         $('#theme_1_new_file').val('');

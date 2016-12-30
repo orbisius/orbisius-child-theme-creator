@@ -173,6 +173,7 @@ Todo
 * Warn the user if there's unsaved content in either of the editors. The browser won't display the actual message I've provided which is stupid.
 * TODO: check php syntax before saving for php files - remove button to check syntax?
 * Users now can create new files in non-existing folders e.g. headers/header-two.php
+* When the admin creates a new file we'll scroll to the element so he/she can start typing
 * Tested with WP 4.7
 
 = 1.3.4 =
