@@ -3,7 +3,7 @@
   Plugin Name: Orbisius Child Theme Creator
   Plugin URI: http://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/
   Description: This plugin allows you to quickly create child themes from any theme that you have currently installed on your site/blog.
-  Version: 1.3.6
+  Version: 1.3.7
   Author: Svetoslav Marinov (Slavi)
   Author URI: http://orbisius.com
  */
@@ -589,8 +589,8 @@ function orbisius_child_theme_creator_settings_page() {
                                         What data will be sent
                                         <a href='javascript:void(0);'
                                             onclick='jQuery(".octc_data_to_be_sent").toggle();'>(show/hide)</a>
-                                        <div class="hide app_hide octc_data_to_be_sent">
-                                            <textarea class="widefat" rows="4" readonly="readonly" disabled="disabled"><?php
+                                        <div class="hide-is-js app-hide octc_data_to_be_sent">
+                                            <textarea class="widefat0" rows="4" readonly="readonly" disabled="disabled"><?php
                                             foreach ($hidden_data as $key => $val) {
                                                 if (is_array($val)) {
                                                     $val = var_export($val, 1);
@@ -1243,7 +1243,7 @@ function orbisius_child_theme_creator_tools_action() {
                                         What data will be sent
                                         <a href='javascript:void(0);'
                                             onclick='jQuery(".octc_data_to_be_sent").toggle();'>(show/hide)</a>
-                                        <div class="hide app_hide octc_data_to_be_sent">
+                                        <div class="hide app-hide octc_data_to_be_sent">
                                             <textarea class="widefat" rows="4" readonly="readonly" disabled="disabled"><?php
                                             foreach ($hidden_data as $key => $val) {
                                                 if (is_array($val)) {

@@ -165,6 +165,11 @@ Todo
 
 == Changelog ==
 
+= 1.3.7 =
+* Tested with WP 4.7.2
+* Corrected some links within the plugin. They were pointing to a wrong site because of an additiona .com to the domain name.
+* Fixes
+
 = 1.3.6 =
 * Corrected some links from club.orbisius.com -> orbisius.com
 
