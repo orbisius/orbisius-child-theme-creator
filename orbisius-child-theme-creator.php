@@ -649,15 +649,7 @@ function orbisius_child_theme_creator_top_links($slug_area = 'orbisius-child-the
             <?php endif; ?>
         </a>
 
-        | <a href="//orbisius.com/page/free-quote/?utm_source=child-theme-creator&utm_medium=plugin-links&utm_campaign=plugin-update"
-             target="_blank" title="If you want a custom web/mobile app or a plugin developed contact us. This opens in a new window/tab">Hire Us</a>
-
-        | <a href="//orbisius.com/forums/forum/community-support-forum/wordpress-plugins/orbisius-child-theme-creator/?utm_source=<?php echo $slug_area; ?>&utm_medium=action_screen&utm_campaign=product" target="_blank" title="[new window]">Support Forums</a>
-
         | <a href="//orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/?utm_source=<?php echo $slug_area; ?>&utm_medium=action_screen&utm_campaign=product" target="_blank" title="[new window]">Product Page</a>
-
-        | <a href="//orbisius.us2.list-manage.com/subscribe?u=005070a78d0e52a7b567e96df&id=1b83cd2093" target="_blank"
-             title="This opens in a new window/tab">Newsletter</a>
 
         <!--| <a href="#help" title="">Help</a>-->
     </div>
@@ -1536,7 +1528,9 @@ class orbisius_child_theme_creator {
         $edit_new_theme_url = admin_url('themes.php?page=orbisius_child_theme_creator_theme_editor_action&theme_1=' 
                 . urlencode($this->target_base_dirname));
 
-        $this->info_result = "$parent_theme_data->Name " . $this->target_name_suffix . ' has been created in ' . $this->target_dir_path
+        $target_dir_path_rel = $this->target_dir_path;
+        $target_dir_path_rel = preg_replace( '#.*wp-content[\/\\\]#si', '', $target_dir_path_rel );
+        $this->info_result = "$parent_theme_data->Name " . $this->target_name_suffix . ' has been created in ' . $target_dir_path_rel
                 . ' based on ' . $parent_theme_data->Name . ' theme.'
                 . "\n<br/>Next go to <a href='$themes_url'><strong>Appearance &gt; Themes</strong></a> and Activate the new theme "
                 . "or <a href='$edit_new_theme_url'>edit the new theme</a>.";
@@ -1958,11 +1952,11 @@ class orbisius_child_theme_creator_util {
         $msg = join("<br/>\n", (array) $msg);
 
         if (empty($status)) {
-            $cls = 'app-alert-error';
+            $cls = 'error app-alert-error00';
         } elseif ($status == 1) {
-            $cls = 'app-alert-success';
+            $cls = 'updated app-alert-success00';
         } else {
-            $cls = 'app-alert-notice';
+            $cls = 'app-alert-notice00';
         }
 
         $str = "<div class='$cls'><p>$msg</p></div>";
