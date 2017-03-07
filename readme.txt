@@ -166,7 +166,11 @@ Todo
 == Changelog ==
 
 = 1.3.8 =
+* Now it's easier to switch to a child theme ... there's an Activate button under each child theme.
 * Reduced the default option (= SELECT THEME =) in the dropdown so it doesn't push the buttons down on smaller displays.
+* Removed some top links in the creator
+* Improved how messages are shown using WP classes and not custom ones.
+* Removed some centering in css
 * Tested with WP 4.7.7
 
 = 1.3.7 =

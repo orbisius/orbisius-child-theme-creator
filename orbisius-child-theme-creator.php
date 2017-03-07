@@ -93,7 +93,40 @@ function orbisius_child_theme_creator_admin_notice_message() {
  * @since 1.0
  */
 function orbisius_child_theme_creator_admin_init() {
+    if ( ! empty( $_REQUEST['orbisius_child_theme_creator_data']['cmd'] ) ) {
+        try {
+            $orbisius_child_theme_creator_data = $_REQUEST['orbisius_child_theme_creator_data'];
+            
+            if ( empty( $orbisius_child_theme_creator_data['theme'] ) ) {
+                throw new Exception( "No theme" );
+            }
+            
+            if ( empty( $orbisius_child_theme_creator_data['nonce'] ) 
+                    || ! wp_verify_nonce( $orbisius_child_theme_creator_data['nonce'], 'orbisius_child_theme_creator_data' ) ) {
+                throw new Exception( "No nonce or it's invalid." );
+            }
+            
+            if ( ! orbisius_child_theme_creator_util::has_access() && isset($_GET['action'] ) ) {
+                throw new Exception( "No access" );
+            }
+            
+            $theme = wp_get_theme( $orbisius_child_theme_creator_data['theme'] );
 
+            if ( ! $theme->exists() || ! $theme->is_allowed() ) {
+                throw new Exception( "No theme or it's invalid." );
+            }
+
+            switch_theme( $theme->get_stylesheet() );
+            wp_redirect( admin_url( 'themes.php?activated=true' ) );
+            exit;
+        } catch (Exception $e) {
+            wp_die(
+                '<h1>' . __( 'Error' ) . '</h1>' .
+                '<p>' . __( $e->getMessage() ) . '</p>',
+                200
+            );
+        }
+    }      
 }
 
 function orbisius_child_theme_creator_is_pro_installed() {
@@ -643,7 +676,7 @@ function orbisius_child_theme_creator_top_links($slug_area = 'orbisius-child-the
              target="_blank" title="[new window]" style="font-weight: bolder;color:<?php echo $text_color;?>">Pro Addon
 
             <?php if ( ! orbisius_child_theme_creator_is_pro_installed() ) : ?>
-                <sup>New!</sup>
+                
             <?php else : ?>
                 <sup>Installed!</sup>
             <?php endif; ?>
@@ -697,7 +730,7 @@ function orbisius_child_theme_creator_get_plugin_data() {
  */
 function orbisius_child_theme_creator_tools_action() {
     // ACL checks *borrowed* from wp-admin/theme-install.php
-    if ( ! current_user_can('install_themes') ) {
+    if ( ! orbisius_child_theme_creator_util::has_access() ) {
     	wp_die( __( 'You do not have sufficient permissions to install themes on this site.' ) );
     }
 
@@ -870,7 +903,7 @@ function orbisius_child_theme_creator_tools_action() {
 
         $edit_theme_link = orbisius_child_theme_creator_util::get_theme_editor_link( array('theme_1' => $theme_basedir_name) );
         $author_line .= " | <a href='$edit_theme_link' title='Edit with Orbisius Theme Editor'>Edit</a>\n";
-
+        
         $buff .= "<div class='available-theme'>\n";
         $buff .= "<form action='$create_url' method='post'>\n";
         $buff .= "<a href='$src' target='_blank' title='See larger version of the screenshot. [new window]'><img class='screenshot' src='$src' alt='' /></a>\n";
@@ -1000,8 +1033,13 @@ function orbisius_child_theme_creator_tools_action() {
                 ? $author_name
                 : "<a title='Visit author homepage' href='$author_uri' target='_blank'>$author_name</a>";
 
-        $author_line .= " | Ver.$theme_obj->Version\n";
+//        $author_line .= " | Ver.$theme_obj->Version\n";
 
+        if ( orbisius_child_theme_creator_util::has_access() ) {
+            $activate_theme_link = orbisius_child_theme_creator_util::get_theme_activation_link( array('theme_1' => $theme_basedir_name) );
+            $author_line .= " | <a href='$activate_theme_link' title='Activate this Child Theme. This will switch the site to the selected Child Theme'>Activate</a>\n";
+        }
+        
         $edit_theme_link = orbisius_child_theme_creator_util::get_theme_editor_link( array('theme_1' => $theme_basedir_name) );
         $author_line .= " | <a href='$edit_theme_link' title='Edit with Orbisius Theme Editor'>Edit</a>\n";
 
@@ -1707,6 +1745,13 @@ BUFF_EOF;
  */
 class orbisius_child_theme_creator_util {
     /**
+     * orbisius_child_theme_creator_util::has_access()
+     */
+    public static function has_access() {
+        return current_user_can( 'switch_themes' ) && current_user_can( 'install_themes' );
+    }
+    
+    /**
      * Loads news from Club Orbsius Site.
      * <?php orbisius_child_theme_creator_util::output_orb_widget(); ?>
      */
@@ -1809,6 +1854,34 @@ class orbisius_child_theme_creator_util {
 
         if (!empty($params)) {
             $rel_path = orbisius_child_theme_creator_html::add_url_params($rel_path, $params);
+        }
+
+        $link = is_multisite()
+                    ? network_admin_url($rel_path)
+                    : admin_url($rel_path);
+
+        return $link;
+    }
+
+    /**
+     * Returns the link to the Theme Editor e.g. when a theme_1 or theme_2 is supplied.
+     * @param type $params
+     * @return string
+     */
+    static public function get_theme_activation_link($params = array()) {
+        $nonce = wp_create_nonce( 'orbisius_child_theme_creator_data' );
+        
+        $url_params = array(
+            'page' => 'orbisius_child_theme_creator_themes_action',
+            'orbisius_child_theme_creator_data[cmd]' => 'theme.activate',
+            'orbisius_child_theme_creator_data[theme]' => $params['theme_1'],
+            'orbisius_child_theme_creator_data[nonce]' => $nonce,
+        );
+        
+        $rel_path = 'themes.php?' . http_build_query( $url_params );
+    
+        if (!empty($params)) {
+            $rel_path = orbisius_child_theme_creator_html::add_url_params($rel_path, $url_params);
         }
 
         $link = is_multisite()
@@ -2218,7 +2291,7 @@ function orbisius_ctc_theme_editor() {
                                 <?php else : ?>
                                     <span>Get more cool features by purchasing the </span>
                                     <a href="//orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator-pro/?utm_source=orbisius-child-theme-editor&utm_medium=footer&utm_campaign=product"
-                                        target="_blank" title="[new window]" style="font-weight: bolder;color:red;text-decoration: underline;">Pro Addon</a> <sup>New!</sup>
+                                        target="_blank" title="[new window]" style="font-weight: bolder;color:red;text-decoration: underline;">Pro Addon</a> 
                                 <?php endif; ?>
 
                                 <!--<ul>
