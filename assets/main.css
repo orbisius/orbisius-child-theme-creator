@@ -22,7 +22,7 @@
     border: 1px solid #eee;
     color: white;
     padding: 3px;
-    text-align: center;
+    /*text-align: center;*/
 }
 
 .orbisius_child_theme_creator_container .app-alert-success {
@@ -30,7 +30,7 @@
     border: 1px solid #eee;
     color: white;
     padding: 3px;
-    text-align: center;
+    /*text-align: center;*/
 }
 
 .orbisius_child_theme_creator_container .app-alert-success a, .orbisius_child_theme_creator_container .app-alert-error a {
@@ -41,7 +41,7 @@
     background: #FFEC8B;
     border: 1px solid #666;
     padding: 3px;
-    text-align: center;
+    /*text-align: center;*/
 }
 
 .orbisius_child_theme_creator_container .app-button-positive {
