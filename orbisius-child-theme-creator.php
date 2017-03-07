@@ -2089,7 +2089,7 @@ function orbisius_ctc_theme_editor() {
 
             $current_theme = wp_get_theme();
             
-            $html_dropdown_themes = array('' => '== SELECT THEME ==');
+            $html_dropdown_themes = array('' => '= SELECT THEME =');
 
             $theme_1 = empty($req['theme_1']) ? $current_theme->get_stylesheet() : $req['theme_1'];
             $theme_2 = empty($req['theme_2']) ? '' : $req['theme_2'];
@@ -2119,7 +2119,7 @@ function orbisius_ctc_theme_editor() {
             }
 
             $html_dropdown_theme_1_files = array(
-                '' => '<== SELECT THEME ==',
+                '' => '<= SELECT THEME =',
             );
 
         ?>

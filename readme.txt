@@ -165,6 +165,10 @@ Todo
 
 == Changelog ==
 
+= 1.3.8 =
+* Reduced the default option (= SELECT THEME =) in the dropdown so it doesn't push the buttons down on smaller displays.
+* Tested with WP 4.7.7
+
 = 1.3.7 =
 * Tested with WP 4.7.2
 * Corrected some links within the plugin. They were pointing to a wrong site because of an additiona .com to the domain name.
