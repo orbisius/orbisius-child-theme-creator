@@ -277,6 +277,13 @@ function orbisius_child_theme_creator_admin_enqueue_scripts($current_page = '') 
     wp_register_script( 'orbisius_child_theme_creator', plugins_url("/assets/main{$suffix}.js", __FILE__), array('jquery', ),
             filemtime( plugin_dir_path( __FILE__ ) . "/assets/main{$suffix}.js" ), true);
     wp_enqueue_script( 'orbisius_child_theme_creator' );
+    
+    wp_enqueue_script( 'jquery-ui-autocomplete' );
+    
+    //Custom javascript for snippet library
+    wp_register_script( 'snippetLib', plugins_url("/assets/custom.js", __FILE__), array('jquery', ),
+    				filemtime( plugin_dir_path( __FILE__ ) . "/assets/custom.js" ), true);
+    wp_enqueue_script( 'snippetLib' );
 }
 
 /**
@@ -2268,6 +2275,25 @@ function orbisius_ctc_theme_editor() {
 
                             <?php do_action('orbisius_child_theme_creator_editors_ext_action_left_start', array( 'place' => 'left' ) ); ?>
                             <?php do_action('orbisius_child_theme_creator_editors_ext_action_left_end', array( 'place' => 'left' ) ); ?>
+
+							<!-- Snippet Library -->
+							<div style="border:1px solid #ccc;margin:10px 0;padding:3px 5px;">
+								<h3>Snippet Library</h3>
+								<input class="button" type="button" id="snippetNew" value="Add a New Snippet">
+								</br>
+								</br>
+								<div id='snippetNew' class="snippetNew" style="display: none">
+									<strong>Title</strong>
+									<input type="text" id="snippetTitle">
+								</div>
+								</br>
+								<input class="selector" id="snippetLib"></input>
+								<input class="button button-primary" type="button" id="snippetLibSearch" value="Search">
+								</br>
+								</br>
+								<textarea class="widefat" id="snippetLibText" style="display: none;"></textarea>
+							</div>
+							<!-- End of Snippet Library -->
 
                             <div style="border:1px solid #ccc;margin:10px 0;padding:3px 5px;">
                                 <h3>Pro Addon 
