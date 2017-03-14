@@ -284,6 +284,14 @@ function orbisius_child_theme_creator_admin_enqueue_scripts($current_page = '') 
     wp_register_script( 'snippetLib', plugins_url("/assets/custom.js", __FILE__), array('jquery', ),
     				filemtime( plugin_dir_path( __FILE__ ) . "/assets/custom.js" ), true);
     wp_enqueue_script( 'snippetLib' );
+    
+    //Custom styles for snippet library
+    wp_register_style('snippetLib', plugins_url("/assets/custom.css", __FILE__), false,
+    filemtime( plugin_dir_path( __FILE__ ) . "/assets/custom.css" ) );
+    wp_enqueue_style('snippetLib');
+    
+    //JQuery Dialog Widget
+    wp_enqueue_script( 'jquery-ui-dialog' );
 }
 
 /**
@@ -2276,24 +2284,38 @@ function orbisius_ctc_theme_editor() {
                             <?php do_action('orbisius_child_theme_creator_editors_ext_action_left_start', array( 'place' => 'left' ) ); ?>
                             <?php do_action('orbisius_child_theme_creator_editors_ext_action_left_end', array( 'place' => 'left' ) ); ?>
 
-							<!-- Snippet Library -->
-							<div style="border:1px solid #ccc;margin:10px 0;padding:3px 5px;">
+							<!-- Snippet Library Wrapper -->
+							<div class="snippet_wrapper">
 								<h3>Snippet Library</h3>
-								<input class="button" type="button" id="snippetNew" value="Add a New Snippet">
-								</br>
-								</br>
-								<div id='snippetNew' class="snippetNew" style="display: none">
+								
+								<!-- New Snippet -->
+								<input class="button" type="button" id="new_snippet_btn" value="Add a New Snippet">
+								<br />
+								<br />
+								<div class="new_snippet_wrapper">
+									<textarea class="widefat" id="add_snippet_text"></textarea>
+									<br />
 									<strong>Title</strong>
-									<input type="text" id="snippetTitle">
+									<input type="text" id="add_snippet_title" required>
+									<button class="snippet_save">Save</button>
 								</div>
-								</br>
-								<input class="selector" id="snippetLib"></input>
-								<input class="button button-primary" type="button" id="snippetLibSearch" value="Search">
-								</br>
-								</br>
-								<textarea class="widefat" id="snippetLibText" style="display: none;"></textarea>
+								<!-- Confirm dialog -->
+								<div id="snippet_confirm_dialog" title="">
+									<p>Are you sure you want to save Snippet without any content?</p>
+								</div>
+								<!-- /Confirm dialog -->
+								<!-- /New Snippet -->
+								
+								<br />
+								<!-- Search Snippets -->
+								<input class="selector" id="search_text"></input>
+								<input class="button button-primary" type="button" id="snippet_search_btn" value="Search">
+								<br />
+								<br />
+								<textarea class="widefat" id="found_snippet_text"></textarea>
+								<!-- /Search Snippets -->
 							</div>
-							<!-- End of Snippet Library -->
+							<!-- /Snippet Library Wrapper -->
 
                             <div style="border:1px solid #ccc;margin:10px 0;padding:3px 5px;">
                                 <h3>Pro Addon 
