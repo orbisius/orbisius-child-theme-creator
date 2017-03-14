@@ -1,9 +1,9 @@
 /**
  * Used for the Snippet Library
  */
-jQuery( document ).ready( function( $ ) {
+jQuery(document).ready(function($) {
 	/**
-	 * Autocomplete suggestions
+	 * Snippets search autocomplete suggestions
 	 * 
 	 * Returns suggestions from remote source
 	 * Suggestions are based on the characters typed in the input field
@@ -11,7 +11,7 @@ jQuery( document ).ready( function( $ ) {
 	 * Expects id TITLE in the response
 	 * 
 	 */
-	$( "#snippetLib" ).autocomplete({
+	$( "#search_text" ).autocomplete( {
 		source: function (request, response) {
 			$.ajax({
 				dataType: "json",
@@ -35,21 +35,20 @@ jQuery( document ).ready( function( $ ) {
 	
 	
 	/**
-	 * Search button
+	 * Search for a snippet button
 	 * 
 	 * On click:	searches for a snippet title matching the criteria from the input field
 	 * 
 	 * On success:	shows a new text box with the returned data
 	 * 
 	 */
-	$('#snippetLibSearch').on("click", function (){
+	$('#snippet_search_btn').on("click", function() {
 		/**
 		 * Holds the value of the input field
 		 */
-		var search = $("#snippetLib").val();
+		var search = $("#search_text").val();
 		
-		if( search.trim() !== '' )
-		{
+		if (search.trim() !== '') {
 			$.ajax({
 				//dataType: "json",
 				type : 'GET',
@@ -57,21 +56,63 @@ jQuery( document ).ready( function( $ ) {
 				data: {"search":search},
 				success: function (data)
 				{
-					$("#snippetLibText").show().val(data).focus();
+					if (data != '[]') {
+						$("#found_snippet_text").show().val(data).focus();
+					}
 				}
 			});
 		}
 	});
 	
 	/**
-	 * Add new snippet button
+	 * Add a new snippet button
 	 * 
-	 * On click:	
-	 * 
-	 * On success:	
+	 * On click:	Displays title and text fields
 	 * 
 	 */
-	$('#snippetNew').on("click", function (){
-		$('.snippetNew').show("slow");
+	$('#new_snippet_btn').on("click", function() {
+		$('.new_snippet_wrapper').show("slow");
+	});
+	
+	/**
+	 * Save a new snippet button
+	 * 
+	 * On click:	If title is missing, cannot proceed
+	 * 		If text is missing, asks for confirmation to proceed
+	 * 
+	 */
+	$('.snippet_save').on("click", function() {
+		 var title	= $('#add_snippet_title').val();
+		 
+		 var text	= $('#add_snippet_text').val();
+		 
+		 /*
+		  * Snippet cannot be added without a Title
+		  * 
+		  * Snippet can be added without text
+		  * 
+		  */
+		if (title == '') {
+			alert('Please, enter Snippet Title');
+			$('#add_snippet_title').focus();
+			return;
+		}
+		else if (text == '') {
+			 $("#snippet_confirm_dialog").dialog( {
+				dialogClass: 'no-close',
+				modal: true,
+				buttons: {
+						'OK' : function (){
+							// send information to API
+						},
+						'No' : function () {
+							$(this).dialog('close');
+						}
+				},
+				close: function(event, ui) {
+					$('#add_snippet_text').focus();
+				}
+			 });
+		 }
 	});
 });
