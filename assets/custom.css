@@ -31,3 +31,9 @@ button.button.ui-button {
 #found_snippet_text {
 	display: none;
 }
+
+a.pro_Add_On {
+	font-weight: bolder;
+	color: #FF0000;
+	text-decoration: underline;
+}
