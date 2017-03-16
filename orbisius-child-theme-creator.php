@@ -2294,11 +2294,17 @@ function orbisius_ctc_theme_editor() {
 								<br />
 								<br />
 								<div class="new_snippet_wrapper">
-									<textarea class="widefat" id="add_snippet_text"></textarea>
-									<br />
-									<strong>Title</strong>
-									<input type="text" id="add_snippet_title" required>
-									<button class="snippet_save button">Save</button>
+									<?php if ( ! orbisius_child_theme_creator_is_pro_installed() ) : ?>
+										<span>Please, log in to add a snippet</span>
+										<a class="pro_Add_On" href="//orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator-pro/?utm_source=<?php echo $slug_area; ?>&utm_medium=action_screen&utm_campaign=product" target="_blank" title="[new window]">Pro Addon</a>
+									<?php endif; ?>
+									<?php if ( orbisius_child_theme_creator_is_pro_installed() ) : ?>
+										<textarea class="widefat" id="add_snippet_text"></textarea>
+										<br />
+										<strong>Title</strong>
+										<input type="text" id="add_snippet_title" required>
+										<button class="snippet_save button">Save</button>
+									<?php endif; ?>
 								</div>
 								<!-- Confirm dialog -->
 								<div id="snippet_confirm_dialog" title="">
