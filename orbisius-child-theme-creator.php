@@ -2284,6 +2284,7 @@ function orbisius_ctc_theme_editor() {
                             <?php do_action('orbisius_child_theme_creator_editors_ext_action_left_start', array( 'place' => 'left' ) ); ?>
                             <?php do_action('orbisius_child_theme_creator_editors_ext_action_left_end', array( 'place' => 'left' ) ); ?>
 
+
 							<!-- Snippet Library Wrapper -->
 							<div class="snippet_wrapper">
 								<h3>Snippet Library</h3>
@@ -2297,11 +2298,11 @@ function orbisius_ctc_theme_editor() {
 									<br />
 									<strong>Title</strong>
 									<input type="text" id="add_snippet_title" required>
-									<button class="snippet_save">Save</button>
+									<button class="snippet_save button">Save</button>
 								</div>
 								<!-- Confirm dialog -->
 								<div id="snippet_confirm_dialog" title="">
-									<p>Are you sure you want to save Snippet without any content?</p>
+									<p>Are you sure you want to save a Snippet without any content?</p>
 								</div>
 								<!-- /Confirm dialog -->
 								<!-- /New Snippet -->
@@ -2316,6 +2317,7 @@ function orbisius_ctc_theme_editor() {
 								<!-- /Search Snippets -->
 							</div>
 							<!-- /Snippet Library Wrapper -->
+
 
                             <div style="border:1px solid #ccc;margin:10px 0;padding:3px 5px;">
                                 <h3>Pro Addon 
@@ -2809,4 +2811,29 @@ function orbisius_ctc_theme_editor_manage_file( $cmd_id = 1 ) {
     }
 
     return $buff;
+}
+
+// Snippet search ajax hook
+add_action( 'wp_ajax_snippet_search', 'snippet_search' );
+
+/**
+ * Sends search request to API
+ *
+ *@return	array parsed from the JSON response of the API
+*/
+function snippet_search()
+{
+	if (isset($_POST['search']))
+	{
+		$searchFor	= $_POST['search'];
+		
+		$url			= 'http://eiguide.com/scrap/snippetLibSearch.php?search=' . $searchFor;
+		
+		$response		= wp_remote_get(esc_url_raw($url));
+		$api_response	= json_decode(wp_remote_retrieve_body($response), true);
+		
+		var_dump($api_response);
+	}
+	
+	wp_die();
 }
