@@ -51,9 +51,12 @@ jQuery(document).ready(function($) {
 		if (search.trim() !== '') {
 			$.ajax({
 				//dataType: "json",
-				type : 'GET',
-				url: '/wp-content/plugins/orbisius-child-theme-creator-feature_cloud_lib/lib/snippetLibSearch.php',
-				data: {"search":search},
+				type : "post",
+				url: ajaxurl,
+				data: {
+					action: "snippet_search",
+					"search":search
+					},
 				success: function (data)
 				{
 					if (data != '[]') {
@@ -101,18 +104,24 @@ jQuery(document).ready(function($) {
 			 $("#snippet_confirm_dialog").dialog( {
 				dialogClass: 'no-close',
 				modal: true,
-				buttons: {
-						'OK' : function (){
-							// send information to API
-						},
-						'No' : function () {
-							$(this).dialog('close');
+				buttons: [{
+						text: "OK",
+						"class": 'button-primary',
+						click: function() {
+							// send information to API 
 						}
-				},
+					},
+					{
+						text: "No",
+						"class": 'button',
+						click: function() { 
+							$(this).dialog("close"); 
+						}
+					}],
 				close: function(event, ui) {
 					$('#add_snippet_text').focus();
 				}
 			 });
-		 }
+		}
 	});
 });
