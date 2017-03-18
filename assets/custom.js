@@ -8,31 +8,33 @@ jQuery(document).ready(function($) {
 	 * Returns suggestions from remote source
 	 * Suggestions are based on the characters typed in the input field
 	 * 
-	 * Expects id TITLE in the response
+	 * Expects JSON array
 	 * 
 	 */
 	$( "#search_text" ).autocomplete( {
 		source: function (request, response) {
 			$.ajax({
 				dataType: "json",
-				type : 'Get',
-				url: '/wp-content/plugins/orbisius-child-theme-creator-feature_cloud_lib/lib/snippetLib.php',
+				type : 'post',
+				url: ajaxurl,
 				data:
 				{
+					action: "orbisius_ctc_cloud_autocomplete",
 					term: request.term,
 				},
 				success: function (data)
 				{
+					//data = $.parseJSON(data);
+					
 					response($.map(data, function(item) {
 						return {
-							label: item.title,
+							label: item,
 						};
 					}));
 				}
 			});
 		},
 	});
-	
 	
 	/**
 	 * Search for a snippet button
@@ -54,7 +56,7 @@ jQuery(document).ready(function($) {
 				type : "post",
 				url: ajaxurl,
 				data: {
-					action: "snippet_search",
+					action: "orbisius_ctc_cloud_search",
 					"search":search
 					},
 				success: function (data)
@@ -97,7 +99,9 @@ jQuery(document).ready(function($) {
 		  */
 		if (title == '') {
 			alert('Please, enter Snippet Title');
+			
 			$('#add_snippet_title').focus();
+			
 			return;
 		}
 		else if (text == '') {
@@ -105,10 +109,30 @@ jQuery(document).ready(function($) {
 				dialogClass: 'no-close',
 				modal: true,
 				buttons: [{
-						text: "OK",
+						text: "Yes",
 						"class": 'button-primary',
 						click: function() {
-							// send information to API 
+							$.ajax({
+								//dataType: "json",
+								type : "post",
+								url: ajaxurl,
+								data: {
+									action: "orbisius_ctc_cloud_add",
+									"title": title,
+									"text": text
+								},
+								success: function (data)
+								{
+									if (data == 'Succcessful')
+									{
+										alert("Success!");
+									}
+									else
+									{
+										alert(data);
+									}
+								}
+							});
 						}
 					},
 					{
