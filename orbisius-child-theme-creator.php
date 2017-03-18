@@ -2819,27 +2819,5 @@ function orbisius_ctc_theme_editor_manage_file( $cmd_id = 1 ) {
     return $buff;
 }
 
-// Snippet search ajax hook
-add_action( 'wp_ajax_snippet_search', 'snippet_search' );
+require_once( '/lib/snippet_lib.php' );
 
-/**
- * Sends search request to API
- *
- *@return	array parsed from the JSON response of the API
-*/
-function snippet_search()
-{
-	if (isset($_POST['search']))
-	{
-		$searchFor	= $_POST['search'];
-		
-		$url			= 'http://eiguide.com/scrap/snippetLibSearch.php?search=' . $searchFor;
-		
-		$response		= wp_remote_get(esc_url_raw($url));
-		$api_response	= json_decode(wp_remote_retrieve_body($response), true);
-		
-		var_dump($api_response);
-	}
-	
-	wp_die();
-}
