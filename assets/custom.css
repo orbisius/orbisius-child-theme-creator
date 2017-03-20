@@ -28,6 +28,10 @@ button.button.ui-button {
 	display: none;
 }
 
+.ui-dialog-buttonset {
+	text-align: center;
+}
+
 #found_snippet_text {
 	display: none;
 }
