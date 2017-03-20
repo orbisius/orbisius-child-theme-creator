@@ -278,8 +278,6 @@ function orbisius_child_theme_creator_admin_enqueue_scripts($current_page = '') 
             filemtime( plugin_dir_path( __FILE__ ) . "/assets/main{$suffix}.js" ), true);
     wp_enqueue_script( 'orbisius_child_theme_creator' );
     
-    wp_enqueue_script( 'jquery-ui-autocomplete' );
-    
     //Custom javascript for snippet library
     wp_register_script( 'snippetLib', plugins_url("/assets/custom.js", __FILE__), array('jquery', ),
     				filemtime( plugin_dir_path( __FILE__ ) . "/assets/custom.js" ), true);
@@ -289,9 +287,6 @@ function orbisius_child_theme_creator_admin_enqueue_scripts($current_page = '') 
     wp_register_style('snippetLib', plugins_url("/assets/custom.css", __FILE__), false,
     filemtime( plugin_dir_path( __FILE__ ) . "/assets/custom.css" ) );
     wp_enqueue_style('snippetLib');
-    
-    //JQuery Dialog Widget
-    wp_enqueue_script( 'jquery-ui-dialog' );
 }
 
 /**
@@ -2298,7 +2293,7 @@ function orbisius_ctc_theme_editor() {
 										<span>Please, log in to add a snippet</span>
 										<a class="pro_Add_On" href="//orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator-pro/?utm_source=<?php echo $slug_area; ?>&utm_medium=action_screen&utm_campaign=product" target="_blank" title="[new window]">Pro Addon</a>
 									<?php endif; ?>
-									<?php if ( orbisius_child_theme_creator_is_pro_installed() ) : ?>
+									<?php if ( ! orbisius_child_theme_creator_is_pro_installed() ) : ?>
 										<textarea class="widefat" id="add_snippet_text"></textarea>
 										<br />
 										<strong>Title</strong>
