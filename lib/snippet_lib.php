@@ -11,6 +11,33 @@ add_action( 'admin_init', array( $snippet_lib_loader, 'orbisius_ctc_init_actions
  */
 class orbisius_ctc_cloud_lib {
 	
+	/**
+	 * @var string	Url to remote
+	 */
+	public $api_url	= 'http://eiguide.com/scrap/';
+	
+	/*
+	 * Name of file on the API which returns with autocomplete suggestions
+	 */
+	public $api_autocomplete_file	= 'snippetLib.php';
+	
+	/*
+	 * Name of file on the API which returns search results
+	 */
+	public $api_snippet_search_file = 'snippetLibSearch.php';
+
+	/**
+	 * Load jQuery widgets
+	 */
+	public function __construct()
+	{
+		wp_enqueue_script( 'jquery-ui-autocomplete' );
+		wp_enqueue_script( 'jquery-ui-dialog' );
+	}
+	
+	/**
+	 * Add snippet librabry actions
+	 */
 	public function orbisius_ctc_init_actions_cloud_lib()
 	{
 		// Snippet autocomplete ajax hook
@@ -19,6 +46,19 @@ class orbisius_ctc_cloud_lib {
 		add_action( 'wp_ajax_orbisius_ctc_cloud_search', [$this, 'orbisius_ctc_cloud_search'] );
 		// Add a New Snippet ajax hook
 		add_action( 'wp_ajax_orbisius_ctc_cloud_add', [$this, 'orbisius_ctc_cloud_add'] );
+	}
+	
+	/**
+	 * Send request to API and get response
+	 * 
+	 * @return response from the api
+	 */
+	public function orbisius_ctc_get_remote($url)
+	{
+		$response		= wp_remote_get(esc_url_raw($url));
+		$api_response	= wp_remote_retrieve_body($response);
+		
+		return $api_response;
 	}
 	
 	/**
@@ -32,12 +72,9 @@ class orbisius_ctc_cloud_lib {
 		{
 			$search_for_term	= $_POST['term'];
 				
-			$url			= 'http://eiguide.com/scrap/snippetLib.php?term=' . $search_for_term;
-				
-			$response		= wp_remote_get(esc_url_raw($url));
-			$api_response	= wp_remote_retrieve_body($response);
+			$url				= $this->api_url . $this->api_autocomplete_file . '?term=' . $search_for_term;
 			
-			echo $api_response;
+			echo $this->orbisius_ctc_get_remote($url);
 		}
 		
 		wp_die();
@@ -54,12 +91,9 @@ class orbisius_ctc_cloud_lib {
 		{
 			$search_for	= $_POST['search'];
 			
-			$url			= 'http://eiguide.com/scrap/snippetLibSearch.php?search=' . $search_for;
+			$url		= $this->api_url . $this->api_snippet_search_file . '?search=' . $search_for;
 			
-			$response		= wp_remote_get(esc_url_raw($url));
-			$api_response	= json_decode(wp_remote_retrieve_body($response), true);
-			
-			var_dump($api_response);
+			var_dump($this->orbisius_ctc_get_remote($url));
 		}
 		
 		wp_die();
@@ -87,12 +121,9 @@ class orbisius_ctc_cloud_lib {
 				$snippetText	=  $_POST['text'];
 			}
 			
-			$url			= '' . $snippetTitle . 'text=' . $snippetText;
+			$url			= $this->api_url . '' . $snippetTitle . 'text=' . $snippetText;
 		
-			$response		= wp_remote_get(esc_url_raw($url));
-			$api_response	= json_decode(wp_remote_retrieve_body($response), true);
-		
-			var_dump($api_response);
+			var_dump($this->orbisius_ctc_get_remote($url));
 		}
 		else
 		{
