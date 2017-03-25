@@ -43,6 +43,7 @@ add_action( 'wp_ajax_nopriv_orbisius_ctc_theme_editor_ajax', 'orbisius_ctc_theme
 
 register_activation_hook( __FILE__, 'orbisius_child_theme_creator_on_activate' );
 
+require_once( __DIR__ . '/lib/snippet_lib.php' );
 /**
  * Adds admin bar items for easy access to the theme creator and editor
  */
@@ -2813,6 +2814,4 @@ function orbisius_ctc_theme_editor_manage_file( $cmd_id = 1 ) {
 
     return $buff;
 }
-
-require_once( '/lib/snippet_lib.php' );
 
