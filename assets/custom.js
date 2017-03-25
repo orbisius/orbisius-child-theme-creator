@@ -17,18 +17,16 @@ jQuery(document).ready(function($) {
 				dataType: "json",
 				type : 'post',
 				url: ajaxurl,
-				data:
-				{
+				data: {
 					action: "orbisius_ctc_cloud_autocomplete",
 					term: request.term,
 				},
-				success: function (data)
-				{
-					//data = $.parseJSON(data);
+				success: function(data) {
+					data	= $.parseJSON(data);
 					
-					response($.map(data, function(item) {
+					response($.map(data.data, function(item) {
 						return {
-							label: item,
+							label: item.title,
 						};
 					}));
 				}
@@ -48,9 +46,9 @@ jQuery(document).ready(function($) {
 		/**
 		 * Holds the value of the input field
 		 */
-		var search = $("#search_text").val();
+		var search = $("#search_text").val().trim();
 		
-		if (search.trim() !== '') {
+		if (search !== '') {
 			$.ajax({
 				//dataType: "json",
 				type : "post",
@@ -58,9 +56,8 @@ jQuery(document).ready(function($) {
 				data: {
 					action: "orbisius_ctc_cloud_search",
 					"search":search
-					},
-				success: function (data)
-				{
+				},
+				success: function (data) {
 					if (data != '[]') {
 						$("#found_snippet_text").show().val(data).focus();
 					}
@@ -87,9 +84,9 @@ jQuery(document).ready(function($) {
 	 * 
 	 */
 	$('.snippet_save').on("click", function() {
-		 var title	= $('#add_snippet_title').val();
+		 var title	= $('#add_snippet_title').val().trim();
 		 
-		 var text	= $('#add_snippet_text').val();
+		 var text	= $('#add_snippet_text').val().trim();
 		 
 		 /*
 		  * Snippet cannot be added without a Title
@@ -121,14 +118,11 @@ jQuery(document).ready(function($) {
 									"title": title,
 									"text": text
 								},
-								success: function (data)
-								{
-									if (data == 'Succcessful')
-									{
+								success: function (data) {
+									if (data == 'Succcessful') {
 										alert("Success!");
 									}
-									else
-									{
+									else {
 										alert(data);
 									}
 								}
