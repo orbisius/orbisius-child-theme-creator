@@ -43,7 +43,7 @@ add_action( 'wp_ajax_nopriv_orbisius_ctc_theme_editor_ajax', 'orbisius_ctc_theme
 
 register_activation_hook( __FILE__, 'orbisius_child_theme_creator_on_activate' );
 
-require_once( __DIR__ . '/lib/snippet_lib.php' );
+require( __DIR__ . '/lib/snippet_lib.php' );
 /**
  * Adds admin bar items for easy access to the theme creator and editor
  */
@@ -279,6 +279,8 @@ function orbisius_child_theme_creator_admin_enqueue_scripts($current_page = '') 
             filemtime( plugin_dir_path( __FILE__ ) . "/assets/main{$suffix}.js" ), true);
     wp_enqueue_script( 'orbisius_child_theme_creator' );
     
+    wp_enqueue_script( 'jquery-ui-autocomplete' );
+    wp_enqueue_script( 'jquery-ui-dialog' );
     //Custom javascript for snippet library
     wp_register_script( 'snippetLib', plugins_url("/assets/custom.js", __FILE__), array('jquery', ),
     				filemtime( plugin_dir_path( __FILE__ ) . "/assets/custom.js" ), true);
