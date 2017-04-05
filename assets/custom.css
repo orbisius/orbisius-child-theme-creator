@@ -32,7 +32,7 @@ button.button.ui-button {
 	text-align: center;
 }
 
-#found_snippet_text {
+.found_snippet {
 	display: none;
 }
 

@@ -18,7 +18,7 @@ jQuery(document).ready(function($) {
 				type : 'post',
 				url: ajaxurl,
 				data: {
-					action: "orbisius_ctc_cloud_autocomplete",
+					action: "cloud_autocomplete",
 					term: request.term,
 				},
 				success: function(data) {
@@ -39,7 +39,7 @@ jQuery(document).ready(function($) {
 	 * 
 	 * On click:	searches for a snippet title matching the criteria from the input field
 	 * 
-	 * On success:	shows a new text box with the returned data
+	 * On success:	shows a new text box with the returned data - content and title
 	 * 
 	 */
 	$('#snippet_search_btn').on("click", function() {
@@ -54,13 +54,19 @@ jQuery(document).ready(function($) {
 				type : "post",
 				url: ajaxurl,
 				data: {
-					action: "orbisius_ctc_cloud_search",
+					action: "cloud_search",
 					"search":search
 				},
-				success: function (data) {
-					if (data != '[]') {
-						$("#found_snippet_text").show().val(data).focus();
-					}
+				success: function(data) {
+					data	= $.parseJSON(data);
+					
+					$.map(data.data, function(item) {
+						if (item != '[]') {
+							$('.found_snippet').show();
+							$("#found_snippet_text").val(item.content).focus();
+							$("#found_snippet_title").val(item.title).focus();
+						}
+					});
 				}
 			});
 		}
@@ -114,7 +120,7 @@ jQuery(document).ready(function($) {
 								type : "post",
 								url: ajaxurl,
 								data: {
-									action: "orbisius_ctc_cloud_add",
+									action: "cloud_add",
 									"title": title,
 									"text": text
 								},
