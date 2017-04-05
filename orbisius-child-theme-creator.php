@@ -2317,7 +2317,12 @@ function orbisius_ctc_theme_editor() {
 								<input class="button button-primary" type="button" id="snippet_search_btn" value="Search">
 								<br />
 								<br />
-								<textarea class="widefat" id="found_snippet_text"></textarea>
+								<div class="found_snippet">
+									<strong>Snippet:</strong>
+									<textarea class="widefat" id="found_snippet_text"></textarea>
+									<strong>Title:</strong>
+									<input class="widefat" type="text" id="found_snippet_title"></textarea>
+								</div>
 								<!-- /Search Snippets -->
 							</div>
 							<!-- /Snippet Library Wrapper -->
