@@ -98,8 +98,8 @@ class orbisius_ctc_cloud_lib {
 			if (isset($_POST['text'])) {
 				$snippetText	=  sanitize_text_field($_POST['text']);
 			}
-			
-			$url			= $this->api_url . '' . $snippetTitle . 'text=' . $snippetText;
+			$url	= 'http://orb-ctc.qsandbox.com/?orb_cloud_lib_data[cmd]=item.add&orb_cloud_lib_data[title]='. $snippetTitle . '&&orb_cloud_lib_data[content]=' . $snippetText;
+			//$url	= $this->api_url . '' . $snippetTitle . 'text=' . $snippetText;
 		
 			wp_send_json($this->get_remote($url));
 		}
