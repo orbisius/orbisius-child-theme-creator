@@ -57,6 +57,7 @@ jQuery(document).ready(function($) {
 					action: "cloud_search",
 					"search":search
 				},
+				//success: function (data) {
 				success: function(data) {
 					data	= $.parseJSON(data);
 					
@@ -125,11 +126,13 @@ jQuery(document).ready(function($) {
 									"text": text
 								},
 								success: function (data) {
-									if (data == 'Succcessful') {
-										alert("Success!");
+									data	= $.parseJSON(data);
+									
+									if (data.status == '1') {
+										alert(data.msg);
 									}
 									else {
-										alert(data);
+										alert('Problem');
 									}
 								}
 							});
@@ -146,6 +149,29 @@ jQuery(document).ready(function($) {
 					$('#add_snippet_text').focus();
 				}
 			 });
+		}
+		else
+		{
+				$.ajax({
+					//dataType: "json",
+					type : "post",
+					url: ajaxurl,
+					data: {
+						action: "cloud_add",
+						"title": title,
+						"text": text
+					},
+					success: function (data) {
+						data	= $.parseJSON(data);
+						
+						if (data.status == '1') {
+							alert(data.msg);
+						}
+						else {
+							alert('Problem');
+						}
+					}
+				});
 		}
 	});
 });
