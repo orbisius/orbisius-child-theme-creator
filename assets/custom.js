@@ -90,12 +90,12 @@ jQuery(document).ready(function($) {
 	 * 		If text is missing, asks for confirmation to proceed
 	 * 
 	 */
-	$('.snippet_save').on("click", function() {
+	$('#snippet_save_btn').on("click", function() {
 		 var title	= $('#add_snippet_title').val().trim();
 		 
 		 var text	= $('#add_snippet_text').val().trim();
 		 
-		 /*
+		 /**
 		  * Snippet cannot be added without a Title
 		  * 
 		  * Snippet can be added without text
@@ -116,62 +116,55 @@ jQuery(document).ready(function($) {
 						text: "Yes",
 						"class": 'button-primary',
 						click: function() {
-							$.ajax({
-								//dataType: "json",
-								type : "post",
-								url: ajaxurl,
-								data: {
-									action: "cloud_add",
-									"title": title,
-									"text": text
-								},
-								success: function (data) {
-									data	= $.parseJSON(data);
-									
-									if (data.status == '1') {
-										alert(data.msg);
-									}
-									else {
-										alert('Problem');
-									}
-								}
-							});
+							$(this).dialog("close"); 
+							save_snippet(title, text);
 						}
 					},
 					{
 						text: "No",
 						"class": 'button',
 						click: function() { 
-							$(this).dialog("close"); 
+							$(this).dialog("close");
+							$('#add_snippet_text').focus();
 						}
 					}],
 				close: function(event, ui) {
-					$('#add_snippet_text').focus();
+					//$('#add_snippet_text').focus();
 				}
 			 });
 		}
 		else
 		{
-				$.ajax({
-					//dataType: "json",
-					type : "post",
-					url: ajaxurl,
-					data: {
-						action: "cloud_add",
-						"title": title,
-						"text": text
-					},
-					success: function (data) {
-						data	= $.parseJSON(data);
-						
-						if (data.status == '1') {
-							alert(data.msg);
-						}
-						else {
-							alert('Problem');
-						}
-					}
-				});
+			save_snippet(title, text);
 		}
 	});
+	
+	/**
+	 * Saves a new snippet
+	 * 
+	 * @param title
+	 * @param text
+	 */
+	function save_snippet(title, text) {
+		$.ajax({
+			//dataType: "json",
+			type : "post",
+			url: ajaxurl,
+			data: {
+				action: "cloud_add",
+				"title": title,
+				"text": text
+			},
+			success: function (data) {
+				data	= $.parseJSON(data);
+			
+				if (data.status == '1') {
+					alert(data.msg);
+				}
+				else {
+					alert("Problem occurred");
+				}
+			}
+		});
+	}
 });
