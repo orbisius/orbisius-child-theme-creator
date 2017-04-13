@@ -2300,8 +2300,8 @@ function orbisius_ctc_theme_editor() {
 										<textarea class="widefat" id="add_snippet_text"></textarea>
 										<br />
 										<strong>Title</strong>
-										<input type="text" id="add_snippet_title" required>
-										<button class="snippet_save button">Save</button>
+										<input type="text" id="add_snippet_title">
+										<input class="button" type="button" id="snippet_save_btn" value="Save">
 									<?php endif; ?>
 								</div>
 								<!-- Confirm dialog -->
