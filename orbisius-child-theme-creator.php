@@ -43,6 +43,7 @@ add_action( 'wp_ajax_nopriv_orbisius_ctc_theme_editor_ajax', 'orbisius_ctc_theme
 
 register_activation_hook( __FILE__, 'orbisius_child_theme_creator_on_activate' );
 
+require( __DIR__ . '/lib/snippet_lib.php' );
 /**
  * Adds admin bar items for easy access to the theme creator and editor
  */
@@ -277,6 +278,18 @@ function orbisius_child_theme_creator_admin_enqueue_scripts($current_page = '') 
     wp_register_script( 'orbisius_child_theme_creator', plugins_url("/assets/main{$suffix}.js", __FILE__), array('jquery', ),
             filemtime( plugin_dir_path( __FILE__ ) . "/assets/main{$suffix}.js" ), true);
     wp_enqueue_script( 'orbisius_child_theme_creator' );
+    
+    wp_enqueue_script( 'jquery-ui-autocomplete' );
+    wp_enqueue_script( 'jquery-ui-dialog' );
+    //Custom javascript for snippet library
+    wp_register_script( 'snippetLib', plugins_url("/assets/custom.js", __FILE__), array('jquery', ),
+    				filemtime( plugin_dir_path( __FILE__ ) . "/assets/custom.js" ), true);
+    wp_enqueue_script( 'snippetLib' );
+    
+    //Custom styles for snippet library
+    wp_register_style('snippetLib', plugins_url("/assets/custom.css", __FILE__), false,
+    filemtime( plugin_dir_path( __FILE__ ) . "/assets/custom.css" ) );
+    wp_enqueue_style('snippetLib');
 }
 
 /**
@@ -2309,6 +2322,52 @@ function orbisius_ctc_theme_editor() {
                             <?php do_action('orbisius_child_theme_creator_editors_ext_action_left_start', array( 'place' => 'left' ) ); ?>
                             <?php do_action('orbisius_child_theme_creator_editors_ext_action_left_end', array( 'place' => 'left' ) ); ?>
 
+
+							<!-- Snippet Library Wrapper -->
+							<div class="snippet_wrapper">
+								<h3>Snippet Library</h3>
+								
+								<!-- New Snippet -->
+								<input class="button" type="button" id="new_snippet_btn" value="Add a New Snippet">
+								<br />
+								<br />
+								<div class="new_snippet_wrapper">
+									<?php if ( ! orbisius_child_theme_creator_is_pro_installed() ) : ?>
+										<span>Please, log in to add a snippet</span>
+										<a class="pro_Add_On" href="//orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator-pro/?utm_source=<?php echo $slug_area; ?>&utm_medium=action_screen&utm_campaign=product" target="_blank" title="[new window]">Pro Addon</a>
+									<?php endif; ?>
+									<?php if ( ! orbisius_child_theme_creator_is_pro_installed() ) : ?>
+										<textarea class="widefat" id="add_snippet_text"></textarea>
+										<br />
+										<strong>Title</strong>
+										<input type="text" id="add_snippet_title">
+										<input class="button" type="button" id="snippet_save_btn" value="Save">
+									<?php endif; ?>
+								</div>
+								<!-- Confirm dialog -->
+								<div id="snippet_confirm_dialog" title="">
+									<p>Are you sure you want to save a Snippet without any content?</p>
+								</div>
+								<!-- /Confirm dialog -->
+								<!-- /New Snippet -->
+								
+								<br />
+								<!-- Search Snippets -->
+								<input class="selector" id="search_text"></input>
+								<input class="button button-primary" type="button" id="snippet_search_btn" value="Search">
+								<br />
+								<br />
+								<div class="found_snippet">
+									<strong>Snippet:</strong>
+									<textarea class="widefat" id="found_snippet_text"></textarea>
+									<strong>Title:</strong>
+									<input class="widefat" type="text" id="found_snippet_title"></textarea>
+								</div>
+								<!-- /Search Snippets -->
+							</div>
+							<!-- /Snippet Library Wrapper -->
+
+
                             <div style="border:1px solid #ccc;margin:10px 0;padding:3px 5px;">
                                 <h3>Pro Addon 
                                     <?php if ( ! orbisius_child_theme_creator_is_pro_installed() ) : ?>
@@ -2802,3 +2861,4 @@ function orbisius_ctc_theme_editor_manage_file( $cmd_id = 1 ) {
 
     return $buff;
 }
+
