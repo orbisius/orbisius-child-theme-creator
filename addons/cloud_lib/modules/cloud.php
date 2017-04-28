@@ -1,33 +1,46 @@
 <?php
 
 class orbisius_child_theme_creator_ext_mod_cloud {
-    public function render_tabs() {
-        $url = admin_url( 'themes.php?page=orbisius_child_theme_creator_theme_editor_action' );
-        
+    private $tabs = [];
+    
+    public function __construct() {
+        // We need to initialize the tabs here because we're using __ method
+        // for future internationalization.
         $tabs = [
             [
                 'id' => 'orb_ctc_ext_cloud_lib_search',
-                'label' => __( 'Search' ),
+                'label' => __( 'Search', 'orbisius-child-theme-creator' ),
             ],
             [
                 'id' => 'orb_ctc_ext_cloud_lib_add',
-                'label' => __( 'Add' ),
+                'label' => __( 'Add', 'orbisius-child-theme-creator' ),
             ],
             [
                 'id' => 'orb_ctc_ext_cloud_lib_manage',
-                'label' => __( 'Manage' ),
+                'label' => __( 'Manage', 'orbisius-child-theme-creator' ),
             ],
             [
                 'id' => 'orb_ctc_ext_cloud_lib_account',
-                'label' => __( 'Account' ),
+                'label' => __( 'Account', 'orbisius-child-theme-creator' ),
             ],
         ];
+        
+        $this->tabs = $tabs;
+    }
+    
+    public function get_current_tab_id() {
+        $cur_tab_id = empty($_REQUEST['tab']) ? $this->tabs[0]['id'] : wp_kses( $_REQUEST['tab'], [] );
+        return $cur_tab_id;
+    }
+    
+    public function render_tabs() {
+        $url = admin_url( 'themes.php?page=orbisius_child_theme_creator_theme_editor_action' );
                 
-        $cur_tab_id = empty($_REQUEST['tab']) ? $tabs[0]['id'] : wp_kses( $_REQUEST['tab'], [] );
+        $cur_tab_id = $this->get_current_tab_id();
         
         ?>
             <h2 class="nav-tab-wrapper">
-                <?php foreach ( $tabs as $tab_rec ) : ?>
+                <?php foreach ( $this->tabs as $tab_rec ) : ?>
                     <?php 
                     $tab_url = add_query_arg( 'tab', $tab_rec['id'], $url );
                     $extra_tab_css = $tab_rec['id'] == $cur_tab_id ? 'nav-tab-active' : '';
