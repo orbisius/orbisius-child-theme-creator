@@ -220,7 +220,7 @@ class orbisius_ctc_cloud_lib {
                     <br />
                     <strong>Title</strong>
                     <input type="text" id="add_snippet_title">
-                    <input class="button" type="button" id="snippet_save_btn" value="Save">
+                    <input class="button" type="button button-primary" id="snippet_save_btn" value="Save">
             <?php endif; ?>
         </div>
         
@@ -241,6 +241,7 @@ class orbisius_ctc_cloud_lib {
                     <h3>Orbisius Cloud Library</h3>
 
                     <?php $this->render_tabs(); ?>
+                    <br/>
                     <?php $this->render_tab_content(); ?>
             </div>
             <!-- /Snippet Library Wrapper -->
