@@ -179,7 +179,7 @@ class orbisius_ctc_cloud_lib {
         ?>
         <!-- Snippet Library Wrapper -->
             <div class="snippet_wrapper">
-                    <h3>Snippet Library</h3>
+                    <h3>Orbisius Cloud Library</h3>
 
                     <?php $this->render_tabs(); ?>
                     
