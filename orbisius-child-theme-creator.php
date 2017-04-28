@@ -3,7 +3,7 @@
   Plugin Name: Orbisius Child Theme Creator
   Plugin URI: http://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/
   Description: This plugin allows you to quickly create child themes from any theme that you have currently installed on your site/blog.
-  Version: 1.3.8
+  Version: 1.3.9
   Author: Svetoslav Marinov (Slavi)
   Author URI: http://orbisius.com
  */
@@ -667,28 +667,58 @@ function orbisius_child_theme_creator_top_links($slug_area = 'orbisius-child-the
     ob_start();
     $text_color = orbisius_child_theme_creator_is_pro_installed() ? 'green' : 'red';
     ?>
-    <div style="float: right;padding: 3px;" class="updated">
-        <a href="//qsandbox.com/?utm_source=<?php echo $slug_area; ?>&utm_medium=action_screen&utm_campaign=product"
-             target="_blank" title="Opens in new tab/window. qSandbox is a service that allows you to setup a test/sandbox WordPress site in 2 seconds. No technical knowledge is required.
-             Test themes and plugins before you actually put them on your site">Free Staging Site</a> <small>(quick set up)</small>
+    <?php if ( $slug_area != 'orbisius-child-theme-creator' ) : ?>
+        <style>
+        .orbisius_child_theme_creator_container_res_wrapper {
+            display: inline-block;
+            text-align: right;
+        }
+        
+        ul.orbisius_child_theme_creator_container_res_list {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        ul.orbisius_child_theme_creator_container_res_list li {
+            display: inline-block;
+            margin-left: 5px;
+            margin-right: 5px;
+            background: #eee;
+            padding: 5px;
+        }
+        
+        ul.orbisius_child_theme_creator_container_res_list li a {
+            /*display: block;*/
+        }
+        </style>
+    <?php endif; ?>
+    
+    <div class="orbisius_child_theme_creator_container_res_wrapper">
+        <ul class="orbisius_child_theme_creator_container_res_list">
+            <li>
+                <a href="//qsandbox.com/?utm_source=<?php echo $slug_area; ?>&utm_medium=action_screen&utm_campaign=product"
+                target="_blank" title="Opens in new tab/window. qSandbox is a service that allows you to setup a test/sandbox WordPress site in 2 seconds. No technical knowledge is required.
+                Test themes and plugins before you actually put them on your site">Free Staging Site</a> <small>(quick set up)</small> by qSandbox
+            </li>
+            <li>
+                <a href="//orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator-pro/?utm_source=<?php echo $slug_area; ?>&utm_medium=action_screen&utm_campaign=product"
+                 target="_blank" title="[new window]" style="font-weight: bolder;color:<?php echo $text_color;?>">Pro Addon
 
-        | <a href="//orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator-pro/?utm_source=<?php echo $slug_area; ?>&utm_medium=action_screen&utm_campaign=product"
-             target="_blank" title="[new window]" style="font-weight: bolder;color:<?php echo $text_color;?>">Pro Addon
+                <?php if ( ! orbisius_child_theme_creator_is_pro_installed() ) : ?>
 
-            <?php if ( ! orbisius_child_theme_creator_is_pro_installed() ) : ?>
-                
-            <?php else : ?>
-                <sup>Installed!</sup>
-            <?php endif; ?>
-        </a>
-
-        | <a href="//orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/?utm_source=<?php echo $slug_area; ?>&utm_medium=action_screen&utm_campaign=product" target="_blank" title="[new window]">Product Page</a>
-
-        <!--| <a href="#help" title="">Help</a>-->
+                <?php else : ?>
+                    <sup>Installed!</sup>
+                    <?php endif; ?>
+                </a>
+            </li>
+            <li>
+                <a href="//orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/?utm_source=<?php echo $slug_area; ?>&utm_medium=action_screen&utm_campaign=product" target="_blank" title="[new window]">Product Page</a>
+            </li>
+        </ul>
     </div>
     <?php
-    $buff = ob_get_contents();
-    ob_end_clean();
+    $buff = ob_get_clean();
 
     return $buff;
 }
@@ -835,8 +865,8 @@ function orbisius_child_theme_creator_tools_action() {
     ?>
     <div class="wrap orbisius_child_theme_creator_container">
         <h2 style="display:inline;">Orbisius Child Theme Creator</h2>
-        <?php echo orbisius_child_theme_creator_top_links('orbisius-child-theme-creator') ; ?>
-    <?php echo $msg; ?>
+        
+        <?php echo $msg; ?>
 
     <?php
     $buff = '';
@@ -1093,6 +1123,13 @@ function orbisius_child_theme_creator_tools_action() {
                 <div id="postbox-container-1" class="postbox-container">
 
                     <div class="meta-box-sortables">
+
+                        <div class="postbox">
+                            <h3><span>Free Staging Site?</span></h3>
+                            <div class="inside">
+                                <?php echo orbisius_child_theme_creator_top_links('orbisius-child-theme-creator') ; ?>
+                            </div> <!-- .inside -->
+                        </div> <!-- .postbox -->
 
                         <div class="postbox">
                             <h3><span>Hire Us</span></h3>
@@ -2137,13 +2174,16 @@ function orbisius_ctc_theme_editor() {
     }
 
     $msg = 'Pick any two themes and copy snippets from one to the other.';
+    $msg .= '<span style="float:right;"> <a href="//qsandbox.com/?utm_source=orctc-ed&utm_medium=action_screen&utm_campaign=product"
+                target="_blank" title="Opens in new tab/window. qSandbox is a service that allows you to setup a test/sandbox WordPress site in 2 seconds. No technical knowledge is required.
+                Test themes and plugins before you actually put them on your site">Free Staging Site</a> <small>(quick set up)</small> by <a href="//qsandbox.com/?utm_source=orctc-ed&utm_medium=action_screen&utm_campaign=product"
+                target="_blank">qSandbox</a></span>';
 
     $plugin_data = orbisius_child_theme_creator_get_plugin_data();
     
     ?>
     <div class="wrap orbisius_child_theme_creator_container orbisius_ctc_theme_editor_container">
         <h2 style="display:inline;">Orbisius Theme Editor <small>(Part of <a href='<?php echo $plugin_data['url'];?>' target="_blank">Orbisius Child Theme Creator</a>)</small></h2>
-        <?php echo orbisius_child_theme_creator_top_links('orbisius-child-theme-editor') ; ?>
 
         <div class="updated"><p>
             <?php echo $msg; ?>

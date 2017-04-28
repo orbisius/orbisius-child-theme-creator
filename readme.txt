@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: theme,child theme,childtheme,childthemes,parent theme,child themes,CSS,styling,resposive design,design,custom themeing, shared hosting,theme editor theme,themes,wp,wordpress,orbisius,theme creator,custom theme,theme generator,css,css editor
 Requires at least: 3.4
 Tested up to: 4.7
-Stable tag: 1.3.8
+Stable tag: 1.3.9
 License: GPLv2 or later
 
 Create Child Themes quickly and easily from any theme that you have currently installed on your site/blog.
@@ -165,13 +165,17 @@ Todo
 
 == Changelog ==
 
+= 1.3.9 =
+* Minor fixes and improvements to the UI
+* Tested with WP 4.7.4
+
 = 1.3.8 =
 * Now it's easier to switch to a child theme ... there's an Activate button under each child theme.
 * Reduced the default option (= SELECT THEME =) in the dropdown so it doesn't push the buttons down on smaller displays.
 * Removed some top links in the creator
 * Improved how messages are shown using WP classes and not custom ones.
 * Removed some centering in css
-* Tested with WP 4.7.7
+* Tested with WP 4.7.3
 
 = 1.3.7 =
 * Tested with WP 4.7.2
