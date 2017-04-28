@@ -25,6 +25,8 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+define( 'ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE', __FILE__ );
+
 // Set up plugin
 add_action('admin_init', 'orbisius_child_theme_creator_admin_init');
 add_action('admin_init', 'orbisius_child_theme_creator_register_settings');
@@ -280,17 +282,7 @@ function orbisius_child_theme_creator_admin_enqueue_scripts($current_page = '') 
             filemtime( plugin_dir_path( __FILE__ ) . "/assets/main{$suffix}.js" ), true);
     wp_enqueue_script( 'orbisius_child_theme_creator' );
     
-    wp_enqueue_script( 'jquery-ui-autocomplete' );
-    wp_enqueue_script( 'jquery-ui-dialog' );
-    //Custom javascript for snippet library
-    wp_register_script( 'snippetLib', plugins_url("/assets/custom.js", __FILE__), array('jquery', ),
-    				filemtime( plugin_dir_path( __FILE__ ) . "/assets/custom.js" ), true);
-    wp_enqueue_script( 'snippetLib' );
-    
-    //Custom styles for snippet library
-    wp_register_style('snippetLib', plugins_url("/assets/custom.css", __FILE__), false,
-    filemtime( plugin_dir_path( __FILE__ ) . "/assets/custom.css" ) );
-    wp_enqueue_style('snippetLib');
+    do_action( 'orbisius_child_theme_creator_admin_enqueue_scripts', [] );
 }
 
 /**

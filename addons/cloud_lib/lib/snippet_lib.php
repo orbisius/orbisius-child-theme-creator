@@ -66,13 +66,36 @@ class orbisius_ctc_cloud_lib {
     /**
      * Add snippet librabry actions
      */
-    public function init() {
-            // Snippet autocomplete ajax hook
-            add_action( 'wp_ajax_cloud_autocomplete', [$this, 'cloud_autocomplete'] );
-            // Snippet search ajax hook
-            add_action( 'wp_ajax_cloud_search', [$this, 'cloud_search'] );
-            // Add a New Snippet ajax hook
-            add_action( 'wp_ajax_cloud_add', [$this, 'cloud_add'] );
+    public function enqueue_assets() {
+        wp_enqueue_script( 'jquery-ui-dialog' );
+        wp_enqueue_script( 'jquery-ui-autocomplete' );
+
+        wp_register_script( 'orbisius_ctc_cloud_lib', plugins_url("/addons/cloud_lib/assets/custom.js", ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE), array('jquery', ),
+            filemtime( plugin_dir_path( ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE ) . "/addons/cloud_lib/assets/custom.js" ), true);
+        wp_enqueue_script( 'orbisius_ctc_cloud_lib' );
+
+        //Custom styles for snippet library
+        wp_register_style('orbisius_ctc_cloud_lib', plugins_url("/addons/cloud_lib/assets/custom.css", ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE), null,
+            filemtime( plugin_dir_path( ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE ) . "/addons/cloud_lib/assets/custom.css" ), true );
+        wp_enqueue_style('orbisius_ctc_cloud_lib');
+    }
+    
+    /**
+     * Add snippet librabry actions
+     */
+    public function admin_init() {
+        add_action( 'orbisius_child_theme_creator_admin_enqueue_scripts', [$this, 'enqueue_assets'] );
+        
+        add_action( 'wp_ajax_cloud_autocomplete', [$this, 'cloud_autocomplete'] );
+        add_action( 'wp_ajax_nopriv_cloud_autocomplete', [$this, 'cloud_autocomplete'] );
+        
+        // Snippet search ajax hook
+        add_action( 'wp_ajax_cloud_search', [$this, 'cloud_search'] );
+        add_action( 'wp_ajax_nopriv_cloud_search', [$this, 'cloud_search'] );
+        
+        // Add a New Snippet ajax hook
+        add_action( 'wp_ajax_cloud_add', [$this, 'cloud_add'] );
+        add_action( 'wp_ajax_nopriv_cloud_add', [$this, 'cloud_add'] );
     }
 
     /**
