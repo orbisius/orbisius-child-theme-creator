@@ -26,8 +26,20 @@ class orbisius_ctc_cloud_lib {
      */
     public $api_search	= '?orb_cloud_lib_data[cmd]=item.list&orb_cloud_lib_data[query]=';
 
-
+    /*
+     * API which adds a new snippet
+     */
     public $api_add		= '?orb_cloud_lib_data[cmd]=item.add&orb_cloud_lib_data[title]=test&&orb_cloud_lib_data[content]=some_data';
+    
+    /*
+     * API which updates a snippet
+     */
+    public $api_update		= '?orb_cloud_lib_data[cmd]=item.update&orb_cloud_lib_data[id]=id&&orb_cloud_lib_data[title]=test&&orb_cloud_lib_data[content]=some_data';
+	
+    /*
+     * API which returns all snippets
+     */
+    public $api_list_all	= '?orb_cloud_lib_data[cmd]=item.list';
 
     public function __construct() {
         if ( !empty( $_SERVER['DEV_ENV'])) {
@@ -76,7 +88,7 @@ class orbisius_ctc_cloud_lib {
 
         //Custom styles for snippet library
         wp_register_style('orbisius_ctc_cloud_lib', plugins_url("/addons/cloud_lib/assets/custom.css", ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE), null,
-            filemtime( plugin_dir_path( ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE ) . "/addons/cloud_lib/assets/custom.css" ), true );
+            filemtime( plugin_dir_path( ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE ) . "/addons/cloud_lib/assets/custom.css" ), false );
         wp_enqueue_style('orbisius_ctc_cloud_lib');
     }
     
@@ -96,6 +108,10 @@ class orbisius_ctc_cloud_lib {
         // Add a New Snippet ajax hook
         add_action( 'wp_ajax_cloud_add', [$this, 'cloud_add'] );
         add_action( 'wp_ajax_nopriv_cloud_add', [$this, 'cloud_add'] );
+        
+        // Update a Snippet ajax hook
+        add_action( 'wp_ajax_cloud_update', [$this, 'cloud_update'] );
+        add_action( 'wp_ajax_nopriv_cloud_update', [$this, 'cloud_update'] );
     }
 
     /**
@@ -163,14 +179,35 @@ class orbisius_ctc_cloud_lib {
     }
 
     /**
-     * Updates snippet
+     * Updates a snippet by ID
+     * 
+     * MUST send an ID to the API
+     * 
+     * @return	JSON array with API's response
      */
-    public function cloud_save() {
-
+    public function cloud_update() {
+    	if (isset($_POST['id'])) {
+    		$snippetId	=  sanitize_text_field($_POST['id']);
+    		
+    		if (isset($_POST['title'])) {
+    			$snippetTitle	= sanitize_text_field($_POST['title']);
+    		}
+    	
+    		if (isset($_POST['text'])) {
+    			$snippetText	=  sanitize_text_field($_POST['text']);
+    		}
+    		
+    		$url	= 'http://orb-ctc.qsandbox.com/?orb_cloud_lib_data[cmd]=item.update&orb_cloud_lib_data[id]='. $snippetId . '&orb_cloud_lib_data[title]='. $snippetTitle . '&&orb_cloud_lib_data[content]=' . $snippetText;
+    		//$url	= $this->api_url . '' . $snippetTitle . 'text=' . $snippetText;
+    	
+    		wp_send_json($this->get_remote($url));
+    	}
     }
 
     /**
-     * Deletes snippet
+     * Deletes snippet by id
+     * 
+     * MUST send an ID to the API
      */
     public function cloud_delete() {
 
@@ -246,17 +283,88 @@ class orbisius_ctc_cloud_lib {
                     <input class="button" type="button button-primary" id="snippet_save_btn" value="Save">
             <?php endif; ?>
         </div>
-        
-        <!-- Confirm dialog -->
+        <!-- /New Snippet -->
+        <!-- Confirm dialog save snippet -->
         <div id="snippet_confirm_dialog" title="">
             <p>Are you sure you want to save a Snippet without any content?</p>
         </div>
-        <!-- /Confirm dialog -->
-        <!-- /New Snippet -->
+        <!-- /Confirm dialog save snippet -->
+        
 
         <?php
     }
     
+    /**
+     * Manage snippets tab view
+     * 
+     * Shows all available snippets with View, Edit and Delete button
+     */
+    public function render_tab_content_orb_ctc_ext_cloud_lib_manage() {
+         $all_snippets = $this->cloud_manage();
+         ?>
+         
+         <!-- Manage snippets -->
+         <div class="manage_snippets">
+             <h3>My Snippets</h3>
+             <div class="manage_snippets_table_wrapper">
+	              <table>
+	                 <?php foreach( $all_snippets["data"] as $key) { ?>
+	                 <tr data-id="<?php echo $key['id']; ?>" data-title="<?php echo $key['title']; ?>" data-content="<?php echo $key['content']; ?>">
+	                    <td><?php echo $key['title']; ?></td>
+	                    <td><input class="button snippet_view_btn" type="button" value="View"></td>
+	                    <td><input class="button snippet_edit_btn" type="button" value="Edit"></td>
+	                    <td><input class="button snippet_delete_btn" type="button" value="Delete"></td>
+	                 </tr><?php } ?>
+	              </table>
+         		</div>
+         
+		          <!-- Edit snippet window -->
+		          <div class="edit_snippet">
+		                 <h3>Edit Snippet</h3>
+		                 <input class="edit_title">
+		                 <br />
+		                 <textarea class="edit_content"></textarea>
+		                 <br />
+		                 <br />
+		            <!-- /Edit snippet window -->
+		            </div>
+		             
+		             <!-- View snippet window -->
+		             <div class="view_snippet">
+		                 <h3>View Snippet</h3>
+		                 <input class="view_title">
+		                 <br />
+		                 <textarea class="view_content"></textarea>
+		                 <br />
+		                 <br />
+		             <!-- /View snippet window -->
+		             </div>
+             
+         <!-- /Manage snippets -->  
+         </div>
+         
+         <!-- Delete snippet confirm dialog -->
+        <div id="snippet_confirm_dialog_delete" title="">
+            <p>Are you sure you want to delete this snippet with title <span class="delete_snippet_title"></span>?</p>
+        </div>
+        <!-- /Delete snippet confirm dialog -->
+         <?php
+    }
+    
+    /**
+     * Manage snippets tab
+     * Displays all present snippets
+     * 
+     * @return array	decoded response from API
+     */
+    public function cloud_manage() {
+        //$url = $this->api_url . $this->api_list_all; echo $url;
+        $url = 'http://orb-ctc.qsandbox.com/?orb_cloud_lib_data[cmd]=item.list';
+        $json_api_response = $this->get_remote($url);
+        
+        return json_decode( $json_api_response, true );
+    }
+	
     public function render_ui() {
         ?>
         <!-- Snippet Library Wrapper -->
