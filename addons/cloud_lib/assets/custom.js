@@ -179,8 +179,9 @@ jQuery(document).ready(function($) {
 		$('.delete_snippet_title').text(title);
 		
 		$("#snippet_confirm_dialog_delete").dialog( {
-        		dialogClass: 'no-close',
+        		dialogClass: 'snippet_confirm_dialog_delete',
         		modal: true,
+        		resizable: false,
         		buttons: [{
         				text: "Yes",
         				"class": 'button-primary',
@@ -200,6 +201,8 @@ jQuery(document).ready(function($) {
         		}
 		});
 	});
+	
+	$('.ui-dialog[aria-describedby*="snippet_confirm_dialog_delete"]').css('height', '200px'); 
 	
 	/**
 	 * Delete snippet by id
@@ -246,9 +249,10 @@ jQuery(document).ready(function($) {
 		$('.edit_content').val(content);
 		//$('.edit_snippet').show();
         	
-		$(".edit_snippet").dialog( {
-    		dialogClass: 'no-close',
+		$("#edit_snippet").dialog( {
+    		dialogClass: 'edit_snippet',
     		modal: true,
+    		resizable: false,
     		buttons: [{
     				text: "Save",
     				"class": 'button-primary',
@@ -287,7 +291,13 @@ jQuery(document).ready(function($) {
         		
         			if (data.status == '1') {
         				alert(data.msg);
-        				//@todo uplate list with snippets
+        				
+        				$row_to_update = $("tr").find("[data-id='" + id + "']");
+        				$row_to_update.attr('data-title', title);
+        				$row_to_update.attr('data-content', text);
+        				$row_to_update.find('#td_title').html(title);
+        				$.domCache($row_to_update).remove();
+        				$zz=$row_to_update.data('title'); alert($zz);
         			}
         			else {
         				alert("Problem occurred");
@@ -297,9 +307,9 @@ jQuery(document).ready(function($) {
         }
 	
 	/**
-	 * Edit snippet button
+	 * View snippet button
 	 * 
-	 * Displays Edit snippet window
+	 * Displays View snippet window
 	 * 
 	 */
 	$('.snippet_view_btn').on("click", function() {
@@ -312,9 +322,10 @@ jQuery(document).ready(function($) {
 		$('.view_content').val(content);
 		//$('.edit_snippet').show();
         	
-		$(".view_snippet").dialog( {
-    		dialogClass: 'no-close',
+		$("#view_snippet").dialog( {
+    		dialogClass: 'view_snippet',
     		modal: true,
+    		resizable: false,
     		buttons: [{
     				text: "Copy",
     				"class": 'button-primary',
