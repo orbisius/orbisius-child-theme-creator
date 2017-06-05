@@ -81,7 +81,15 @@ class orbisius_ctc_cloud_lib {
     public function enqueue_assets() {
         wp_enqueue_script( 'jquery-ui-dialog' );
         wp_enqueue_script( 'jquery-ui-autocomplete' );
-
+	
+        wp_register_script( 'orbisius_ctc_c_lib', plugins_url("/addons/cloud_lib/assets/jquery-ui.js", ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE), array('jquery', ),
+        				filemtime( plugin_dir_path( ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE ) . "/addons/cloud_lib/assets/jquery-ui.js" ), true);
+        wp_enqueue_script( 'orbisius_ctc_c_lib' );
+        
+        wp_register_style('orbisius_ctc_c_lib', plugins_url("/addons/cloud_lib/assets/jquery-ui.css", ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE), null,
+        				filemtime( plugin_dir_path( ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE ) . "/addons/cloud_lib/assets/jquery-ui.css" ), false );
+        wp_enqueue_style('orbisius_ctc_c_lib');
+        
         wp_register_script( 'orbisius_ctc_cloud_lib', plugins_url("/addons/cloud_lib/assets/custom.js", ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE), array('jquery', ),
             filemtime( plugin_dir_path( ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE ) . "/addons/cloud_lib/assets/custom.js" ), true);
         wp_enqueue_script( 'orbisius_ctc_cloud_lib' );
@@ -310,7 +318,7 @@ class orbisius_ctc_cloud_lib {
 	              <table>
 	                 <?php foreach( $all_snippets["data"] as $key) { ?>
 	                 <tr data-id="<?php echo $key['id']; ?>" data-title="<?php echo $key['title']; ?>" data-content="<?php echo $key['content']; ?>">
-	                    <td><?php echo $key['title']; ?></td>
+	                    <td id="td_title"><?php echo $key['title']; ?></td>
 	                    <td><input class="button snippet_view_btn" type="button" value="View"></td>
 	                    <td><input class="button snippet_edit_btn" type="button" value="Edit"></td>
 	                    <td><input class="button snippet_delete_btn" type="button" value="Delete"></td>
@@ -319,7 +327,7 @@ class orbisius_ctc_cloud_lib {
          		</div>
          
 		          <!-- Edit snippet window -->
-		          <div class="edit_snippet">
+		          <div id="edit_snippet">
 		                 <h3>Edit Snippet</h3>
 		                 <input class="edit_title">
 		                 <br />
@@ -330,7 +338,7 @@ class orbisius_ctc_cloud_lib {
 		            </div>
 		             
 		             <!-- View snippet window -->
-		             <div class="view_snippet">
+		             <div id="view_snippet">
 		                 <h3>View Snippet</h3>
 		                 <input class="view_title">
 		                 <br />
