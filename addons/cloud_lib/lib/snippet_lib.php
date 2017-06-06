@@ -259,15 +259,17 @@ class orbisius_ctc_cloud_lib {
     public function render_tab_content_orb_ctc_ext_cloud_lib_search() {
         ?>
         <!-- Search Snippets -->
-        <input class="selector" id="search_text"></input>
-        <input class="button button-primary" type="button" id="snippet_search_btn" value="Search" />
-        
+        <span class="descr">Start typing the title of your snippet to see suggestions</span>
         <br />
+        <input class="selector" id="search_text"></input>
+        <!-- <input class="button button-primary" type="button" id="snippet_search_btn" value="Search" /> -->
+        
         <div class="found_snippet">
-            <strong>Snippet:</strong>
-            <textarea class="widefat" id="found_snippet_text"></textarea>
-            <strong>Title:</strong>
+            <span class="label">Title:</span>
             <input class="widefat" type="text" id="found_snippet_title"></textarea>
+            <br />
+            <span class="label">Snippet:</span>
+            <textarea class="widefat" id="found_snippet_text"></textarea>
         </div>
         <!-- /Search Snippets -->
         <?php
