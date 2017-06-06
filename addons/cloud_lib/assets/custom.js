@@ -29,11 +29,14 @@ jQuery(document).ready(function($) {
 							label: item.title,
 						};
 					}));
+				},
+				select: function (event, ui) {
+				  //  return false;
 				}
 			});
 		},
 	});
-	
+	//$( "#search_text" ).on( "autocompleteselect", function( event, ui ) {alert('zzz');} );
 	/**
 	 * Search for a snippet button
 	 * 
@@ -42,12 +45,13 @@ jQuery(document).ready(function($) {
 	 * On success:	shows a new text box with the returned data - content and title
 	 * 
 	 */
-	$('#snippet_search_btn').on("click", function() {
+	//$('#snippet_search_btn').on("click", function() {
+	$( "#search_text" ).on( "autocompleteselect", function( event, ui ) {
 		/**
 		 * Holds the value of the input field
 		 */
-		var search = $("#search_text").val().trim();
-		
+		//var search = $("#search_text").val().trim();
+	    var search	= ui.item.label;
 		if (search !== '') {
 			$.ajax({
 				//dataType: "json",
