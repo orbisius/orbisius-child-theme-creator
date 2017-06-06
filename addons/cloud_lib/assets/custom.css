@@ -175,7 +175,7 @@ a.pro_Add_On {
 	padding-left: 10px;
 }
 
-.button.snippet_view_btn, .button.snippet_edit_btn, .button.snippet_delete_btn {
+.button.snippet_edit_view_btn, .button.snippet_view_btn, .button.snippet_edit_btn, .button.snippet_delete_btn {
 	color: white;
 }
 
@@ -183,7 +183,7 @@ a.pro_Add_On {
 	background-image: linear-gradient(#1e8cbe, #0074a2);
 }
 
-.button.snippet_edit_btn {
+.button.snippet_edit_btn, .button.snippet_edit_view_btn {
 	background-image: linear-gradient(#3c7504, #336600);
 }
 

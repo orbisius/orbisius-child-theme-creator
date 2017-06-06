@@ -149,7 +149,7 @@ jQuery(document).ready(function($) {
 	 * @param title
 	 * @param text
 	 */
-	function save_snippet(title) {
+	function save_snippet(title, text) {
 		$.ajax({
 			//dataType: "json",
 			type : "post",
@@ -206,8 +206,6 @@ jQuery(document).ready(function($) {
 		});
 	});
 	
-	$('.ui-dialog[aria-describedby*="snippet_confirm_dialog_delete"]').css('height', '200px'); 
-	
 	/**
 	 * Delete snippet by id
 	 * 
@@ -221,14 +219,14 @@ jQuery(document).ready(function($) {
 		url: ajaxurl,
 		data: {
 			action: "cloud_delete",
-			"id": id,
+			"id": id
 		},
 		success: function (data) {
 			data	= $.parseJSON(data);
-		
+			
 			if (data.status == '1') {
 				alert(data.msg);
-				//@todo remove deleted snippet from the list with snippets
+				$("tr[data-id='" + id + "']").remove();
 			}
 			else {
 				alert("Problem occurred");
@@ -279,7 +277,54 @@ jQuery(document).ready(function($) {
 		});
 	});
 	
+	/**
+	 * Edit / view window combined
+	 * 
+	 */
+	$('.snippet_edit_view_btn').on("click", function() {
+		
+		var id		= $(this).parents('tr').data('id');
+		var title	= $(this).parents('tr').data('title');
+		var content	= $(this).parents('tr').data('content');
+		
+		$('.edit_title').val(title);
+		$('.edit_content').val(content);
+		//$('.edit_snippet').show();
+    	
+		$("#edit_snippet").dialog( {
+		dialogClass: 'edit_snippet',
+		modal: true,
+		resizable: false,
+		buttons: [{
+				text: "Copy",
+				//"class": 'button',
+				click: function() {
+				}
+			},
+			{
+				text: "Update",
+				"class": 'button-primary',
+				click: function() {
+					var newTitle = $('.edit_title').val();
+					var newContent = $('.edit_content').val();
+					$(this).dialog("close"); 
+					snippet_update(id, newTitle, newContent);
+				}
+			},
+			{
+				text: "Close",
+				"class": 'button',
+				click: function() { 
+					$(this).dialog("close");
+				}
+			}],
+		close: function(event, ui) {
+		}
+		});
+	});
+	
 	function snippet_update(id, title, text) {
+	    $t = title;
         	$.ajax({
         		//dataType: "json",
         		type : "post",
@@ -296,12 +341,10 @@ jQuery(document).ready(function($) {
         			if (data.status == '1') {
         				alert(data.msg);
         				
-        				$row_to_update = $("tr").find("[data-id='" + id + "']");
-        				$row_to_update.attr('data-title', title);
-        				$row_to_update.attr('data-content', text);
+        				$row_to_update	= $("tr[data-id='" + id + "']");
+        				$row_to_update.data('title', title );
+        				$row_to_update.data('content', text);
         				$row_to_update.find('#td_title').html(title);
-        				$.domCache($row_to_update).remove();
-        				$zz=$row_to_update.data('title'); alert($zz);
         			}
         			else {
         				alert("Problem occurred");
