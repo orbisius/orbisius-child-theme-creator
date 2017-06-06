@@ -37,6 +37,11 @@ class orbisius_ctc_cloud_lib {
     public $api_update		= '?orb_cloud_lib_data[cmd]=item.update&orb_cloud_lib_data[id]=id&&orb_cloud_lib_data[title]=test&&orb_cloud_lib_data[content]=some_data';
 	
     /*
+     * API which deletes a snippet
+     */
+    public $api_delete		= '?orb_cloud_lib_data[cmd]=item.delete&orb_cloud_lib_data[id]=id';
+    
+    /*
      * API which returns all snippets
      */
     public $api_list_all	= '?orb_cloud_lib_data[cmd]=item.list';
@@ -120,6 +125,10 @@ class orbisius_ctc_cloud_lib {
         // Update a Snippet ajax hook
         add_action( 'wp_ajax_cloud_update', [$this, 'cloud_update'] );
         add_action( 'wp_ajax_nopriv_cloud_update', [$this, 'cloud_update'] );
+        
+        // Delete a Snippet ajax hook
+        add_action( 'wp_ajax_cloud_delete', [$this, 'cloud_delete'] );
+        add_action( 'wp_ajax_nopriv_cloud_delete', [$this, 'cloud_delete'] );
     }
 
     /**
@@ -218,7 +227,14 @@ class orbisius_ctc_cloud_lib {
      * MUST send an ID to the API
      */
     public function cloud_delete() {
-
+    	if (isset($_POST['id'])) {
+    		$id	= sanitize_text_field($_POST['id']);
+    	
+    		$url	= 'http://orb-ctc.qsandbox.com/?orb_cloud_lib_data[cmd]=item.delete&orb_cloud_lib_data[id]='. $id;
+    		//$url	= $this->api_url . '' . $id . 'text=' . $snippetText;
+    		
+    		wp_send_json($this->get_remote($url));
+    	}
     }
 
     public function get_current_tab_id() {
@@ -290,7 +306,8 @@ class orbisius_ctc_cloud_lib {
                     <br />
                     <strong>Title</strong>
                     <input type="text" id="add_snippet_title">
-                    <input class="button" type="button button-primary" id="snippet_save_btn" value="Save">
+                   <!-- <input class="button" type="button button-primary" id="snippet_save_btn" value="Save"> -->
+                     <input class="button button-primary" type="button" id="snippet_save_btn" value="Save"> 
             <?php endif; ?>
         </div>
         <!-- /New Snippet -->
@@ -321,8 +338,9 @@ class orbisius_ctc_cloud_lib {
 	                 <?php foreach( $all_snippets["data"] as $key) { ?>
 	                 <tr data-id="<?php echo $key['id']; ?>" data-title="<?php echo $key['title']; ?>" data-content="<?php echo $key['content']; ?>">
 	                    <td id="td_title"><?php echo $key['title']; ?></td>
-	                    <td><input class="button snippet_view_btn" type="button" value="View"></td>
-	                    <td><input class="button snippet_edit_btn" type="button" value="Edit"></td>
+	                    <td><!--<input class="button snippet_view_btn" type="button" value="View"></td>
+	                    <td><input class="button snippet_edit_btn" type="button" value="Edit"></td>-->	                    
+	                    <input class="button snippet_edit_view_btn" type="button" value="View / Edit"></td>
 	                    <td><input class="button snippet_delete_btn" type="button" value="Delete"></td>
 	                 </tr><?php } ?>
 	              </table>
