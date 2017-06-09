@@ -393,3 +393,35 @@ jQuery(document).ready(function($) {
 		});
 	});
 });
+
+/**
+ * Switches tabs
+ * 
+ */
+function switch_tab(evt, tab_name) {
+	var i, tabcontent, tablinks;
+	
+	tabcontent = document.getElementsByClassName("tabcontent");
+	
+	for (i = 0; i < tabcontent.length; i++) {
+		tabcontent[i].style.display = "none";
+	}
+
+	tablinks = document.getElementsByClassName("nav-tab");
+
+	for (i = 0; i < tablinks.length; i++) {
+		tablinks[i].className = tablinks[i].className.replace(" active", "");
+	}
+	
+	document.getElementById(tab_name).style.display = "block";
+	evt.currentTarget.className += " active";
+}
+	
+/**
+ * Chooses default tab to be opened when the page is loaded
+ * 
+ * Uses the element with id="defaultOpen"
+ */
+window.onload = function(){
+	document.getElementById("defaultOpen").click();
+}
