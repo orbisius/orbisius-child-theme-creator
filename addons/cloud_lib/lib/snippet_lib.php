@@ -260,35 +260,14 @@ class orbisius_ctc_cloud_lib {
     }
     
     /**
-     * @brief	switches tabs without refreshing the page
+     * @brief	Displays tabs 
+     * 			You can switch between the content of these tabs without refreshing the page
      */
     public function switch_tabs() {
-    	echo '<script type="text/javascript">
-	 				function render_tab(evt, tab_name) {
-	 					var i, tabcontent, tablinks;
-	 					tabcontent = document.getElementsByClassName("tabcontent");
-	 					for (i = 0; i < tabcontent.length; i++) {
-	 					tabcontent[i].style.display = "none";
-	    			}
- 				
-	 				tablinks = document.getElementsByClassName("nav-tab");
-	 				for (i = 0; i < tablinks.length; i++) {
-	 					tablinks[i].className = tablinks[i].className.replace(" active", "");
-	    			}
-	 				
-	 				document.getElementById(tab_name).style.display = "block";
-	 				evt.currentTarget.className += " active";
-	    			}
-	 				
-	 				window.onload = function(){
-	 				// Get the element with id="defaultOpen" and click on it
-	 				document.getElementById("defaultOpen").click();
-    				}
- 				</script>';
     	?>
                 <h2 class="nav-tab-wrapper">
                 	<?php foreach ( $this->tabs as $tab_rec ) : ?>
-	                    <input class="nav-tab" onclick="render_tab(event, '<?php echo $tab_rec['id']; ?>')" <?php if ( $tab_rec['id'] == 'orb_ctc_ext_cloud_lib_search' ) { echo 'id="defaultOpen"';} ?> type="button" value="<?php echo $tab_rec['label'];?>"/>
+	                    <input class="nav-tab" onclick="switch_tab(event, '<?php echo $tab_rec['id']; ?>')" <?php if ( $tab_rec['id'] == 'orb_ctc_ext_cloud_lib_search' ) { echo 'id="defaultOpen"';} ?> type="button" value="<?php echo $tab_rec['label'];?>"/>
                		<?php  endforeach; ?>
                </h2>
             <?php
