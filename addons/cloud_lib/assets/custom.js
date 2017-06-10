@@ -36,7 +36,44 @@ jQuery(document).ready(function($) {
 			});
 		},
 	});
-	//$( "#search_text" ).on( "autocompleteselect", function( event, ui ) {alert('zzz');} );
+	
+	/**
+	 * Search for a snippet button
+	 */
+	$('#snippet_search_btn').on("click", function() {
+		var search = $("#search_text").val().trim();
+	    
+		if (search !== '') {
+		    search_snippets(search);
+		}
+		else
+        	{
+		    $("#search_text").focus();
+        	}
+		
+	});
+	
+	/**
+	 * Press enter to search for a snippet
+	 */
+	$('#search_text').keypress(function(e) {
+		if(e.keyCode == 13)
+		{
+		// e.preventDefault();
+		//  sendSelected(this.value);
+		//  $(this).autocomplete('close');
+		var search = $("#search_text").val().trim();
+	    
+		if (search !== '') {
+		    search_snippets(search);
+		}
+		else
+        	{
+    		    $("#search_text").focus();
+        	}
+	    }
+	});
+	
 	/**
 	 * Search for a snippet button
 	 * 
@@ -51,31 +88,39 @@ jQuery(document).ready(function($) {
 		 * Holds the value of the input field
 		 */
 		//var search = $("#search_text").val().trim();
-	    var search	= ui.item.label;
+		var search	= ui.item.label;
 		if (search !== '') {
-			$.ajax({
-				//dataType: "json",
-				type : "post",
-				url: ajaxurl,
-				data: {
-					action: "cloud_search",
-					"search":search
-				},
-				//success: function (data) {
-				success: function(data) {
-					data	= $.parseJSON(data);
-					
-					$.map(data.data, function(item) {
-						if (item != '[]') {
-							$('.found_snippet').show();
-							$("#found_snippet_text").val(item.content).focus();
-							$("#found_snippet_title").val(item.title).focus();
-						}
-					});
+		    search_snippets(search);
+		}
+		else
+		{
+		    $("#search_text").focus();
+		}
+	});
+	
+	function search_snippets (search) {
+	    $.ajax({
+		//dataType: "json",
+		type : "post",
+		url: ajaxurl,
+		data: {
+			action: "cloud_search",
+			"search":search
+		},
+		//success: function (data) {
+		success: function(data) {
+			data	= $.parseJSON(data);
+			
+			$.map(data.data, function(item) {
+				if (item != '[]') {
+					$('.found_snippet').show();
+					$("#found_snippet_text").val(item.content).focus();
+					$("#found_snippet_title").val(item.title).focus();
 				}
 			});
 		}
 	});
+	}
 	
 	/**
 	 * Add a new snippet button
