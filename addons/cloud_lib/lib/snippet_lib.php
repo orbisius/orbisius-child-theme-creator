@@ -244,7 +244,8 @@ class orbisius_ctc_cloud_lib {
     
     public function render_tabs() {
         $url = admin_url( 'themes.php?page=orbisius_child_theme_creator_theme_editor_action' );
-                $cur_tab_id = $this->get_current_tab_id();
+                
+        $cur_tab_id = $this->get_current_tab_id();
         
         ?>
             <h2 class="nav-tab-wrapper">
@@ -259,22 +260,8 @@ class orbisius_ctc_cloud_lib {
         <?php
     }
     
-    /**
-     * @brief	Displays tabs 
-     * 			You can switch between the content of these tabs without refreshing the page
-     */
-    public function switch_tabs() {
-    	?>
-                <h2 class="nav-tab-wrapper">
-                	<?php foreach ( $this->tabs as $tab_rec ) : ?>
-	                    <input class="nav-tab" onclick="switch_tab(event, '<?php echo $tab_rec['id']; ?>')" <?php if ( $tab_rec['id'] == 'orb_ctc_ext_cloud_lib_search' ) { echo 'id="defaultOpen"';} ?> type="button" value="<?php echo $tab_rec['label'];?>"/>
-               		<?php  endforeach; ?>
-               </h2>
-            <?php
-        }
-        
     public function render_tab_content( $tab_id = '' ) {
-    	$tab_id = empty($tab_id) ? $this->get_current_tab_id() : $tab_id; 
+        $tab_id = empty($tab_id) ? $this->get_current_tab_id() : $tab_id;
         
         $method_name = 'render_tab_content_' . $tab_id;
         
@@ -288,7 +275,6 @@ class orbisius_ctc_cloud_lib {
     public function render_tab_content_orb_ctc_ext_cloud_lib_search() {
         ?>
         <!-- Search Snippets -->
-       <div id="orb_ctc_ext_cloud_lib_search" class="tabcontent">
         <span class="descr">Start typing the title of your snippet to see suggestions</span>
         <br />
         <input class="selector" id="search_text"></input>
@@ -301,7 +287,6 @@ class orbisius_ctc_cloud_lib {
             <span class="label">Snippet:</span>
             <textarea class="widefat" id="found_snippet_text"></textarea>
         </div>
-        </div>
         <!-- /Search Snippets -->
         <?php
     }
@@ -310,7 +295,7 @@ class orbisius_ctc_cloud_lib {
     public function render_tab_content_orb_ctc_ext_cloud_lib_add() {
         ?>
          <!--New Snippet--> 
-        <div id="orb_ctc_ext_cloud_lib_add" class="tabcontent">
+        
         <div class="new_snippet_wrapper">
             <?php if ( ! orbisius_child_theme_creator_is_pro_installed() ) : ?>
                     <span>Please, log in to add a snippet</span>
@@ -331,7 +316,7 @@ class orbisius_ctc_cloud_lib {
             <p>Are you sure you want to save a Snippet without any content?</p>
         </div>
         <!-- /Confirm dialog save snippet -->
-        </div>
+        
 
         <?php
     }
@@ -344,7 +329,7 @@ class orbisius_ctc_cloud_lib {
     public function render_tab_content_orb_ctc_ext_cloud_lib_manage() {
          $all_snippets = $this->cloud_manage();
          ?>
-         <div id="orb_ctc_ext_cloud_lib_manage" class="tabcontent">
+         
          <!-- Manage snippets -->
          <div class="manage_snippets">
              <h3>My Snippets</h3>
@@ -391,7 +376,6 @@ class orbisius_ctc_cloud_lib {
             <p>Are you sure you want to delete this snippet with title <span class="delete_snippet_title"></span>?</p>
         </div>
         <!-- /Delete snippet confirm dialog -->
-        </div>
          <?php
     }
     
@@ -414,17 +398,10 @@ class orbisius_ctc_cloud_lib {
         <!-- Snippet Library Wrapper -->
             <div class="snippet_wrapper">
                     <h3>Orbisius Cloud Library</h3>
-					<?php $this->switch_tabs()?>
-                    <?php //$this->render_tabs(); ?>
+
+                    <?php $this->render_tabs(); ?>
                     <br/>
-                    <?php //$this->render_tab_content(); 
-        
-        $this->render_tab_content_orb_ctc_ext_cloud_lib_search();
-        $this->render_tab_content_orb_ctc_ext_cloud_lib_add();
-       $this->render_tab_content_orb_ctc_ext_cloud_lib_manage();
-       
-        
-        ?>
+                    <?php $this->render_tab_content(); ?>
             </div>
             <!-- /Snippet Library Wrapper -->
         <?php
