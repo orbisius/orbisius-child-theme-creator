@@ -86,14 +86,6 @@ class orbisius_ctc_cloud_lib {
     public function enqueue_assets() {
         wp_enqueue_script( 'jquery-ui-dialog' );
         wp_enqueue_script( 'jquery-ui-autocomplete' );
-	
-        wp_register_script( 'orbisius_ctc_c_lib', plugins_url("/addons/cloud_lib/assets/jquery-ui.js", ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE), array('jquery', ),
-        				filemtime( plugin_dir_path( ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE ) . "/addons/cloud_lib/assets/jquery-ui.js" ), true);
-        wp_enqueue_script( 'orbisius_ctc_c_lib' );
-        
-        wp_register_style('orbisius_ctc_c_lib', plugins_url("/addons/cloud_lib/assets/jquery-ui.css", ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE), null,
-        				filemtime( plugin_dir_path( ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE ) . "/addons/cloud_lib/assets/jquery-ui.css" ), false );
-        wp_enqueue_style('orbisius_ctc_c_lib');
         
         wp_register_script( 'orbisius_ctc_cloud_lib', plugins_url("/addons/cloud_lib/assets/custom.js", ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE), array('jquery', ),
             filemtime( plugin_dir_path( ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE ) . "/addons/cloud_lib/assets/custom.js" ), true);
