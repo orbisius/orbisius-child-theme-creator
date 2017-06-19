@@ -86,6 +86,7 @@ class orbisius_ctc_cloud_lib {
     public function enqueue_assets() {
         wp_enqueue_script( 'jquery-ui-dialog' );
         wp_enqueue_script( 'jquery-ui-autocomplete' );
+        wp_enqueue_script('jquery-ui-tabs');
         
         wp_register_script( 'orbisius_ctc_cloud_lib', plugins_url("/addons/cloud_lib/assets/custom.js", ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE), array('jquery', ),
             filemtime( plugin_dir_path( ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE ) . "/addons/cloud_lib/assets/custom.js" ), true);
@@ -239,31 +240,24 @@ class orbisius_ctc_cloud_lib {
                 $cur_tab_id = $this->get_current_tab_id();
         
         ?>
-            <h2 class="nav-tab-wrapper">
+        <div id="tabs">
+             <h2 class="nav-tab-wrapper"> 
+            
+            <ul>
                 <?php foreach ( $this->tabs as $tab_rec ) : ?>
                     <?php 
                     $tab_url = add_query_arg( 'tab', $tab_rec['id'], $url );
                     $extra_tab_css = $tab_rec['id'] == $cur_tab_id ? 'nav-tab-active' : '';
                     ?>
-                    <a href="<?php echo esc_url( $tab_url ); ?>" class="nav-tab <?php echo $extra_tab_css;?>"><?php echo $tab_rec['label'];?></a>
+                    <!--                     <a href="<?php //echo esc_url( $tab_url ); ?>" class="nav-tab <?php // echo $extra_tab_css;?>"><?php //echo $tab_rec['label'];?></a> -->
+                    
+                    <li><a href="<?php echo '#' . $tab_rec['id']; ?>"><?php echo $tab_rec['label'];?></a></li>
                 <?php endforeach; ?>
-            </h2>
+                </ul>
+             </h2>
         <?php
     }
     
-    /**
-     * @brief	Displays tabs 
-     * 			You can switch between the content of these tabs without refreshing the page
-     */
-    public function switch_tabs() {
-    	?>
-                <h2 class="nav-tab-wrapper">
-                	<?php foreach ( $this->tabs as $tab_rec ) : ?>
-	                    <input class="nav-tab" onclick="switch_tab(event, '<?php echo $tab_rec['id']; ?>')" <?php if ( $tab_rec['id'] == 'orb_ctc_ext_cloud_lib_search' ) { echo 'id="defaultOpen"';} ?> type="button" value="<?php echo $tab_rec['label'];?>"/>
-               		<?php  endforeach; ?>
-               </h2>
-            <?php
-        }
         
     public function render_tab_content( $tab_id = '' ) {
     	$tab_id = empty($tab_id) ? $this->get_current_tab_id() : $tab_id; 
@@ -294,6 +288,7 @@ class orbisius_ctc_cloud_lib {
             <textarea class="widefat" id="found_snippet_text"></textarea>
         </div>
         </div>
+        
         <!-- /Search Snippets -->
         <?php
     }
@@ -406,8 +401,7 @@ class orbisius_ctc_cloud_lib {
         <!-- Snippet Library Wrapper -->
             <div class="snippet_wrapper">
                     <h3>Orbisius Cloud Library</h3>
-					<?php $this->switch_tabs()?>
-                    <?php //$this->render_tabs(); ?>
+                    <?php $this->render_tabs(); ?>
                     <br/>
                     <?php //$this->render_tab_content(); 
         
@@ -415,8 +409,10 @@ class orbisius_ctc_cloud_lib {
         $this->render_tab_content_orb_ctc_ext_cloud_lib_add();
        $this->render_tab_content_orb_ctc_ext_cloud_lib_manage();
        
+       ?>
+       </div>
         
-        ?>
+        
             </div>
             <!-- /Snippet Library Wrapper -->
         <?php
