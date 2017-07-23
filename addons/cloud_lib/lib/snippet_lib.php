@@ -124,9 +124,13 @@ class orbisius_ctc_cloud_lib {
         add_action( 'wp_ajax_orb_ctc_signup', [$this, 'process_signup'] );
         add_action( 'wp_ajax_nopriv_orb_ctc_signup', [$this, 'process_signup'] );
         
-         // Snippet search ajax hook
+         // Log in
         add_action( 'wp_ajax_orb_ctc_login', [$this, 'process_login'] );
         add_action( 'wp_ajax_nopriv_orb_ctc_login', [$this, 'process_login'] );
+        
+         // Log out
+        add_action( 'wp_ajax_orb_ctc_log_out', [$this, 'process_log_out'] );
+        add_action( 'wp_ajax_nopriv_orb_ctc_log_out', [$this, 'process_log_out'] );
         
         add_action( 'wp_ajax_cloud_autocomplete', [$this, 'cloud_autocomplete'] );
         add_action( 'wp_ajax_nopriv_cloud_autocomplete', [$this, 'cloud_autocomplete'] );
@@ -212,6 +216,19 @@ class orbisius_ctc_cloud_lib {
                 }
             }
         }
+        
+        wp_send_json($req_res->is_success() ? $req_res->data('result') : $req_res->to_array());
+    }
+
+    /**
+     * Deletes the api key saved in the current user's meta
+     */
+    public function process_log_out() {
+        $user_api = orbisius_child_theme_creator_user::get_instance();
+        $user_api->api_key('');
+
+        $req_res = new orbisius_child_theme_creator_result();
+        $req_res->status(1);
         
         wp_send_json($req_res->is_success() ? $req_res->data('result') : $req_res->to_array());
     }
@@ -551,6 +568,9 @@ class orbisius_ctc_cloud_lib {
                 <!--<h3>Account</h3>-->
                 <div class="">
                     Orbisius API Key <?php echo $api_key; ?>
+                </div>
+                <div class="">
+                    <a href='#' id='orb_ctc_ext_cloud_lib_account_log_out' class="button"> Log out</a>
                 </div>
             </div> <!-- /orb_ctc_ext_cloud_lib_account_wrapper -->  
         </div>

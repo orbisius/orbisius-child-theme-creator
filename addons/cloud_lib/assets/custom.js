@@ -2,7 +2,26 @@
  * Used for the Snippet Library
  */
 jQuery(document).ready(function($) {
-    $('.orb_ctc_signup_form,.orb_ctc_login_form').on('submit', function (e) {
+    $('#orb_ctc_ext_cloud_lib_account_log_out').on('click', function (e) {
+        var res_container = $('.orb_ctc_ext_cloud_lib_signup_wrapper').find('.result');
+        res_container.html('Please, wait');
+        
+        $.ajax({
+            type : 'post',
+            url: ajaxurl + '?action=orb_ctc_log_out',
+            data: params,
+            success: function(json) {
+                if (json.status) {
+                    res_container.html('Please, wait');
+                    //window.location.reload();
+                } else {
+                    res_container.html(json.msg);
+                }
+            }
+        });
+    } );
+    
+    $('.orb_ctc_signup_form').on('submit', function (e) {
         e.preventDefault();
         var params = $(this).serialize();
         
@@ -50,7 +69,7 @@ jQuery(document).ready(function($) {
             success: function(json) {
                 if (json.status) {
                     res_container.html('Please, wait');
-                    window.location.reload();
+//                    window.location.reload();
                 } else {
                     res_container.html(json.msg);
                     submit_btn.show();

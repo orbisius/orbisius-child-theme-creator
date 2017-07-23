@@ -8,10 +8,10 @@ class orbisius_child_theme_creator_user extends orbisius_child_theme_creator_sin
      * @param str/opt $key
      * @return str
      */
-    public function api_key($key = '') {
+    public function api_key($key = null) {
         static $api_key = null;
         
-        if (!is_null($api_key) && empty($key)) { // get
+        if (!is_null($api_key) && is_null($key)) { // get
             return $api_key;
         }
         
@@ -19,9 +19,11 @@ class orbisius_child_theme_creator_user extends orbisius_child_theme_creator_sin
         
         if (!empty($key)) {
             $api_key = update_user_meta($user_id, $this->api_meta_key, $key);
+            $api_key = get_user_meta($user_id, $this->api_meta_key, true);
+        } else { // delete
+            delete_user_meta($user_id, $this->api_meta_key);
+            $api_key = null;
         }
-
-        $api_key = get_user_meta($user_id, $this->api_meta_key, true);
 
         return $api_key;
     }
