@@ -2,6 +2,21 @@
  * Used for the Snippet Library
  */
 jQuery(document).ready(function($) {
+    $('.orb_ctc_signup_form').on('submit', function (e) {
+        e.preventDefault();
+        var params = $(this).serialize();
+        
+        $.ajax({
+            type : 'post',
+            url: ajaxurl + '?action=orb_ctc_signup',
+            data: params,
+            success: function(json) {
+                alert(json.status + ' ' + json.msg);
+            },
+        });
+        
+        return false;
+    })
 	/**
 	 * Snippets search autocomplete suggestions
 	 * 

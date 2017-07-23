@@ -1372,6 +1372,26 @@ function orbisius_child_theme_creator_get_request($key = null, $default = '') {
 }
 
 /**
+ * orbisius_child_theme_creator_get();
+ * @param str $key
+ * @param str $default
+ * @return mixed
+ */
+function orbisius_child_theme_creator_get($key = null, $default = '') {
+    $val = orbisius_child_theme_creator_get_request($key, $default);
+    
+    if (is_scalar($val)) {
+        $val = wp_kses($val, []);
+        $val = trim($val);
+    } elseif (is_array($key)) {
+        $val = array_map('orbisius_child_theme_creator_get', $key);
+    }
+    
+    return $val;
+}
+
+
+/**
  * adds some HTML comments in the page so people would know that this plugin powers their site.
  */
 function orbisius_child_theme_creator_add_plugin_credits() {
@@ -2275,104 +2295,105 @@ function orbisius_ctc_theme_editor() {
                             <button type='submit' class='button button-primary' id="theme_1_submit" name="theme_1_submit">Save Changes</button>
                             <span class="status"></span>
                         </div>
-
-                        <hr />
-                        <div class="orbisius_ctc_theme_editor_theme_1_secondary_buttons secondary_buttons">
-                            <button type="button" class='button' id="theme_1_new_file_btn" name="theme_1_new_file_btn">New File</button>
-                            <button type="button" class='button' id="theme_1_syntax_chk_btn" name="theme_1_syntax_chk_btn">PHP Syntax Check</button>
-                            <button type="button" class='button' id="theme_1_send_btn" name="theme_1_send_btn">Send</button>
-                            <a href="<?php echo site_url('/');?>" class='button' target="_blank" title="new tab/window"
-                                id="theme_1_site_preview_btn" name="theme_1_site_preview_btn">View Site</a>
-
-                            <?php do_action('orbisius_child_theme_creator_editors_ext_actions', 'theme_1'); ?>
-
-                            <!--
-                            <button type="button" class='button' id="theme_1_new_folder_btn" name="theme_1_new_folder_btn">New Folder</button>-->
-
-                            <a href='javascript:void(0)' class='app-button-right app-button-negative' id="theme_1_delete_file_btn" name="theme_1_delete_file_btn">Delete File</a>
-
-                            <div id='theme_1_new_file_container' class="theme_1_new_file_container app-hide">
-                                <strong>New File</strong>
-                                <input type="text" id="theme_1_new_file" name="theme_1_new_file" value="" />
-                                <span>e.g. test.js, extra.css, headers/header-two.php etc</span>
-
-                                <!--<br/>
-                                <label>
-                                <input type="checkbox" name="theme_1_new_file_type" value="folder" />
-                                Create a folder Instead
-                                </label>-->
-
-                                <span class="status"></span>
-
-                                <br/>
-                                <button type='button' class='button button-primary' id="theme_1_new_file_btn_ok" name="theme_1_new_file_btn_ok">Save</button>
-                                <a href='javascript:void(0)' class='app-button-negative00 button delete' id="theme_1_new_file_btn_cancel" name="theme_1_new_file_btn_cancel">Cancel</a>
-                            </div>
-
-                            <!-- send -->
-                            <div id='theme_1_send_container' class="theme_1_send_container app-hide">
-                                <p>
-                                    Email selected theme and parent theme (if any) to yourself or a colleague.
-                                    Separate multiple emails with commas.<br/>
-                                    <strong>To:</strong>
-                                    <input type="text" id="theme_1_send_to" name="email" value="" placeholder="Enter email" />
-
-                                    <button type='button' class='button button-primary' id="theme_1_send_btn_ok" name="theme_1_send_btn_ok">Send</button>
-                                    <a href='javascript:void(0)' class='app-button-negative00 button delete'
-                                       id="theme_1_send_btn_cancel" name="theme_1_send_btn_cancel">Cancel</a>
-                                </p>
-                            </div>
-                            <!-- /send -->
-
-                            <?php do_action('orbisius_child_theme_creator_editors_ext_action_left_start', array( 'place' => 'left' ) ); ?>
-                            <?php do_action('orbisius_child_theme_creator_editors_ext_action_left_end', array( 'place' => 'left' ) ); ?>
-							
-                            <div style="border:1px solid #ccc;margin:10px 0;padding:3px 5px;">
-                                <h3>Pro Addon 
-                                    <?php if ( ! orbisius_child_theme_creator_is_pro_installed() ) : ?>
-                                    <ul>
-                                        <li>Syntax Highlighting</li>
-                                        <li>Better dropdown for selecting themes and files</li>
-                                        <li>Soon: snippet library stored in the cloud</li>
-                                        <li></li>
-                                    </ul>
-                                    <?php endif; ?>
-                                </h3>
-
-                                <?php if ( orbisius_child_theme_creator_is_pro_installed() ) : ?>
-                                    <div class="app-alert-success">
-                                        The <a href="//orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator-pro/?utm_source=orbisius-child-theme-editor&utm_medium=footer&utm_campaign=product"
-                                            target="_blank" title="[new window]" style="font-weight: bolder;text-decoration: underline;">Pro Addon</a>
-                                        is up and running. Thanks for supporting our <a
-                                            href="//orbisius.com/products/wordpress-plugins/?utm_source=orbisius-child-theme-editor&utm_medium=footer&utm_campaign=product" target="_blank">work</a>!
-                                    </div>
-                                <?php else : ?>
-                                    <span>Get more cool features by purchasing the </span>
-                                    <a href="//orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator-pro/?utm_source=orbisius-child-theme-editor&utm_medium=footer&utm_campaign=product"
-                                        target="_blank" title="[new window]" style="font-weight: bolder;color:red;text-decoration: underline;">Pro Addon</a> 
-                                <?php endif; ?>
-
-                                <!--<ul>
-                                    <li><a href="//orbisius.com/products/wordpress-plugins/orbisius-theme-switcher/?utm_source=orbisius-child-theme-creator&utm_medium=editors&utm_campaign=product"
-                                           target="_blank" title="Opens in a new tab/window">Orbisius Theme Switcher</a> - Allows you to preview any of the installed themes on your site.</li>
-                                </ul>-->
-                            </div>
-
-                            <!-- new folder -->
-                            <!--
-                            <div id='theme_1_new_folder_container' class="theme_1_new_folder_container app-hide">
-                                <strong>New Folder</strong>
-                                <input type="text" id="theme_1_new_folder" name="theme_1_new_folder" value="" />
-                                <span>e.g. includes, data</span>
-                                <span class="status"></span>
-
-                                <br/>
-                                <button type='button' class='button button-primary' id="theme_1_new_folder_btn_ok" name="theme_1_new_folder_btn_ok">Save</button>
-                                <a href='javascript:void(0)' class='app-button-negative00 button delete' id="theme_1_new_folder_btn_cancel" name="theme_1_new_folder_btn_cancel">Cancel</a>
-                            </div>-->
-                            <!-- /new folder -->
-                        </div> <!-- /secondary_buttons -->
                     </form>
+
+
+                    <hr />
+                    <div class="orbisius_ctc_theme_editor_theme_1_secondary_buttons secondary_buttons">
+                        <button type="button" class='button' id="theme_1_new_file_btn" name="theme_1_new_file_btn">New File</button>
+                        <button type="button" class='button' id="theme_1_syntax_chk_btn" name="theme_1_syntax_chk_btn">PHP Syntax Check</button>
+                        <button type="button" class='button' id="theme_1_send_btn" name="theme_1_send_btn">Send</button>
+                        <a href="<?php echo site_url('/');?>" class='button' target="_blank" title="new tab/window"
+                            id="theme_1_site_preview_btn" name="theme_1_site_preview_btn">View Site</a>
+
+                        <?php do_action('orbisius_child_theme_creator_editors_ext_actions', 'theme_1'); ?>
+
+                        <!--
+                        <button type="button" class='button' id="theme_1_new_folder_btn" name="theme_1_new_folder_btn">New Folder</button>-->
+
+                        <a href='javascript:void(0)' class='app-button-right app-button-negative' id="theme_1_delete_file_btn" name="theme_1_delete_file_btn">Delete File</a>
+
+                        <div id='theme_1_new_file_container' class="theme_1_new_file_container app-hide">
+                            <strong>New File</strong>
+                            <input type="text" id="theme_1_new_file" name="theme_1_new_file" value="" />
+                            <span>e.g. test.js, extra.css, headers/header-two.php etc</span>
+
+                            <!--<br/>
+                            <label>
+                            <input type="checkbox" name="theme_1_new_file_type" value="folder" />
+                            Create a folder Instead
+                            </label>-->
+
+                            <span class="status"></span>
+
+                            <br/>
+                            <button type='button' class='button button-primary' id="theme_1_new_file_btn_ok" name="theme_1_new_file_btn_ok">Save</button>
+                            <a href='javascript:void(0)' class='app-button-negative00 button delete' id="theme_1_new_file_btn_cancel" name="theme_1_new_file_btn_cancel">Cancel</a>
+                        </div>
+
+                        <!-- send -->
+                        <div id='theme_1_send_container' class="theme_1_send_container app-hide">
+                            <p>
+                                Email selected theme and parent theme (if any) to yourself or a colleague.
+                                Separate multiple emails with commas.<br/>
+                                <strong>To:</strong>
+                                <input type="text" id="theme_1_send_to" name="email" value="" placeholder="Enter email" />
+
+                                <button type='button' class='button button-primary' id="theme_1_send_btn_ok" name="theme_1_send_btn_ok">Send</button>
+                                <a href='javascript:void(0)' class='app-button-negative00 button delete'
+                                   id="theme_1_send_btn_cancel" name="theme_1_send_btn_cancel">Cancel</a>
+                            </p>
+                        </div>
+                        <!-- /send -->
+
+                        <?php do_action('orbisius_child_theme_creator_editors_ext_action_left_start', array( 'place' => 'left' ) ); ?>
+                        <?php do_action('orbisius_child_theme_creator_editors_ext_action_left_end', array( 'place' => 'left' ) ); ?>
+
+                        <div style="border:1px solid #ccc;margin:10px 0;padding:3px 5px;">
+                            <h3>Pro Addon 
+                                <?php if ( ! orbisius_child_theme_creator_is_pro_installed() ) : ?>
+                                <ul>
+                                    <li>Syntax Highlighting</li>
+                                    <li>Better dropdown for selecting themes and files</li>
+                                    <li>Soon: snippet library stored in the cloud</li>
+                                    <li></li>
+                                </ul>
+                                <?php endif; ?>
+                            </h3>
+
+                            <?php if ( orbisius_child_theme_creator_is_pro_installed() ) : ?>
+                                <div class="app-alert-success">
+                                    The <a href="//orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator-pro/?utm_source=orbisius-child-theme-editor&utm_medium=footer&utm_campaign=product"
+                                        target="_blank" title="[new window]" style="font-weight: bolder;text-decoration: underline;">Pro Addon</a>
+                                    is up and running. Thanks for supporting our <a
+                                        href="//orbisius.com/products/wordpress-plugins/?utm_source=orbisius-child-theme-editor&utm_medium=footer&utm_campaign=product" target="_blank">work</a>!
+                                </div>
+                            <?php else : ?>
+                                <span>Get more cool features by purchasing the </span>
+                                <a href="//orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator-pro/?utm_source=orbisius-child-theme-editor&utm_medium=footer&utm_campaign=product"
+                                    target="_blank" title="[new window]" style="font-weight: bolder;color:red;text-decoration: underline;">Pro Addon</a> 
+                            <?php endif; ?>
+
+                            <!--<ul>
+                                <li><a href="//orbisius.com/products/wordpress-plugins/orbisius-theme-switcher/?utm_source=orbisius-child-theme-creator&utm_medium=editors&utm_campaign=product"
+                                       target="_blank" title="Opens in a new tab/window">Orbisius Theme Switcher</a> - Allows you to preview any of the installed themes on your site.</li>
+                            </ul>-->
+                        </div>
+
+                        <!-- new folder -->
+                        <!--
+                        <div id='theme_1_new_folder_container' class="theme_1_new_folder_container app-hide">
+                            <strong>New Folder</strong>
+                            <input type="text" id="theme_1_new_folder" name="theme_1_new_folder" value="" />
+                            <span>e.g. includes, data</span>
+                            <span class="status"></span>
+
+                            <br/>
+                            <button type='button' class='button button-primary' id="theme_1_new_folder_btn_ok" name="theme_1_new_folder_btn_ok">Save</button>
+                            <a href='javascript:void(0)' class='app-button-negative00 button delete' id="theme_1_new_folder_btn_cancel" name="theme_1_new_folder_btn_cancel">Cancel</a>
+                        </div>-->
+                        <!-- /new folder -->
+                    </div> <!-- /secondary_buttons -->
                 </td>
                 <td width="50%">
                     <form id="orbisius_ctc_theme_editor_theme_2_form" class="orbisius_ctc_theme_editor_theme_2_form">

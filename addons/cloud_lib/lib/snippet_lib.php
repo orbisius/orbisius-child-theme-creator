@@ -116,6 +116,10 @@ class orbisius_ctc_cloud_lib {
     public function admin_init() {
         add_action( 'orbisius_child_theme_creator_admin_enqueue_scripts', [$this, 'enqueue_assets'] );
         
+         // Snippet search ajax hook
+        add_action( 'wp_ajax_orb_ctc_signup', [$this, 'process_signup'] );
+        add_action( 'wp_ajax_nopriv_orb_ctc_signup', [$this, 'process_signup'] );
+        
         add_action( 'wp_ajax_cloud_autocomplete', [$this, 'cloud_autocomplete'] );
         add_action( 'wp_ajax_nopriv_cloud_autocomplete', [$this, 'cloud_autocomplete'] );
         
@@ -154,7 +158,7 @@ class orbisius_ctc_cloud_lib {
         $res = new orbisius_child_theme_creator_result();
         
         $wp_req_params = [
-            'method' => 'POST',
+            'method' => 'POST', 'sslverify' => false,
             'timeout' => 20,
             'redirection' => 5,
             'blocking' => true,
@@ -166,12 +170,32 @@ class orbisius_ctc_cloud_lib {
         if ( is_wp_error( $response ) ) {
            $res->msg( $response->get_error_message() );
         } else {
-            $api_response = wp_remote_retrieve_body($response);
-            $res->status(1);
-            $res->data('result', $api_response);
+            $json_str = wp_remote_retrieve_body($response);
+            $api_res = new orbisius_child_theme_creator_result($json_str);
+            $res->status(1); // current connection is OK.
+            $res->data('result', $api_res);  // this is what API said. This could be status:0
         }
 
         return $res;
+    }
+
+    /**
+     * Signs up the user.
+     */
+    public function process_signup() {
+        $email = orbisius_child_theme_creator_get('orb_ctc_email');
+        $pass = orbisius_child_theme_creator_get('orb_ctc_pass');
+        
+        $params = [
+            'orb_cloud_lib_data' => [
+                'cmd' => 'user.register',
+                'pass' => $pass,
+                'email' => $email,
+            ]
+        ];
+
+        $req_res = $this->call($this->api_url, $params);
+        wp_send_json($req_res->is_success() ? $req_res->data('result') : $req_res->to_array());
     }
 
     /**
@@ -444,14 +468,14 @@ class orbisius_ctc_cloud_lib {
             <div class="orb_ctc_ext_cloud_lib_signup_wrapper">
                 <h3>Sign Up</h3>
                 <div class="">
-                    <form name="orb_ctc_signup_form" id="loginform" method="post">
+                    <form name="orb_ctc_signup_form" id="orb_ctc_signup_form" class="orb_ctc_signup_form" method="post">
                             <p>
-                                <label for="user_login">Email Address<br />
-                                <input type="text" name="orb_ctc_email" id="orb_ctc_email" class="input" value="" size="20" /></label>
+                                <label for="orb_ctc_email">Email Address<br />
+                                    <input type="email" name="orb_ctc_email" id="orb_ctc_email" class="input" value="" size="42" required="" /></label>
                             </p>
                             <p>
-                                <label for="user_pass">Password<br />
-                                <input type="password" name="orb_ctc_pass" id="orb_ctc_pass" class="input" value="" size="20" /></label>
+                                <label for="orb_ctc_pass">Password<br />
+                                    <input type="password" name="orb_ctc_pass" id="orb_ctc_pass" class="input" value="" size="42" required=" "/></label>
                             </p>
                             <p class="submit">
                                 <input type="submit" name="wp-submit" id="wp-submit"
