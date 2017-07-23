@@ -80,6 +80,10 @@ class orbisius_ctc_cloud_lib {
                 'label' => __( 'Sign Up', 'orbisius-child-theme-creator' ),
             ],
             [
+                'id' => 'orb_ctc_ext_cloud_lib_login',
+                'label' => __( 'Login', 'orbisius-child-theme-creator' ),
+            ],
+            [
                 'id' => 'orb_ctc_ext_cloud_lib_account',
                 'label' => __( 'Account', 'orbisius-child-theme-creator' ),
             ],
@@ -119,6 +123,10 @@ class orbisius_ctc_cloud_lib {
          // Snippet search ajax hook
         add_action( 'wp_ajax_orb_ctc_signup', [$this, 'process_signup'] );
         add_action( 'wp_ajax_nopriv_orb_ctc_signup', [$this, 'process_signup'] );
+        
+         // Snippet search ajax hook
+        add_action( 'wp_ajax_orb_ctc_login', [$this, 'process_login'] );
+        add_action( 'wp_ajax_nopriv_orb_ctc_login', [$this, 'process_login'] );
         
         add_action( 'wp_ajax_cloud_autocomplete', [$this, 'cloud_autocomplete'] );
         add_action( 'wp_ajax_nopriv_cloud_autocomplete', [$this, 'cloud_autocomplete'] );
@@ -182,9 +190,42 @@ class orbisius_ctc_cloud_lib {
     /**
      * Signs up the user.
      */
-    public function process_signup() {
-        $email = orbisius_child_theme_creator_get('orb_ctc_email');
+    public function process_login() {
         $pass = orbisius_child_theme_creator_get('orb_ctc_pass');
+        $email = orbisius_child_theme_creator_get('orb_ctc_email');
+        
+        $params = [
+            'orb_cloud_lib_data' => [
+                'cmd' => 'user.login',
+                'pass' => $pass,
+                'email' => $email,
+            ]
+        ];
+
+        $req_res = $this->call($this->api_url, $params);
+        
+        if ($req_res->is_success()) {
+            $api_res = $req_res->data('result');
+
+            if ($api_res->is_success()) {
+                $user_api = orbisius_child_theme_creator_user::get_instance();
+                $api_key = $api_res->data('api_key');
+                
+                if ( !empty($api_key)) {
+                    $user_api->api_key($api_key);
+                }
+            }
+        }
+        
+        wp_send_json($req_res->is_success() ? $req_res->data('result') : $req_res->to_array());
+    }
+
+    /**
+     * Signs up the user.
+     */
+    public function process_signup() {
+        $pass = orbisius_child_theme_creator_get('orb_ctc_pass');
+        $email = orbisius_child_theme_creator_get('orb_ctc_email');
         
         $params = [
             'orb_cloud_lib_data' => [
@@ -503,6 +544,42 @@ class orbisius_ctc_cloud_lib {
      * 
      * Shows all available snippets with View, Edit and Delete button
      */
+    public function render_tab_content_orb_ctc_ext_cloud_lib_login() {
+        ?>
+         <div id="orb_ctc_ext_cloud_lib_login" class="tabcontent">
+            <div id="orb_ctc_ext_cloud_lib_login_wrapper" class="orb_ctc_ext_cloud_lib_login_wrapper">
+                <h3>Log in</h3>
+                <div class="">
+                    <form name="orb_ctc_login_form" id="orb_ctc_login_form" class="orb_ctc_login_form" method="post">
+                        <p>
+                            <label for="orb_ctc_email">Email Address<br />
+                                <input type="email" name="orb_ctc_email" id="orb_ctc_email" class="input" value="" size="42" required="" /></label>
+                        </p>
+                        <p>
+                            <label for="orb_ctc_pass">Password<br />
+                                <input type="password" name="orb_ctc_pass" id="orb_ctc_pass" 
+                                       class="input" value="" size="42" required="" /></label>
+                        </p>
+                        <p class="submit">
+                            <input type="submit" name="orb_ctc_login_submit" id="orb_ctc_login_submit"
+                                   class="button button-primary button-large" value="Log in" />
+                        </p>
+                    </form>
+                    
+                    <div class="result">
+
+                    </div>
+                </div>
+            </div> <!-- /orb_ctc_ext_cloud_lib_login_wrapper -->  
+        </div>
+        <?php
+    }
+    
+    /**
+     * About tab view
+     * 
+     * Shows all available snippets with View, Edit and Delete button
+     */
     public function render_tab_content_orb_ctc_ext_cloud_lib_account() {
         $user_api = orbisius_child_theme_creator_user::get_instance();
         $api_key = $user_api->api_key();
@@ -585,7 +662,7 @@ class orbisius_ctc_cloud_lib {
                 $render = 0;
             }
         } else {
-            if (!preg_match('#signup|about#si', $tab_rec['id'])) {
+            if (!preg_match('#signup|login|about#si', $tab_rec['id'])) {
                 $render = 0;
             }
         }

@@ -2,7 +2,7 @@
  * Used for the Snippet Library
  */
 jQuery(document).ready(function($) {
-    $('.orb_ctc_signup_form').on('submit', function (e) {
+    $('.orb_ctc_signup_form,.orb_ctc_login_form').on('submit', function (e) {
         e.preventDefault();
         var params = $(this).serialize();
         
@@ -10,7 +10,7 @@ jQuery(document).ready(function($) {
             alert('Error: Passwords do not match');
             return false;
         }
-        
+
         var submit_btn = $(this).find(':submit');
         var res_container = $('.orb_ctc_ext_cloud_lib_signup_wrapper').find('.result');
         res_container.html('Please, wait');
@@ -28,7 +28,34 @@ jQuery(document).ready(function($) {
                     res_container.html(json.msg);
                     submit_btn.show();
                 }
-            },
+            }
+        });
+        
+        return false;
+    })
+    
+    $('.orb_ctc_login_form').on('submit', function (e) {
+        e.preventDefault();
+        var params = $(this).serialize();
+        
+        var submit_btn = $(this).find(':submit');
+        var res_container = $('.orb_ctc_ext_cloud_lib_signup_wrapper').find('.result');
+        res_container.html('Please, wait');
+        submit_btn.hide();
+        
+        $.ajax({
+            type : 'post',
+            url: ajaxurl + '?action=orb_ctc_login',
+            data: params,
+            success: function(json) {
+                if (json.status) {
+                    res_container.html('Please, wait');
+                    window.location.reload();
+                } else {
+                    res_container.html(json.msg);
+                    submit_btn.show();
+                }
+            }
         });
         
         return false;
