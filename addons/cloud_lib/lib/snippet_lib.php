@@ -235,24 +235,25 @@ class orbisius_ctc_cloud_lib {
         return $cur_tab_id;
     }
     
+    /**
+     * 
+     */
     public function render_tabs() {
         $url = admin_url( 'themes.php?page=orbisius_child_theme_creator_theme_editor_action' );
-                $cur_tab_id = $this->get_current_tab_id();
-        
+        $cur_tab_id = $this->get_current_tab_id();
         ?>
         <div id="tabs">
              <h2 class="nav-tab-wrapper"> 
-            
-            <ul>
-                <?php foreach ( $this->tabs as $tab_rec ) : ?>
-                    <?php 
-                    $tab_url = add_query_arg( 'tab', $tab_rec['id'], $url );
-                    $extra_tab_css = $tab_rec['id'] == $cur_tab_id ? 'nav-tab-active' : '';
-                    ?>
-                    <!--                     <a href="<?php //echo esc_url( $tab_url ); ?>" class="nav-tab <?php // echo $extra_tab_css;?>"><?php //echo $tab_rec['label'];?></a> -->
-                    
-                    <li><a href="<?php echo '#' . $tab_rec['id']; ?>"><?php echo $tab_rec['label'];?></a></li>
-                <?php endforeach; ?>
+                <ul>
+                    <?php foreach ( $this->tabs as $tab_rec ) : ?>
+                        <?php
+                        $tab_url = add_query_arg( 'tab', $tab_rec['id'], $url );
+                        $extra_tab_css = $tab_rec['id'] == $cur_tab_id ? 'nav-tab-active' : '';
+                        ?>
+                        <!--                     <a href="<?php //echo esc_url( $tab_url ); ?>" class="nav-tab <?php // echo $extra_tab_css;?>"><?php //echo $tab_rec['label'];?></a> -->
+
+                        <li><a href="<?php echo '#' . $tab_rec['id']; ?>"><?php echo $tab_rec['label'];?></a></li>
+                    <?php endforeach; ?>
                 </ul>
              </h2>
         <?php
@@ -315,7 +316,7 @@ class orbisius_ctc_cloud_lib {
         <!-- /New Snippet -->
         <!-- Confirm dialog save snippet -->
         <div id="snippet_confirm_dialog" title="">
-            <p>Are you sure you want to save a Snippet without any content?</p>
+            <p>Are you sure you want to save a snippet without any content?</p>
         </div>
         <!-- /Confirm dialog save snippet -->
         </div>
@@ -395,24 +396,26 @@ class orbisius_ctc_cloud_lib {
         
         return json_decode( $json_api_response, true );
     }
-	
-    public function render_ui() {
+    
+    /**
+     * 
+     * @param array $ctx
+     */
+    public function render_ui($ctx = []) {
+        $place = empty($ctx['place']) ? 'left' : $ctx['place'];
         ?>
-        <!-- Snippet Library Wrapper -->
+        <div class="orb_cloud_lib_wrapper_<?php echo $place;?>" class="orb_cloud_lib_wrapper orb_cloud_lib_wrapper_<?php echo $place;?>">
             <div class="snippet_wrapper">
-                    <h3>Orbisius Cloud Library</h3>
-                    <?php $this->render_tabs(); ?>
-                    <br/>
-                    <?php
-        
-                		foreach ( $this->tabs as $tab_rec ) {
-                			$this->render_tab_content( $tab_rec['id'] );
-                		}
-                       
-                    ?>
+                <h3>Orbisius Cloud Library</h3>
+                <?php $this->render_tabs(); ?>
+                <br/>
+                <?php
+                    foreach ( $this->tabs as $tab_rec ) {
+                        $this->render_tab_content( $tab_rec['id'] );
+                    }
+                ?>
             </div>
-        </div>
-        <!-- /Snippet Library Wrapper -->
+        </div> <!-- /Snippet Library Wrapper -->
         <?php
     }
 }
