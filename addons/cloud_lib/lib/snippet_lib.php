@@ -259,7 +259,10 @@ class orbisius_ctc_cloud_lib {
         <?php
     }
     
-        
+    /**
+     * 
+     * @param str $tab_id
+     */    
     public function render_tab_content( $tab_id = '' ) {
     	$tab_id = empty($tab_id) ? $this->get_current_tab_id() : $tab_id; 
         
@@ -268,7 +271,7 @@ class orbisius_ctc_cloud_lib {
         if (method_exists( $this, $method_name)) {
             $this->$method_name();
         } else {
-            echo "Invalid tab method.";
+            echo "<!-- OCTC:Error: Invalid tab method. -->";
         }
     }
     
