@@ -442,20 +442,20 @@ class orbisius_ctc_cloud_lib {
         ?>
          <div id="orb_ctc_ext_cloud_lib_signup" class="tabcontent">
             <div class="orb_ctc_ext_cloud_lib_signup_wrapper">
-                <h3>Sign up</h3>
+                <h3>Sign Up</h3>
                 <div class="">
                     <form name="orb_ctc_signup_form" id="loginform" method="post">
                             <p>
-                                <label for="user_login">Username or Email Address<br />
-                                <input type="text" name="log" id="user_login" class="input" value="" size="20" /></label>
+                                <label for="user_login">Email Address<br />
+                                <input type="text" name="orb_ctc_email" id="orb_ctc_email" class="input" value="" size="20" /></label>
                             </p>
                             <p>
                                 <label for="user_pass">Password<br />
-                                <input type="password" name="pwd" id="user_pass" class="input" value="" size="20" /></label>
+                                <input type="password" name="orb_ctc_pass" id="orb_ctc_pass" class="input" value="" size="20" /></label>
                             </p>
                             <p class="submit">
                                 <input type="submit" name="wp-submit" id="wp-submit"
-                                       class="button button-primary button-large" value="Join" />
+                                       class="button button-primary button-large" value="Sign Up" />
                             </p>
                     </form>
                 </div>
@@ -496,8 +496,8 @@ class orbisius_ctc_cloud_lib {
             <div class="orb_ctc_ext_cloud_lib_about_wrapper">
                 <h3>About</h3>
                 <div class="">
-                    Orbisius Cloud library is a service that allows you to store your snippets, license keys in the cloud.
-                    With your Orbisius account you can store up to 10 snippets.
+                    Orbisius Cloud library is a service that allows you to store your snippets, license keys etc in the Orbisius Cloud Library.
+                    Create an Orbisius account store up to 10 snippets for free.
                 </div>
             </div> <!-- /orb_ctc_ext_cloud_lib_about_wrapper -->  
         </div>
