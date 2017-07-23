@@ -46,6 +46,9 @@ add_action( 'wp_ajax_nopriv_orbisius_ctc_theme_editor_ajax', 'orbisius_ctc_theme
 
 register_activation_hook( __FILE__, 'orbisius_child_theme_creator_on_activate' );
 
+require_once( ORBISIUS_CHILD_THEME_CREATOR_BASE_DIR . '/lib/000_singleton.php' );
+require_once( ORBISIUS_CHILD_THEME_CREATOR_BASE_DIR . '/lib/user.php' );
+
 if (file_exists( ORBISIUS_CHILD_THEME_CREATOR_BASE_DIR . '/addons/init.php' ) ) {
     require_once( ORBISIUS_CHILD_THEME_CREATOR_BASE_DIR . '/addons/init.php' );
 }
