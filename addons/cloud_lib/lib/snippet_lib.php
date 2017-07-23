@@ -409,33 +409,30 @@ class orbisius_ctc_cloud_lib {
         <?php
     }
     
-    
+    /**
+     * 
+     */
     public function render_tab_content_orb_ctc_ext_cloud_lib_add() {
         ?>
-         <!--New Snippet--> 
+        <!-- New Snippet --> 
         <div id="orb_ctc_ext_cloud_lib_add" class="tabcontent">
-        <div class="new_snippet_wrapper">
-            <?php if ( ! orbisius_child_theme_creator_is_pro_installed() ) : ?>
-                    <span>Please, log in to add a snippet</span>
-                    <a class="pro_Add_On" href="//orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator-pro/?utm_source=<?php echo $slug_area; ?>&utm_medium=action_screen&utm_campaign=product" target="_blank" title="[new window]">Pro Addon</a>
-            <?php endif; ?>
-            <?php if ( ! orbisius_child_theme_creator_is_pro_installed() ) : ?>
-                    <textarea class="widefat" id="add_snippet_text"></textarea>
+            <div class="new_snippet_wrapper">
+                <?php if ( 1 ) : ?>
+                    <textarea class="widefat" id="add_snippet_text" required=""></textarea>
                     <br />
                     <strong>Title</strong>
-                    <input type="text" id="add_snippet_title">
-                   <!-- <input class="button" type="button button-primary" id="snippet_save_btn" value="Save"> -->
-                     <input class="button button-primary" type="button" id="snippet_save_btn" value="Save"> 
-            <?php endif; ?>
-        </div>
-        <!-- /New Snippet -->
-        <!-- Confirm dialog save snippet -->
-        <div id="snippet_confirm_dialog" title="">
-            <p>Are you sure you want to save a snippet without any content?</p>
-        </div>
-        <!-- /Confirm dialog save snippet -->
-        </div>
+                    <input type="text" id="add_snippet_title" value="">
+                    <input class="button button-primary" type="button" id="snippet_save_btn" value="Save"> 
+                 <?php endif; ?>
+            </div>
+            <!-- /New Snippet -->
 
+            <!-- Confirm dialog save snippet -->
+            <div id="snippet_confirm_dialog" title="">
+                <p>Are you sure you want to save a snippet without any content?</p>
+            </div>
+            <!-- /Confirm dialog save snippet -->
+        </div>
         <?php
     }
     

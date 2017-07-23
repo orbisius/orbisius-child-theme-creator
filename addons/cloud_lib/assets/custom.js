@@ -199,7 +199,6 @@ jQuery(document).ready(function($) {
 	 */
 	$('#snippet_save_btn').on("click", function() {
 		 var title	= $('#add_snippet_title').val().trim();
-		 
 		 var text	= $('#add_snippet_text').val().trim();
 		 
 		 /**
@@ -208,14 +207,13 @@ jQuery(document).ready(function($) {
 		  * Snippet can be added without text
 		  * 
 		  */
-		if (title == '') {
-			alert('Please, enter Snippet Title');
-			
-			$('#add_snippet_title').focus();
-			
-			return;
-		}
-		else if (text == '') {
+//		if (title == '') {
+//			alert('Please, enter Snippet Title');
+//			$('#add_snippet_title').focus();
+//			return;
+//		}
+//		else 
+		if (text == '') {
 			 $("#snippet_confirm_dialog").dialog( {
 				dialogClass: 'no-close',
 				modal: true,
@@ -239,10 +237,8 @@ jQuery(document).ready(function($) {
 					//$('#add_snippet_text').focus();
 				}
 			 });
-		}
-		else
-		{
-			save_snippet(title, text);
+		} else {
+                    save_snippet(title, text);
 		}
 	});
 	
