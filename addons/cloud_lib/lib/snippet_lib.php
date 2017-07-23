@@ -443,6 +443,7 @@ class orbisius_ctc_cloud_lib {
      */
     public function render_tab_content_orb_ctc_ext_cloud_lib_manage() {
          $all_snippets = $this->get_user_snippets();
+         
          ?>
          <div id="orb_ctc_ext_cloud_lib_manage" class="tabcontent">
          <!-- Manage snippets -->
@@ -450,12 +451,12 @@ class orbisius_ctc_cloud_lib {
             <h3>My Snippets</h3>
             <div class="manage_snippets_table_wrapper">
                 <table>
-                   <?php foreach( $all_snippets["data"] as $key) { ?>
-                   <tr data-id="<?php echo $key['id']; ?>" data-title="<?php echo $key['title']; ?>" data-content="<?php echo $key['content']; ?>">
-                      <td id="td_title"><?php echo $key['title']; ?></td>
-                      <td><!--<input class="button snippet_view_btn" type="button" value="View"></td>
-                      <td><input class="button snippet_edit_btn" type="button" value="Edit"></td>-->	                    
-                      <input class="button snippet_edit_view_btn" type="button" value="View / Edit"></td>
+                   <?php foreach( $all_snippets as $rec) { ?>
+                   <tr data-id="<?php echo esc_attr($rec['id']); ?>" 
+                        data-title="<?php echo esc_attr($rec['title']); ?>" 
+                        data-content="<?php echo esc_attr($rec['content']); ?>">
+                      <td id="td_title"><?php echo esc_attr($rec['title']); ?></td>
+                      <td><input class="button snippet_edit_view_btn" type="button" value="View / Edit"></td>
                       <td><input class="button snippet_delete_btn" type="button" value="Delete"></td>
                    </tr><?php } ?>
                 </table>
@@ -625,9 +626,17 @@ class orbisius_ctc_cloud_lib {
             ]
         ];
 
-        $json_api_response = $this->call($this->api_url, $params);
+        $req_res = $this->call($this->api_url, $params);
+        $snippets = [];
         
-        return $this->decode_response( $json_api_response );
+        if ( $req_res->is_success() ) {
+            $api_result = $req_res->data('result');
+            $snippets = $api_result->data();
+        }
+        
+        $snippets = empty($snippets) ? [] : $snippets;
+
+        return $snippets;
     }
     
     /**
