@@ -1355,9 +1355,14 @@ function orbisius_child_theme_creator_tools_action() {
  * If you must unslash, consider only doing it to your own data which isn't used by others:
  * @see http://codex.wordpress.org/Function_Reference/stripslashes_deep
  */
-function orbisius_child_theme_creator_get_request() {
+function orbisius_child_theme_creator_get_request($key = null, $default = '') {
     $req = $_REQUEST;
     $req = stripslashes_deep($req);
+
+    if (!empty($key)) {
+        $val = isset($req[$key]) ? $req[$key] : $default;
+        return $val;
+    }
 
     return $req;
 }
@@ -2201,7 +2206,7 @@ function orbisius_ctc_theme_editor() {
 
         <?php
             $buff = $theme_1_file = $theme_2_file = '';
-            $req = orbisius_ctc_theme_editor_get_request();
+            $req = orbisius_child_theme_creator_get_request();
 
             $current_theme = wp_get_theme();
             
@@ -2259,7 +2264,7 @@ function orbisius_ctc_theme_editor() {
                         </span>
 
                         <div id="theme_1_file_contents_container">
-                            <textarea id="theme_1_file_contents" name="theme_1_file_contents" rows="22" class="widefat"></textarea>
+                            <textarea id="theme_1_file_contents" name="theme_1_file_contents" rows="16" class="widefat"></textarea>
                         </div>
 
                         <div class="orbisius_ctc_theme_editor_theme_1_primary_buttons primary_buttons">
@@ -2382,7 +2387,7 @@ function orbisius_ctc_theme_editor() {
                         </span>
 
                         <div id="theme_2_file_contents_container">
-                            <textarea id="theme_2_file_contents" name="theme_2_file_contents" rows="22" class="widefat"></textarea>
+                            <textarea id="theme_2_file_contents" name="theme_2_file_contents" rows="16" class="widefat"></textarea>
                         </div>
 
                         <div class="orbisius_ctc_theme_editor_theme_2_primary_buttons primary_buttons">
@@ -2452,7 +2457,7 @@ function orbisius_ctc_theme_editor_no_auth_ajax() {
 function orbisius_ctc_theme_editor_ajax() {
     $buff = 'INVALID AJAX SUB_CMD';
 
-    $req = orbisius_ctc_theme_editor_get_request();
+    $req = orbisius_child_theme_creator_get_request();
     $sub_cmd = empty($req['sub_cmd']) ? '' : $req['sub_cmd'];
 
     switch ($sub_cmd) {
@@ -2649,26 +2654,13 @@ function orbisius_ctc_theme_editor_check_syntax($theme_file_contents) {
 }
 
 /**
- * It seems WP intentionally adds slashes for consistency with php.
- * Please note: WordPress Core and most plugins will still be expecting slashes, and the above code will confuse and break them.
- * If you must unslash, consider only doing it to your own data which isn't used by others:
- * @see http://codex.wordpress.org/Function_Reference/stripslashes_deep
- */
-function orbisius_ctc_theme_editor_get_request() {
-    $req = $_REQUEST;
-    $req = stripslashes_deep( $req );
-
-    return $req;
-}
-
-/**
  * This returns an HTML select with the selected theme's files.
  * the name/id of that select must be either theme_1_file or theme_2_file
  * @return string
  */
 function orbisius_ctc_theme_editor_generate_dropdown() {
     $theme_base_dir = $theme_1_file = '';
-    $req = orbisius_ctc_theme_editor_get_request();
+    $req = orbisius_child_theme_creator_get_request();
 
     $select_name = 'theme_1_file';
 
@@ -2718,7 +2710,7 @@ function orbisius_ctc_theme_editor_manage_file( $cmd_id = 1 ) {
 
     $buff = $theme_base_dir = $theme_dir = $theme_file = '';
 
-    $req = orbisius_ctc_theme_editor_get_request();
+    $req = orbisius_child_theme_creator_get_request();
 
     $theme_root = trailingslashit( get_theme_root() );
 

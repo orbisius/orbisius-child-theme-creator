@@ -166,7 +166,9 @@ Todo
 == Changelog ==
 
 = 1.4.0 =
-* Tested with WP 4.7.5
+* Tested with WP 4.8
+* Got rid of some duplicated functions.
+* Reduced the height (rows of the 2 editors to 16) from 22
 
 = 1.3.9 =
 * Minor fixes and improvements to the UI
