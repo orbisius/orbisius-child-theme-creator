@@ -25,6 +25,7 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+define( 'ORBISIUS_CHILD_THEME_CREATOR_BASE_DIR', __DIR__ );
 define( 'ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE', __FILE__ );
 
 // Set up plugin
@@ -45,7 +46,9 @@ add_action( 'wp_ajax_nopriv_orbisius_ctc_theme_editor_ajax', 'orbisius_ctc_theme
 
 register_activation_hook( __FILE__, 'orbisius_child_theme_creator_on_activate' );
 
-require_once( __DIR__ . '/addons/cloud_lib/init.php' );
+if (file_exists( ORBISIUS_CHILD_THEME_CREATOR_BASE_DIR . '/addons/init.php' ) ) {
+    require_once( ORBISIUS_CHILD_THEME_CREATOR_BASE_DIR . '/addons/init.php' );
+}
 
 /**
  * Adds admin bar items for easy access to the theme creator and editor
