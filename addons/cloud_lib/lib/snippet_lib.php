@@ -658,7 +658,7 @@ class orbisius_ctc_cloud_lib {
         $render = 1;
         
         if (!empty($api_key)) {
-            if (preg_match('#signup#si', $tab_rec['id'])) {
+            if (preg_match('#signup|login#si', $tab_rec['id'])) {
                 $render = 0;
             }
         } else {
