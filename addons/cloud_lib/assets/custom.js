@@ -6,12 +6,28 @@ jQuery(document).ready(function($) {
         e.preventDefault();
         var params = $(this).serialize();
         
+        if ($('#orb_ctc_pass').val() != $('#orb_ctc_pass2').val() ) {
+            alert('Error: Passwords do not match');
+            return false;
+        }
+        
+        var submit_btn = $(this).find(':submit');
+        var res_container = $('.orb_ctc_ext_cloud_lib_signup_wrapper').find('.result');
+        res_container.html('Please, wait');
+        submit_btn.hide();
+        
         $.ajax({
             type : 'post',
             url: ajaxurl + '?action=orb_ctc_signup',
             data: params,
             success: function(json) {
-                alert(json.status + ' ' + json.msg);
+                if (json.status) {
+                    res_container.html('Please, wait');
+                    window.location.reload();
+                } else {
+                    res_container.html(json.msg);
+                    submit_btn.show();
+                }
             },
         });
         

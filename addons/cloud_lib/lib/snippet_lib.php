@@ -465,23 +465,33 @@ class orbisius_ctc_cloud_lib {
     public function render_tab_content_orb_ctc_ext_cloud_lib_signup() {
         ?>
          <div id="orb_ctc_ext_cloud_lib_signup" class="tabcontent">
-            <div class="orb_ctc_ext_cloud_lib_signup_wrapper">
+            <div id="orb_ctc_ext_cloud_lib_signup_wrapper" class="orb_ctc_ext_cloud_lib_signup_wrapper">
                 <h3>Sign Up</h3>
                 <div class="">
                     <form name="orb_ctc_signup_form" id="orb_ctc_signup_form" class="orb_ctc_signup_form" method="post">
-                            <p>
-                                <label for="orb_ctc_email">Email Address<br />
-                                    <input type="email" name="orb_ctc_email" id="orb_ctc_email" class="input" value="" size="42" required="" /></label>
-                            </p>
-                            <p>
-                                <label for="orb_ctc_pass">Password<br />
-                                    <input type="password" name="orb_ctc_pass" id="orb_ctc_pass" class="input" value="" size="42" required=" "/></label>
-                            </p>
-                            <p class="submit">
-                                <input type="submit" name="wp-submit" id="wp-submit"
-                                       class="button button-primary button-large" value="Sign Up" />
-                            </p>
+                        <p>
+                            <label for="orb_ctc_email">Email Address<br />
+                                <input type="email" name="orb_ctc_email" id="orb_ctc_email" class="input" value="" size="42" required="" /></label>
+                        </p>
+                        <p>
+                            <label for="orb_ctc_pass">Password<br />
+                                <input type="password" name="orb_ctc_pass" id="orb_ctc_pass" 
+                                       class="input" value="" size="42" required="" /></label>
+                        </p>
+                        <p>
+                            <label for="orb_ctc_pass">Password (repeat)<br />
+                                <input type="password" name="orb_ctc_pass2" id="orb_ctc_pass2"
+                                       class="input" value="" size="42" required="" /></label>
+                        </p>
+                        <p class="submit">
+                            <input type="submit" name="orb_ctc_signup_submit" id="orb_ctc_signup_submit"
+                                   class="button button-primary button-large" value="Sign Up" />
+                        </p>
                     </form>
+                    
+                    <div class="result">
+
+                    </div>
                 </div>
             </div> <!-- /orb_ctc_ext_cloud_lib_signup_wrapper -->  
         </div>
