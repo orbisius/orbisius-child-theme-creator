@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: theme,child theme,childtheme,childthemes,parent theme,child themes,CSS,styling,resposive design,design,custom themeing, shared hosting,theme editor theme,themes,wp,wordpress,orbisius,theme creator,custom theme,theme generator,css,css editor
 Requires at least: 3.4
 Tested up to: 4.7
-Stable tag: 1.3.9
+Stable tag: 1.4.0
 License: GPLv2 or later
 
 Create Child Themes quickly and easily from any theme that you have currently installed on your site/blog.
@@ -160,10 +160,13 @@ Let's talk.
 
 Todo
 - Add buttons in the WP's Theme listing page near Customize
-	- Orbisius Create
-	- Orbisius Edit
+- Orbisius Create
+- Orbisius Edit
 
 == Changelog ==
+
+= 1.4.0 =
+* Tested with WP 4.7.5
 
 = 1.3.9 =
 * Minor fixes and improvements to the UI

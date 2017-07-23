@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="20">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="21">
         <file>
             <url>assets/main.js</url>
             <bookmark id="19">
@@ -13,67 +13,72 @@
             <url>orbisius-child-theme-creator.php</url>
             <bookmark id="20">
                 <name/>
-                <line>95</line>
+                <line>98</line>
+                <key/>
+            </bookmark>
+            <bookmark id="21">
+                <name/>
+                <line>689</line>
                 <key/>
             </bookmark>
             <bookmark id="15">
                 <name/>
-                <line>1402</line>
+                <line>1432</line>
                 <key/>
             </bookmark>
             <bookmark id="16">
                 <name/>
-                <line>1543</line>
+                <line>1573</line>
                 <key/>
             </bookmark>
             <bookmark id="6">
                 <name/>
-                <line>1617</line>
+                <line>1647</line>
                 <key/>
             </bookmark>
             <bookmark id="14">
                 <name/>
-                <line>1695</line>
+                <line>1725</line>
                 <key/>
             </bookmark>
             <bookmark id="12">
                 <name/>
-                <line>2149</line>
+                <line>2182</line>
                 <key/>
             </bookmark>
             <bookmark id="9">
                 <name/>
-                <line>2154</line>
+                <line>2187</line>
                 <key/>
             </bookmark>
             <bookmark id="5">
                 <name/>
-                <line>2196</line>
+                <line>2229</line>
                 <key/>
             </bookmark>
             <bookmark id="18">
                 <name/>
-                <line>2206</line>
+                <line>2239</line>
                 <key/>
             </bookmark>
             <bookmark id="4">
                 <name/>
-                <line>2357</line>
+                <line>2344</line>
                 <key/>
             </bookmark>
             <bookmark id="17">
                 <name/>
-                <line>2390</line>
+                <line>2377</line>
                 <key/>
             </bookmark>
             <bookmark id="13">
                 <name/>
-                <line>2572</line>
+                <line>2559</line>
                 <key/>
             </bookmark>
             <bookmark id="3">
                 <name/>
-                <line>2617</line>
+                <line>2604</line>
                 <key/>
             </bookmark>
         </file>
@@ -93,7 +98,10 @@
             <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/readme.txt</file>
         </group>
         <group>
+            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/addons/cloud_lib/init.php</file>
             <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/orbisius-child-theme-creator.php</file>
+            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/addons/cloud_lib/modules/cloud.php</file>
+            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/addons/cloud_lib/lib/snippet_lib.php</file>
         </group>
     </open-files>
 </project-private>
