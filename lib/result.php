@@ -139,5 +139,10 @@ class orbisius_child_theme_creator_result {
 
         return $val;
     }
+    
+    public function to_array() {
+        $var = $this;
+        return (array) $var;
+    }
 }
 
