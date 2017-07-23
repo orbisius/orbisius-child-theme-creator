@@ -403,18 +403,16 @@ class orbisius_ctc_cloud_lib {
                     <h3>Orbisius Cloud Library</h3>
                     <?php $this->render_tabs(); ?>
                     <br/>
-                    <?php //$this->render_tab_content(); 
+                    <?php
         
-        $this->render_tab_content_orb_ctc_ext_cloud_lib_search();
-        $this->render_tab_content_orb_ctc_ext_cloud_lib_add();
-       $this->render_tab_content_orb_ctc_ext_cloud_lib_manage();
-       
-       ?>
-       </div>
-        
-        
+                		foreach ( $this->tabs as $tab_rec ) {
+                			$this->render_tab_content( $tab_rec['id'] );
+                		}
+                       
+                    ?>
             </div>
-            <!-- /Snippet Library Wrapper -->
+        </div>
+        <!-- /Snippet Library Wrapper -->
         <?php
     }
 }
