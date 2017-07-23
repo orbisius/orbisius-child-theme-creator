@@ -9,6 +9,12 @@ class orbisius_child_theme_creator_user extends orbisius_child_theme_creator_sin
      * @return str
      */
     public function api_key($key = '') {
+        static $api_key = null;
+        
+        if (!empty($api_key) && empty($key)) { // get
+            return $api_key;
+        }
+        
         $user_id = $this->get_user_id();
         
         if (!empty($key)) {
