@@ -411,7 +411,7 @@ class orbisius_ctc_cloud_lib {
          <div id="orb_ctc_ext_cloud_lib_manage" class="tabcontent">
          <!-- Manage snippets -->
          <div class="manage_snippets">
-            <h3>My Snippets</h3>
+            <!--<h3>My Snippets</h3>-->
             <div class="manage_snippets_table_wrapper">
                 <table>
                    <?php foreach( $all_snippets as $rec) { ?>
@@ -468,7 +468,7 @@ class orbisius_ctc_cloud_lib {
         ?>
          <div id="orb_ctc_ext_cloud_lib_signup" class="tabcontent">
             <div id="orb_ctc_ext_cloud_lib_signup_wrapper" class="orb_ctc_ext_cloud_lib_signup_wrapper">
-                <h3>Sign Up</h3>
+                <!--<h3>Sign Up</h3>-->
                 <div class="">
                     <form name="orb_ctc_signup_form" id="orb_ctc_signup_form" class="orb_ctc_signup_form" method="post">
                         <p>
@@ -509,7 +509,7 @@ class orbisius_ctc_cloud_lib {
         ?>
          <div id="orb_ctc_ext_cloud_lib_login" class="tabcontent">
             <div id="orb_ctc_ext_cloud_lib_login_wrapper" class="orb_ctc_ext_cloud_lib_login_wrapper">
-                <h3>Log in</h3>
+                <!--<h3>Log in</h3>-->
                 <div class="">
                     <form name="orb_ctc_login_form" id="orb_ctc_login_form" class="orb_ctc_login_form" method="post">
                         <p>
@@ -548,7 +548,7 @@ class orbisius_ctc_cloud_lib {
         ?>
          <div id="orb_ctc_ext_cloud_lib_account" class="tabcontent">
             <div class="orb_ctc_ext_cloud_lib_account_wrapper">
-                <h3>Account</h3>
+                <!--<h3>Account</h3>-->
                 <div class="">
                     Orbisius API Key <?php echo $api_key; ?>
                 </div>
@@ -566,7 +566,7 @@ class orbisius_ctc_cloud_lib {
          ?>
          <div id="orb_ctc_ext_cloud_lib_about" class="tabcontent">
             <div class="orb_ctc_ext_cloud_lib_about_wrapper">
-                <h3>About</h3>
+                <!--<h3>About</h3>-->
                 <div class="">
                     Orbisius Cloud library is a service that allows you to store your snippets, license keys etc in the Orbisius Cloud Library.
                     Create an Orbisius account store up to 10 snippets for free.
