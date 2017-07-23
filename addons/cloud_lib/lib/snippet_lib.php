@@ -12,8 +12,8 @@ class orbisius_ctc_cloud_lib {
      */
     public $api_url	= '';
     public $live_api_url = 'https://orbisius.com/';
-    public $dev_api_url	= 'http://orb-ctc.qsandbox.com/';
-//    public $dev_api_url	= 'http://orbclub.com.clients.com/';
+//    public $dev_api_url	= 'http://orb-ctc.qsandbox.com/';
+    public $dev_api_url	= 'http://orbclub.com.clients.com/';
     public $staging_api_url = 'http://orb-ctc.qsandbox.com/';
     private $tabs = [];
 
@@ -50,11 +50,11 @@ class orbisius_ctc_cloud_lib {
     public function __construct() {
         if ( !empty( $_SERVER['DEV_ENV'])) {
             $this->api_url = $this->dev_api_url;
-        } elseif ( !empty($_SERVER['HTTP_HOST']) 
-                && (stripos($_SERVER['HTTP_HOST'], '.qsandbox.com') !== false)) {
-            $this->api_url = $this->staging_api_url;
         } elseif ( !empty($_SERVER['HTTP_HOST'])
                 && (stripos($_SERVER['HTTP_HOST'], '.clients.com') !== false)) {
+            $this->api_url = $this->staging_api_url;
+        } elseif ( !empty($_SERVER['HTTP_HOST'])
+                && (stripos($_SERVER['HTTP_HOST'], '.qsandbox.com') !== false)) {
             $this->api_url = $this->staging_api_url;
         } else {
             $this->api_url = $this->live_api_url;
@@ -134,10 +134,6 @@ class orbisius_ctc_cloud_lib {
         // Snippet search ajax hook
         add_action( 'wp_ajax_cloud_search', [$this, 'cloud_search'] );
         add_action( 'wp_ajax_nopriv_cloud_search', [$this, 'cloud_search'] );
-        
-        // Add a New Snippet ajax hook
-        add_action( 'wp_ajax_cloud_add', [$this, 'cloud_add'] );
-        add_action( 'wp_ajax_nopriv_cloud_add', [$this, 'cloud_add'] );
         
         // Update a Snippet ajax hook
         add_action( 'wp_ajax_cloud_update', [$this, 'cloud_update'] );
@@ -266,60 +262,26 @@ class orbisius_ctc_cloud_lib {
     }
 
     /**
-     * Adds a new snippet
-     * 
-     * MUST send a title to the API
-     * Text is optional
-     * 
-     * @return	JSON array with API's response
-     */
-    public function cloud_add() {
-        if (!empty($_REQUEST['text'])) {
-            
-            $title = orbisius_child_theme_creator_get_request('title');
-            $title = sanitize_text_field($title);
-            
-            $text = orbisius_child_theme_creator_get_request('text');
-            $text = sanitize_text_field($text);
-
-            $params = [
-                'orb_cloud_lib_data' => [
-                    'cmd' => 'item.add',
-                    'title' => $title,
-                    'content' => $text,
-                ]
-            ];
-            
-            $url = $this->api_url;
-            $req_res = $this->call($url, $params);
-            wp_send_json($req_res);
-        }
-    }
-
-    /**
      * Updates a snippet by ID
-     * 
      * MUST send an ID to the API
-     * 
      * @return	JSON array with API's response
      */
     public function cloud_update() {
-    	if (isset($_POST['id'])) {
-    		$snippetId	=  sanitize_text_field($_POST['id']);
-    		
-    		if (isset($_POST['title'])) {
-    			$snippetTitle	= sanitize_text_field($_POST['title']);
-    		}
-    	
-    		if (isset($_POST['text'])) {
-    			$snippetText	=  sanitize_text_field($_POST['text']);
-    		}
-    		
-    		$url	= 'http://orb-ctc.qsandbox.com/?orb_cloud_lib_data[cmd]=item.update&orb_cloud_lib_data[id]='. $snippetId . '&orb_cloud_lib_data[title]='. $snippetTitle . '&&orb_cloud_lib_data[content]=' . $snippetText;
-    		//$url	= $this->api_url . '' . $snippetTitle . 'text=' . $snippetText;
-    	
-    		wp_send_json($this->call($url));
-    	}
+        $snippet_id = (int) orbisius_child_theme_creator_get('id');
+        $snippet_title = orbisius_child_theme_creator_get('title');
+        $snippet_text = orbisius_child_theme_creator_get('text');
+
+        $params = [
+            'orb_cloud_lib_data' => [
+                'cmd' => $snippet_id ? 'item.update' : 'item.add',
+                'id' => $snippet_id,
+                'title' => $snippet_title,
+                'content' => $snippet_text,
+            ]
+        ];
+
+        $req_res = $this->call($this->api_url, $params);
+        wp_send_json($req_res->is_success() ? $req_res->data('result') : $req_res->to_array());
     }
 
     /**
@@ -422,6 +384,7 @@ class orbisius_ctc_cloud_lib {
                     <br />
                     <strong>Title</strong>
                     <input type="text" id="add_snippet_title" value="">
+                    <br />
                     <input class="button button-primary" type="button" id="snippet_save_btn" value="Save"> 
                  <?php endif; ?>
             </div>

@@ -198,78 +198,10 @@ jQuery(document).ready(function($) {
 	 * 
 	 */
 	$('#snippet_save_btn').on("click", function() {
-		 var title	= $('#add_snippet_title').val().trim();
-		 var text	= $('#add_snippet_text').val().trim();
-		 
-		 /**
-		  * Snippet cannot be added without a Title
-		  * 
-		  * Snippet can be added without text
-		  * 
-		  */
-//		if (title == '') {
-//			alert('Please, enter Snippet Title');
-//			$('#add_snippet_title').focus();
-//			return;
-//		}
-//		else 
-		if (text == '') {
-			 $("#snippet_confirm_dialog").dialog( {
-				dialogClass: 'no-close',
-				modal: true,
-				buttons: [{
-						text: "Yes",
-						"class": 'button-primary',
-						click: function() {
-							$(this).dialog("close"); 
-							save_snippet(title, text);
-						}
-					},
-					{
-						text: "No",
-						"class": 'button',
-						click: function() { 
-							$(this).dialog("close");
-							$('#add_snippet_text').focus();
-						}
-					}],
-				close: function(event, ui) {
-					//$('#add_snippet_text').focus();
-				}
-			 });
-		} else {
-                    save_snippet(title, text);
-		}
+            var title	= $('#add_snippet_title').val().trim();
+            var text	= $('#add_snippet_text').val().trim();
+            snippet_update(0, title, text);
 	});
-	
-	/**
-	 * Saves a new snippet
-	 * 
-	 * @param title
-	 * @param text
-	 */
-	function save_snippet(title, text) {
-		$.ajax({
-			//dataType: "json",
-			type : "post",
-			url: ajaxurl,
-			data: {
-				action: "cloud_add",
-				"title": title,
-				"text": text
-			},
-			success: function (data) {
-				data	= $.parseJSON(data);
-			
-				if (data.status == '1') {
-					alert(data.msg);
-				}
-				else {
-					alert("Problem occurred");
-				}
-			}
-		});
-	}
 	
 	/**
 	 * Delete a snippet by id button
@@ -342,7 +274,6 @@ jQuery(document).ready(function($) {
 	 * 
 	 */
 	$('.snippet_edit_btn').on("click", function() {
-		
 		var id		= $(this).parents('tr').data('id');
 		var title	= $(this).parents('tr').data('title');
 		var content	= $(this).parents('tr').data('content');
@@ -352,29 +283,31 @@ jQuery(document).ready(function($) {
 		//$('.edit_snippet').show();
         	
 		$("#edit_snippet").dialog( {
-    		dialogClass: 'edit_snippet',
-    		modal: true,
-    		resizable: false,
-    		buttons: [{
-    				text: "Save",
-    				"class": 'button-primary',
-    				click: function() {
-    					var newTitle = $('.edit_title').val();
-    					var newContent = $('.edit_content').val();
-    					$(this).dialog("close"); 
-    					snippet_update(id, newTitle, newContent);
-    				}
-    			},
-    			{
-    				text: "Close",
-    				"class": 'button',
-    				click: function() { 
-    					$(this).dialog("close");
-    				}
-    			}],
-    		close: function(event, ui) {
-    		}
-		});
+                    dialogClass: 'edit_snippet',
+                    modal: true,
+                    resizable: false,
+                    buttons: [
+                        {
+                            text: "Save",
+                            "class": 'button-primary',
+                            click: function() {
+                                    var newTitle = $('.edit_title').val();
+                                    var newContent = $('.edit_content').val();
+                                    $(this).dialog("close"); 
+                                    snippet_update(id, newTitle, newContent);
+                            }
+                        },
+                        {
+                            text: "Close",
+                            "class": 'button',
+                            click: function() { 
+                                    $(this).dialog("close");
+                            }
+                        }
+                    ],
+                    close: function(event, ui) {
+                    }
+            });
 	});
 	
 	/**
@@ -392,66 +325,64 @@ jQuery(document).ready(function($) {
 		//$('.edit_snippet').show();
     	
 		$("#edit_snippet").dialog( {
-		dialogClass: 'edit_snippet',
-		modal: true,
-		resizable: false,
-		draggable: false,
-		buttons: [{
-				text: "Copy",
-				//"class": 'button',
-				click: function() {
-				}
-			},
-			{
-				text: "Update",
-				"class": 'button-primary',
-				click: function() {
-					var newTitle = $('.edit_title').val();
-					var newContent = $('.edit_content').val();
-					$(this).dialog("close"); 
-					snippet_update(id, newTitle, newContent);
-				}
-			},
-			{
-				text: "Close",
-				"class": 'button',
-				click: function() { 
-					$(this).dialog("close");
-				}
-			}],
-		close: function(event, ui) {
-		}
+                    dialogClass: 'edit_snippet',
+                    modal: true,
+                    resizable: false,
+                    draggable: false,
+                    buttons: [{
+                                    text: "Copy",
+                                    //"class": 'button',
+                                    click: function() {
+                                    }
+                            },
+                            {
+                                    text: "Update",
+                                    "class": 'button-primary',
+                                    click: function() {
+                                            var newTitle = $('.edit_title').val();
+                                            var newContent = $('.edit_content').val();
+                                            $(this).dialog("close"); 
+                                            snippet_update(id, newTitle, newContent);
+                                    }
+                            },
+                            {
+                                    text: "Close",
+                                    "class": 'button',
+                                    click: function() { 
+                                            $(this).dialog("close");
+                                    }
+                            }],
+                    close: function(event, ui) {
+                    }
 		});
 	});
 	
 	function snippet_update(id, title, text) {
 	    $t = title;
-        	$.ajax({
-        		//dataType: "json",
-        		type : "post",
-        		url: ajaxurl,
-        		data: {
-        			action: "cloud_update",
-        			"id": id,
-        			"title": title,
-        			"text": text
-        		},
-        		success: function (data) {
-        			data	= $.parseJSON(data);
-        		
-        			if (data.status == '1') {
-        				alert(data.msg);
-        				
-        				$row_to_update	= $("tr[data-id='" + id + "']");
-        				$row_to_update.data('title', title );
-        				$row_to_update.data('content', text);
-        				$row_to_update.find('#td_title').html(title);
-        			}
-        			else {
-        				alert("Problem occurred");
-        			}
-        		}
-        	});
+            
+            $.ajax({
+                url: ajaxurl,
+                data: {
+                        action: "cloud_update",
+                        "id": id,
+                        "title": title,
+                        "text": text
+                },
+                success: function (data) {
+                        data	= $.parseJSON(data);
+
+                        if (data.status == '1') {
+                            alert(data.msg);
+
+                            $row_to_update	= $("tr[data-id='" + id + "']");
+                            $row_to_update.data('title', title );
+                            $row_to_update.data('content', text);
+                            $row_to_update.find('#td_title').html(title);
+                        } else {
+                            alert("Error: occurred");
+                        }
+                }
+            });
         }
 	
 	/**
