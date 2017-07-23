@@ -11,7 +11,7 @@ class orbisius_child_theme_creator_user extends orbisius_child_theme_creator_sin
     public function api_key($key = '') {
         static $api_key = null;
         
-        if (!empty($api_key) && empty($key)) { // get
+        if (!is_null($api_key) && empty($key)) { // get
             return $api_key;
         }
         
