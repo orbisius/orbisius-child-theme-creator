@@ -229,6 +229,7 @@ class orbisius_ctc_cloud_lib {
 
         $req_res = new orbisius_child_theme_creator_result();
         $req_res->status(1);
+        $req_res->data('result', new orbisius_child_theme_creator_result(1));
         
         wp_send_json($req_res->is_success() ? $req_res->data('result') : $req_res->to_array());
     }
@@ -249,6 +250,20 @@ class orbisius_ctc_cloud_lib {
         ];
 
         $req_res = $this->call($this->api_url, $params);
+        
+        if ($req_res->is_success()) {
+            $api_res = $req_res->data('result');
+
+            if ($api_res->is_success()) {
+                $user_api = orbisius_child_theme_creator_user::get_instance();
+                $api_key = $api_res->data('api_key');
+                
+                if ( !empty($api_key)) {
+                    $user_api->api_key($api_key);
+                }
+            }
+        }
+        
         wp_send_json($req_res->is_success() ? $req_res->data('result') : $req_res->to_array());
     }
 
@@ -570,7 +585,8 @@ class orbisius_ctc_cloud_lib {
                     Orbisius API Key <?php echo $api_key; ?>
                 </div>
                 <div class="">
-                    <a href='#' id='orb_ctc_ext_cloud_lib_account_log_out' class="button"> Log out</a>
+                    <a href='#' id='orb_ctc_ext_cloud_lib_account_log_out' 
+                       class="button orb_ctc_ext_cloud_lib_account_log_out"> Log out</a>
                 </div>
             </div> <!-- /orb_ctc_ext_cloud_lib_account_wrapper -->  
         </div>

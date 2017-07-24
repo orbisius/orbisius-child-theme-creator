@@ -3,8 +3,11 @@
  */
 jQuery(document).ready(function($) {
     $('#orb_ctc_ext_cloud_lib_account_log_out').on('click', function (e) {
+        e.preventDefault();
+        
         var res_container = $('.orb_ctc_ext_cloud_lib_signup_wrapper').find('.result');
         res_container.html('Please, wait');
+        var params = {};
         
         $.ajax({
             type : 'post',
