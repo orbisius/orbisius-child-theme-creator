@@ -154,7 +154,7 @@ class orbisius_ctc_cloud_lib {
      */
     public function call($url, $req_params = []) {
         // Prepend user's api key if any.
-        if (!empty($req_params['orb_cloud_lib_data']['api_key'])) {
+        if (empty($req_params['orb_cloud_lib_data']['api_key'])) {
             $user_api = orbisius_child_theme_creator_user::get_instance();
             $api_key = $user_api->api_key();
             
@@ -203,7 +203,7 @@ class orbisius_ctc_cloud_lib {
         ];
 
         $req_res = $this->call($this->api_url, $params);
-        
+
         if ($req_res->is_success()) {
             $api_res = $req_res->data('result');
 
@@ -211,9 +211,11 @@ class orbisius_ctc_cloud_lib {
                 $user_api = orbisius_child_theme_creator_user::get_instance();
                 $api_key = $api_res->data('api_key');
                 
-                if ( !empty($api_key)) {
+                if (!empty($api_key)) {
                     $user_api->api_key($api_key);
                 }
+            } else {
+
             }
         }
         
@@ -460,16 +462,20 @@ class orbisius_ctc_cloud_lib {
          <div class="manage_snippets">
             <!--<h3>My Snippets</h3>-->
             <div class="manage_snippets_table_wrapper">
-                <table>
-                   <?php foreach( $all_snippets as $rec) { ?>
-                   <tr data-id="<?php echo esc_attr($rec['id']); ?>" 
-                        data-title="<?php echo esc_attr($rec['title']); ?>" 
-                        data-content="<?php echo esc_attr($rec['content']); ?>">
-                      <td id="td_title"><?php echo esc_attr($rec['title']); ?></td>
-                      <td><input class="button snippet_edit_view_btn" type="button" value="View / Edit"></td>
-                      <td><input class="button snippet_delete_btn" type="button" value="Delete"></td>
-                   </tr><?php } ?>
-                </table>
+                <?php if (empty($all_snippets)) : ?>
+                    You haven't added any snippets yet.
+                <?php else : ?>
+                    <table class="widefat">
+                       <?php foreach( $all_snippets as $rec) { ?>
+                       <tr data-id="<?php echo esc_attr($rec['id']); ?>" 
+                            data-title="<?php echo esc_attr($rec['title']); ?>" 
+                            data-content="<?php echo esc_attr($rec['content']); ?>">
+                          <td id="td_title"><?php echo esc_attr($rec['title']); ?></td>
+                          <td><input class="button snippet_edit_view_btn" type="button" value="View / Edit"></td>
+                          <td><input class="button snippet_delete_btn" type="button" value="Delete"></td>
+                       </tr><?php } ?>
+                    </table>
+                <?php endif; ?>
             </div>
 
             <!-- Edit snippet window -->
@@ -643,7 +649,7 @@ class orbisius_ctc_cloud_lib {
 
         $req_res = $this->call($this->api_url, $params);
         $snippets = [];
-        
+
         if ( $req_res->is_success() ) {
             $api_result = $req_res->data('result');
             $snippets = $api_result->data();
