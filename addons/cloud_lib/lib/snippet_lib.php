@@ -619,8 +619,9 @@ class orbisius_ctc_cloud_lib {
             <div class="orb_ctc_ext_cloud_lib_about_wrapper">
                 <!--<h3>About</h3>-->
                 <div class="">
-                    Orbisius Cloud library is a service that allows you to store your snippets, license keys etc in the Orbisius Cloud Library.
-                    Create an Orbisius account store up to 10 snippets for free.
+                    Orbisius Cloud library enables you to store your snippets, license keys etc in the Orbisius Cloud Library.
+                    You can access those snippets another WordPress installations.
+                    To get started just create a free Orbisius account and store up to 10 snippets for free.
                 </div>
             </div> <!-- /orb_ctc_ext_cloud_lib_about_wrapper -->  
         </div>
