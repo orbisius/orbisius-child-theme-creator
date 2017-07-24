@@ -64,16 +64,16 @@ class orbisius_ctc_cloud_lib {
         // for future internationalization.
         $tabs = [
             [
+                'id' => 'orb_ctc_ext_cloud_lib_manage',
+                'label' => __( 'Manage', 'orbisius-child-theme-creator' ),
+            ],
+            [
                 'id' => 'orb_ctc_ext_cloud_lib_search',
                 'label' => __( 'Search', 'orbisius-child-theme-creator' ),
             ],
             [
                 'id' => 'orb_ctc_ext_cloud_lib_add',
                 'label' => __( 'Add', 'orbisius-child-theme-creator' ),
-            ],
-            [
-                'id' => 'orb_ctc_ext_cloud_lib_manage',
-                'label' => __( 'Manage', 'orbisius-child-theme-creator' ),
             ],
             [
                 'id' => 'orb_ctc_ext_cloud_lib_signup',
@@ -332,8 +332,25 @@ class orbisius_ctc_cloud_lib {
     	}
     }
 
+    /**
+     * 
+     * @return string
+     */
     public function get_current_tab_id() {
-        $cur_tab_id = empty($_REQUEST['tab']) ? $this->tabs[0]['id'] : wp_kses( $_REQUEST['tab'], [] );
+        // $this->tabs[0]['id']
+        $cur_tab_id = empty($_REQUEST['tab']) ? '' : wp_kses( $_REQUEST['tab'], [] );
+ 
+        if (empty($cur_tab_id)) {
+            $user_api = orbisius_child_theme_creator_user::get_instance();
+            $api_key = $user_api->api_key();
+            
+            if (empty($api_key)) {
+                $cur_tab_id = 'orb_ctc_ext_cloud_lib_about';
+            } else {
+                $cur_tab_id = 'orb_ctc_ext_cloud_lib_manage';
+            }
+        }
+        
         return $cur_tab_id;
     }
     
@@ -354,11 +371,9 @@ class orbisius_ctc_cloud_lib {
                         }
                         
                         $tab_url = add_query_arg( 'tab', $tab_rec['id'], $url );
-                        $extra_tab_css = $tab_rec['id'] == $cur_tab_id ? 'nav-tab-active' : '';
+                        $extra_tab_css = $tab_rec['id'] == $cur_tab_id ? 'ui-state-default ui-tabs-active' : ''; // nav-tab-active 
                         ?>
-                        <!--                     <a href="<?php //echo esc_url( $tab_url ); ?>" class="nav-tab <?php // echo $extra_tab_css;?>"><?php //echo $tab_rec['label'];?></a> -->
-
-                        <li><a href="<?php echo '#' . $tab_rec['id']; ?>"><?php echo $tab_rec['label'];?></a></li>
+                        <li class="nav-tab2 <?php echo $extra_tab_css;?>"><a href="<?php echo '#' . $tab_rec['id']; ?>"><?php echo $tab_rec['label'];?></a></li>
                     <?php endforeach; ?>
                 </ul>
              </h2>
