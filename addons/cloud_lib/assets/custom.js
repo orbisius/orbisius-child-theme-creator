@@ -13,7 +13,7 @@ jQuery(document).ready(function($) {
             success: function(json) {
                 if (json.status) {
                     res_container.html('Please, wait');
-                    //window.location.reload();
+                    window.location.reload();
                 } else {
                     res_container.html(json.msg);
                 }
@@ -69,7 +69,7 @@ jQuery(document).ready(function($) {
             success: function(json) {
                 if (json.status) {
                     res_container.html('Please, wait');
-//                    window.location.reload();
+                    window.location.reload();
                 } else {
                     res_container.html(json.msg);
                     submit_btn.show();

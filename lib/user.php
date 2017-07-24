@@ -18,11 +18,13 @@ class orbisius_child_theme_creator_user extends orbisius_child_theme_creator_sin
         $user_id = $this->get_user_id();
         
         if (!empty($key)) {
-            $api_key = update_user_meta($user_id, $this->api_meta_key, $key);
+            $up_status = update_user_meta($user_id, $this->api_meta_key, $key);
             $api_key = get_user_meta($user_id, $this->api_meta_key, true);
-        } else { // delete
+        } elseif (!is_null($key)) { // empty string so delete
             delete_user_meta($user_id, $this->api_meta_key);
             $api_key = null;
+        } else {
+            $api_key = get_user_meta($user_id, $this->api_meta_key, true);
         }
 
         return $api_key;
