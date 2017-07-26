@@ -188,16 +188,18 @@ jQuery(document).ready(function($) {
 			"search":search
 		},
 		//success: function (data) {
-		success: function(data) {
-			data	= $.parseJSON(data);
-			
-			$.map(data.data, function(item) {
-				if (item != '[]') {
-					$('.found_snippet').show();
-					$("#found_snippet_text").val(item.content).focus();
-					$("#found_snippet_title").val(item.title).focus();
-				}
-			});
+		success: function(json) {
+                    if (json.status) {
+                        if (json.data.length > 0) {
+                            $.map(json.data, function(item) {
+                                if (item != '[]') {
+                                    $('.found_snippet').show();
+                                    $("#found_snippet_text").val(item.content).focus();
+                                    $("#found_snippet_title").val(item.title).focus();
+                                }
+                            });
+                        }
+                    }
 		}
 	});
 	}

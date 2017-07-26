@@ -22,11 +22,6 @@ class orbisius_ctc_cloud_lib {
      */
     public $api_autocomplete	= '?orb_cloud_lib_data[cmd]=item.list&orb_cloud_lib_data[query]=';
 
-    /*
-     * API which returns search results
-     */
-    public $api_search	= '?orb_cloud_lib_data[cmd]=item.list&orb_cloud_lib_data[query]=';
-
     public function __construct() {
         if ( !empty( $_SERVER['DEV_ENV'])) {
             $this->api_url = $this->dev_api_url;
@@ -269,9 +264,16 @@ class orbisius_ctc_cloud_lib {
     public function cloud_search() {
         if (!empty($_REQUEST['search'])) {
             $search_for	= sanitize_text_field($_REQUEST['search']);
-            $url = $this->api_url . $this->api_search . $search_for;
-            $req_res = $this->call($url);
-            wp_send_json($req_res);
+
+            $params = [
+                'orb_cloud_lib_data' => [
+                    'cmd' => 'item.list',
+                    'query' => $search_for,
+                ]
+            ];
+
+            $req_res = $this->call($this->api_url, $params);
+            wp_send_json($req_res->is_success() ? $req_res->data('result') : $req_res->to_array());
         }
     }
 
