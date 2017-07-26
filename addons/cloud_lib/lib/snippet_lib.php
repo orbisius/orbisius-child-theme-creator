@@ -27,21 +27,6 @@ class orbisius_ctc_cloud_lib {
      */
     public $api_search	= '?orb_cloud_lib_data[cmd]=item.list&orb_cloud_lib_data[query]=';
 
-    /*
-     * API which adds a new snippet
-     */
-    public $api_add		= '?orb_cloud_lib_data[cmd]=item.add&orb_cloud_lib_data[title]=test&&orb_cloud_lib_data[content]=some_data';
-    
-    /*
-     * API which updates a snippet
-     */
-    public $api_update		= '?orb_cloud_lib_data[cmd]=item.update&orb_cloud_lib_data[id]=id&&orb_cloud_lib_data[title]=test&&orb_cloud_lib_data[content]=some_data';
-    
-    /*
-     * API which returns all snippets
-     */
-    public $api_list_all	= '?orb_cloud_lib_data[cmd]=item.list';
-
     public function __construct() {
         if ( !empty( $_SERVER['DEV_ENV'])) {
             $this->api_url = $this->dev_api_url;
