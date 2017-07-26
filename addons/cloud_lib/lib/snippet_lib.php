@@ -36,11 +36,6 @@ class orbisius_ctc_cloud_lib {
      * API which updates a snippet
      */
     public $api_update		= '?orb_cloud_lib_data[cmd]=item.update&orb_cloud_lib_data[id]=id&&orb_cloud_lib_data[title]=test&&orb_cloud_lib_data[content]=some_data';
-	
-    /*
-     * API which deletes a snippet
-     */
-    public $api_delete		= '?orb_cloud_lib_data[cmd]=item.delete&orb_cloud_lib_data[id]=id';
     
     /*
      * API which returns all snippets
@@ -324,13 +319,17 @@ class orbisius_ctc_cloud_lib {
      * MUST send an ID to the API
      */
     public function cloud_delete() {
-    	if (isset($_POST['id'])) {
-    		$id	= sanitize_text_field($_POST['id']);
-    	
-    		$url	= 'http://orb-ctc.qsandbox.com/?orb_cloud_lib_data[cmd]=item.delete&orb_cloud_lib_data[id]='. $id;
-    		//$url	= $this->api_url . '' . $id . 'text=' . $snippetText;
-    		
-    		wp_send_json($this->call($url));
+    	if (!empty($_REQUEST['id'])) {
+            $id	= sanitize_text_field($_REQUEST['id']);
+            $params = [
+                'orb_cloud_lib_data' => [
+                    'cmd' => 'item.delete',
+                    'id' => $id,
+                ]
+            ];
+
+            $req_res = $this->call($this->api_url, $params);
+            wp_send_json($req_res->is_success() ? $req_res->data('result') : $req_res);
     	}
     }
 
