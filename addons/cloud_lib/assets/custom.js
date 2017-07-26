@@ -89,32 +89,37 @@ jQuery(document).ready(function($) {
 	 * Suggestions are based on the characters typed in the input field
 	 * 
 	 * Expects JSON array
-	 * 
+	 * @see https://stackoverflow.com/questions/9656523/jquery-autocomplete-with-callback-ajax-json
 	 */
-	$( "#search_text" ).autocomplete( {
-		source: function (request, response) {
-			$.ajax({
-				dataType: "json",
-				type : 'post',
-				url: ajaxurl,
-				data: {
-					action: "cloud_autocomplete",
-					term: request.term,
-				},
-				success: function(data) {
-					data	= $.parseJSON(data);
-					
-					response($.map(data.data, function(item) {
-						return {
-							label: item.title,
-						};
-					}));
-				},
-				select: function (event, ui) {
-				  //  return false;
-				}
-			});
-		},
+	 $( "#search_text" ).autocomplete( {
+            minLength: 3,
+            open: function() {
+                $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+            },
+            close: function() {
+                $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+            },
+            source: function (request, response) {
+                $.ajax({
+                    type : 'post',
+                    url: ajaxurl,
+                    data: {
+                        action: "cloud_autocomplete",
+                        term: request.term,
+                    },
+                    success: function(json) {
+                        response($.map(json.data, function(item) {
+                            return {
+                                value: item.id,
+                                label: item.title
+                            };
+                        }));
+                    },
+                    select: function (event, ui) {
+                      //  return false;
+                    }
+                });
+            },
 	});
 	
 	/**

@@ -17,11 +17,6 @@ class orbisius_ctc_cloud_lib {
     public $staging_api_url = 'http://orb-ctc.qsandbox.com/';
     private $tabs = [];
 
-    /*
-     * API which returns with autocomplete suggestions
-     */
-    public $api_autocomplete	= '?orb_cloud_lib_data[cmd]=item.list&orb_cloud_lib_data[query]=';
-
     public function __construct() {
         if ( !empty( $_SERVER['DEV_ENV'])) {
             $this->api_url = $this->dev_api_url;
@@ -250,10 +245,17 @@ class orbisius_ctc_cloud_lib {
      */
     public function cloud_autocomplete() {
         if (!empty($_REQUEST['term'])) {
-            $search_for_term = sanitize_text_field($_REQUEST['term']);
-            $url = $this->api_url . $this->api_autocomplete . $search_for_term;
-            $req_res = $this->call($url);
-            wp_send_json($req_res->is_success() ? $req_res->data('result') : $req_res);
+            $search_for = sanitize_text_field($_REQUEST['term']);
+            
+            $params = [
+                'orb_cloud_lib_data' => [
+                    'cmd' => 'item.list',
+                    'query' => $search_for,
+                ]
+            ];
+
+            $req_res = $this->call($this->api_url, $params);
+            wp_send_json($req_res->is_success() ? $req_res->data('result') : $req_res->to_array());
         }
     }
 
