@@ -212,13 +212,13 @@ a.pro_Add_On {
 .manage_snippets_table_wrapper table tr td {
     border-bottom: 1px solid #d8d8d8;
 }
-.manage_snippets_table_wrapper table tr td:first-child {
+.manage_snippets_table_wrapper table tr td.td_title {
     font-size: 14px;
-    width: 55%;
 }
 
-.manage_snippets_table_wrapper table tr td {
-    width: 15%;
+.manage_snippets_table_wrapper table tr .cmd_row {
+    width: 35%;
+    text-align: right;
 }
 
 .nav-tab.active {

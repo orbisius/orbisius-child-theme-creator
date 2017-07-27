@@ -458,9 +458,12 @@ class orbisius_ctc_cloud_lib {
                        <tr data-id="<?php echo esc_attr($rec['id']); ?>" 
                             data-title="<?php echo esc_attr($rec['title']); ?>" 
                             data-content="<?php echo esc_attr($rec['content']); ?>">
-                          <td id="td_title"><?php echo esc_attr($rec['title']); ?></td>
-                          <td><input class="button snippet_edit_view_btn" type="button" value="View / Edit"></td>
-                          <td><input class="button snippet_delete_btn" type="button" value="Delete"></td>
+                          <td id="td_title" class="title_row"><?php echo esc_attr($rec['title']); ?></td>
+                          <td class="cmd_row">
+                              <input class="button snippet_edit_view_btn" type="button" value="Copy">
+                              <input class="button snippet_edit_view_btn" type="button" value="Edit">
+                              <input class="button snippet_delete_btn" type="button" value="X">
+                          </td>
                        </tr><?php } ?>
                 <?php endif; ?>
                 </table>
