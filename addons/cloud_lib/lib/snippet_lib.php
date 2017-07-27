@@ -455,12 +455,20 @@ class orbisius_ctc_cloud_lib {
                         <span id="no_snippets_alert">You haven't added any snippets yet.</span>
                 <?php else : ?>
                        <?php foreach( $all_snippets as $rec) { ?>
-                       <tr data-id="<?php echo esc_attr($rec['id']); ?>" 
+                       <tr  id="snippet_<?php echo esc_attr($rec['id']); ?>"
+                            class="snippet_<?php echo esc_attr($rec['id']); ?>"
+                            data-id="<?php echo esc_attr($rec['id']); ?>" 
                             data-title="<?php echo esc_attr($rec['title']); ?>" 
                             data-content="<?php echo esc_attr($rec['content']); ?>">
                           <td id="td_title" class="title_row"><?php echo esc_attr($rec['title']); ?></td>
                           <td class="cmd_row">
-                              <input class="button snippet_edit_view_btn" type="button" value="Copy">
+                              <div id="snippet_content_<?php echo esc_attr($rec['id']);?>" 
+                                   class="snippet_content_<?php echo esc_attr($rec['id']);?> app_hide"><?php echo esc_attr($rec['content']); ?></div>
+
+                              <input class="button orb_ctc_copy_btn" type="button" value="Copy"
+                                      data-clipboard-action="copy"
+                                      data-clipboard-target="#snippet_content_<?php echo esc_attr($rec['id']);?>"
+                                >
                               <input class="button snippet_edit_view_btn" type="button" value="Edit">
                               <input class="button snippet_delete_btn" type="button" value="X">
                           </td>
