@@ -374,12 +374,12 @@ jQuery(document).ready(function($) {
                     modal: true,
                     resizable: false,
                     draggable: false,
-                    buttons: [{
+                    buttons: [/*{
                                     text: "Copy",
                                     //"class": 'button',
                                     click: function() {
                                     }
-                            },
+                            },*/
                             {
                                     text: "Update",
                                     "class": 'button-primary',
