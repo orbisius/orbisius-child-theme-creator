@@ -2,6 +2,10 @@
  * Used for the Snippet Library
  */
 jQuery(document).ready(function($) {
+    $('.snippet_copy_btn').on('click', function (e) {
+        
+    } );
+    
     $('#orb_ctc_ext_cloud_lib_account_log_out').on('click', function (e) {
         e.preventDefault();
         

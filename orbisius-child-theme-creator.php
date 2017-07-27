@@ -289,7 +289,7 @@ function orbisius_child_theme_creator_admin_enqueue_scripts($current_page = '') 
             filemtime( plugin_dir_path( __FILE__ ) . "/assets/main{$suffix}.js" ), true);
     wp_enqueue_script( 'orbisius_child_theme_creator' );
     
-    do_action( 'orbisius_child_theme_creator_admin_enqueue_scripts', [] );
+    do_action( 'orbisius_child_theme_creator_admin_enqueue_scripts', [ 'suffix' => $suffix, ] );
 }
 
 /**

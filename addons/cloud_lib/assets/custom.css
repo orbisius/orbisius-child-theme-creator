@@ -59,6 +59,10 @@ span.descr {
     margin: 1em 0;
 }
 
+.orb_cloud_lib_wrapper .app_hide {
+    display: none;
+}
+
 .orb_cloud_lib_wrapper h3 {
     margin: 0.5em 0;
 }
