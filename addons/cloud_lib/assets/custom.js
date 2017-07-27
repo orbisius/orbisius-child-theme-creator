@@ -236,7 +236,7 @@ jQuery(document).ready(function($) {
 	 * Delete a snippet by id button
 	 * 
 	 */
-	$('.snippet_delete_btn').on("click", function() {
+	$('#manage_snippets_table').on("click", '.snippet_delete_btn', function() {
 		var id		= $(this).parents('tr').data('id');
 		var title	= $(this).parents('tr').data('title');
 		
@@ -275,7 +275,7 @@ jQuery(document).ready(function($) {
 	 */
 	function delete_snippet(id) {
 		$.ajax({
-		//dataType: "json",
+		dataType: "json",
 		type : "post",
 		url: ajaxurl,
 		data: {
@@ -283,11 +283,15 @@ jQuery(document).ready(function($) {
 			"id": id
 		},
 		success: function (data) {
-			data	= $.parseJSON(data);
+			//data	= $.parseJSON(data);
 			
 			if (data.status == '1') {
 				alert(data.msg);
 				$("tr[data-id='" + id + "']").remove();
+				if ( $('#manage_snippets_table >tbody >tr').length == 0 )
+				{
+					$('#no_snippets_alert').show();
+				}
 			}
 			else {
 				alert("Problem occurred");
@@ -343,7 +347,7 @@ jQuery(document).ready(function($) {
 	 * Edit / view window combined
 	 * 
 	 */
-	$('.snippet_edit_view_btn').on("click", function() {
+	$('#manage_snippets_table').on("click", '.snippet_edit_view_btn', function() {
 		
 		var id		= $(this).parents('tr').data('id');
 		var title	= $(this).parents('tr').data('title');
@@ -398,15 +402,22 @@ jQuery(document).ready(function($) {
                         "text": text
                 },
                 success: function (data) {
-                        data	= $.parseJSON(data);
+                        //data	= $.parseJSON(data);
 
                         if (data.status == '1') {
                             alert(data.msg);
 
                             $row_to_update	= $("tr[data-id='" + id + "']");
-                            $row_to_update.data('title', title );
-                            $row_to_update.data('content', text);
-                            $row_to_update.find('#td_title').html(title);
+                            if ($row_to_update.length) {
+                                $row_to_update.data('title', title );
+                                $row_to_update.data('content', text);
+                                $row_to_update.find('#td_title').html(title);
+                            }
+                            else {
+                            	$("#no_snippets_alert").hide();
+	                        	$('#manage_snippets_table').append('<tr data-id="' + data.data.id + '" data-title="' + title + '"  data-content="' 
+	                        		+ text + '"  ><td id="td_title">' + title + '</td><td><input class="button snippet_edit_view_btn" type="button" value="View / Edit"></td><td><input class="button snippet_delete_btn" type="button" value="Delete"></td></tr>');
+                           }
                         } else {
                             alert("Error: occurred");
                         }
