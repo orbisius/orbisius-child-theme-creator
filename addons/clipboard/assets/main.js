@@ -10,6 +10,7 @@ jQuery(document).ready(function($) {
         });
 
         clipboard.on('error', function(e) {
+            alert('copy failed');
             console.log(e);
         });
     } catch (e) {

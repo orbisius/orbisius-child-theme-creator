@@ -460,15 +460,18 @@ class orbisius_ctc_cloud_lib {
                             data-id="<?php echo esc_attr($rec['id']); ?>" 
                             data-title="<?php echo esc_attr($rec['title']); ?>" 
                             data-content="<?php echo esc_attr($rec['content']); ?>">
-                          <td id="td_title" class="title_row"><?php echo esc_attr($rec['title']); ?></td>
+                          <td id="td_title" class="title_row"><?php echo esc_attr($rec['title']); ?>
+                              <div>
+                                  <input type="text" id="snippet_content_<?php echo esc_attr($rec['id']);?>"
+                                         value="<?php 
+                                        echo esc_attr($rec['content']); ?>"/>
+                              </div>
+                          </td>
                           <td class="cmd_row">
-                              <div id="snippet_content_<?php echo esc_attr($rec['id']);?>" 
-                                   class="snippet_content_<?php echo esc_attr($rec['id']);?> app_hide"><?php echo esc_attr($rec['content']); ?></div>
-
-                              <input class="button orb_ctc_copy_btn" type="button" value="Copy"
+                              <button class="button orb_ctc_copy_btn" 
                                       data-clipboard-action="copy"
                                       data-clipboard-target="#snippet_content_<?php echo esc_attr($rec['id']);?>"
-                                >
+                                >Copy</button>
                               <input class="button snippet_edit_view_btn" type="button" value="Edit">
                               <input class="button snippet_delete_btn" type="button" value="X">
                           </td>
