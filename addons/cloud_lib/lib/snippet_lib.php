@@ -352,7 +352,7 @@ class orbisius_ctc_cloud_lib {
         $cur_tab_id = $this->get_current_tab_id();
         ?>
         <div id="tabs">
-             <h2 class="nav-tab-wrapper"> 
+             <div class="nav-tab-wrapper"> 
                 <ul>
                     <?php foreach ( $this->tabs as $tab_rec ) : ?>
                         <?php
@@ -366,7 +366,7 @@ class orbisius_ctc_cloud_lib {
                         <li class="nav-tab2 <?php echo $extra_tab_css;?>"><a href="<?php echo '#' . $tab_rec['id']; ?>"><?php echo $tab_rec['label'];?></a></li>
                     <?php endforeach; ?>
                 </ul>
-             </h2>
+             </div>
         <?php
     }
     
@@ -694,7 +694,7 @@ class orbisius_ctc_cloud_lib {
         $user_api = orbisius_child_theme_creator_user::get_instance();
         $api_key = $user_api->api_key();
         ?>
-        <div class="orb_cloud_lib_wrapper_<?php echo $place;?>" class="orb_cloud_lib_wrapper orb_cloud_lib_wrapper_<?php echo $place;?>">
+        <div id="orb_cloud_lib_wrapper_<?php echo $place;?>" class="orb_cloud_lib_wrapper orb_cloud_lib_wrapper_<?php echo $place;?>">
             <div class="snippet_wrapper">
                 <h3>Orbisius Cloud Library</h3>
                 <?php $this->render_tabs(); ?>

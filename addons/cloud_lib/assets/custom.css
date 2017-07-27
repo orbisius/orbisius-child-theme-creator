@@ -55,6 +55,15 @@ span.descr {
 	margin-top: -25px;
 }
 
+.orb_cloud_lib_wrapper h3 {
+    margin: 0.5em 0;
+}
+
+.orb_cloud_lib_wrapper .nav-tab-wrapper {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
 .ui-dialog.edit_snippet, .ui-dialog.view_snippet {
 	min-height: 300px !important;
 	background: white;
@@ -581,14 +590,16 @@ body .ui-tooltip {
 }
 
 .ui-widget.ui-widget-content {
-    border: 1px solid #c5c5c5;
+    /*border: 1px solid #c5c5c5;*/
+    padding: 0;
 }
 
 .ui-widget-content {
-	border: 1px solid #dddddd;
-	background: #ffffff;
-	color: #333333;
+	/*border: 1px solid #dddddd;*/
+    background: #ffffff;
+    color: #333333;
 }
+
 
 .ui-widget-content a {
 	color: #333333;
@@ -801,8 +812,8 @@ a.ui-button:active,
 	padding: .2em;
 }
 .ui-tabs .ui-tabs-nav {
-	margin: 0;
-	padding: .2em .2em 0;
+	/*margin: 0;*/
+	/*padding: .2em .2em 0;*/
 }
 .ui-tabs .ui-tabs-nav li {
 	list-style: none;
