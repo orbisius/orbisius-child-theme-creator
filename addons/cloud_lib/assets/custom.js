@@ -263,6 +263,7 @@ jQuery(document).ready(function($) {
         				}
         			}],
         		close: function(event, ui) {
+                    $('.snippet_delete_btn').blur();
         		}
 		});
 	});
@@ -288,9 +289,16 @@ jQuery(document).ready(function($) {
 			if (data.status == '1') {
 				alert(data.msg);
 				$("tr[data-id='" + id + "']").remove();
-				if ( $('#manage_snippets_table >tbody >tr').length == 0 )
+				if($('#manage_snippets_table >tbody >tr').length == 0)
 				{
-					$('#no_snippets_alert').show();
+                    if($('#no_snippets_alert'). length > 0)
+                    {
+                        $('#no_snippets_alert').show();
+                    }
+                    else
+                    {
+                        $('#manage_snippets_table').append('<span id="no_snippets_alert">You haven\'t added any snippets yet.</span>');
+                    }
 				}
 			}
 			else {
@@ -386,6 +394,7 @@ jQuery(document).ready(function($) {
                                     }
                             }],
                     close: function(event, ui) {
+                         $('.snippet_edit_view_btn').blur();
                     }
 		});
 	});
