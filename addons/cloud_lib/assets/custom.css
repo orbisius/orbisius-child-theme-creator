@@ -64,13 +64,13 @@ span.descr {
 }
 
 button.button.ui-button {
-	/*margin-left: 5px;*/
+    /*margin-left: 5px;*/
 }
 
 .snippet_wrapper {
-	border: 1px solid #ccc;
-	margin: 10px 0;
-	padding: 3px 5px;
+    border: 1px solid #ccc;
+    /*margin: 10px 0;*/
+    padding: 3px 5px;
 }
 
 .new_snippet_wrapper {
@@ -135,8 +135,8 @@ a.pro_Add_On {
 
 .secondary_buttons .snippet_wrapper .manage_snippets {
 	/*border: 1px solid #ccc !important;*/
-	margin: 10px 0;
-	padding: 3px 5px;
+	/*margin: 10px 0;*/
+	/*padding: 3px 5px;*/
 }
 
 /**.secondary_buttons .snippet_wrapper .manage_snippets .edit_snippet {
@@ -831,9 +831,10 @@ a.ui-button:active,
 .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor {
 	cursor: pointer;
 }
+
 .ui-tabs .ui-tabs-panel {
 	display: block;
 	border-width: 0;
-	padding: 1em 1.4em;
+	/*padding: 1em 1.4em;*/
 	background: none;
 }
