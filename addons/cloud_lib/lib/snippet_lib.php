@@ -450,10 +450,10 @@ class orbisius_ctc_cloud_lib {
          <div class="manage_snippets">
             <!--<h3>My Snippets</h3>-->
             <div class="manage_snippets_table_wrapper">
+                <table class="widefat" id="manage_snippets_table">
                 <?php if (empty($all_snippets)) : ?>
-                    You haven't added any snippets yet.
+                        <span id="no_snippets_alert">You haven't added any snippets yet.</span>
                 <?php else : ?>
-                    <table class="widefat">
                        <?php foreach( $all_snippets as $rec) { ?>
                        <tr data-id="<?php echo esc_attr($rec['id']); ?>" 
                             data-title="<?php echo esc_attr($rec['title']); ?>" 
@@ -462,8 +462,8 @@ class orbisius_ctc_cloud_lib {
                           <td><input class="button snippet_edit_view_btn" type="button" value="View / Edit"></td>
                           <td><input class="button snippet_delete_btn" type="button" value="Delete"></td>
                        </tr><?php } ?>
-                    </table>
                 <?php endif; ?>
+                </table>
             </div>
 
             <!-- Edit snippet window -->
