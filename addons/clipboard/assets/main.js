@@ -16,4 +16,4 @@ jQuery(document).ready(function($) {
     } catch (e) {
         console && console.log("orbisius child theme creator addon: Clipboard.js wasn't loaded");
     }
-})(jQuery);
+}); // (jQuery)

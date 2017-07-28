@@ -394,17 +394,19 @@ jQuery(document).ready(function($) {
 	});
 	
 	function snippet_update(id, title, text) {
-            var $row_to_update = $("tr[data-id='" + id + "']");
+            id = parseInt(id);
+            var $row_to_update = '';
             
             if (id <= 0) {
                 $('#no_snippets_row').hide();
                 $row_to_update = $('#manage_snippets_table tr.snippet_row:first').clone();
                 $row_to_update.show();
+            } else {
+                $row_to_update = $("tr[data-id='" + id + "']");
             }
 
             $row_to_update.find('.snippet_title').html('Please, wait...');
             $row_to_update.find('.snippet_content').empty().hide();
-            $('#manage_snippets_table').append($row_to_update);
 
             $.ajax({
                 url: ajaxurl,
@@ -422,6 +424,10 @@ jQuery(document).ready(function($) {
                        $row_to_update.find('.snippet_title').html(title);
                        $row_to_update.find('.snippet_content').html(text);
                        $row_to_update.show();
+                       
+                       if (id <= 0) {
+                          $('#manage_snippets_table').append($row_to_update);
+                       }
                     } else {
                         alert("Error: " + json.msg);
                     }
@@ -472,4 +478,4 @@ jQuery(document).ready(function($) {
         $( function() {
             $( "#tabs" ).tabs();
           } );
-})(jQuery);
+});
