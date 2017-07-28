@@ -588,12 +588,12 @@ class orbisius_ctc_cloud_lib {
                 <div class="">
                     <form name="orb_ctc_login_form" id="orb_ctc_login_form" class="orb_ctc_login_form" method="post">
                         <p>
-                            <label for="orb_ctc_email">Email Address<br />
-                                <input type="email" name="orb_ctc_email" id="orb_ctc_email" class="input" value="" size="42" required="" /></label>
+                            <label for="orb_ctc_login_email">Email Address<br />
+                                <input type="email" name="orb_ctc_email" id="orb_ctc_login_email" class="input" value="" size="42" required="" /></label>
                         </p>
                         <p>
-                            <label for="orb_ctc_pass">Password<br />
-                                <input type="password" name="orb_ctc_pass" id="orb_ctc_pass" 
+                            <label for="orb_ctc_login_pass">Password<br />
+                                <input type="password" name="orb_ctc_pass" id="orb_ctc_login_pass" 
                                        class="input" value="" size="42" required="" /></label>
                         </p>
                         <p class="submit">
