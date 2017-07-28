@@ -352,7 +352,6 @@ jQuery(document).ready(function($) {
 	 * 
 	 */
 	$('#manage_snippets_table').on("click", '.snippet_edit_view_btn', function() {
-		
 		var id		= $(this).parents('tr').data('id');
 		var title	= $(this).parents('tr').data('title');
 		var content	= $(this).parents('tr').data('content');
@@ -398,35 +397,33 @@ jQuery(document).ready(function($) {
 	function snippet_update(id, title, text) {
             var $row_to_update = $("tr[data-id='" + id + "']");
             
-            if ($row_to_update.length == 0) {
+            if (id <= 0) {
                 $('#no_snippets_row').hide();
                 $row_to_update = $('#manage_snippets_table tr.snippet_row:first').clone().show();
-            } else {
-                
             }
-            
+
             $row_to_update.find('.snippet_title').html('Please, wait...');
-            $row_to_update.find('.snippet_content').val('').hide();
-            
+            $row_to_update.find('.snippet_content').empty().hide();
+            $('#manage_snippets_table').append($row_to_update);
+
             $.ajax({
                 url: ajaxurl,
                 data: {
-                    action: "cloud_update",
+                    action: "orb_ctc_addon_cloud_lib_cloud_update",
                     id : id,
                     title : title,
                     text : text
                 },
                 success: function (json) {
-                    $row_to_update.data('id', json.data.id);
-                    
                     if (json.status) {
+                       $row_to_update.data('id', json.data.id);
                        $row_to_update.data('title', title );
                        $row_to_update.data('content', text);
                        $row_to_update.find('.snippet_title').html(title);
-                       $row_to_update.find('.snippet_content').val(text);
+                       $row_to_update.find('.snippet_content').html(text);
                        $row_to_update.find('.snippet_content').show();
                     } else {
-                        alert("Error: occurred" + json.msg);
+                        alert("Error: " + json.msg);
                     }
                 }
             });

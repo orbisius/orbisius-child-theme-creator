@@ -92,30 +92,30 @@ class orbisius_ctc_cloud_lib {
         
          // Snippet search ajax hook
         add_action( 'wp_ajax_orb_ctc_signup', [$this, 'process_signup'] );
-        add_action( 'wp_ajax_nopriv_orb_ctc_signup', [$this, 'process_signup'] );
+//        add_action( 'wp_ajax_nopriv_orb_ctc_signup', [$this, 'process_signup'] );
         
          // Log in
         add_action( 'wp_ajax_orb_ctc_login', [$this, 'process_login'] );
-        add_action( 'wp_ajax_nopriv_orb_ctc_login', [$this, 'process_login'] );
+//        add_action( 'wp_ajax_nopriv_orb_ctc_login', [$this, 'process_login'] );
         
          // Log out
         add_action( 'wp_ajax_orb_ctc_log_out', [$this, 'process_log_out'] );
         add_action( 'wp_ajax_nopriv_orb_ctc_log_out', [$this, 'process_log_out'] );
         
         add_action( 'wp_ajax_cloud_autocomplete', [$this, 'cloud_autocomplete'] );
-        add_action( 'wp_ajax_nopriv_cloud_autocomplete', [$this, 'cloud_autocomplete'] );
+//        add_action( 'wp_ajax_nopriv_cloud_autocomplete', [$this, 'cloud_autocomplete'] );
         
         // Snippet search ajax hook
         add_action( 'wp_ajax_cloud_search', [$this, 'cloud_search'] );
-        add_action( 'wp_ajax_nopriv_cloud_search', [$this, 'cloud_search'] );
+//        add_action( 'wp_ajax_nopriv_cloud_search', [$this, 'cloud_search'] );
         
         // Update a Snippet ajax hook
-        add_action( 'wp_ajax_cloud_update', [$this, 'cloud_update'] );
-        add_action( 'wp_ajax_nopriv_cloud_update', [$this, 'cloud_update'] );
+        add_action( 'wp_ajax_orb_ctc_addon_cloud_lib_cloud_update', [$this, 'cloud_update'] );
+//        add_action( 'wp_ajax_nopriv_cloud_update', [$this, 'cloud_update'] );
         
         // Delete a Snippet ajax hook
         add_action( 'wp_ajax_cloud_delete', [$this, 'cloud_delete'] );
-        add_action( 'wp_ajax_nopriv_cloud_delete', [$this, 'cloud_delete'] );
+//        add_action( 'wp_ajax_nopriv_cloud_delete', [$this, 'cloud_delete'] );
     }
 
     /**
