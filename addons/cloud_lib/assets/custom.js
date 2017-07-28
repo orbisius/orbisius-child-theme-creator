@@ -281,6 +281,12 @@ jQuery(document).ready(function($) {
 	function delete_snippet(id) {
             $("tr[data-id='" + id + "']").fadeOut(300, function() { $(this).remove(); });
             
+            if ($('#manage_snippets_table tr.snippet_row').length == 0) {
+                $('#no_snippets_row').show();
+            } else {
+                $('#no_snippets_row').hide();
+            }
+
             $.ajax({
 		url: ajaxurl,
 		data: {
@@ -289,11 +295,7 @@ jQuery(document).ready(function($) {
 		},
 		success: function (json) {
                     if (json.status) {
-                        if ($('#manage_snippets_table tr.snippet_row').length == 0) {
-                            $('#no_snippets_alert').show();
-                        } else {
-                            $('#no_snippets_alert').hide();
-                        }
+                        
                     } else {
                         alert(json.msg);
                     }
@@ -396,8 +398,10 @@ jQuery(document).ready(function($) {
             var $row_to_update = $("tr[data-id='" + id + "']");
             
             if ($row_to_update.length == 0) {
-                $('#no_snippets_alert').hide();
+                $('#no_snippets_row').hide();
                 $row_to_update = $('#manage_snippets_table tr.snippet_row:first').clone().show();
+            } else {
+                
             }
             
             $row_to_update.find('.snippet_title').html('Please, wait...');
