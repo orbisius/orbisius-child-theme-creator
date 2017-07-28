@@ -241,8 +241,8 @@ jQuery(document).ready(function($) {
 	 * 
 	 */
 	$('#manage_snippets_table').on("click", '.snippet_delete_btn', function() {
-		var id		= $(this).parents('tr').data('id');
-		var title	= $(this).parents('tr').data('title');
+		var id		= $(this).closest('tr').data('id');
+		var title	= $(this).closest('tr').data('title');
 		
 		$('.delete_snippet_title').text(title);
 		
@@ -263,7 +263,7 @@ jQuery(document).ready(function($) {
         				text: "No",
         				"class": 'button',
         				click: function() { 
-        					$(this).dialog("close");
+                                            $(this).dialog("close");
         				}
         			}],
         		close: function(event, ui) {
@@ -398,7 +398,7 @@ jQuery(document).ready(function($) {
             
             if (id <= 0) {
                 $('#no_snippets_row').hide();
-                $row_to_update = $('#manage_snippets_table tr.snippet_row:first').clone().show();
+                $row_to_update = $('#manage_snippets_table tr.snippet_row:first').clone();
                 $row_to_update.show();
             }
 

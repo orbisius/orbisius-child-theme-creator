@@ -455,6 +455,7 @@ class orbisius_ctc_cloud_lib {
                     $no_items_css = '';
                     
                     if (empty($all_snippets)) {
+                        $all_snippets = [];
                         $all_snippets[] = $this->get_blank_snippet();
                     } else {
                         $no_items_css = 'app_hide'; 
