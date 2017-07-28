@@ -451,20 +451,25 @@ class orbisius_ctc_cloud_lib {
             <!--<h3>My Snippets</h3>-->
             <div class="manage_snippets_table_wrapper">
                 <table class="widefat" id="manage_snippets_table">
-                    <?php if (empty($all_snippets)) : ?>
-                        <tr>
-                            <td colspan="2">
-                                <span id="no_snippets_alert">You haven't added any snippets yet.</span>
-                            </td>
-                        </tr>
-                        <?php
-                        $all_snippets[] = $this->get_blank_snippet();
-                        ?>
-                    <?php endif; ?>
+                    <?php
+                    $no_items_css = '';
                     
+                    if (empty($all_snippets)) {
+                        $all_snippets[] = $this->get_blank_snippet();
+                    } else {
+                        $no_items_css = 'app_hide'; 
+                    }
+                    ?>
+                    
+                    <tr id="no_snippets_row" class="no_snippets_row no_snippets_alert <?php echo $no_items_css;?>">
+                        <td colspan="2">
+                            <span id="no_snippets_alert">You haven't added any snippets yet.</span>
+                        </td>
+                    </tr>
+
                     <?php foreach( $all_snippets as $rec) : ?>
                        <tr  id="snippet_<?php echo esc_attr($rec['id']); ?>"
-                            class="snippet snippet_<?php echo esc_attr($rec['id']); ?> 
+                            class="snippet_row snippet_row<?php echo esc_attr($rec['id']); ?> 
                                 <?php echo empty($rec['id']) ? 'app_hide' :''; ?>"
                             data-id="<?php echo esc_attr($rec['id']); ?>" 
                             data-title="<?php echo esc_attr($rec['title']); ?>" 

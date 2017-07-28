@@ -279,37 +279,26 @@ jQuery(document).ready(function($) {
 	 * 
 	 */
 	function delete_snippet(id) {
-		$.ajax({
-		dataType: "json",
-		type : "post",
+            $("tr[data-id='" + id + "']").fadeOut(300, function() { $(this).remove(); });
+            
+            $.ajax({
 		url: ajaxurl,
 		data: {
-			action: "cloud_delete",
-			"id": id
+                    action: "cloud_delete",
+                    id: id
 		},
-		success: function (data) {
-			//data	= $.parseJSON(data);
-			
-			if (data.status == '1') {
-				alert(data.msg);
-				$("tr[data-id='" + id + "']").remove();
-				if($('#manage_snippets_table >tbody >tr').length == 0)
-				{
-                    if($('#no_snippets_alert'). length > 0)
-                    {
-                        $('#no_snippets_alert').show();
+		success: function (json) {
+                    if (json.status) {
+                        if ($('#manage_snippets_table tr.snippet_row').length == 0) {
+                            $('#no_snippets_alert').show();
+                        } else {
+                            $('#no_snippets_alert').hide();
+                        }
+                    } else {
+                        alert(json.msg);
                     }
-                    else
-                    {
-                        $('#manage_snippets_table').append('<span id="no_snippets_alert">You haven\'t added any snippets yet.</span>');
-                    }
-				}
-			}
-			else {
-				alert("Problem occurred");
-			}
 		}
-	});
+            });
 	}
 	
 	/**
@@ -408,7 +397,7 @@ jQuery(document).ready(function($) {
             
             if ($row_to_update.length == 0) {
                 $('#no_snippets_alert').hide();
-                $row_to_update = $('#manage_snippets_table tr.snippet:first').clone().show();
+                $row_to_update = $('#manage_snippets_table tr.snippet_row:first').clone().show();
             }
             
             $row_to_update.find('.snippet_title').html('Please, wait...');
