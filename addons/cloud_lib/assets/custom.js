@@ -401,6 +401,7 @@ jQuery(document).ready(function($) {
                 $('#no_snippets_row').hide();
                 $row_to_update = $('#manage_snippets_table tr.snippet_row:first').clone();
                 $row_to_update.show();
+                $('#manage_snippets_table').prepend($row_to_update);
             } else {
                 $row_to_update = $("tr[data-id='" + id + "']");
             }
@@ -423,11 +424,6 @@ jQuery(document).ready(function($) {
                        $row_to_update.data('content', text);
                        $row_to_update.find('.snippet_title').html(title);
                        $row_to_update.find('.snippet_content').html(text);
-                       $row_to_update.show();
-                       
-                       if (id <= 0) {
-                          $('#manage_snippets_table').append($row_to_update);
-                       }
                     } else {
                         alert("Error: " + json.msg);
                     }
@@ -476,8 +472,23 @@ jQuery(document).ready(function($) {
 	});
 	
         // https://stackoverflow.com/questions/3641154/jquery-trapping-tab-select-event
-        $( '.orb_ctc_addon_cloud_lib_tabs' ).tabs();
-        $( '.orb_ctc_addon_cloud_lib_tabs' ).bind('tabsactivate',function(e, ui) {
-            console.log(ui.newTab);
+        $( '.orb_ctc_addon_cloud_lib_tabs' ).tabs({
+            activate : function(event, ui) {
+                if (ui.newPanel.selector == '#orb_ctc_ext_cloud_lib_add') {
+                    $('#add_snippet_text').focus();
+                } else if (ui.newPanel.selector == '#orb_ctc_ext_cloud_lib_signup') {
+                    if ($('#orb_ctc_email').val() == '') {
+                       $('#orb_ctc_email').focus();
+                    } else {
+                        $('#orb_ctc_pass2').focus();
+                    }
+                } else if (ui.newPanel.selector == '#orb_ctc_ext_cloud_lib_login') {
+                    if ($('#orb_ctc_login_email').val() == '') {
+                       $('#orb_ctc_login_email').focus();
+                    } else {
+                        $('#orb_ctc_login_pass').focus();
+                    }
+                }
+            }       
         });
 });
