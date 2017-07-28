@@ -408,11 +408,11 @@ jQuery(document).ready(function($) {
             
             if ($row_to_update.length == 0) {
                 $('#no_snippets_alert').hide();
-                $row_to_update = $('#manage_snippets_table tr:first').clone();
+                $row_to_update = $('#manage_snippets_table tr.snippet:first').clone().show();
             }
             
             $row_to_update.find('.snippet_title').html('Please, wait...');
-            $row_to_update.find('.snippet_content').val('');
+            $row_to_update.find('.snippet_content').val('').hide();
             
             $.ajax({
                 url: ajaxurl,
@@ -430,6 +430,7 @@ jQuery(document).ready(function($) {
                        $row_to_update.data('content', text);
                        $row_to_update.find('.snippet_title').html(title);
                        $row_to_update.find('.snippet_content').val(text);
+                       $row_to_update.find('.snippet_content').show();
                     } else {
                         alert("Error: occurred" + json.msg);
                     }

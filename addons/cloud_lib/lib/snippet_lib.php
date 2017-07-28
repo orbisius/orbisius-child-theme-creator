@@ -451,16 +451,21 @@ class orbisius_ctc_cloud_lib {
             <!--<h3>My Snippets</h3>-->
             <div class="manage_snippets_table_wrapper">
                 <table class="widefat" id="manage_snippets_table">
-                <?php if (empty($all_snippets)) : ?>
-                    <tr>
-                        <td colspan="2">
-                            <span id="no_snippets_alert">You haven't added any snippets yet.</span>
-                        </td>
-                    </tr>
-                <?php else : ?>
-                       <?php foreach( $all_snippets as $rec) { ?>
+                    <?php if (empty($all_snippets)) : ?>
+                        <tr>
+                            <td colspan="2">
+                                <span id="no_snippets_alert">You haven't added any snippets yet.</span>
+                            </td>
+                        </tr>
+                        <?php
+                        $all_snippets[] = $this->get_blank_snippet();
+                        ?>
+                    <?php endif; ?>
+                    
+                    <?php foreach( $all_snippets as $rec) : ?>
                        <tr  id="snippet_<?php echo esc_attr($rec['id']); ?>"
-                            class="snippet_<?php echo esc_attr($rec['id']); ?>"
+                            class="snippet snippet_<?php echo esc_attr($rec['id']); ?> 
+                                <?php echo empty($rec['id']) ? 'app_hide' :''; ?>"
                             data-id="<?php echo esc_attr($rec['id']); ?>" 
                             data-title="<?php echo esc_attr($rec['title']); ?>" 
                             data-content="<?php echo esc_attr($rec['content']); ?>">
@@ -484,8 +489,8 @@ class orbisius_ctc_cloud_lib {
                               <input class="button snippet_edit_view_btn" type="button" value="Edit">
                               <input class="button snippet_delete_btn" type="button" value="X">
                           </td>
-                       </tr><?php } ?>
-                <?php endif; ?>
+                       </tr>
+                    <?php endforeach; ?>
                 </table>
             </div>
 
@@ -651,7 +656,7 @@ class orbisius_ctc_cloud_lib {
      */
     public function get_blank_snippet() {
         $arr = [
-            'id' => '',
+            'id' => 0,
             'title' => '',
             'content' => '',
         ];
