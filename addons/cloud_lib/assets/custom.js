@@ -399,6 +399,7 @@ jQuery(document).ready(function($) {
             if (id <= 0) {
                 $('#no_snippets_row').hide();
                 $row_to_update = $('#manage_snippets_table tr.snippet_row:first').clone().show();
+                $row_to_update.show();
             }
 
             $row_to_update.find('.snippet_title').html('Please, wait...');
@@ -420,7 +421,7 @@ jQuery(document).ready(function($) {
                        $row_to_update.data('content', text);
                        $row_to_update.find('.snippet_title').html(title);
                        $row_to_update.find('.snippet_content').html(text);
-                       $row_to_update.find('.snippet_content').show();
+                       $row_to_update.show();
                     } else {
                         alert("Error: " + json.msg);
                     }
