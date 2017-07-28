@@ -452,7 +452,11 @@ class orbisius_ctc_cloud_lib {
             <div class="manage_snippets_table_wrapper">
                 <table class="widefat" id="manage_snippets_table">
                 <?php if (empty($all_snippets)) : ?>
-                        <span id="no_snippets_alert">You haven't added any snippets yet.</span>
+                    <tr>
+                        <td colspan="2">
+                            <span id="no_snippets_alert">You haven't added any snippets yet.</span>
+                        </td>
+                    </tr>
                 <?php else : ?>
                        <?php foreach( $all_snippets as $rec) { ?>
                        <tr  id="snippet_<?php echo esc_attr($rec['id']); ?>"
@@ -639,6 +643,20 @@ class orbisius_ctc_cloud_lib {
             </div> <!-- /orb_ctc_ext_cloud_lib_about_wrapper -->  
         </div>
          <?php
+    }
+    
+    /**
+     * 
+     * @return array
+     */
+    public function get_blank_snippet() {
+        $arr = [
+            'id' => '',
+            'title' => '',
+            'content' => '',
+        ];
+        
+        return $arr;
     }
     
     /**
