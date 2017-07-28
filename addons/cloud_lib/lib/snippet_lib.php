@@ -456,10 +456,13 @@ class orbisius_ctc_cloud_lib {
                     
                     if (empty($all_snippets)) {
                         $all_snippets = [];
-                        $all_snippets[] = $this->get_blank_snippet();
                     } else {
                         $no_items_css = 'app_hide'; 
                     }
+                    
+                    // We prepend a blan row which will be hidden if the ID is 0.
+                    // It will used when adding a new item. The row will be cloned.
+                    $all_snippets = array_merge( [ $this->get_blank_snippet() ], $all_snippets);
                     ?>
                     
                     <tr id="no_snippets_row" class="no_snippets_row no_snippets_alert <?php echo $no_items_css;?>">
