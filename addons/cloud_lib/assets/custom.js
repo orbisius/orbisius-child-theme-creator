@@ -475,7 +475,9 @@ jQuery(document).ready(function($) {
 		});
 	});
 	
-        $( function() {
-            $( "#tabs" ).tabs();
-          } );
+        // https://stackoverflow.com/questions/3641154/jquery-trapping-tab-select-event
+        $( '.orb_ctc_addon_cloud_lib_tabs' ).tabs();
+        $( '.orb_ctc_addon_cloud_lib_tabs' ).bind('tabsactivate',function(e, ui) {
+            console.log(ui.newTab);
+        });
 });

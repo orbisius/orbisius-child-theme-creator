@@ -351,7 +351,7 @@ class orbisius_ctc_cloud_lib {
         $url = admin_url( 'themes.php?page=orbisius_child_theme_creator_theme_editor_action' );
         $cur_tab_id = $this->get_current_tab_id();
         ?>
-        <div id="tabs">
+        <div id="orb_ctc_addon_cloud_lib_tabs" class="orb_ctc_addon_cloud_lib_tabs">
              <div class="nav-tab-wrapper"> 
                 <ul>
                     <?php foreach ( $this->tabs as $tab_rec ) : ?>
