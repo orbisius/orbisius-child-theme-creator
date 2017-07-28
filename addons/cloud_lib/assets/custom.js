@@ -404,36 +404,35 @@ jQuery(document).ready(function($) {
 	});
 	
 	function snippet_update(id, title, text) {
-	    $t = title;
+            var $row_to_update = $("tr[data-id='" + id + "']");
+            
+            if ($row_to_update.length == 0) {
+                $('#no_snippets_alert').hide();
+                $row_to_update = $('#manage_snippets_table tr:first').clone();
+            }
+            
+            $row_to_update.find('.snippet_title').html('Please, wait...');
+            $row_to_update.find('.snippet_content').val('');
             
             $.ajax({
                 url: ajaxurl,
                 data: {
-                        action: "cloud_update",
-                        "id": id,
-                        "title": title,
-                        "text": text
+                    action: "cloud_update",
+                    id : id,
+                    title : title,
+                    text : text
                 },
-                success: function (data) {
-                        //data	= $.parseJSON(data);
-
-                        if (data.status == '1') {
-                            alert(data.msg);
-
-                            $row_to_update	= $("tr[data-id='" + id + "']");
-                            if ($row_to_update.length) {
-                                $row_to_update.data('title', title );
-                                $row_to_update.data('content', text);
-                                $row_to_update.find('#td_title').html(title);
-                            }
-                            else {
-                            	$("#no_snippets_alert").hide();
-	                        	$('#manage_snippets_table').append('<tr data-id="' + data.data.id + '" data-title="' + title + '"  data-content="' 
-	                        		+ text + '"  ><td id="td_title">' + title + '</td><td><input class="button snippet_edit_view_btn" type="button" value="View / Edit"></td><td><input class="button snippet_delete_btn" type="button" value="Delete"></td></tr>');
-                           }
-                        } else {
-                            alert("Error: occurred");
-                        }
+                success: function (json) {
+                    $row_to_update.data('id', json.data.id);
+                    
+                    if (json.status) {
+                       $row_to_update.data('title', title );
+                       $row_to_update.data('content', text);
+                       $row_to_update.find('.snippet_title').html(title);
+                       $row_to_update.find('.snippet_content').val(text);
+                    } else {
+                        alert("Error: occurred" + json.msg);
+                    }
                 }
             });
         }

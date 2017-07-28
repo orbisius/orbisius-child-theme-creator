@@ -460,9 +460,14 @@ class orbisius_ctc_cloud_lib {
                             data-id="<?php echo esc_attr($rec['id']); ?>" 
                             data-title="<?php echo esc_attr($rec['title']); ?>" 
                             data-content="<?php echo esc_attr($rec['content']); ?>">
-                          <td id="td_title" class="title_row"><?php echo esc_attr($rec['title']); ?>
+                          <td id="td_title" class="title_cell">
+                              <div class="snippet_title">
+                                  <?php echo esc_attr($rec['title']); ?>
+                              </div>
                               <div>
-                                  <input type="text" id="snippet_content_<?php echo esc_attr($rec['id']);?>"
+                                  <input type="text"
+                                         id="snippet_content_<?php echo esc_attr($rec['id']);?>"
+                                         class="snippet_content"
                                          value="<?php 
                                         echo esc_attr($rec['content']); ?>"/>
                               </div>
