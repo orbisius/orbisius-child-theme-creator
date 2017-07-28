@@ -279,9 +279,10 @@ jQuery(document).ready(function($) {
 	 * 
 	 */
 	function delete_snippet(id) {
-            $("tr[data-id='" + id + "']").fadeOut(300, function() { $(this).remove(); });
+            $("tr[data-id='" + id + "']").remove();
+//            $("tr[data-id='" + id + "']").fadeOut(300, function() { $(this).remove(); });
             
-            if ($('#manage_snippets_table tr.snippet_row').length == 0) {
+            if ($('#manage_snippets_table tr.snippet_row').length - 1 <= 0) {
                 $('#no_snippets_row').show();
             } else {
                 $('#no_snippets_row').hide();

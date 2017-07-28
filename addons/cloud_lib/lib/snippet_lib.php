@@ -478,13 +478,10 @@ class orbisius_ctc_cloud_lib {
                               <div class="snippet_title">
                                   <?php echo esc_attr($rec['title']); ?>
                               </div>
-                              <div>
-                                  <input type="text"
-                                         id="snippet_content_<?php echo esc_attr($rec['id']);?>"
-                                         class="snippet_content"
-                                         value="<?php 
-                                        echo esc_attr($rec['content']); ?>"/>
-                              </div>
+                              <div id="snippet_content_<?php echo esc_attr($rec['id']);?>"
+                                    class="snippet_content"><?php 
+                                    echo esc_attr($rec['content']); 
+                              ?></div>
                           </td>
                           <td class="cmd_row">
                               <button class="button orb_ctc_copy_btn" 
