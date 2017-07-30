@@ -242,8 +242,9 @@ jQuery(document).ready(function($) {
 	 */
 	$('#manage_snippets_table').on("click", '.snippet_delete_btn', function() {
 		var id		= $(this).closest('tr').data('id');
-		var title	= $(this).closest('tr').data('title');
-		
+		//var title	= $(this).closest('tr').data('title');
+        var title   = $(this).closest('tr').children('td.title_cell').children('.snippet_title').text();
+        
 		$('.delete_snippet_title').text(title);
 		
 		$("#snippet_confirm_dialog_delete").dialog( {
@@ -311,9 +312,11 @@ jQuery(document).ready(function($) {
 	 */
 	$('.snippet_edit_btn').on("click", function() {
 		var id		= $(this).parents('tr').data('id');
-		var title	= $(this).parents('tr').data('title');
-		var content	= $(this).parents('tr').data('content');
-		
+		//var title	= $(this).parents('tr').data('title');
+        var title   = $(this).parents('tr').children('td.title_cell').children('.snippet_title').text();
+		//var content	= $(this).parents('tr').data('content');
+		var content   = $(this).parents('tr').children('td.title_cell').children('.snippet_content').text();
+
 		$('.edit_title').val(title);
 		$('.edit_content').val(content);
 		//$('.edit_snippet').show();
@@ -352,8 +355,10 @@ jQuery(document).ready(function($) {
 	 */
 	$('#manage_snippets_table').on("click", '.snippet_edit_view_btn', function() {
 		var id		= $(this).parents('tr').data('id');
-		var title	= $(this).parents('tr').data('title');
-		var content	= $(this).parents('tr').data('content');
+		//var title	= $(this).parents('tr').data('title');
+        var title   = $(this).parents('tr').children('td.title_cell').children('.snippet_title').text();
+		//var content	= $(this).parents('tr').data('content');
+        var content = $(this).parents('tr').children('td.title_cell').children('.snippet_content').text();
 		
 		$('.edit_title').val(title);
 		$('.edit_content').val(content);
@@ -421,8 +426,8 @@ jQuery(document).ready(function($) {
                 success: function (json) {
                     if (json.status) {
                        $row_to_update.data('id', json.data.id);
-                       $row_to_update.data('title', title );
-                       $row_to_update.data('content', text);
+                       //$row_to_update.data('title', title );
+                       //$row_to_update.data('content', text);
                        $row_to_update.find('.snippet_title').html(title);
                        $row_to_update.find('.snippet_content').html(text);
                        $row_to_update.find('.snippet_content').show();
@@ -442,8 +447,10 @@ jQuery(document).ready(function($) {
 	$('.snippet_view_btn').on("click", function() {
 		
 		//var id	= $(this).parents('tr').data('id');
-		var title	= $(this).parents('tr').data('title');
-		var content	= $(this).parents('tr').data('content');
+		//var title	= $(this).parents('tr').data('title');
+        var title   = $(this).parents('tr').children('td.title_cell').children('.snippet_title').text();
+		//var content	= $(this).parents('tr').data('content');
+        var content = $(this).parents('tr').children('td.title_cell').children('.snippet_content').text();
 		
 		$('.view_title').val(title);
 		$('.view_content').val(content);
