@@ -37,10 +37,11 @@ class orbisius_ctc_cloud_lib {
                 'id' => 'orb_ctc_ext_cloud_lib_manage',
                 'label' => __( 'Manage', 'orbisius-child-theme-creator' ),
             ],
-            [
-                'id' => 'orb_ctc_ext_cloud_lib_search',
-                'label' => __( 'Search', 'orbisius-child-theme-creator' ),
-            ],
+            // Turning off the search for now. The users will use manage tab instead.
+//            [
+//                'id' => 'orb_ctc_ext_cloud_lib_search',
+//                'label' => __( 'Search', 'orbisius-child-theme-creator' ),
+//            ],
             [
                 'id' => 'orb_ctc_ext_cloud_lib_add',
                 'label' => __( 'Add', 'orbisius-child-theme-creator' ),
