@@ -213,7 +213,17 @@ jQuery(document).ready(function($) {
 	 * 
 	 */
 	$('#new_snippet_btn').on("click", function() {
-		$('.new_snippet_wrapper').show("slow");
+            $('.new_snippet_wrapper').show("slow");
+	});
+        
+        // When title is entered and the Enter key is pressed submit the form.
+	$('#add_snippet_title').on("keypress", function(e) {
+            if (e.keyCode == 13 || e.which == 13) {
+                $('#snippet_save_btn').trigger('click');
+                return false;
+            } else {
+                return true;
+            }
 	});
 	
 	/**
@@ -223,7 +233,14 @@ jQuery(document).ready(function($) {
 	 * 		If text is missing, asks for confirmation to proceed
 	 * 
 	 */
-	$('#snippet_save_btn').on("click", function() {
+        
+	$('#orb_ctc_ext_cloud_lib_add_new_snippet_form').on("submit", function(e) {
+            e.preventDefault();
+            $('#snippet_save_btn').trigger('click');
+            return false;
+	});
+	
+	$('#snippet_save_btn').on("click", function(e) {
             var title	= $('#add_snippet_title').val().trim();
             var text	= $('#add_snippet_text').val().trim();
             snippet_update(0, title, text);
@@ -409,6 +426,9 @@ jQuery(document).ready(function($) {
 
             $('#manage_snippets_table').prepend($row_to_update);
 
+            var submit_btn = $('.new_snippet_wrapper').find(':submit');
+            submit_btn.hide();
+        
             $row_to_update.find('.snippet_title').html('Please, wait...');
             $row_to_update.find('.snippet_content').empty().hide();
 
@@ -422,7 +442,8 @@ jQuery(document).ready(function($) {
                 },
                 success: function (json) {
                     res_container.html(json.msg);
-                    
+                    submit_btn.show();
+
                     if (json.status) {
                        $row_to_update.data('id', json.data.id);
                        //$row_to_update.data('title', title );
@@ -430,12 +451,12 @@ jQuery(document).ready(function($) {
                        $row_to_update.find('.snippet_title').html(title);
                        $row_to_update.find('.snippet_content').html(text);
                        $row_to_update.find('.snippet_content').show();
-                       
+
                        setTimeout(function () {
                             res_container.empty();
                             $('.orb_ctc_ext_cloud_lib_add_new_snippet_form').trigger('reset');
                             $('.orb_ctc_ext_cloud_lib_add_new_snippet_form .add_snippet_text').focus();
-                       }, 3500);
+                       }, 2500);
                     } else {
                         
                     }
