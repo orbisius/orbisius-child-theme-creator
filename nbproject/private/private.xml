@@ -86,17 +86,17 @@
             <url>addons/cloud_lib/lib/snippet_lib.php</url>
             <bookmark id="28">
                 <name/>
-                <line>307</line>
+                <line>291</line>
                 <key/>
             </bookmark>
             <bookmark id="27">
                 <name/>
-                <line>307</line>
+                <line>291</line>
                 <key/>
             </bookmark>
             <bookmark id="26">
                 <name/>
-                <line>430</line>
+                <line>421</line>
                 <key/>
             </bookmark>
         </file>
@@ -115,12 +115,6 @@
             <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/orbisius-child-theme-creator.php</file>
             <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/readme.txt</file>
         </group>
-        <group>
-            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/addons/clipboard/init.php</file>
-            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/addons/cloud_lib/assets/custom.css</file>
-            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/addons/cloud_lib/assets/custom.js</file>
-            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/addons/init.php</file>
-            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/addons/cloud_lib/lib/snippet_lib.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
