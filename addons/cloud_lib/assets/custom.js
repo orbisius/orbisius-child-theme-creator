@@ -6,12 +6,12 @@ jQuery(document).ready(function($) {
         
     } );
     
-    $('#orb_ctc_ext_cloud_lib_account_log_out').on('click', function (e) {
+    $('.orb_ctc_ext_cloud_lib_account_log_out').on('click', function (e) {
         e.preventDefault();
         
-        var res_container = $('.orb_ctc_ext_cloud_lib_signup_wrapper').find('.result');
-        res_container.html('Please, wait');
         var params = {};
+        var res_container = $('.orb_ctc_ext_cloud_lib_signup_wrapper').find('.result');
+        res_container.html('Please, wait ...');
         
         $.ajax({
             type : 'post',
@@ -32,7 +32,7 @@ jQuery(document).ready(function($) {
         e.preventDefault();
         var params = $(this).serialize();
         
-        if ($('#orb_ctc_pass').val() != $('#orb_ctc_pass2').val() ) {
+        if ($('.orb_ctc_pass').val() != $('.orb_ctc_pass2').val() ) {
             alert('Error: Passwords do not match');
             return false;
         }
