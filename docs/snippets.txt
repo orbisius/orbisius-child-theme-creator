@@ -1,5 +1,8 @@
 snippets
 ===============================================================
+    $('.snippet_copy_btn').on('click', function (e) {
+        
+    } );
 
 .no-close .ui-dialog-titlebar-close {
     float: right;
