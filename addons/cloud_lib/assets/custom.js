@@ -396,6 +396,9 @@ jQuery(document).ready(function($) {
             id = parseInt(id);
             var $row_to_update = '';
             
+            var res_container = $('.new_snippet_wrapper').find('.result');
+            res_container.html('Please, wait ...');
+            
             if (id <= 0) {
                 $('#no_snippets_row').hide();
                 $row_to_update = $('#manage_snippets_table tr.snippet_row:first').clone();
@@ -418,6 +421,8 @@ jQuery(document).ready(function($) {
                     text : text
                 },
                 success: function (json) {
+                    res_container.html(json.msg);
+                    
                     if (json.status) {
                        $row_to_update.data('id', json.data.id);
                        //$row_to_update.data('title', title );
@@ -425,8 +430,14 @@ jQuery(document).ready(function($) {
                        $row_to_update.find('.snippet_title').html(title);
                        $row_to_update.find('.snippet_content').html(text);
                        $row_to_update.find('.snippet_content').show();
+                       
+                       setTimeout(function () {
+                            res_container.empty();
+                            $('.orb_ctc_ext_cloud_lib_add_new_snippet_form').trigger('reset');
+                            $('.orb_ctc_ext_cloud_lib_add_new_snippet_form .add_snippet_text').focus();
+                       }, 3500);
                     } else {
-                        alert("Error: " + json.msg);
+                        
                     }
                 }
             });

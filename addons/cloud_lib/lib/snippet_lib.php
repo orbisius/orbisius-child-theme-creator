@@ -415,16 +415,18 @@ class orbisius_ctc_cloud_lib {
     public function render_tab_content_orb_ctc_ext_cloud_lib_add() {
         ?>
         <!-- New Snippet --> 
-        <div id="orb_ctc_ext_cloud_lib_add" class="tabcontent">
-            <div class="new_snippet_wrapper">
-                <?php if ( 1 ) : ?>
-                    <textarea class="widefat" id="add_snippet_text" required=""></textarea>
+        <div id="orb_ctc_ext_cloud_lib_add" class="tabcontent orb_ctc_ext_cloud_lib_add">
+            <div id="new_snippet_wrapper" class="new_snippet_wrapper">
+                <form method="POST" id="orb_ctc_ext_cloud_lib_add_new_snippet_form" class="orb_ctc_ext_cloud_lib_add_new_snippet_form">
+                    <textarea id="add_snippet_text" class="widefat add_snippet_text" required=""></textarea>
                     <br />
                     <strong>Title</strong>
                     <input type="text" id="add_snippet_title" value="">
                     <br />
                     <input class="button button-primary" type="button" id="snippet_save_btn" value="Save"> 
-                 <?php endif; ?>
+                </form>
+                
+                <div class="result"></div>
             </div>
             <!-- /New Snippet -->
 
