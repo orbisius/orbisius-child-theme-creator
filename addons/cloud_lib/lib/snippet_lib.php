@@ -75,6 +75,14 @@ class orbisius_ctc_cloud_lib {
         wp_enqueue_script( 'jquery-ui-autocomplete' );
         wp_enqueue_script('jquery-ui-tabs');
         
+        $wp_scripts = wp_scripts();
+        wp_enqueue_style('orbisius_ctc_cloud_lib_jquery_ui',
+            '//ajax.googleapis.com/ajax/libs/jqueryui/' . $wp_scripts->registered['jquery-ui-core']->ver . '/themes/smoothness/jquery-ui.min.css',
+            false,
+            '1.0',
+            false
+        );
+        
         wp_register_script( 'orbisius_ctc_cloud_lib', plugins_url("/addons/cloud_lib/assets/custom.js", ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE), array('jquery', ),
             filemtime( plugin_dir_path( ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE ) . "/addons/cloud_lib/assets/custom.js" ), true);
         wp_enqueue_script( 'orbisius_ctc_cloud_lib' );
@@ -390,7 +398,7 @@ class orbisius_ctc_cloud_lib {
     public function render_tab_content_orb_ctc_ext_cloud_lib_search() {
         ?>
         <!-- Search Snippets -->
-       <div id="orb_ctc_ext_cloud_lib_search" class="tabcontent">
+       <div id="orb_ctc_ext_cloud_lib_search" class="tabcontent orb_ctc_ext_cloud_lib_search">
         <span class="descr">Start typing the title of your snippet to see suggestions</span>
         <br />
         <input class="selector" id="search_text"></input>
@@ -502,13 +510,12 @@ class orbisius_ctc_cloud_lib {
             </div>
 
             <!-- Edit snippet window -->
-            <div id="edit_snippet">
-                   <h3>Edit Snippet</h3>
-                   <input class="edit_title">
-                   <br />
-                   <textarea class="edit_content"></textarea>
-                   <br />
-                   <br />
+            <div id="edit_snippet" class="edit_snippet" title="Edit Snippet">
+                <input id="edit_title" class="edit_title" />
+                <br />
+                <textarea id="edit_content" class="edit_content"></textarea>
+                <br />
+                <br />
             </div>
              <!-- /Edit snippet window -->
 
