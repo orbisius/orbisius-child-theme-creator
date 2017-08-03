@@ -475,9 +475,7 @@ class orbisius_ctc_cloud_lib {
                        <tr  id="snippet_<?php echo esc_attr($rec['id']); ?>"
                             class="snippet_row snippet_row<?php echo esc_attr($rec['id']); ?> 
                                 <?php echo empty($rec['id']) ? 'app_hide' :''; ?>"
-                            data-id="<?php echo esc_attr($rec['id']); ?>" 
-                            data-title="<?php echo esc_attr($rec['title']); ?>" 
-                            data-content="<?php echo esc_attr($rec['content']); ?>">
+                            data-id="<?php echo esc_attr($rec['id']); ?>">
                           <td id="td_title" class="title_cell">
                               <div class="snippet_title">
                                   <?php echo esc_attr($rec['title']); ?>
