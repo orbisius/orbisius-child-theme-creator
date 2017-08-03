@@ -225,7 +225,18 @@ jQuery(document).ready(function($) {
                 return true;
             }
 	});
-	
+
+        // When CTRL + Enter is pressed submit the add snippet form
+        // https://stackoverflow.com/questions/1684196/ctrlenter-jquery-in-textarea
+	$('#add_snippet_text').on("keydown", function(e) {
+            if (e.ctrlKey && (e.keyCode == 13 || e.which == 13)) {
+                $('#snippet_save_btn').trigger('click');
+                return false;
+            } else {
+                return true;
+            }
+	});
+
 	/**
 	 * Save a new snippet button
 	 * 
