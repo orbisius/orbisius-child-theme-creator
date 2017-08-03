@@ -620,7 +620,7 @@ class orbisius_ctc_cloud_lib {
         $api_key = $user_api->api_key();
         
         ?>
-         <div id="orb_ctc_ext_cloud_lib_account" class="tabcontent">
+         <div id="orb_ctc_ext_cloud_lib_account" class="tabcontent orb_ctc_ext_cloud_lib_account">
             <div class="orb_ctc_ext_cloud_lib_account_wrapper">
                 <!--<h3>Account</h3>-->
                 <div class="">
@@ -629,6 +629,8 @@ class orbisius_ctc_cloud_lib {
                 <div class="">
                     <a href='#' id='orb_ctc_ext_cloud_lib_account_log_out' 
                        class="button orb_ctc_ext_cloud_lib_account_log_out"> Log out</a>
+                </div>
+                <div class="result">
                 </div>
             </div> <!-- /orb_ctc_ext_cloud_lib_account_wrapper -->  
         </div>

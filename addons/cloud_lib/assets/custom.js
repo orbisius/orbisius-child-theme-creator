@@ -10,7 +10,7 @@ jQuery(document).ready(function($) {
         e.preventDefault();
         
         var params = {};
-        var res_container = $('.orb_ctc_ext_cloud_lib_signup_wrapper').find('.result');
+        var res_container = $('.orb_ctc_ext_cloud_lib_account').find('.result');
         res_container.html('Please, wait ...');
         
         $.ajax({
@@ -65,7 +65,7 @@ jQuery(document).ready(function($) {
         var params = $(this).serialize();
         
         var submit_btn = $(this).find(':submit');
-        var res_container = $('.orb_ctc_ext_cloud_lib_signup_wrapper').find('.result');
+        var res_container = $('.orb_ctc_ext_cloud_lib_login_wrapper').find('.result');
         res_container.html('Please, wait');
         submit_btn.hide();
         
