@@ -55,6 +55,14 @@ span.descr {
     margin-top: -25px;
 }
 
+.orb_cloud_lib_wrapper .half_text {
+    width: 50%;
+}
+
+.orb_cloud_lib_wrapper .text_75p {
+    width: 75%;
+}
+
 .orb_cloud_lib_wrapper {
     margin: 1em 0;
 }
