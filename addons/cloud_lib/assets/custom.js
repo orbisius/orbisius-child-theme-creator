@@ -15,7 +15,7 @@ jQuery(document).ready(function($) {
         
         $.ajax({
             type : 'post',
-            url: ajaxurl + '?action=orb_ctc_log_out',
+            url: ajaxurl + '?action=orb_ctc_addon_cloud_lib_log_out',
             data: params,
             success: function(json) {
                 if (json.status) {
@@ -44,7 +44,7 @@ jQuery(document).ready(function($) {
         
         $.ajax({
             type : 'post',
-            url: ajaxurl + '?action=orb_ctc_signup',
+            url: ajaxurl + '?action=orb_ctc_addon_cloud_lib_signup',
             data: params,
             success: function(json) {
                 if (json.status) {
@@ -71,7 +71,7 @@ jQuery(document).ready(function($) {
         
         $.ajax({
             type : 'post',
-            url: ajaxurl + '?action=orb_ctc_login',
+            url: ajaxurl + '?action=orb_ctc_addon_cloud_lib_login',
             data: params,
             success: function(json) {
                 if (json.status) {
@@ -108,7 +108,7 @@ jQuery(document).ready(function($) {
                     type : 'post',
                     url: ajaxurl,
                     data: {
-                        action: "cloud_autocomplete",
+                        action: "orb_ctc_addon_cloud_lib_autocomplete",
                         term: request.term,
                     },
                     success: function(json) {
@@ -130,34 +130,28 @@ jQuery(document).ready(function($) {
 	 * Search for a snippet button
 	 */
 	$('#snippet_search_btn').on("click", function() {
-		var search = $("#search_text").val().trim();
-	    
-		if (search !== '') {
-		    search_snippets(search);
-		}
-		else
-        	{
-		    $("#search_text").focus();
-        	}
-		
+            var search = $("#search_text").val().trim();
+
+            if (search !== '') {
+                search_snippets(search);
+            } else {
+                $("#search_text").focus();
+            }
 	});
-	
+
 	/**
 	 * Press enter to search for a snippet
 	 */
 	$('#search_text').keypress(function(e) {
-		if(e.keyCode == 13)
-		{
+            if (e.keyCode == 13 || e.which == 13) {
 		// e.preventDefault();
-		//  sendSelected(this.value);
-		//  $(this).autocomplete('close');
+		// sendSelected(this.value);
+		// $(this).autocomplete('close');
 		var search = $("#search_text").val().trim();
 	    
 		if (search !== '') {
 		    search_snippets(search);
-		}
-		else
-        	{
+		} else {
     		    $("#search_text").focus();
         	}
 	    }
@@ -173,18 +167,17 @@ jQuery(document).ready(function($) {
 	 */
 	//$('#snippet_search_btn').on("click", function() {
 	$( "#search_text" ).on( "autocompleteselect", function( event, ui ) {
-		/**
-		 * Holds the value of the input field
-		 */
-		//var search = $("#search_text").val().trim();
-		var search	= ui.item.label;
-		if (search !== '') {
-		    search_snippets(search);
-		}
-		else
-		{
-		    $("#search_text").focus();
-		}
+            /**
+             * Holds the value of the input field
+             */
+            //var search = $("#search_text").val().trim();
+            var search	= ui.item.label;
+            
+            if (search !== '') {
+                search_snippets(search);
+            } else {
+                $("#search_text").focus();
+            }
 	});
 	
 	function search_snippets (search) {
@@ -193,7 +186,7 @@ jQuery(document).ready(function($) {
 		type : "post",
 		url: ajaxurl,
 		data: {
-			action: "cloud_search",
+			action: "orb_ctc_addon_cloud_lib_search",
 			"search":search
 		},
 		//success: function (data) {
@@ -281,7 +274,7 @@ jQuery(document).ready(function($) {
 	 */
 	function delete_snippet(id) {
             $("tr[data-id='" + id + "']").remove();
-            
+
             if ($('#manage_snippets_table tr.snippet_row').length <= 0) {
                 $('#no_snippets_row').show();
             } else {
@@ -291,12 +284,13 @@ jQuery(document).ready(function($) {
             $.ajax({
 		url: ajaxurl,
 		data: {
-                    action: "cloud_delete",
-                    id: id
+                    id: id,
+                    action: "orb_ctc_addon_cloud_lib_delete"
 		},
 		success: function (json) {
                     if (json.status) {
-                        
+                        // the row is deleted anyways so nothing to do.
+                        // just have some coffee.
                     } else {
                         alert(json.msg);
                     }
