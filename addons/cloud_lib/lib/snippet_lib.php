@@ -421,7 +421,7 @@ class orbisius_ctc_cloud_lib {
                     <textarea id="add_snippet_text" class="widefat add_snippet_text" required="" placeholder="Snippet content"></textarea>
                     <br />
                     <strong>Title</strong>
-                    <input type="text" id="add_snippet_title" class="add_snippet_title text_75p" value="" />
+                    <input type="text" id="add_snippet_title" class="add_snippet_title text_75p" value="" placeholder="Title/description" />
                     <br />
                     <input type="submit" id="snippet_save_btn" class="button button-primary snippet_save_btn" value="Save" /> 
                 </form>
