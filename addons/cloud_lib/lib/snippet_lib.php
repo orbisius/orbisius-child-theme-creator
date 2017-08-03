@@ -451,7 +451,7 @@ class orbisius_ctc_cloud_lib {
          <div class="manage_snippets">
             <!--<h3>My Snippets</h3>-->
             <div class="manage_snippets_table_wrapper">
-                <table class="widefat" id="manage_snippets_table">
+                <table id="manage_snippets_table" class="widefat manage_snippets_table">
                     <?php
                     $no_items_css = '';
                     
