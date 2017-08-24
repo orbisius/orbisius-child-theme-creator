@@ -1,5 +1,23 @@
 snippets
 ===============================================================
+
+//        $('.orb_ctc_addon_cloud_lib_tabs .tab_link').on('click', function(e) {
+//            e.preventDefault();
+//        });
+        
+        $(".orb_ctc_addon_cloud_lib_tabs ul li").delegate('a', 'click', function(e){
+            e.preventDefault();
+            return false;
+        });
+		
+		                        <li class="nav-tab <?php echo $extra_tab_css;?>">
+                            <a class="tab_link" 
+                               href="<?php echo '#' . $tab_rec['id']; ?>"><?php 
+                                    echo $tab_rec['label'];?></a></li>
+
+									
+									
+
     $('.snippet_copy_btn').on('click', function (e) {
         
     } );

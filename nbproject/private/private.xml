@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="28">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="30">
         <file>
             <url>assets/main.js</url>
             <bookmark id="19">
@@ -83,20 +83,33 @@
             </bookmark>
         </file>
         <file>
+            <url>addons/cloud_lib/assets/custom.js</url>
+            <bookmark id="29">
+                <name/>
+                <line>275</line>
+                <key/>
+            </bookmark>
+            <bookmark id="30">
+                <name/>
+                <line>371</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
             <url>addons/cloud_lib/lib/snippet_lib.php</url>
             <bookmark id="28">
                 <name/>
-                <line>291</line>
+                <line>300</line>
                 <key/>
             </bookmark>
             <bookmark id="27">
                 <name/>
-                <line>291</line>
+                <line>300</line>
                 <key/>
             </bookmark>
             <bookmark id="26">
                 <name/>
-                <line>421</line>
+                <line>430</line>
                 <key/>
             </bookmark>
         </file>
@@ -115,6 +128,10 @@
             <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/orbisius-child-theme-creator.php</file>
             <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/readme.txt</file>
         </group>
-        <group/>
+        <group>
+            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/addons/cloud_lib/assets/custom.js</file>
+            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/addons/cloud_lib/assets/custom.css</file>
+            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/addons/cloud_lib/lib/snippet_lib.php</file>
+        </group>
     </open-files>
 </project-private>
