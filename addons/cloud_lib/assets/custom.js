@@ -2,41 +2,6 @@
  * Used for the Snippet Library
  */
 jQuery(document).ready(function($) {    
-    var orb_ctc_cloud_lib_edit_snippet_dlg = $("#edit_snippet").dialog( {
-        dialogClass: 'edit_snippet',
-        modal: true,
-        autoOpen: false,
-        show : false,
-        width : 'auto',
-        resizable: true,
-        minWidth: 250,
-        minHeight: 250,
-        position: { my: "center", at: "center", of: window },
-        buttons: [
-            {
-                text: 'Save',
-                class: 'button-primary',
-                click: function() {
-                    $(this).dialog("close");
-
-                    var id = 0;
-                    var new_title = $('.edit_title').val().trim();
-                    var new_content = $('.edit_content').val().trim();
-                    snippet_update(id, new_title, new_content);
-                }
-            },
-            {
-                text: 'Close',
-                class: 'button',
-                click: function() {
-                    $(this).dialog('close');
-                }
-            }
-        ],
-        close: function(event, ui) {
-        }
-    });
-    
     $('.orb_ctc_ext_cloud_lib_account_log_out').on('click', function (e) {
         e.preventDefault();
         
@@ -379,52 +344,57 @@ jQuery(document).ready(function($) {
 	 * 
 	 */
 	$('#manage_snippets_table').on("click", '.snippet_edit_view_btn', function() {
-		var id		= $(this).parents('tr').data('id');
+            var id		= $(this).parents('tr').data('id');
 		//var title	= $(this).parents('tr').data('title');
-        var title   = $(this).parents('tr').children('td.title_cell').children('.snippet_title').text();
-		//var content	= $(this).parents('tr').data('content');
-        var content = $(this).parents('tr').children('td.title_cell').children('.snippet_content').text();
-		
-		$('.edit_title').val(title);
-		$('.edit_content').val(content);
-		//$('.edit_snippet').show();
-    	
-		$("#edit_snippet").dialog( {
-                    dialogClass: 'edit_snippet',
-                    modal: true,
-                    resizable: false,
-                    draggable: false,
-                    buttons: [/*{
-                                    text: "Copy",
-                                    //"class": 'button',
-                                    click: function() {
-                                    }
-                            },*/
-                            {
-                                    text: "Update",
-                                    "class": 'button-primary',
-                                    click: function() {
-                                            var new_title = $('.edit_title').val();
-                                            var new_content = $('.edit_content').val();
-                                            $(this).dialog("close"); 
-                                            snippet_update(id, new_title, new_content);
-                                    }
-                            },
-                            {
-                                    text: "Close",
-                                    "class": 'button',
-                                    click: function() { 
-                                            $(this).dialog("close");
-                                    }
-                            }],
-                    close: function(event, ui) {
-                         $('.snippet_edit_view_btn').blur();
+            var title   = $(this).parents('tr').children('td.title_cell').children('.snippet_title').html().trim();
+            //var content	= $(this).parents('tr').data('content');
+            var content = $(this).parents('tr').children('td.title_cell').children('.snippet_content').html().trim();
+
+            $('.edit_title').val(title);
+            $('.edit_content').val(content);
+            //$('.edit_snippet').show();
+
+            var orb_ctc_cloud_lib_edit_snippet_dlg = $("#edit_snippet").dialog( {
+                dialogClass: 'edit_snippet',
+                modal: true,
+                autoOpen: true,
+//                autoOpen: false,
+                show : false,
+                width : 'auto',
+                resizable: true,
+                minWidth: 300,
+                minHeight: 300,
+                position: { my: "center", at: "center", of: window },
+                buttons: [
+                    {
+                        text: 'Save',
+                        class: 'button-primary',
+                        click: function() {
+                            $(this).dialog("close");
+
+//                            var id = 0;
+                            var new_title = $('.edit_title').val().trim();
+                            var new_content = $('.edit_content').val().trim();
+                            snippet_update(id, new_title, new_content);
+                        }
+                    },
+                    {
+                        text: 'Close',
+                        class: 'button',
+                        click: function() {
+                            $(this).dialog('close');
+                        }
                     }
-		});
+                ],
+                close: function(event, ui) {
+                    $('.snippet_edit_view_btn').blur(); //???
+                }
+            });
 	});
 	
 	function snippet_update(id, title, text) {
             id = parseInt(id);
+            id = id || 0;
             var $row_to_update = '';
             
             var res_container = $('.new_snippet_wrapper').find('.result');

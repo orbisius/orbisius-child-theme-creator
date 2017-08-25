@@ -1,6 +1,39 @@
 snippets
 ===============================================================
 
+$("#edit_snippet").dialog( {
+                dialogClass: 'edit_snippet',
+                modal: true,
+                resizable: false,
+                draggable: false,
+                buttons: [/*{
+                                text: "Copy",
+                                //"class": 'button',
+                                click: function() {
+                                }
+                        },*/
+                        {
+                                text: "Update",
+                                "class": 'button-primary',
+                                click: function() {
+                                    var new_title = $('.edit_title').val();
+                                    var new_content = $('.edit_content').val();
+                                    $(this).dialog("close"); 
+                                    snippet_update(id, new_title, new_content);
+                                }
+                        },
+                        {
+                                text: "Close",
+                                "class": 'button',
+                                click: function() { 
+                                        $(this).dialog("close");
+                                }
+                        }],
+                close: function(event, ui) {
+                     $('.snippet_edit_view_btn').blur();
+                }
+            });
+
 button.button.ui-button {
     /*margin-left: 5px;*/
 }
