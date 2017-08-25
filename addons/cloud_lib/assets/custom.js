@@ -7,26 +7,29 @@ jQuery(document).ready(function($) {
         modal: true,
         autoOpen: false,
         show : false,
+        width : 'auto',
         resizable: true,
         minWidth: 250,
         minHeight: 250,
         position: { my: "center", at: "center", of: window },
         buttons: [
             {
-                text: "Save",
-                "class": 'button-primary',
+                text: 'Save',
+                class: 'button-primary',
                 click: function() {
-                    var newTitle = $('.edit_title').val();
-                    var newContent = $('.edit_content').val();
-                    $(this).dialog("close"); 
-                    snippet_update(id, newTitle, newContent);
+                    $(this).dialog("close");
+
+                    var id = 0;
+                    var new_title = $('.edit_title').val().trim();
+                    var new_content = $('.edit_content').val().trim();
+                    snippet_update(id, new_title, new_content);
                 }
             },
             {
-                text: "Close",
-                "class": 'button',
-                click: function() { 
-                    $(this).dialog("close");
+                text: 'Close',
+                class: 'button',
+                click: function() {
+                    $(this).dialog('close');
                 }
             }
         ],
@@ -361,8 +364,8 @@ jQuery(document).ready(function($) {
 	 * 
 	 */
 	$('.snippet_edit_view_btn').on("click", function() {
-            var parent_row = $(this).closest('tr');
             var id = $(parent_row).data('id') || 0;
+            var parent_row = $(this).closest('tr');
             var title   = $(parent_row).find('.snippet_title').html().trim();
             var content = $(parent_row).find('.snippet_content').html().trim();
 
@@ -401,10 +404,10 @@ jQuery(document).ready(function($) {
                                     text: "Update",
                                     "class": 'button-primary',
                                     click: function() {
-                                            var newTitle = $('.edit_title').val();
-                                            var newContent = $('.edit_content').val();
+                                            var new_title = $('.edit_title').val();
+                                            var new_content = $('.edit_content').val();
                                             $(this).dialog("close"); 
-                                            snippet_update(id, newTitle, newContent);
+                                            snippet_update(id, new_title, new_content);
                                     }
                             },
                             {

@@ -1,6 +1,11 @@
 snippets
 ===============================================================
 
+button.button.ui-button {
+    /*margin-left: 5px;*/
+}
+
+
 //        $('.orb_ctc_addon_cloud_lib_tabs .tab_link').on('click', function(e) {
 //            e.preventDefault();
 //        });
