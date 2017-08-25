@@ -360,7 +360,7 @@ jQuery(document).ready(function($) {
 	 * Displays Edit snippet window
 	 * 
 	 */
-	$('.snippet_edit_btn').on("click", function() {
+	$('.snippet_edit_view_btn').on("click", function() {
             var parent_row = $(this).closest('tr');
             var id = $(parent_row).data('id') || 0;
             var title   = $(parent_row).find('.snippet_title').html().trim();
@@ -368,7 +368,7 @@ jQuery(document).ready(function($) {
 
             $('.edit_title').val(title);
             $('.edit_content').val(content);
-            orb_ctc_cloud_lib_edit_snippet_dlg.show();
+            orb_ctc_cloud_lib_edit_snippet_dlg.dialog('open');
 	});
 	
 	/**
