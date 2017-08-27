@@ -523,7 +523,11 @@ jQuery(document).ready(function($) {
         $( '.orb_ctc_addon_cloud_lib_tabs' ).tabs({
             activate : function(event, ui) {
                 if (ui.newPanel.selector == '#orb_ctc_ext_cloud_lib_add') {
-                    $('#add_snippet_text').focus();
+                    if ($('#add_snippet_title').val().trim() == '') {
+                        $('#add_snippet_title').focus();
+                    } else {
+                        $('#add_snippet_text').focus();
+                    }
                 } else if (ui.newPanel.selector == '#orb_ctc_ext_cloud_lib_signup') {
                     if ($('#orb_ctc_email').val() == '') {
                        $('#orb_ctc_email').focus();
