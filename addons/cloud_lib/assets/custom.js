@@ -200,7 +200,7 @@ jQuery(document).ready(function($) {
                     }
 		}
 	});
-	}
+    }
 	
 	/**
 	 * Add a new snippet button
@@ -224,7 +224,7 @@ jQuery(document).ready(function($) {
 
         // When CTRL + Enter is pressed submit the add snippet form
         // https://stackoverflow.com/questions/1684196/ctrlenter-jquery-in-textarea
-	$('#add_snippet_text').on("keydown", function(e) {
+	$(document).on('keydown', '#add_snippet_text', function(e) {
             if (e.ctrlKey && (e.keyCode == 13 || e.which == 13)) {
                 $('#snippet_save_btn').trigger('click');
                 return false;
@@ -240,10 +240,9 @@ jQuery(document).ready(function($) {
 	 * 		If text is missing, asks for confirmation to proceed
 	 * 
 	 */
-        
-	$('#orb_ctc_ext_cloud_lib_add_new_snippet_form').on("submit", function(e) {
+	$('.orb_ctc_ext_cloud_lib_add_new_snippet_form').on("submit", function(e) {
             e.preventDefault();
-            $('#snippet_save_btn').trigger('click');
+            //$('#snippet_save_btn').trigger('click');
             return false;
 	});
 	
@@ -258,38 +257,38 @@ jQuery(document).ready(function($) {
 	 * 
 	 */
 	$('#manage_snippets_table').on("click", '.snippet_delete_btn', function() {
-		var id		= $(this).closest('tr').data('id');
-		//var title	= $(this).closest('tr').data('title');
-        var title   = $(this).closest('tr').children('td.title_cell').children('.snippet_title').text();
+            var id		= $(this).closest('tr').data('id');
+            //var title	= $(this).closest('tr').data('title');
+            var title   = $(this).closest('tr').children('td.title_cell').children('.snippet_title').text();
         
-		$('.delete_snippet_title').text(title);
-		
-		$("#snippet_confirm_dialog_delete").dialog( {
-        		dialogClass: 'snippet_confirm_dialog_delete',
-        		modal: true,
-        		resizable: false,
-        		draggable: false,
-        		buttons: [{
-        				text: "Yes",
-        				"class": 'button-primary',
-        				click: function() {
-        					$(this).dialog("close"); 
-        					delete_snippet(id);
-        				}
-        			},
-        			{
-        				text: "No",
-        				"class": 'button',
-        				click: function() { 
-                                            $(this).dialog("close");
-        				}
-        			}],
-        		close: function(event, ui) {
+            $('.delete_snippet_title').text(title);
+
+            $("#snippet_confirm_dialog_delete").dialog( {
+                dialogClass: 'snippet_confirm_dialog_delete',
+                modal: true,
+                resizable: false,
+                draggable: false,
+                buttons: [{
+                                text: "Yes",
+                                "class": 'button-primary',
+                                click: function() {
+                                        $(this).dialog("close"); 
+                                        delete_snippet(id);
+                                }
+                        },
+                        {
+                                text: "No",
+                                "class": 'button',
+                                click: function() { 
+                                    $(this).dialog("close");
+                                }
+                        }],
+                close: function(event, ui) {
                     $('.snippet_delete_btn').blur();
-        		}
-		});
+                }
+            });
 	});
-	
+
 	/**
 	 * Delete snippet by id
 	 * 
@@ -297,9 +296,9 @@ jQuery(document).ready(function($) {
 	 * 
 	 */
 	function delete_snippet(id) {
-            $("tr[data-id='" + id + "']").remove();
+            $(".snippet_row_" + id).remove();
 
-            if ($('#manage_snippets_table .snippet_row').length <= 0) {
+            if ($('#manage_snippets_table .snippet_row:visible').length <= 0) {
                 $('#no_snippets_row').show();
             } else {
                 $('#no_snippets_row').hide();
@@ -350,7 +349,7 @@ jQuery(document).ready(function($) {
                 position: { my: "center", at: "center", of: window },
                 buttons: [
                     {
-                        text: 'Save',
+                        text: 'Save Changes',
                         class: 'button-primary',
                         click: function() {
                             $(this).dialog("close");
@@ -380,14 +379,15 @@ jQuery(document).ready(function($) {
             id = id || 0;
             var $row_to_update = '';
             
+            // in edit for show msg
             var res_container = $('.new_snippet_wrapper').find('.result');
             res_container.html('Please, wait ...');
-            
+
             if (id <= 0) {
                 $('#no_snippets_row').hide();
                 $row_to_update = $('#manage_snippets_table .snippet_row:first').clone();
                 $row_to_update.show();
-                
+
                 // newest snippets go first.
                 $('#manage_snippets_table').prepend($row_to_update);
             } else {
@@ -396,7 +396,7 @@ jQuery(document).ready(function($) {
 
             var submit_btn = $('.new_snippet_wrapper').find(':submit');
             submit_btn.hide();
-        
+
             $row_to_update.find('.snippet_title').html('Please, wait...');
             $row_to_update.find('.snippet_content').empty().hide();
 
