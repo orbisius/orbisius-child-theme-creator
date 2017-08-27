@@ -656,7 +656,7 @@ class orbisius_ctc_cloud_lib {
     public function render_tab_content_orb_ctc_ext_cloud_lib_account() {
         $user_api = orbisius_child_theme_creator_user::get_instance();
         $email = $user_api->email();
-        $api_key = $user_api->api_key();
+        //$api_key = $user_api->api_key();
         $plan_data = $user_api->plan();
         
         ?>
@@ -667,9 +667,11 @@ class orbisius_ctc_cloud_lib {
                     Orbisius Email: <?php echo $email; ?>
                 </div>
                 
+                <?php if (!empty($api_key)) : ?>
                 <div class="api_key_wrapper">
                     Orbisius API Key: <?php echo $api_key; ?>
                 </div>
+                <?php endif; ?>
                 
                 <?php if (!empty($plan_data)) : ?>
                 <div class="api_orb_plan">
