@@ -374,6 +374,11 @@ jQuery(document).ready(function($) {
             var title = title_el.html().trim();
             var content_el   = $(row).find('.snippet_content');
             var content = content_el.html().trim();
+            
+            // decode entities: browsers will encode '&' and other chars. We want the chars unencoded i.e. not as &amp;
+            // https://stackoverflow.com/questions/1147359/how-to-decode-html-entities-using-jquery
+            title = $("<textarea/>").html(title).val();
+            content = $("<textarea/>").html(content).val();
 
             $('.edit_id').val(id);
             $('.edit_title').val(title);
