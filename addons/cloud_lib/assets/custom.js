@@ -247,10 +247,20 @@ jQuery(document).ready(function($) {
             }
 	});
 
+        // just enter and no control key -> jump to content
+        $(document).on('keydown', '.edit_title,.edit_content', function(e) {
+            if (!e.ctrlKey && ( e.keyCode == 13 || e.which == 13)) {
+                $('.edit_content').focus();
+                return false;
+            } else {
+                return true;
+            }
+        });
+        
         // When CTRL + Enter is pressed submit the add snippet form
         // https://stackoverflow.com/questions/1684196/ctrlenter-jquery-in-textarea
         // https://stackoverflow.com/questions/7445151/jquery-document-keydown-issues
-	$(document).on('keydown', '.edit_content', function(e) {
+	$(document).on('keydown', '.edit_title,.edit_content', function(e) {
             if (e.ctrlKey && (e.keyCode == 13 || e.which == 13)) {
                 e.preventDefault();
                 $("#edit_snippet").dialog('close');
