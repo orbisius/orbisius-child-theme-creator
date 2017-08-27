@@ -513,7 +513,7 @@ class orbisius_ctc_cloud_lib {
 
                     <?php foreach( $all_snippets as $rec) : ?>
                        <tr id="snippet_<?php echo esc_attr($rec['id']); ?>"
-                            class="snippet_row snippet_row<?php echo esc_attr($rec['id']); ?> 
+                            class="snippet_row snippet_row_<?php echo esc_attr($rec['id']); ?> 
                                 <?php echo empty($rec['id']) ? 'app_hide' :''; ?>"
                             data-id="<?php echo esc_attr($rec['id']); ?>">
                           <td id="td_title" class="title_cell">

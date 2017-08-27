@@ -299,7 +299,7 @@ jQuery(document).ready(function($) {
 	function delete_snippet(id) {
             $("tr[data-id='" + id + "']").remove();
 
-            if ($('#manage_snippets_table tr.snippet_row').length <= 0) {
+            if ($('#manage_snippets_table .snippet_row').length <= 0) {
                 $('#no_snippets_row').show();
             } else {
                 $('#no_snippets_row').hide();
@@ -321,23 +321,6 @@ jQuery(document).ready(function($) {
 		}
             });
 	}
-	
-	/**
-	 * Edit snippet button
-	 * 
-	 * Displays Edit snippet window
-	 * 
-	 */
-	$('.snippet_edit_view_btn').on("click", function() {
-            var id = $(parent_row).data('id') || 0;
-            var parent_row = $(this).closest('tr');
-            var title   = $(parent_row).find('.snippet_title').html().trim();
-            var content = $(parent_row).find('.snippet_content').html().trim();
-
-            $('.edit_title').val(title);
-            $('.edit_content').val(content);
-            orb_ctc_cloud_lib_edit_snippet_dlg.dialog('open');
-	});
 	
 	/**
 	 * Edit / view window combined
@@ -402,13 +385,14 @@ jQuery(document).ready(function($) {
             
             if (id <= 0) {
                 $('#no_snippets_row').hide();
-                $row_to_update = $('#manage_snippets_table tr.snippet_row:first').clone();
+                $row_to_update = $('#manage_snippets_table .snippet_row:first').clone();
                 $row_to_update.show();
+                
+                // newest snippets go first.
+                $('#manage_snippets_table').prepend($row_to_update);
             } else {
-                $row_to_update = $("tr[data-id='" + id + "']");
+                $row_to_update = $('.snippet_row_' + id);
             }
-
-            $('#manage_snippets_table').prepend($row_to_update);
 
             var submit_btn = $('.new_snippet_wrapper').find(':submit');
             submit_btn.hide();

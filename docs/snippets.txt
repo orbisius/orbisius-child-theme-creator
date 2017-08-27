@@ -1,6 +1,23 @@
 snippets
 ===============================================================
 
+	/**
+	 * Edit snippet button
+	 * 
+	 * Displays Edit snippet window
+	 * 
+	 */
+	$('.snippet_edit_view_btn').on("click", function() {
+            var id = $(parent_row).data('id') || 0;
+            var parent_row = $(this).closest('tr');
+            var title   = $(parent_row).find('.snippet_title').html().trim();
+            var content = $(parent_row).find('.snippet_content').html().trim();
+
+            $('.edit_title').val(title);
+            $('.edit_content').val(content);
+            orb_ctc_cloud_lib_edit_snippet_dlg.dialog('open');
+	});
+
 $("#edit_snippet").dialog( {
                 dialogClass: 'edit_snippet',
                 modal: true,
