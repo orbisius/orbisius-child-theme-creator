@@ -198,3 +198,11 @@ a.pro_Add_On {
     width: 45%;
     text-align: right;
 }
+
+/*https://css-tricks.com/snippets/css/truncate-string-with-ellipsis/*/
+.manage_snippets_table_wrapper .truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

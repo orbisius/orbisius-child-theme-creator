@@ -517,11 +517,11 @@ class orbisius_ctc_cloud_lib {
                                 <?php echo empty($rec['id']) ? 'app_hide' :''; ?>"
                             data-id="<?php echo esc_attr($rec['id']); ?>">
                           <td id="td_title" class="title_cell">
-                              <div class="snippet_title">
+                              <div class="snippet_title truncate">
                                   <?php echo esc_attr($rec['title']); ?>
                               </div>
                               <div id="snippet_content_<?php echo esc_attr($rec['id']);?>"
-                                    class="snippet_content snippet_content_<?php echo esc_attr($rec['id']);?>"><?php 
+                                    class="truncate snippet_content snippet_content_<?php echo esc_attr($rec['id']);?>"><?php 
                                     echo esc_attr($rec['content']); 
                               ?></div>
                           </td>
