@@ -455,7 +455,7 @@ class orbisius_ctc_cloud_lib {
         <div id="orb_ctc_ext_cloud_lib_add" class="tabcontent orb_ctc_ext_cloud_lib_add">
             <div id="new_snippet_wrapper" class="new_snippet_wrapper">
                 <form method="POST" id="orb_ctc_ext_cloud_lib_add_new_snippet_form" class="orb_ctc_ext_cloud_lib_add_new_snippet_form">
-                    title/label<br/>
+                    Title/label<br/>
                     <input type="text" id="add_snippet_title" 
                            required=""
                            class="add_snippet_title widefat" 
