@@ -507,7 +507,7 @@ class orbisius_ctc_cloud_lib {
                     
                     <tr id="no_snippets_row" class="no_snippets_row no_snippets_alert <?php echo $no_items_css;?>">
                         <td colspan="2">
-                            <span id="no_snippets_alert">You haven't added any snippets yet.</span>
+                            <span id="no_snippets_alert">You don't haven any snippets.</span>
                         </td>
                     </tr>
 
