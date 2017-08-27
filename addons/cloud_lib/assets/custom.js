@@ -248,7 +248,7 @@ jQuery(document).ready(function($) {
 	});
 
         // just enter and no control key -> jump to content
-        $(document).on('keydown', '.edit_title,.edit_content', function(e) {
+        $(document).on('keydown', '.edit_title', function(e) {
             if (!e.ctrlKey && ( e.keyCode == 13 || e.which == 13)) {
                 $('.edit_content').focus();
                 return false;
@@ -260,6 +260,9 @@ jQuery(document).ready(function($) {
         // When CTRL + Enter is pressed submit the add snippet form
         // https://stackoverflow.com/questions/1684196/ctrlenter-jquery-in-textarea
         // https://stackoverflow.com/questions/7445151/jquery-document-keydown-issues
+        
+        // @todo handle CTRL+S ??? while in the text area to save
+        // https://stackoverflow.com/questions/93695/best-cross-browser-method-to-capture-ctrls-with-jquery
 	$(document).on('keydown', '.edit_title,.edit_content', function(e) {
             if (e.ctrlKey && (e.keyCode == 13 || e.which == 13)) {
                 e.preventDefault();
