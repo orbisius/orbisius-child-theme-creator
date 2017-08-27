@@ -125,6 +125,8 @@ class orbisius_ctc_cloud_lib {
         // Delete a Snippet ajax hook
         add_action( 'wp_ajax_orb_ctc_addon_cloud_lib_delete', [$this, 'cloud_delete'] );
 //        add_action( 'wp_ajax_nopriv_orb_ctc_addon_cloud_lib_delete', [$this, 'cloud_delete'] );
+//        
+        add_action( 'orbisius_child_theme_creator_addon_cloud_lib_action_auth_success', [$this, 'process_successful_auth'] );
     }
 
     /**
@@ -186,21 +188,14 @@ class orbisius_ctc_cloud_lib {
         if ($req_res->is_success()) {
             $api_res = $req_res->data('result');
 
+            $ctx = [
+                'api_res' => $api_res,
+            ];
+            
             if ($api_res->is_success()) {
-                $user_api = orbisius_child_theme_creator_user::get_instance();
-                $api_key = $api_res->data('api_key');
-                
-                if (!empty($api_key)) {
-                    $user_api->api_key($api_key);
-                }
-                
-                $email = $api_res->data('email');
-
-                if ( !empty($email)) {
-                    $user_api->email($email);
-                }
+                do_action('orbisius_child_theme_creator_addon_cloud_lib_action_auth_success', $ctx);
             } else {
-
+                do_action('orbisius_child_theme_creator_addon_cloud_lib_action_auth_error', $ctx);
             }
         }
         
@@ -208,11 +203,38 @@ class orbisius_ctc_cloud_lib {
     }
 
     /**
+     * This is called after login and register to update some meta info about plan & api key
+     * @param array $ctx
+     */
+    public function process_successful_auth($ctx) {
+        $api_res = $ctx['api_res'];
+        $user_api = orbisius_child_theme_creator_user::get_instance();
+
+        $api_key = $api_res->data('api_key');
+
+        if (!empty($api_key)) {
+            $user_api->api_key($api_key);
+        }
+
+        $email = $api_res->data('email');
+
+        if ( !empty($email)) {
+            $user_api->email($email);
+        }
+        
+        $plan_data = $api_res->data('plan_data');
+        
+        if (!empty($plan_data)) {
+            $plan_data = $user_api->plan($plan_data);
+        }
+    }
+    
+    /**
      * Deletes the api key saved in the current user's meta
      */
     public function process_log_out() {
         $user_api = orbisius_child_theme_creator_user::get_instance();
-        $user_api->api_key('');
+        $user_api->clear_account_data();
 
         $req_res = new orbisius_child_theme_creator_result();
         $req_res->status(1);
@@ -241,19 +263,14 @@ class orbisius_ctc_cloud_lib {
         if ($req_res->is_success()) {
             $api_res = $req_res->data('result');
 
+            $ctx = [
+                'api_res' => $api_res,
+            ];
+            
             if ($api_res->is_success()) {
-                $user_api = orbisius_child_theme_creator_user::get_instance();
-                $api_key = $api_res->data('api_key');
-                
-                if ( !empty($api_key)) {
-                    $user_api->api_key($api_key);
-                }
-                
-                $email = $api_res->data('email');
-
-                if ( !empty($email)) {
-                    $user_api->email($email);
-                }
+                do_action('orbisius_child_theme_creator_addon_cloud_lib_action_auth_success', $ctx);
+            } else {
+                do_action('orbisius_child_theme_creator_addon_cloud_lib_action_auth_error', $ctx);
             }
         }
         
@@ -640,6 +657,7 @@ class orbisius_ctc_cloud_lib {
         $user_api = orbisius_child_theme_creator_user::get_instance();
         $email = $user_api->email();
         $api_key = $user_api->api_key();
+        $plan_data = $user_api->plan();
         
         ?>
          <div id="orb_ctc_ext_cloud_lib_account" class="tabcontent orb_ctc_ext_cloud_lib_account">
@@ -653,6 +671,32 @@ class orbisius_ctc_cloud_lib {
                     Orbisius API Key: <?php echo $api_key; ?>
                 </div>
                 
+                <?php if (!empty($plan_data)) : ?>
+                <div class="api_orb_plan">
+                    Plan Info: <br/>
+                    <?php foreach ($plan_data as $key => $value) {
+                        $val_fmt = $value;
+                        
+                        if ($key == 'price') {
+                            $val_fmt = $value <= 0 ? 'Free plan' : $value;
+                        }
+                        
+                        $key_fmt = preg_replace('#[\-\_]+#si',  ' ', $key);
+                        $key_fmt = ucwords($key_fmt);
+                        echo esc_attr($key_fmt) . ': ' . esc_attr($val_fmt) . "<br />\n";
+                    }
+                    ?>
+                </div> <!-- /api_orb_plan -->
+                <?php endif; ?>
+
+                <div class="api_orb_pricing">
+                    <a href="//orbisius.com/plans/?utm_source=ctc&utm_medium=cloud_lib" 
+                       target="_blank" 
+                       title="See plans [new window/tab]"
+                       class="button button-primary">Upgrade / See plans</a>
+                </div>
+                
+                <hr/>
                 <div class="">
                     <a href='#' id='orb_ctc_ext_cloud_lib_account_log_out' 
                        class="button orb_ctc_ext_cloud_lib_account_log_out"> Log out</a>

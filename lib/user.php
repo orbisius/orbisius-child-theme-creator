@@ -2,6 +2,7 @@
 
 class orbisius_child_theme_creator_user extends orbisius_child_theme_creator_singleton {
     private $api_meta_key = '_orb_ctc_cloud_api_key';
+    private $meta_cloud_plan = '_orb_ctc_cloud_plan';
     private $meta_cloud_email = '_orb_ctc_cloud_email';
 
     /**
@@ -10,25 +11,52 @@ class orbisius_child_theme_creator_user extends orbisius_child_theme_creator_sin
      * @return str
      */
     public function api_key($key = null) {
-        static $api_key = null;
-        
-        if (!is_null($api_key) && is_null($key)) { // get
-            return $api_key;
+        static $val = null;
+
+        if (!is_null($val) && is_null($key)) { // get
+            return $val;
         }
         
         $user_id = $this->get_user_id();
         
         if (!empty($key)) {
             $up_status = update_user_meta($user_id, $this->api_meta_key, $key);
-            $api_key = get_user_meta($user_id, $this->api_meta_key, true);
+            $val = get_user_meta($user_id, $this->api_meta_key, true);
         } elseif (!is_null($key)) { // empty string so delete
             delete_user_meta($user_id, $this->api_meta_key);
-            $api_key = null;
+            $val = null;
         } else {
-            $api_key = get_user_meta($user_id, $this->api_meta_key, true);
+            $val = get_user_meta($user_id, $this->api_meta_key, true);
         }
 
-        return $api_key;
+        return $val;
+    }
+    
+    /**
+     * 
+     * @param str/opt $data
+     * @return str
+     */
+    public function plan($data = null) {
+        static $val = null;
+        
+        if (!is_null($val) && is_null($data)) { // get
+            return $val;
+        }
+        
+        $user_id = $this->get_user_id();
+        
+        if (!empty($data)) {
+            $up_status = update_user_meta($user_id, $this->meta_cloud_plan, $data);
+            $val = get_user_meta($user_id, $this->meta_cloud_plan, true);
+        } elseif (!is_null($data)) { // empty string so delete
+            delete_user_meta($user_id, $this->meta_cloud_plan);
+            $val = null;
+        } else {
+            $val = get_user_meta($user_id, $this->meta_cloud_plan, true);
+        }
+
+        return $val;
     }
     
     /**
@@ -37,25 +65,25 @@ class orbisius_child_theme_creator_user extends orbisius_child_theme_creator_sin
      * @return str
      */
     public function email($key = null) {
-        static $api_key = null;
+        static $val = null;
         
-        if (!is_null($api_key) && is_null($key)) { // get
-            return $api_key;
+        if (!is_null($val) && is_null($key)) { // get
+            return $val;
         }
         
         $user_id = $this->get_user_id();
         
         if (!empty($key)) {
             $up_status = update_user_meta($user_id, $this->meta_cloud_email, $key);
-            $api_key = get_user_meta($user_id, $this->meta_cloud_email, true);
+            $val = get_user_meta($user_id, $this->meta_cloud_email, true);
         } elseif (!is_null($key)) { // empty string so delete
             delete_user_meta($user_id, $this->meta_cloud_email);
-            $api_key = null;
+            $val = null;
         } else {
-            $api_key = get_user_meta($user_id, $this->meta_cloud_email, true);
+            $val = get_user_meta($user_id, $this->meta_cloud_email, true);
         }
 
-        return $api_key;
+        return $val;
     }
     
     /**
@@ -67,4 +95,14 @@ class orbisius_child_theme_creator_user extends orbisius_child_theme_creator_sin
         $user_id = get_current_user_id();
         return $user_id;
     }
+
+    /**
+     * Clears some plan related info so it's fresh for next time.
+     */
+    public function clear_account_data() {
+        $this->plan('');
+        $this->email('');
+        $this->api_key('');
+    }
+
 }
