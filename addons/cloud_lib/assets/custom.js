@@ -56,6 +56,17 @@ jQuery(document).ready(function($) {
         return false;
     })
     
+    $('.orb_ctc_ext_cloud_lib_edit_snippet_form').on('submit', function (e) {
+        e.preventDefault();
+        
+        var id = $('.edit_id').val().trim() || 0;
+        var new_title = $('.edit_title').val().trim();
+        var new_content = $('.edit_content').val().trim();
+        snippet_update(id, new_title, new_content);
+        
+        return false;
+    });
+    
     $('.orb_ctc_login_form').on('submit', function (e) {
         e.preventDefault();
         var params = $(this).serialize();
@@ -215,6 +226,7 @@ jQuery(document).ready(function($) {
         // When title is entered and the Enter key is pressed submit the form.
 	$('#add_snippet_title').on("keypress", function(e) {
             if (e.keyCode == 13 || e.which == 13) {
+                e.preventDefault();
                 $('#snippet_save_btn').trigger('click');
                 return false;
             } else {
@@ -224,9 +236,25 @@ jQuery(document).ready(function($) {
 
         // When CTRL + Enter is pressed submit the add snippet form
         // https://stackoverflow.com/questions/1684196/ctrlenter-jquery-in-textarea
-	$(document).on('keydown', '#add_snippet_text', function(e) {
+        // https://stackoverflow.com/questions/7445151/jquery-document-keydown-issues
+	$(document).on('keydown', '.add_snippet_text', function(e) {
             if (e.ctrlKey && (e.keyCode == 13 || e.which == 13)) {
+                e.preventDefault();
                 $('#snippet_save_btn').trigger('click');
+                return false;
+            } else {
+                return true;
+            }
+	});
+
+        // When CTRL + Enter is pressed submit the add snippet form
+        // https://stackoverflow.com/questions/1684196/ctrlenter-jquery-in-textarea
+        // https://stackoverflow.com/questions/7445151/jquery-document-keydown-issues
+	$(document).on('keydown', '.edit_content', function(e) {
+            if (e.ctrlKey && (e.keyCode == 13 || e.which == 13)) {
+                e.preventDefault();
+                $("#edit_snippet").dialog('close');
+                $('.orb_ctc_ext_cloud_lib_edit_snippet_form').trigger('submit'); 
                 return false;
             } else {
                 return true;
@@ -334,6 +362,7 @@ jQuery(document).ready(function($) {
             var content_el   = $(row).find('.snippet_content');
             var content = content_el.html().trim();
 
+            $('.edit_id').val(id);
             $('.edit_title').val(title);
             $('.edit_content').val(content);
 
@@ -353,11 +382,8 @@ jQuery(document).ready(function($) {
                         text: 'Save Changes',
                         class: 'button-primary',
                         click: function() {
+                            $('.orb_ctc_ext_cloud_lib_edit_snippet_form').trigger('submit'); 
                             $(this).dialog("close");
-
-                            var new_title = $('.edit_title').val().trim();
-                            var new_content = $('.edit_content').val().trim();
-                            snippet_update(id, new_title, new_content);
                         }
                     },
                     {

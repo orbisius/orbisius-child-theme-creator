@@ -538,13 +538,20 @@ class orbisius_ctc_cloud_lib {
                 </table>
             </div>
 
-            <!-- Edit snippet window -->
-            <div id="edit_snippet" class="edit_snippet" title="Edit Snippet">
-                <input id="edit_title" class="edit_title" />
-                <br />
-                <textarea id="edit_content" class="edit_content"></textarea>
-                <br />
-                <br />
+            <div id="orb_ctc_ext_cloud_lib_edit" class="tabcontent orb_ctc_ext_cloud_lib_edit">
+                <div id="edit_snippet_wrapper" class="edit_snippet_wrapper">
+                    <form method="POST" id="orb_ctc_ext_cloud_lib_edit_snippet_form" class="orb_ctc_ext_cloud_lib_edit_snippet_form">
+                        <!-- Edit snippet window -->
+                        <div id="edit_snippet" class="edit_snippet" title="Edit Snippet">
+                            <input type="hidden" id="edit_id" class="edit_id" name="id" value="0"/>
+                            <input type="text" id="edit_title" class="edit_title" name="title"/>
+                            <br />
+                            <textarea id="edit_content" class="edit_content" name="content"></textarea>
+                            <br />
+                            <br />
+                        </div>
+                     </form>
+                </div>
             </div>
              <!-- /Edit snippet window -->
 
