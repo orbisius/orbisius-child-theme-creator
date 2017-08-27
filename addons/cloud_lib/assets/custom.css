@@ -209,8 +209,6 @@ a.pro_Add_On {
 
 /*, .snippet_row, .orb_ctc_ext_cloud_lib_manage*/
 .orb_cloud_lib_wrapper .tabcontent {
-    padding: 0 !important;
-    margin: 0 !important;
-    padding-left: 5px;
-    margin-left: 5px;
+    padding: 5px !important;
+    margin: 0 5px !important;
 }
