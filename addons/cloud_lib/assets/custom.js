@@ -414,9 +414,10 @@ jQuery(document).ready(function($) {
 
                     if (json.status) {
                        $row_to_update.data('id', json.data.id);
-                       //$row_to_update.data('title', title );
-                       //$row_to_update.data('content', text);
+                       $row_to_update.prop('id', json.data.id);
                        $row_to_update.find('.snippet_title').html(title);
+                       $row_to_update.removeClass('snippet_row_0');
+                       $row_to_update.addClass('snippet_row_' + json.data.id);
                        $row_to_update.find('.snippet_content').html(text);
                        $row_to_update.find('.snippet_content').show();
 
