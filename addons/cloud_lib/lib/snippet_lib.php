@@ -455,13 +455,16 @@ class orbisius_ctc_cloud_lib {
         <div id="orb_ctc_ext_cloud_lib_add" class="tabcontent orb_ctc_ext_cloud_lib_add">
             <div id="new_snippet_wrapper" class="new_snippet_wrapper">
                 <form method="POST" id="orb_ctc_ext_cloud_lib_add_new_snippet_form" class="orb_ctc_ext_cloud_lib_add_new_snippet_form">
-                    <strong>Title</strong><br/>
-                    <input type="text" id="add_snippet_title" class="add_snippet_title widefat" value="" placeholder="Title/description" />
-                    <br />
-                    <strong>Snippet code</strong><br/>
+                    Snippet Title/label<br/>
+                    <input type="text" id="add_snippet_title" 
+                           required=""
+                           class="add_snippet_title widefat" 
+                           value="" placeholder="Title" />
+                    <br /><br />
+                    Snippet code<br/>
                     <textarea id="add_snippet_text" class="widefat add_snippet_text" 
                               required="" placeholder="Snippet content"></textarea>
-                    <br />
+                    <br /><br />
                     <input type="submit" id="snippet_save_btn" 
                            class="button button-primary snippet_save_btn" value="Save Changes" /> 
                 </form>
@@ -488,7 +491,7 @@ class orbisius_ctc_cloud_lib {
          $all_snippets = $this->get_user_snippets();
          
          ?>
-         <div id="orb_ctc_ext_cloud_lib_manage" class="tabcontent">
+         <div id="orb_ctc_ext_cloud_lib_manage" class="tabcontent orb_ctc_ext_cloud_lib_manage">
          <!-- Manage snippets -->
          <div class="manage_snippets">
             <!--<h3>My Snippets</h3>-->
