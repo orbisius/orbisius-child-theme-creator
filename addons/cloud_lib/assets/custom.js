@@ -298,6 +298,7 @@ jQuery(document).ready(function($) {
 	function delete_snippet(id) {
             $(".snippet_row_" + id).remove();
 
+            // if there aren't any visible rows (i.e. excluding the 0 row that we use for cloning)
             if ($('#manage_snippets_table .snippet_row:visible').length <= 0) {
                 $('#no_snippets_row').show();
             } else {
@@ -326,15 +327,15 @@ jQuery(document).ready(function($) {
 	 * 
 	 */
 	$('#manage_snippets_table').on("click", '.snippet_edit_view_btn', function() {
-            var id		= $(this).parents('tr').data('id');
-		//var title	= $(this).parents('tr').data('title');
-            var title   = $(this).parents('tr').children('td.title_cell').children('.snippet_title').html().trim();
-            //var content	= $(this).parents('tr').data('content');
-            var content = $(this).parents('tr').children('td.title_cell').children('.snippet_content').html().trim();
+            var row	= $(this).closest('.snippet_row');
+            var id      = $(row).data('id') || 0;
+            var title_el  = $(row).find('.snippet_title');
+            var title = title_el.html().trim();
+            var content_el   = $(row).find('.snippet_content');
+            var content = content_el.html().trim();
 
             $('.edit_title').val(title);
             $('.edit_content').val(content);
-            //$('.edit_snippet').show();
 
             var orb_ctc_cloud_lib_edit_snippet_dlg = $("#edit_snippet").dialog( {
                 dialogClass: 'edit_snippet',
@@ -354,7 +355,6 @@ jQuery(document).ready(function($) {
                         click: function() {
                             $(this).dialog("close");
 
-//                            var id = 0;
                             var new_title = $('.edit_title').val().trim();
                             var new_content = $('.edit_content').val().trim();
                             snippet_update(id, new_title, new_content);
