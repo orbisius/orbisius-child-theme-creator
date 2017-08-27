@@ -193,6 +193,12 @@ class orbisius_ctc_cloud_lib {
                 if (!empty($api_key)) {
                     $user_api->api_key($api_key);
                 }
+                
+                $email = $api_res->data('email');
+
+                if ( !empty($email)) {
+                    $user_api->email($email);
+                }
             } else {
 
             }
@@ -241,6 +247,12 @@ class orbisius_ctc_cloud_lib {
                 
                 if ( !empty($api_key)) {
                     $user_api->api_key($api_key);
+                }
+                
+                $email = $api_res->data('email');
+
+                if ( !empty($email)) {
+                    $user_api->email($email);
                 }
             }
         }
@@ -626,15 +638,21 @@ class orbisius_ctc_cloud_lib {
      */
     public function render_tab_content_orb_ctc_ext_cloud_lib_account() {
         $user_api = orbisius_child_theme_creator_user::get_instance();
+        $email = $user_api->email();
         $api_key = $user_api->api_key();
         
         ?>
          <div id="orb_ctc_ext_cloud_lib_account" class="tabcontent orb_ctc_ext_cloud_lib_account">
             <div class="orb_ctc_ext_cloud_lib_account_wrapper">
                 <!--<h3>Account</h3>-->
-                <div class="">
-                    Orbisius API Key <?php echo $api_key; ?>
+                <div class="email_wrapper">
+                    Orbisius Email: <?php echo $email; ?>
                 </div>
+                
+                <div class="api_key_wrapper">
+                    Orbisius API Key: <?php echo $api_key; ?>
+                </div>
+                
                 <div class="">
                     <a href='#' id='orb_ctc_ext_cloud_lib_account_log_out' 
                        class="button orb_ctc_ext_cloud_lib_account_log_out"> Log out</a>

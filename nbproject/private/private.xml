@@ -86,12 +86,12 @@
             <url>addons/cloud_lib/assets/custom.js</url>
             <bookmark id="29">
                 <name/>
-                <line>275</line>
+                <line>243</line>
                 <key/>
             </bookmark>
             <bookmark id="30">
                 <name/>
-                <line>371</line>
+                <line>339</line>
                 <key/>
             </bookmark>
         </file>
@@ -130,8 +130,8 @@
         </group>
         <group>
             <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/addons/cloud_lib/assets/custom.js</file>
-            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/addons/cloud_lib/assets/custom.css</file>
             <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/addons/cloud_lib/lib/snippet_lib.php</file>
+            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/docs/snippets.txt</file>
         </group>
     </open-files>
 </project-private>
