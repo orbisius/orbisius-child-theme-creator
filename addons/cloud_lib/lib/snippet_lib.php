@@ -673,7 +673,6 @@ class orbisius_ctc_cloud_lib {
                 
                 <?php if (!empty($plan_data)) : ?>
                 <div class="api_orb_plan">
-                    Plan Info: <br/>
                     <?php foreach ($plan_data as $key => $value) {
                         $val_fmt = $value;
                         
@@ -689,18 +688,33 @@ class orbisius_ctc_cloud_lib {
                 </div> <!-- /api_orb_plan -->
                 <?php endif; ?>
 
+                <hr/>
                 <div class="api_orb_pricing">
                     <a href="//orbisius.com/plans/?utm_source=ctc&utm_medium=cloud_lib" 
                        target="_blank" 
                        title="See plans [new window/tab]"
                        class="button button-primary">Upgrade / See plans</a>
-                </div>
-                
-                <hr/>
-                <div class="">
+                    |
+                    <?php
+                    
+                    // This info is passed to the content link.
+                    // See the title of the contact link so the user doesn't have to re-enter that info.
+                    $e = [
+                        'site' => site_url(),
+                        'email' => $email,
+                        'api_key' => $api_key,
+                    ];
+                    ?>
+                    <a href="//orbisius.com/contact/quick-contact/?utm_source=ctc&utm_medium=cloud_lib&<?php echo http_build_query($e);?>" 
+                       target="_blank" 
+                       title="Contact us with a suggestion, bug report etc. This link includes your email, API key, site url so you don't have to enter it again to get support. [new window/tab]"
+                       class="button">Contact Us</a>
+                    |
                     <a href='#' id='orb_ctc_ext_cloud_lib_account_log_out' 
+                       title="Logs you out and remove Orbisius cloud account data from ths WordPress installation."
                        class="button orb_ctc_ext_cloud_lib_account_log_out"> Log out</a>
                 </div>
+                
                 <div class="result">
                 </div>
             </div> <!-- /orb_ctc_ext_cloud_lib_account_wrapper -->  
