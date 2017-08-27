@@ -664,7 +664,7 @@ class orbisius_ctc_cloud_lib {
             <div class="orb_ctc_ext_cloud_lib_account_wrapper">
                 <!--<h3>Account</h3>-->
                 <div class="email_wrapper">
-                    Orbisius Email: <?php echo $email; ?>
+                    Email: <?php echo $email; ?>
                 </div>
                 
                 <?php if (!empty($api_key)) : ?>
