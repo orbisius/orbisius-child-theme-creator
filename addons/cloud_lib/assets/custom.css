@@ -154,6 +154,10 @@
     font-size: 14px;
 }
 
+.orb_cloud_lib_wrapper .hover_row:hover {
+    background: #ffff99;
+}
+
 .orb_cloud_lib_wrapper .manage_snippets_table_wrapper table tr .cmd_row {
     width: 45%;
     text-align: right;
