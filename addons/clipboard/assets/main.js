@@ -23,6 +23,6 @@ jQuery(document).ready(function($) {
             alert('copy failed');
         });
     } catch (e) {
-        console && console.log("orbisius child theme creator addon: Clipboard.js wasn't loaded");
+        console && console.log("orbisius child theme creator addon: Clipboard.js wasn't loaded or there was a conflict");
     }
 }); // (jQuery)
