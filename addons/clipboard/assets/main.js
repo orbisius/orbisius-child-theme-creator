@@ -5,11 +5,13 @@ jQuery(document).ready(function($) {
     try {
         var clipboard = new Clipboard('.orb_ctc_copy_btn');
 
+        // Change the button's label temporarily.
         clipboard.on('success', function(e) {
+            // by default the copied text/container is highlighted and looks weird.
             e.clearSelection();
             var btn = $(e.trigger);
             var old_label = btn.text();
-            
+
             btn.text('Copied!');
 
             setTimeout(function () {
