@@ -272,16 +272,27 @@ function orbisius_child_theme_creator_is_live_env() {
 
 add_filter('orbisius_child_theme_creator_filter_asset_src', 'orbisius_child_theme_creator_fix_asset_src', 10, 2);
 function orbisius_child_theme_creator_fix_asset_src($src, $ctx = []) {
-    if (1 || orbisius_child_theme_creator_is_live_env()
-            && (!preg_match('#^(?:https?:)?//#si', $src)) ) {
+    if (1 //|| orbisius_child_theme_creator_is_live_env() // only on live env
+            && (!preg_match('#^(?:https?:)?//#si', $src)) ) // not full urls.
+            {
         $new_src = $src;
-        $new_src = str_replace( '.css', '.min.css', $new_src);
-        $new_src = str_replace( '.js', '.min.js', $new_src);
+
+        // We might need to get last_mod for min files too.
+        if (orbisius_child_theme_creator_is_live_env() && (stripos($src, '.min.') === false)) {
+            $new_src = str_replace('.css', '.min.css', $new_src);
+            $new_src = str_replace('.js', '.min.js', $new_src);
+        }
+
+        $local_file = plugin_dir_path( ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE ) . $new_src;
         
         // We check if .min file exists and if so use it.
-        if (file_exists(plugin_dir_path( ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE ) . $new_src )) {
-            $full_new_src = plugins_url($new_src, ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE);
-            $src = $full_new_src;
+        if (file_exists($local_file)) {
+            if (!empty($ctx['last_mod'])) {
+                $src = filemtime($local_file);
+            } else {
+                $full_new_src = plugins_url($new_src, ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE);
+                $src = $full_new_src;
+            }
         }
     }
     
