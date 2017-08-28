@@ -3,7 +3,7 @@ Contributors: lordspace,orbisius
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7APYDVPBCSY9A
 Tags: theme,child theme,childtheme,childthemes,parent theme,child themes,CSS,styling,resposive design,design,custom themeing, shared hosting,theme editor theme,themes,wp,wordpress,orbisius,theme creator,custom theme,theme generator,css,css editor
 Requires at least: 3.4
-Tested up to: 4.7
+Tested up to: 4.8
 Stable tag: 1.4.0
 License: GPLv2 or later
 
@@ -17,6 +17,7 @@ It also creates rtl.css if exists in the parent theme.
 **Did you find this plugin helpful? Please consider [writing a review](https://wordpress.org/support/view/plugin-reviews/orbisius-child-theme-creator).**
 
 = Child Theme Creator Features =
+* Since v1.4 store your snippets, license keys in Orbisius cloud library
 * Create a theme with a click of a button
 * Uses the recommended approach for loading css (since v.1.3.4)
 * Never forget what files to copy and what to skip when creating child themes.
@@ -170,6 +171,8 @@ Todo
 * Tested with WP 4.8
 * Got rid of some duplicated functions.
 * Reduced the height of the 2x editors (from 22 rows to 16)
+* Tests, improvements and lots of cool stuff.
+* Drank lots of coffee, danced bachata, kizomba & salsa ;)
 
 = 1.3.9 =
 * Minor fixes and improvements to the UI
