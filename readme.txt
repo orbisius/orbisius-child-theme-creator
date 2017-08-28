@@ -166,6 +166,10 @@ Todo
 
 == Changelog ==
 
+= 1.4.3 =
+* Removed some of the info about other plugins
+* Added a notice that the initial message upon plugin activation will disappear in 24h
+
 = 1.4.2 =
 * Corrected links to the cloud library api.
 * Reduced the Promo messages in the Editor.

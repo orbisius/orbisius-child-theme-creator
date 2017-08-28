@@ -94,8 +94,8 @@ function orbisius_child_theme_creator_admin_notice_message() {
             && ( stripos($pagenow, 'plugins.php') !== false )
             && ( !is_multisite() || ( is_multisite() && is_network_admin() ) ) ) {
         $just_link = orbisius_child_theme_creator_util::get_create_child_pages_link();
-        echo "<div class='updated'><p>$name has been installed. To create a child theme go to
-          <a href='$just_link'><strong>Appearance &rarr; $name</strong></a></p></div>";
+        echo "<div class='updated'><p>$name: to create a child theme go to
+          <a href='$just_link'><strong>Appearance &rarr; $name</strong></a>. This message will automatically disappear within 24h.</p></div>";
     }
 }
 
@@ -530,7 +530,7 @@ function orbisius_child_theme_creator_settings_page() {
                             </div> <!-- .inside -->
                         </div> <!-- .postbox -->
 
-                        <?php orbisius_child_theme_creator_util::output_orb_widget(); ?>
+                        <?php //orbisius_child_theme_creator_util::output_orb_widget(); ?>
 
                         <?php
                                         $plugin_data = get_plugin_data(__FILE__);
@@ -1218,7 +1218,7 @@ function orbisius_child_theme_creator_tools_action() {
                             </div> <!-- .inside -->
                         </div> <!-- .postbox -->
 
-                        <?php orbisius_child_theme_creator_util::output_orb_widget(); ?>
+                        <?php //orbisius_child_theme_creator_util::output_orb_widget(); ?>
 
                         <?php
                                         $plugin_data = get_plugin_data(__FILE__);
@@ -1380,7 +1380,7 @@ function orbisius_child_theme_creator_tools_action() {
             <br class="clear">
         </div> <!-- #poststuff -->
 
-        <?php orbisius_child_theme_creator_util::output_orb_widget('author'); ?>
+        <?php //orbisius_child_theme_creator_util::output_orb_widget('author'); ?>
     </div> <!-- .wrap -->
     <?php
 }
