@@ -1,5 +1,10 @@
 /* Snippet Library styles */
-span.label {
+
+.orb_cloud_lib_wrapper {
+    /*margin: 1em 0;*/
+}
+
+.orb_cloud_lib_wrapper span.label {
     font-weight: bold;
     color: #3c7504; /* #336600 */
     margin-bottom: 5px;
@@ -7,7 +12,7 @@ span.label {
     display: inline-block;
 }
 
-span.descr {
+.orb_cloud_lib_wrapper span.descr {
     font-size: 14px;
     margin-bottom: 5px;
     display: inline-block;
@@ -17,24 +22,12 @@ span.descr {
     width: 70%;
 }
 
-/*#view_snippet.ui-dialog-content, #edit_snippet.ui-dialog-content {
-    min-height: 300px !important;
-    min-width: 330px !important;
-    text-align: center;
-    padding-top: 0 !important;
-    margin-top: -25px;
-}*/
-
-.orb_cloud_lib_wrapper {
-    /*margin: 1em 0;*/
-}
-
 .orb_cloud_lib_wrapper .half_text {
     width: 50%;
 }
 
 /* jQuery UI tweaks / overrides */
-.ui-autocomplete-loading {
+.orb_cloud_lib_wrapper .ui-autocomplete-loading {
     background: url('images/loader.gif') no-repeat right center
 }
 
@@ -45,6 +38,11 @@ span.descr {
 
 .orb_cloud_lib_wrapper .ui-tabs .ui-tabs-nav {
     padding: 0;
+}
+
+.orb_cloud_lib_wrapper .tabcontent {
+    padding: 5px !important;
+    margin: 0 5px !important;
 }
 /* /jQuery UI tweaks / overrides */
 
@@ -73,152 +71,95 @@ span.descr {
     min-width: 400px !important;
 }*/
 
-.snippet_wrapper {
+.orb_cloud_lib_wrapper .snippet_wrapper {
     border: 1px solid #ccc;
     /*margin: 10px 0;*/
     padding: 3px 5px;
 }
 
-.new_snippet_wrapper {
-    /*display: none;*/
-}
-
-#snippet_confirm_dialog {
+.orb_cloud_lib_wrapper .app_hide {
     display: none;
 }
 
-.found_snippet {
-    display: none;
-}
-
-a.pro_Add_On {
-    font-weight: bolder;
-    color: #FF0000;
-    text-decoration: underline;
-}
-
-.manage_snippets {
+.orb_cloud_lib_wrapper .manage_snippets {
     /*border: 1px solid #ccc;*/
     /*margin: 10px 0;*/
     /*padding: 3px 5px;*/
 }
 
-.manage_snippets #edit_snippet, .manage_snippets #view_snippet {
-    display: none !important;
-}
-
-/**.manage_snippets .edit_snippet {
-        display: none !important;
-        color: #FF0000;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 999;
-        width: 100%;
-        height: 23px;
-}*/
-
-.manage_snippets_table_wrapper {
+.orb_cloud_lib_wrapper .manage_snippets_table_wrapper {
     overflow: auto;
     max-height: 350px;
 }
 
-.delete_snippet_title {
+.orb_cloud_lib_wrapper .delete_snippet_title {
     font-size: 15px;
     font-weight: bold;
     font-style: italic;
 }
 
-#snippet_confirm_dialog_delete {
-    display: none;
-    /*height:*/ 
-}
-
-.secondary_buttons .snippet_wrapper .manage_snippets {
-    /*border: 1px solid #ccc !important;*/
-    /*margin: 10px 0;*/
-    /*padding: 3px 5px;*/
-}
-
-/**.secondary_buttons .snippet_wrapper .manage_snippets .edit_snippet {
-        display: none;
-        position: absolute;
-        width: 300px;
-        height: 500px;
-        z-index: 15;
-        top: 50%;
-        left: 50%;
-        margin: -100px 0 0 -150px;
-        background: white;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-}*/
-
-.edit_title, .view_title {
+.orb_cloud_lib_wrapper .edit_title, .orb_cloud_lib_wrapper .view_title {
     width: 100%;
     margin-bottom: 10px;
     border-radius: 5px;
     min-width: 330px !important;
 }
 
-.edit_content, .view_content {
+.orb_cloud_lib_wrapper .edit_content, .orb_cloud_lib_wrapper .view_content {
     width: 100%;
     min-height: 300px;
     border-radius: 5px;
     min-width: 330px !important;
 }
 
-#edit_snippet h3,#view_snippet h3{
+.orb_cloud_lib_wrapper #edit_snippet h3, .orb_cloud_lib_wrapper #view_snippet h3{
     margin-top: 0px;
 }
 
-.manage_snippets h3 {
+.orb_cloud_lib_wrapper .manage_snippets h3 {
     /*font-weight: bolder;
     color: red;
     text-decoration: underline;*/
     padding-left: 10px;
 }
 
-.button.snippet_edit_view_btn, .button.snippet_view_btn, .button.snippet_edit_btn, .button.snippet_delete_btn {
+.orb_cloud_lib_wrapper .button.snippet_edit_view_btn, 
+.orb_cloud_lib_wrapper .button.snippet_view_btn, 
+.orb_cloud_lib_wrapper .button.snippet_edit_btn, 
+.orb_cloud_lib_wrapper .button.snippet_delete_btn {
     color: white;
 }
 
-.button.snippet_view_btn {
+.orb_cloud_lib_wrapper .button.snippet_view_btn {
     background-image: linear-gradient(#1e8cbe, #0074a2);
 }
 
-.button.snippet_edit_btn, .button.snippet_edit_view_btn {
+.orb_cloud_lib_wrapper .button.snippet_edit_btn, .orb_cloud_lib_wrapper .button.snippet_edit_view_btn {
     /*background-image: linear-gradient(#3c7504, #336600);*/
     background-image: linear-gradient(#4f8916, #244900);
 }
 
-.button.snippet_delete_btn {
+.orb_cloud_lib_wrapper .button.snippet_delete_btn {
     background-image: linear-gradient(#e50202, #750303);
 }
 
-.manage_snippets_table_wrapper table tr td {
-    border-bottom: 1px solid #d8d8d8;
+.orb_cloud_lib_wrapper .manage_snippets_table_wrapper table tr td {
+    /*border-bottom: 1px solid #d8d8d8;*/
 }
-.manage_snippets_table_wrapper table tr td.td_title {
+
+.orb_cloud_lib_wrapper .manage_snippets_table_wrapper table tr td.td_title {
     font-size: 14px;
 }
 
-.manage_snippets_table_wrapper table tr .cmd_row {
+.orb_cloud_lib_wrapper .manage_snippets_table_wrapper table tr .cmd_row {
     width: 45%;
     text-align: right;
 }
 
 /*https://css-tricks.com/snippets/css/truncate-string-with-ellipsis/*/
-.manage_snippets_table_wrapper .truncate {
+.orb_cloud_lib_wrapper .manage_snippets_table_wrapper .truncate {
   width: 250px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-/*, .snippet_row, .orb_ctc_ext_cloud_lib_manage*/
-.orb_cloud_lib_wrapper .tabcontent {
-    padding: 5px !important;
-    margin: 0 5px !important;
 }

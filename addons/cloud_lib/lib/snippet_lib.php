@@ -427,19 +427,19 @@ class orbisius_ctc_cloud_lib {
     public function render_tab_content_orb_ctc_ext_cloud_lib_search() {
         ?>
         <!-- Search Snippets -->
-       <div id="orb_ctc_ext_cloud_lib_search" class="tabcontent orb_ctc_ext_cloud_lib_search">
-        <span class="descr">Start typing the title of your snippet to see suggestions</span>
-        <br />
-        <input class="selector" id="search_text"></input>
-        <input class="button button-primary" type="button" id="snippet_search_btn" value="Search" />
-        
-        <div class="found_snippet">
-            <span class="label">Title:</span>
-            <input class="widefat" type="text" id="found_snippet_title"></textarea>
+        <div id="orb_ctc_ext_cloud_lib_search" class="tabcontent orb_ctc_ext_cloud_lib_search">
+            <span class="descr">Start typing the title of your snippet to see suggestions</span>
             <br />
-            <span class="label">Snippet:</span>
-            <textarea class="widefat" id="found_snippet_text"></textarea>
-        </div>
+            <input class="selector" id="search_text"></input>
+            <input class="button button-primary" type="button" id="snippet_search_btn" value="Search" />
+
+            <div class="found_snippet app_hide">
+                <span class="label">Title:</span>
+                <input class="widefat" type="text" id="found_snippet_title"></textarea>
+                <br />
+                <span class="label">Snippet:</span>
+                <textarea class="widefat" id="found_snippet_text"></textarea>
+            </div>
         </div>
         
         <!-- /Search Snippets -->
@@ -474,7 +474,7 @@ class orbisius_ctc_cloud_lib {
             <!-- /New Snippet -->
 
             <!-- Confirm dialog save snippet -->
-            <div id="snippet_confirm_dialog" title="">
+            <div id="snippet_confirm_dialog" title="" class="snippet_confirm_dialog app_hide">
                 <p>Are you sure you want to save a snippet without any content?</p>
             </div>
             <!-- /Confirm dialog save snippet -->
@@ -548,7 +548,7 @@ class orbisius_ctc_cloud_lib {
                 <div id="edit_snippet_wrapper" class="edit_snippet_wrapper">
                     <form method="POST" id="orb_ctc_ext_cloud_lib_edit_snippet_form" class="orb_ctc_ext_cloud_lib_edit_snippet_form">
                         <!-- Edit snippet window -->
-                        <div id="edit_snippet" class="edit_snippet" title="Edit Snippet">
+                        <div id="edit_snippet" class="edit_snippet app_hide" title="Edit Snippet">
                             <input type="hidden" id="edit_id" class="edit_id" name="id" value="0"/>
                             <input type="text" id="edit_title" class="edit_title" name="title"/>
                             <br />
@@ -562,7 +562,7 @@ class orbisius_ctc_cloud_lib {
              <!-- /Edit snippet window -->
 
             <!-- View snippet window -->
-            <div id="view_snippet">
+            <div id="view_snippet" class="view_snippet app_hide">
                 <h3>View Snippet</h3>
                 <input class="view_title">
                 <br />
@@ -576,7 +576,7 @@ class orbisius_ctc_cloud_lib {
         <!-- /Manage snippets -->  
          
          <!-- Delete snippet confirm dialog -->
-        <div id="snippet_confirm_dialog_delete" title="">
+         <div id="snippet_confirm_dialog_delete" class="snippet_confirm_dialog_delete app_hide" title="Delete">
             <p>Are you sure you want to delete this snippet with title <span class="delete_snippet_title"></span>?</p>
         </div>
         <!-- /Delete snippet confirm dialog -->
@@ -669,7 +669,11 @@ class orbisius_ctc_cloud_lib {
     public function render_tab_content_orb_ctc_ext_cloud_lib_account() {
         $user_api = orbisius_child_theme_creator_user::get_instance();
         $email = $user_api->email();
-        //$api_key = $user_api->api_key();
+        $api_key = '';
+        
+        if (isset($_REQUEST['load_orb_cloud_api_key'])) {
+            $api_key = $user_api->api_key();
+        }
         $plan_data = $user_api->plan();
         
         ?>
