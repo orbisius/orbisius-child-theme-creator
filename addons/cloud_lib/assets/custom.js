@@ -215,334 +215,360 @@ jQuery(document).ready(function($) {
 	});
     }
 	
-	/**
-	 * Add a new snippet button
-	 * 
-	 * On click:	Displays title and text fields
-	 * 
-	 */
-	$('#new_snippet_btn').on("click", function() {
-            $('.new_snippet_wrapper').show("slow");
-	});
-        
-        // When title is entered and the Enter key is pressed submit the form.
-	$('#add_snippet_title').on("keypress", function(e) {
-            if (e.keyCode == 13 || e.which == 13) {
-                e.preventDefault();
-                $('#snippet_save_btn').trigger('click');
-                return false;
-            } else {
-                return true;
-            }
-	});
+    /**
+     * Add a new snippet button
+     * 
+     * On click:	Displays title and text fields
+     * 
+     */
+    $('#new_snippet_btn').on("click", function() {
+        $('.new_snippet_wrapper').show("slow");
+    });
 
-        // When CTRL + Enter is pressed submit the add snippet form
-        // https://stackoverflow.com/questions/1684196/ctrlenter-jquery-in-textarea
-        // https://stackoverflow.com/questions/7445151/jquery-document-keydown-issues
-	$(document).on('keydown', '.add_snippet_text', function(e) {
-            if (e.ctrlKey && (e.keyCode == 13 || e.which == 13)) {
-                e.preventDefault();
-                $('#snippet_save_btn').trigger('click');
-                return false;
-            } else {
-                return true;
-            }
-	});
-
-        // just enter and no control key -> jump to content
-        $(document).on('keydown', '.edit_title', function(e) {
-            if (!e.ctrlKey && ( e.keyCode == 13 || e.which == 13)) {
-                $('.edit_content').focus();
-                return false;
-            } else {
-                return true;
-            }
-        });
-        
-        // When CTRL + Enter is pressed submit the add snippet form
-        // https://stackoverflow.com/questions/1684196/ctrlenter-jquery-in-textarea
-        // https://stackoverflow.com/questions/7445151/jquery-document-keydown-issues
-        
-        // @todo handle CTRL+S ??? while in the text area to save
-        // https://stackoverflow.com/questions/93695/best-cross-browser-method-to-capture-ctrls-with-jquery
-	$(document).on('keydown', '.edit_title,.edit_content', function(e) {
-            if (e.ctrlKey && (e.keyCode == 13 || e.which == 13)) {
-                e.preventDefault();
-                $("#edit_snippet").dialog('close');
-                $('.orb_ctc_ext_cloud_lib_edit_snippet_form').trigger('submit'); 
-                return false;
-            } else {
-                return true;
-            }
-	});
-
-	/**
-	 * Save a new snippet button
-	 * 
-	 * On click:	If title is missing, cannot proceed
-	 * 		If text is missing, asks for confirmation to proceed
-	 * 
-	 */
-	$('.orb_ctc_ext_cloud_lib_add_new_snippet_form').on("submit", function(e) {
+    // When title is entered and the Enter key is pressed submit the form.
+    $('#add_snippet_title').on("keypress", function(e) {
+        if (e.keyCode == 13 || e.which == 13) {
             e.preventDefault();
-            //$('#snippet_save_btn').trigger('click');
+            $('#snippet_save_btn').trigger('click');
             return false;
-	});
-	
-	$('#snippet_save_btn').on("click", function(e) {
-            var title	= $('#add_snippet_title').val().trim();
-            var text	= $('#add_snippet_text').val().trim();
-            snippet_update(0, title, text);
-	});
-	
-	/**
-	 * Delete a snippet by id button
-	 * 
-	 */
-	$('#manage_snippets_table').on("click", '.snippet_delete_btn', function() {
-            var id		= $(this).closest('tr').data('id');
-            //var title	= $(this).closest('tr').data('title');
-            var title   = $(this).closest('tr').children('td.title_cell').children('.snippet_title').text();
-        
-            $('.delete_snippet_title').text(title);
+        } else {
+            return true;
+        }
+    });
 
-            $("#snippet_confirm_dialog_delete").dialog( {
-                dialogClass: 'snippet_confirm_dialog_delete',
-                modal: true,
-                resizable: false,
-                draggable: false,
-                buttons: [{
-                                text: "Yes",
-                                "class": 'button-primary',
-                                click: function() {
-                                        $(this).dialog("close"); 
-                                        delete_snippet(id);
-                                }
-                        },
-                        {
-                                text: "No",
-                                "class": 'button',
-                                click: function() { 
-                                    $(this).dialog("close");
-                                }
-                        }],
-                close: function(event, ui) {
-                    $('.snippet_delete_btn').blur();
-                }
-            });
-	});
+    // When CTRL + Enter is pressed submit the add snippet form
+    // https://stackoverflow.com/questions/1684196/ctrlenter-jquery-in-textarea
+    // https://stackoverflow.com/questions/7445151/jquery-document-keydown-issues
+    $(document).on('keydown', '.add_snippet_text', function(e) {
+        if (e.ctrlKey && (e.keyCode == 13 || e.which == 13)) {
+            e.preventDefault();
+            $('#snippet_save_btn').trigger('click');
+            return false;
+        } else {
+            return true;
+        }
+    });
 
-	/**
-	 * Delete snippet by id
-	 * 
-	 * @param id
-	 * 
-	 */
-	function delete_snippet(id) {
-            $(".snippet_row_" + id).remove();
+    // just enter and no control key -> jump to content
+    $(document).on('keydown', '.edit_title', function(e) {
+        if (!e.ctrlKey && ( e.keyCode == 13 || e.which == 13)) {
+            $('.edit_content').focus();
+            return false;
+        } else {
+            return true;
+        }
+    });
 
-            // if there aren't any visible rows (i.e. excluding the 0 row that we use for cloning)
-            if ($('#manage_snippets_table .snippet_row:visible').length <= 0) {
-                $('#no_snippets_row').show();
-            } else {
-                $('#no_snippets_row').hide();
-            }
+    // When CTRL + Enter is pressed submit the add snippet form
+    // https://stackoverflow.com/questions/1684196/ctrlenter-jquery-in-textarea
+    // https://stackoverflow.com/questions/7445151/jquery-document-keydown-issues
 
-            $.ajax({
-		url: ajaxurl,
-		data: {
-                    id: id,
-                    action: "orb_ctc_addon_cloud_lib_delete"
-		},
-		success: function (json) {
-                    if (json.status) {
-                        // the row is deleted anyways so nothing to do.
-                        // just have some coffee.
-                    } else {
-                        alert(json.msg);
-                    }
-		}
-            });
-	}
-	
-	/**
-	 * Edit / view window combined
-	 * 
-	 */
-	$('#manage_snippets_table').on("click", '.snippet_edit_view_btn', function() {
-            var row	= $(this).closest('.snippet_row');
-            var id      = $(row).data('id') || 0;
-            var title_el  = $(row).find('.snippet_title');
-            var title = title_el.html().trim();
-            var content_el   = $(row).find('.snippet_content');
-            var content = content_el.html().trim();
-            
-            // decode entities: browsers will encode '&' and other chars. We want the chars unencoded i.e. not as &amp;
-            // https://stackoverflow.com/questions/1147359/how-to-decode-html-entities-using-jquery
-            title = $("<textarea/>").html(title).val();
-            content = $("<textarea/>").html(content).val();
+    // @todo handle CTRL+S ??? while in the text area to save
+    // https://stackoverflow.com/questions/93695/best-cross-browser-method-to-capture-ctrls-with-jquery
+    $(document).on('keydown', '.edit_title,.edit_content', function(e) {
+        if (e.ctrlKey && (e.keyCode == 13 || e.which == 13)) {
+            e.preventDefault();
+            $("#edit_snippet").dialog('close');
+            $('.orb_ctc_ext_cloud_lib_edit_snippet_form').trigger('submit'); 
+            return false;
+        } else {
+            return true;
+        }
+    });
 
-            $('.edit_id').val(id);
-            $('.edit_title').val(title);
-            $('.edit_content').val(content);
+    /**
+     * Save a new snippet button
+     * 
+     * On click:	If title is missing, cannot proceed
+     * 		If text is missing, asks for confirmation to proceed
+     * 
+     */
+    $('.orb_ctc_ext_cloud_lib_add_new_snippet_form').on("submit", function(e) {
+        e.preventDefault();
+        //$('#snippet_save_btn').trigger('click');
+        return false;
+    });
 
-            var orb_ctc_cloud_lib_edit_snippet_dlg = $("#edit_snippet").dialog( {
-                dialogClass: 'edit_snippet',
-                modal: true,
-                autoOpen: true,
-//                autoOpen: false,
-                show : false,
-                width : 'auto',
-                resizable: true,
-                minWidth: 300,
-                minHeight: 300,
-                position: { my: "center", at: "center", of: window },
-                buttons: [
-                    {
-                        text: 'Save Changes',
-                        class: 'button-primary',
-                        click: function() {
-                            $('.orb_ctc_ext_cloud_lib_edit_snippet_form').trigger('submit'); 
-                            $(this).dialog("close");
-                        }
+    $('#snippet_save_btn').on("click", function(e) {
+        var title	= $('#add_snippet_title').val().trim();
+        var text	= $('#add_snippet_text').val().trim();
+        snippet_update(0, title, text);
+    });
+
+    /**
+     * Delete a snippet by id button
+     * 
+     */
+    $('#manage_snippets_table').on("click", '.snippet_delete_btn', function() {
+        var id		= $(this).closest('tr').data('id');
+        //var title	= $(this).closest('tr').data('title');
+        var title   = $(this).closest('tr').children('td.title_cell').children('.snippet_title').text();
+
+        $('.delete_snippet_title').text(title);
+
+        $("#snippet_confirm_dialog_delete").dialog( {
+            dialogClass: 'snippet_confirm_dialog_delete',
+            modal: true,
+            resizable: false,
+            draggable: false,
+            buttons: [{
+                            text: "Yes",
+                            "class": 'button-primary',
+                            click: function() {
+                                    $(this).dialog("close"); 
+                                    delete_snippet(id);
+                            }
                     },
                     {
-                        text: 'Close',
-                        class: 'button',
-                        click: function() {
-                            $(this).dialog('close');
-                        }
-                    }
-                ],
-                close: function(event, ui) {
-                    $('.snippet_edit_view_btn').blur(); //???
-                }
-            });
-	});
-	
-	function snippet_update(id, title, text) {
-            id = parseInt(id);
-            id = id || 0;
-            var $row_to_update = '';
-            
-            // in edit for show msg
-            var res_container = $('.new_snippet_wrapper').find('.result');
-            res_container.html('Please, wait ...');
-
-            if (id <= 0) {
-                $('#no_snippets_row').hide();
-                $row_to_update = $('#manage_snippets_table .snippet_row:first').clone();
-                $row_to_update.show();
-
-                // newest snippets go first.
-                $('#manage_snippets_table').prepend($row_to_update);
-            } else {
-                $row_to_update = $('.snippet_row_' + id);
+                            text: "No",
+                            "class": 'button',
+                            click: function() { 
+                                $(this).dialog("close");
+                            }
+                    }],
+            close: function(event, ui) {
+                $('.snippet_delete_btn').blur();
             }
-
-            var submit_btn = $('.new_snippet_wrapper').find(':submit');
-            submit_btn.hide();
-
-            $row_to_update.find('.snippet_title').html('Please, wait...');
-            $row_to_update.find('.snippet_content').empty().hide();
-
-            $.ajax({
-                url: ajaxurl,
-                data: {
-                    action: "orb_ctc_addon_cloud_lib_cloud_update",
-                    id : id,
-                    title : title,
-                    text : text
-                },
-                success: function (json) {
-                    res_container.html(json.msg);
-                    submit_btn.show();
-
-                    if (json.status) {
-                       $row_to_update.data('id', json.data.id);
-                       $row_to_update.prop('id', json.data.id);
-                       $row_to_update.find('.snippet_title').html(title);
-                       $row_to_update.removeClass('snippet_row_0');
-                       $row_to_update.addClass('snippet_row_' + json.data.id);
-                       $row_to_update.find('.snippet_content').html(text);
-                       $row_to_update.find('.snippet_content').show();
-
-                       setTimeout(function () {
-                            res_container.empty();
-                            $('.orb_ctc_ext_cloud_lib_add_new_snippet_form').trigger('reset');
-                            $('.orb_ctc_ext_cloud_lib_add_new_snippet_form .add_snippet_text').focus();
-                       }, 2500);
-                    } else {
-                        
-                    }
-                }
-            });
-        }
-	
-	/**
-	 * View snippet button
-	 * 
-	 * Displays View snippet window
-	 * 
-	 */
-	$('.snippet_view_btn').on("click", function() {
-		
-		//var id	= $(this).parents('tr').data('id');
-		//var title	= $(this).parents('tr').data('title');
-        var title   = $(this).parents('tr').children('td.title_cell').children('.snippet_title').text();
-		//var content	= $(this).parents('tr').data('content');
-        var content = $(this).parents('tr').children('td.title_cell').children('.snippet_content').text();
-		
-		$('.view_title').val(title);
-		$('.view_content').val(content);
-		//$('.edit_snippet').show();
-        	
-		$("#view_snippet").dialog( {
-    		dialogClass: 'view_snippet',
-    		modal: true,
-    		resizable: false,
-    		buttons: [{
-    				text: "Copy",
-    				"class": 'button-primary',
-    				click: function() {
-    					$(this).dialog("close"); 
-    					//todo make copy button actually work
-    				}
-    			},
-    			{
-    				text: "Close",
-    				"class": 'button',
-    				click: function() { 
-    					$(this).dialog("close");
-    				}
-    			}],
-    		close: function(event, ui) {
-    		}
-		});
-	});
-	
-        // https://stackoverflow.com/questions/3641154/jquery-trapping-tab-select-event
-        $( '.orb_ctc_addon_cloud_lib_tabs' ).tabs({
-            activate : function(event, ui) {
-                if (ui.newPanel.selector == '#orb_ctc_ext_cloud_lib_add') {
-                    if ($('#add_snippet_title').val().trim() == '') {
-                        $('#add_snippet_title').focus();
-                    } else {
-                        $('#add_snippet_text').focus();
-                    }
-                } else if (ui.newPanel.selector == '#orb_ctc_ext_cloud_lib_signup') {
-                    if ($('#orb_ctc_email').val() == '') {
-                       $('#orb_ctc_email').focus();
-                    } else {
-                        $('#orb_ctc_pass2').focus();
-                    }
-                } else if (ui.newPanel.selector == '#orb_ctc_ext_cloud_lib_login') {
-                    if ($('#orb_ctc_login_email').val() == '') {
-                       $('#orb_ctc_login_email').focus();
-                    } else {
-                        $('#orb_ctc_login_pass').focus();
-                    }
-                }
-            }       
         });
+    });
+
+    /**
+     * We subtract 1 because we have 1 hidden row.
+     * We don't filter by visibility because when a different tab is
+     * shown those a technically hidden.
+     * @returns {Number}
+     */
+    function get_snippet_count() {
+        return $('#manage_snippets_table .snippet_row').length - 1;
+    }
+
+    /**
+     * Delete snippet by id
+     * 
+     * @param id
+     * 
+     */
+    function delete_snippet(id) {
+        $(".snippet_row_" + id).remove();
+
+        // if there aren't any visible rows (i.e. excluding the 0 row that we use for cloning)
+        if ($('#manage_snippets_table .snippet_row:visible').length <= 0) {
+            $('#no_snippets_row').show();
+        } else {
+            $('#no_snippets_row').hide();
+        }
+
+        $.ajax({
+            url: ajaxurl,
+            data: {
+                id: id,
+                action: "orb_ctc_addon_cloud_lib_delete"
+            },
+            success: function (json) {
+                // update max items via js
+                $('.usage_items').text(get_snippet_count());
+
+                if (json.status) {
+                    // the row is deleted anyways so nothing to do.
+                    // just have some coffee.
+                } else {
+                    alert(json.msg);
+                }
+            }
+        });
+    }
+
+    /**
+     * Edit / view window combined
+     * 
+     */
+    $('#manage_snippets_table').on("click", '.snippet_edit_view_btn', function() {
+        var row	= $(this).closest('.snippet_row');
+        var id      = $(row).data('id') || 0;
+        var title_el  = $(row).find('.snippet_title');
+        var title = title_el.html().trim();
+        var content_el   = $(row).find('.snippet_content');
+        var content = content_el.html().trim();
+
+        // decode entities: browsers will encode '&' and other chars. We want the chars unencoded i.e. not as &amp;
+        // https://stackoverflow.com/questions/1147359/how-to-decode-html-entities-using-jquery
+        title = $("<textarea/>").html(title).val();
+        content = $("<textarea/>").html(content).val();
+
+        $('.edit_id').val(id);
+        $('.edit_title').val(title);
+        $('.edit_content').val(content);
+
+        var orb_ctc_cloud_lib_edit_snippet_dlg = $("#edit_snippet").dialog( {
+            dialogClass: 'edit_snippet',
+            modal: true,
+            autoOpen: true,
+//                autoOpen: false,
+            show : false,
+            width : 'auto',
+            resizable: true,
+            minWidth: 300,
+            minHeight: 300,
+            position: { my: "center", at: "center", of: window },
+            buttons: [
+                {
+                    text: 'Save Changes',
+                    class: 'button-primary',
+                    click: function() {
+                        $('.orb_ctc_ext_cloud_lib_edit_snippet_form').trigger('submit'); 
+                        $(this).dialog("close");
+                    }
+                },
+                {
+                    text: 'Close',
+                    class: 'button',
+                    click: function() {
+                        $(this).dialog('close');
+                    }
+                }
+            ],
+            close: function(event, ui) {
+                $('.snippet_edit_view_btn').blur(); //???
+            }
+        });
+    });
+
+    function snippet_update(id, title, text) {
+        id = parseInt(id);
+        id = id || 0;
+        var $row_to_update = '';
+
+        // in edit for show msg
+        var res_container = $('.new_snippet_wrapper').find('.result');
+        res_container.html('Please, wait ...');
+
+        if (id <= 0) {
+            $('#no_snippets_row').hide();
+            $row_to_update = $('#manage_snippets_table .snippet_row:first').clone();
+            $row_to_update.show();
+
+            // newest snippets go first.
+            $('#manage_snippets_table').prepend($row_to_update);
+
+            // update max items via js
+            $('.usage_items').text(get_snippet_count());
+        } else {
+            $row_to_update = $('.snippet_row_' + id);
+        }
+
+        var submit_btn = $('.new_snippet_wrapper').find(':submit');
+        submit_btn.hide();
+
+        $row_to_update.find('.snippet_title').html('Please, wait...');
+        $row_to_update.find('.snippet_content').empty().hide();
+
+        $.ajax({
+            url: ajaxurl,
+            data: {
+                id : id,
+                title : title,
+                text : text,
+                action: "orb_ctc_addon_cloud_lib_cloud_update"
+            },
+            success: function (json) {
+                res_container.html(json.msg);
+                submit_btn.show();
+
+                if (json.status) {
+                   $row_to_update.data('id', json.data.id);
+                   $row_to_update.prop('id', json.data.id);
+                   $row_to_update.find('.snippet_title').html(title);
+                   $row_to_update.removeClass('snippet_row_0');
+                   $row_to_update.addClass('snippet_row_' + json.data.id);
+                   $row_to_update.find('.snippet_content').html(text);
+                   $row_to_update.find('.snippet_content').show();
+
+                   setTimeout(function () {
+                        res_container.empty();
+                        $('.orb_ctc_ext_cloud_lib_add_new_snippet_form').trigger('reset');
+                        $('.orb_ctc_ext_cloud_lib_add_new_snippet_form .add_snippet_text').focus();
+                   }, 2500);
+                } else {
+
+                }
+            }
+        });
+    }
+
+    /**
+     * View snippet button
+     * 
+     * Displays View snippet window
+     * 
+     */
+    $('.snippet_view_btn').on("click", function() {
+
+            //var id	= $(this).parents('tr').data('id');
+            //var title	= $(this).parents('tr').data('title');
+    var title   = $(this).parents('tr').children('td.title_cell').children('.snippet_title').text();
+            //var content	= $(this).parents('tr').data('content');
+    var content = $(this).parents('tr').children('td.title_cell').children('.snippet_content').text();
+
+            $('.view_title').val(title);
+            $('.view_content').val(content);
+            //$('.edit_snippet').show();
+
+            $("#view_snippet").dialog( {
+            dialogClass: 'view_snippet',
+            modal: true,
+            resizable: false,
+            buttons: [{
+                            text: "Copy",
+                            "class": 'button-primary',
+                            click: function() {
+                                    $(this).dialog("close"); 
+                                    //todo make copy button actually work
+                            }
+                    },
+                    {
+                            text: "Close",
+                            "class": 'button',
+                            click: function() { 
+                                    $(this).dialog("close");
+                            }
+                    }],
+            close: function(event, ui) {
+            }
+            });
+    });
+
+    // https://api.jqueryui.com/tabs/
+    // https://stackoverflow.com/questions/3641154/jquery-trapping-tab-select-event
+    $( '.orb_ctc_addon_cloud_lib_tabs' ).tabs({
+        heightStyle: "auto", // All panels will be set to the height of the tallest panel.
+        activate : function(event, ui) {
+            if (ui.newPanel.selector == '#orb_ctc_ext_cloud_lib_add') {
+                if ($('#add_snippet_title').val().trim() == '') {
+                    $('#add_snippet_title').focus();
+                } else {
+                    $('#add_snippet_text').focus();
+                }
+            } else if (ui.newPanel.selector == '#orb_ctc_ext_cloud_lib_signup') {
+                if ($('#orb_ctc_email').val() == '') {
+                   $('#orb_ctc_email').focus();
+                } else {
+                    $('#orb_ctc_pass2').focus();
+                }
+            } else if (ui.newPanel.selector == '#orb_ctc_ext_cloud_lib_login') {
+                if ($('#orb_ctc_login_email').val() == '') {
+                   $('#orb_ctc_login_email').focus();
+                } else {
+                    $('#orb_ctc_login_pass').focus();
+                }
+            }
+        }       
+    })
+    // https://stackoverflow.com/questions/436587/jquery-ui-tabs-automatic-height
+    .css({
+        'min-height': '250px',
+        'overflow': 'auto'
+    });
+
+    // update max items via js
+    $('.usage_items').text(get_snippet_count());
 });

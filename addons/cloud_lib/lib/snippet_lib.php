@@ -732,7 +732,7 @@ class orbisius_ctc_cloud_lib {
                         
                         $key_fmt = preg_replace('#[\-\_]+#si',  ' ', $key);
                         $key_fmt = ucwords($key_fmt);
-                        echo esc_attr($key_fmt) . ': ' . esc_attr($val_fmt) . "<br />\n";
+                        echo esc_attr($key_fmt) . ": <span id='$key' class='$key'>" . esc_attr($val_fmt) . "</span><br />\n";
                     }
                     ?>
                     Orbisius API URL (system): <?php echo $this->get_api_url(); ?>
