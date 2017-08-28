@@ -496,7 +496,7 @@ class orbisius_ctc_cloud_lib {
          <div class="manage_snippets">
             <!--<h3>My Snippets</h3>-->
             <div class="manage_snippets_table_wrapper">
-                <table id="manage_snippets_table" class="widefat manage_snippets_table">
+                <table id="manage_snippets_table" class="widefat000 manage_snippets_table">
                     <?php
                     $no_items_css = '';
                     
@@ -517,9 +517,10 @@ class orbisius_ctc_cloud_lib {
                         </td>
                     </tr>
 
-                    <?php foreach( $all_snippets as $rec) : ?>
+                    <?php foreach( $all_snippets as $idx => $rec) : ?>
                        <tr id="snippet_<?php echo esc_attr($rec['id']); ?>"
                             class="snippet_row snippet_row_<?php echo esc_attr($rec['id']); ?> 
+                            <?php echo $idx % 2 == 1 ? 'alt_row' : ''; ?>
                                 <?php echo empty($rec['id']) ? 'app_hide' :''; ?>"
                             data-id="<?php echo esc_attr($rec['id']); ?>">
                           <td id="td_title" class="title_cell">

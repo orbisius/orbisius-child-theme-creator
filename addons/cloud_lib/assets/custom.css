@@ -37,12 +37,16 @@
 }
 
 .orb_cloud_lib_wrapper .ui-tabs .ui-tabs-nav {
-    padding: 0;
+    padding: 2px;
 }
 
 .orb_cloud_lib_wrapper .tabcontent {
     padding: 5px !important;
     margin: 0 5px !important;
+}
+
+.orb_cloud_lib_wrapper .ui-widget-content {
+    padding: 0;
 }
 /* /jQuery UI tweaks / overrides */
 
@@ -71,12 +75,6 @@
     min-width: 400px !important;
 }*/
 
-.orb_cloud_lib_wrapper .snippet_wrapper {
-    border: 1px solid #ccc;
-    /*margin: 10px 0;*/
-    padding: 3px 5px;
-}
-
 .orb_cloud_lib_wrapper .app_hide {
     display: none;
 }
@@ -87,13 +85,9 @@
     /*padding: 3px 5px;*/
 }
 
-.orb_cloud_lib_wrapper .manage_snippets_table_wrapper {
-    overflow: auto;
-    max-height: 350px;
-}
 
 .orb_cloud_lib_wrapper .delete_snippet_title {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: bold;
     font-style: italic;
 }
@@ -143,8 +137,17 @@
     background-image: linear-gradient(#e50202, #750303);
 }
 
+.orb_cloud_lib_wrapper .manage_snippets_table_wrapper {
+    overflow: auto;
+    font-size: 14px;
+    max-height: 350px;
+}
+
 .orb_cloud_lib_wrapper .manage_snippets_table_wrapper table tr td {
     /*border-bottom: 1px solid #d8d8d8;*/
+    padding: 0;
+    margin-bottom: 5px;
+    font-size: 14px;
 }
 
 .orb_cloud_lib_wrapper .manage_snippets_table_wrapper table tr td.td_title {
@@ -157,9 +160,13 @@
 }
 
 /*https://css-tricks.com/snippets/css/truncate-string-with-ellipsis/*/
-.orb_cloud_lib_wrapper .manage_snippets_table_wrapper .truncate {
+.orb_cloud_lib_wrapper .truncate {
   width: 250px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.orb_cloud_lib_wrapper .alt_row {
+    background: #eee;
 }
