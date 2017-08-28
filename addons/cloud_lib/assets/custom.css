@@ -157,6 +157,7 @@
 .orb_cloud_lib_wrapper .manage_snippets_table_wrapper table tr .cmd_row {
     width: 45%;
     text-align: right;
+    vertical-align: middle;
 }
 
 /*https://css-tricks.com/snippets/css/truncate-string-with-ellipsis/*/
