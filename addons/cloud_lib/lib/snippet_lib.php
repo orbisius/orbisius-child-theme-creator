@@ -1,5 +1,7 @@
 <?php
 
+define('ORBISIUS_CHILD_THEME_CREATOR_EXT_CLOUD_LIB_MAX_ITEMS', 25);
+
 /**
  * Autocomplete
  * Search for a snippet
@@ -18,10 +20,10 @@ class orbisius_ctc_cloud_lib {
     private $tabs = [];
 
     public function __construct() {
-        if ( !empty( $_SERVER['DEV_ENV'])) {
+        if ( 0&&!empty( $_SERVER['DEV_ENV'])) {
             $this->api_url = $this->dev_api_url;
         } elseif ( !empty($_SERVER['HTTP_HOST'])
-                && (stripos($_SERVER['HTTP_HOST'], '.clients.com') !== false)) {
+                && 1) { // (stripos($_SERVER['HTTP_HOST'], '.clients.com') !== false)
             $this->api_url = $this->staging_api_url;
         } elseif ( !empty($_SERVER['HTTP_HOST'])
                 && (stripos($_SERVER['HTTP_HOST'], '.qsandbox.com') !== false)) {
@@ -59,14 +61,22 @@ class orbisius_ctc_cloud_lib {
                 'label' => __( 'Account', 'orbisius-child-theme-creator' ),
             ],
             [
+                'id' => 'orb_ctc_ext_cloud_lib_contact',
+                'label' => __( 'Contact', 'orbisius-child-theme-creator' ),
+            ],
+            [
                 'id' => 'orb_ctc_ext_cloud_lib_about',
                 'label' => __( 'About', 'orbisius-child-theme-creator' ),
-            ],
+            ],            
         ];
         
         $this->tabs = $tabs;
     }
-        
+    
+    public function get_api_url() {
+        return $this->api_url;
+    }
+    
     /**
      * Add snippet librabry actions
      */
@@ -82,7 +92,7 @@ class orbisius_ctc_cloud_lib {
             '1.0',
             false
         );
-        
+
         wp_register_script( 'orbisius_ctc_cloud_lib', 
             apply_filters('orbisius_child_theme_creator_filter_asset_src', "/addons/cloud_lib/assets/custom.js" ), 
             array('jquery', ),
@@ -714,11 +724,16 @@ class orbisius_ctc_cloud_lib {
                             $val_fmt = $value <= 0 ? 'Free plan' : $value;
                         }
                         
+                        if ($key == 'max_items') {
+                            $val_fmt = $this->get_max_snippets();
+                        }
+                        
                         $key_fmt = preg_replace('#[\-\_]+#si',  ' ', $key);
                         $key_fmt = ucwords($key_fmt);
                         echo esc_attr($key_fmt) . ': ' . esc_attr($val_fmt) . "<br />\n";
                     }
                     ?>
+                    Orbisius API URL (system): <?php echo $this->get_api_url(); ?>
                 </div> <!-- /api_orb_plan -->
                 <?php endif; ?>
 
@@ -756,6 +771,10 @@ class orbisius_ctc_cloud_lib {
         <?php
     }
     
+    public function get_max_snippets() {
+        return ORBISIUS_CHILD_THEME_CREATOR_EXT_CLOUD_LIB_MAX_ITEMS;
+    }
+    
     /**
      * About tab view
      * 
@@ -769,9 +788,35 @@ class orbisius_ctc_cloud_lib {
                 <div class="">
                     Orbisius Cloud library enables you to store your snippets, license keys etc in the Orbisius Cloud Library.
                     You can access those snippets from other WordPress installations.
-                    With your free Orbisius account and you can store up to 10 snippets for free.
+                    With your free Orbisius account and you can store up to 
+                        <?php echo $this->get_max_snippets();?> snippets for free.
                 </div>
             </div> <!-- /orb_ctc_ext_cloud_lib_about_wrapper -->  
+        </div>
+         <?php
+    }
+    
+    /**
+     * Contact tab view
+     */
+    public function render_tab_content_orb_ctc_ext_cloud_lib_contact() {
+        $e = [
+            'tab' => 'contact',
+        ];
+        ?>
+         <div id="orb_ctc_ext_cloud_lib_contact" class="tabcontent">
+            <div class="orb_ctc_ext_cloud_lib_contact_wrapper">
+                <!--<h3>About</h3>-->
+                <div class="">
+                    Please, report any glitches you may find. We'd really appreciate it.
+                    <a href="//orbisius.com/contact/quick-contact/?utm_source=ctc&utm_medium=cloud_lib&<?php echo http_build_query($e);?>" 
+                       target="_blank" 
+                       title="Contact us with a suggestion, bug report etc. This link includes your email, API key, site url so you don't have to enter it again to get support. [new window/tab]"
+                       class="button-primary">Contact Us</a>
+                    
+                    you can also email us at: <a href="mailto:help@orbisius.com?subject=ctc cloud lib feedback" class="">help@orbisius.com</a>
+                </div>
+            </div> <!-- /orb_ctc_ext_cloud_lib_contact_wrapper -->  
         </div>
          <?php
     }
@@ -845,7 +890,7 @@ class orbisius_ctc_cloud_lib {
                 $render = 0;
             }
         } else {
-            if (!preg_match('#signup|login|about#si', $tab_rec['id'])) {
+            if (!preg_match('#signup|login|about|contact#si', $tab_rec['id'])) {
                 $render = 0;
             }
         }
