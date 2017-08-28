@@ -83,13 +83,27 @@ class orbisius_ctc_cloud_lib {
             false
         );
         
-        wp_register_script( 'orbisius_ctc_cloud_lib', apply_filters('orbisius_child_theme_creator_filter_asset_src', "/addons/cloud_lib/assets/custom.js" ), array('jquery', ),
-            filemtime( plugin_dir_path( ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE ) . "/addons/cloud_lib/assets/custom.js" ), true);
+        wp_register_script( 'orbisius_ctc_cloud_lib', 
+            apply_filters('orbisius_child_theme_creator_filter_asset_src', "/addons/cloud_lib/assets/custom.js" ), 
+            array('jquery', ),
+            apply_filters('orbisius_child_theme_creator_filter_asset_src', 
+                "/addons/cloud_lib/assets/custom.js",
+                [ 'last_mod' => 1 ] 
+            ),
+            true
+        );
         wp_enqueue_script( 'orbisius_ctc_cloud_lib' );
 
         //Custom styles for snippet library
-        wp_register_style('orbisius_ctc_cloud_lib', apply_filters('orbisius_child_theme_creator_filter_asset_src', "/addons/cloud_lib/assets/custom.css" ), null,
-            filemtime( plugin_dir_path( ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE ) . "/addons/cloud_lib/assets/custom.css" ), false );
+        wp_register_style('orbisius_ctc_cloud_lib', 
+            apply_filters('orbisius_child_theme_creator_filter_asset_src', "/addons/cloud_lib/assets/custom.css" ), 
+            null,
+            apply_filters('orbisius_child_theme_creator_filter_asset_src', 
+                "/addons/cloud_lib/assets/custom.css",
+                [ 'last_mod' => 1 ] 
+            ), 
+            false
+        );
         wp_enqueue_style('orbisius_ctc_cloud_lib');
     }
     
