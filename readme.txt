@@ -17,7 +17,7 @@ It also creates rtl.css if exists in the parent theme.
 **Did you find this plugin helpful? Please consider [writing a review](https://wordpress.org/support/view/plugin-reviews/orbisius-child-theme-creator).**
 
 = Child Theme Creator Features =
-* Since v1.4 store your snippets, license keys in Orbisius cloud library
+* Since v1.4 store your snippets, license keys in Orbisius cloud library. Access them with a click of a button.
 * Create a theme with a click of a button
 * Uses the recommended approach for loading css (since v.1.3.4)
 * Never forget what files to copy and what to skip when creating child themes.
