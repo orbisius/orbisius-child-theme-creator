@@ -483,7 +483,9 @@ class orbisius_ctc_cloud_lib {
                     <input type="text" id="add_snippet_title" 
                            required=""
                            class="add_snippet_title widefat" 
-                           value="" placeholder="Title" />
+                           autocomplete="off"
+                           value=""
+                           placeholder="Title" />
                     <br /><br />
                     Code/license key/content<br/>
                     <textarea id="add_snippet_text" class="widefat add_snippet_text" 
@@ -575,7 +577,7 @@ class orbisius_ctc_cloud_lib {
                         <!-- Edit snippet window -->
                         <div id="edit_snippet" class="edit_snippet app_hide" title="Edit Snippet">
                             <input type="hidden" id="edit_id" class="edit_id" name="id" value="0"/>
-                            <input type="text" id="edit_title" class="edit_title" name="title"/>
+                            <input type="text" id="edit_title" class="edit_title" name="title" autocomplete="off" />
                             <br />
                             <textarea id="edit_content" class="edit_content" name="content"></textarea>
                             <br />
