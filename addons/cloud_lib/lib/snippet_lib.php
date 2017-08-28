@@ -83,12 +83,12 @@ class orbisius_ctc_cloud_lib {
             false
         );
         
-        wp_register_script( 'orbisius_ctc_cloud_lib', plugins_url("/addons/cloud_lib/assets/custom.js", ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE), array('jquery', ),
+        wp_register_script( 'orbisius_ctc_cloud_lib', apply_filters('orbisius_child_theme_creator_filter_asset_src', "/addons/cloud_lib/assets/custom.js" ), array('jquery', ),
             filemtime( plugin_dir_path( ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE ) . "/addons/cloud_lib/assets/custom.js" ), true);
         wp_enqueue_script( 'orbisius_ctc_cloud_lib' );
 
         //Custom styles for snippet library
-        wp_register_style('orbisius_ctc_cloud_lib', plugins_url("/addons/cloud_lib/assets/custom.css", ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE), null,
+        wp_register_style('orbisius_ctc_cloud_lib', apply_filters('orbisius_child_theme_creator_filter_asset_src', "/addons/cloud_lib/assets/custom.css" ), null,
             filemtime( plugin_dir_path( ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE ) . "/addons/cloud_lib/assets/custom.css" ), false );
         wp_enqueue_style('orbisius_ctc_cloud_lib');
     }

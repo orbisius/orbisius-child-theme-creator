@@ -266,6 +266,28 @@ function orbisius_child_theme_creator_set_options($opts = array(), $override = 0
     return $opts;
 }
 
+function orbisius_child_theme_creator_is_live_env() {
+    return empty($_SERVER['DEV_ENV']);
+}
+
+add_filter('orbisius_child_theme_creator_filter_asset_src', 'orbisius_child_theme_creator_fix_asset_src', 10, 2);
+function orbisius_child_theme_creator_fix_asset_src($src, $ctx = []) {
+    if (1 || orbisius_child_theme_creator_is_live_env()
+            && (!preg_match('#^(?:https?:)?//#si', $src)) ) {
+        $new_src = $src;
+        $new_src = str_replace( '.css', '.min.css', $new_src);
+        $new_src = str_replace( '.js', '.min.js', $new_src);
+        
+        // We check if .min file exists and if so use it.
+        if (file_exists(plugin_dir_path( ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE ) . $new_src )) {
+            $full_new_src = plugins_url($new_src, ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE);
+            $src = $full_new_src;
+        }
+    }
+    
+    return $src;
+}
+
 /**
  * @package Orbisius Child Theme Creator
  * @since 1.0
