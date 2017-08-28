@@ -311,7 +311,7 @@ function orbisius_child_theme_creator_admin_enqueue_scripts($current_page = '') 
         return ;
     }
     
-    $suffix = empty($_SERVER['DEV_ENV']) ? '.min' : '';
+    $suffix = orbisius_child_theme_creator_is_live_env() ? '.min' : '';
 
     wp_register_style('orbisius_child_theme_creator', plugins_url("/assets/main{$suffix}.css", __FILE__), false,
             filemtime( plugin_dir_path( __FILE__ ) . "/assets/main{$suffix}.css" ) );
