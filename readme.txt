@@ -166,6 +166,9 @@ Todo
 
 == Changelog ==
 
+= 1.4.2 =
+* Corrected links to the cloud library api.
+
 = 1.4.1 =
 * The previous version got released prematurely. So sorry!
 
