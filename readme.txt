@@ -168,6 +168,7 @@ Todo
 
 = 1.4.2 =
 * Corrected links to the cloud library api.
+* Reduced the Promo messages in the Editor.
 
 = 1.4.1 =
 * The previous version got released prematurely. So sorry!

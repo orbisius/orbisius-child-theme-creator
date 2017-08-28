@@ -2383,12 +2383,10 @@ function orbisius_ctc_theme_editor() {
 
                         <div style="border:1px solid #ccc;margin:10px 0;padding:3px 5px;">
                             <h3>Pro Addon 
-                                <?php if ( ! orbisius_child_theme_creator_is_pro_installed() ) : ?>
+                                <?php if ( 0&&! orbisius_child_theme_creator_is_pro_installed() ) : ?>
                                 <ul>
                                     <li>Syntax Highlighting</li>
                                     <li>Better dropdown for selecting themes and files</li>
-                                    <li>Soon: snippet library stored in the cloud</li>
-                                    <li></li>
                                 </ul>
                                 <?php endif; ?>
                             </h3>
@@ -2499,8 +2497,7 @@ function orbisius_ctc_theme_editor() {
 
         <?php do_action('orbisius_child_theme_creator_editors_ext_action_footer', array() ); ?>
 
-        <br/>
-        <?php orbisius_child_theme_creator_util::output_orb_widget(); ?>
+        <?php //orbisius_child_theme_creator_util::output_orb_widget(); ?>
     <?php
 }
 
