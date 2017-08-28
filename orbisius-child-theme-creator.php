@@ -272,8 +272,7 @@ function orbisius_child_theme_creator_is_live_env() {
 
 add_filter('orbisius_child_theme_creator_filter_asset_src', 'orbisius_child_theme_creator_fix_asset_src', 10, 2);
 function orbisius_child_theme_creator_fix_asset_src($src, $ctx = []) {
-    if (1 //|| orbisius_child_theme_creator_is_live_env() // only on live env
-            && (!preg_match('#^(?:https?:)?//#si', $src)) ) // not full urls.
+    if (!preg_match('#^(?:https?:)?//#si', $src)) // not full urls.
             {
         $new_src = $src;
 
