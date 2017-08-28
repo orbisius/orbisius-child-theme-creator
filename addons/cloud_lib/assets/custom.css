@@ -1,9 +1,4 @@
 /* Snippet Library styles */
-
-.ui-autocomplete-loading {
-    background: url('images/loader.gif') no-repeat right center
-}
-
 span.label {
     font-weight: bold;
     color: #3c7504; /* #336600 */
@@ -30,16 +25,31 @@ span.descr {
     margin-top: -25px;
 }*/
 
+.orb_cloud_lib_wrapper {
+    /*margin: 1em 0;*/
+}
+
 .orb_cloud_lib_wrapper .half_text {
     width: 50%;
 }
 
-.orb_cloud_lib_wrapper .text_75p {
-    width: 75%;
+/* jQuery UI tweaks / overrides */
+.ui-autocomplete-loading {
+    background: url('images/loader.gif') no-repeat right center
 }
 
-.orb_cloud_lib_wrapper {
-    margin: 1em 0;
+.orb_cloud_lib_wrapper .ui-widget-header {
+    border: 0;
+    background: inherit;
+}
+
+.orb_cloud_lib_wrapper .ui-tabs .ui-tabs-nav {
+    padding: 0;
+}
+/* /jQuery UI tweaks / overrides */
+
+.orb_cloud_lib_wrapper .text_75p {
+    width: 75%;
 }
 
 .orb_cloud_lib_wrapper .app_hide {
