@@ -47,7 +47,8 @@ jQuery(document).ready(function($) {
                     res_container.html('Please, wait');
                     window.location.reload();
                 } else {
-                    res_container.html(json.msg);
+                    var msg = json.msg || "There was an error with the registration. Contact us and report if you think this is a glitch.";
+                    res_container.html(msg);
                     submit_btn.show();
                 }
             }
@@ -85,7 +86,8 @@ jQuery(document).ready(function($) {
                     res_container.html('Please, wait');
                     window.location.reload();
                 } else {
-                    res_container.html(json.msg);
+                    var msg = json.msg || "Login details are incorrect.";
+                    res_container.html(msg);
                     submit_btn.show();
                 }
             }
