@@ -20,7 +20,7 @@ class orbisius_ctc_cloud_lib {
     private $tabs = [];
 
     public function __construct() {
-        if ( 0&&!empty( $_SERVER['DEV_ENV'])) {
+        if ( !empty( $_SERVER['DEV_ENV'])) {
             $this->api_url = $this->dev_api_url;
         } elseif ( !empty($_SERVER['HTTP_HOST'])
                 && 1) { // (stripos($_SERVER['HTTP_HOST'], '.clients.com') !== false)
@@ -31,7 +31,7 @@ class orbisius_ctc_cloud_lib {
         } else {
             $this->api_url = $this->live_api_url;
         }
-
+//$this->api_url = $this->live_api_url; // on dev
         // We need to initialize the tabs here because we're using __ method
         // for future internationalization.
         $tabs = [
@@ -175,6 +175,7 @@ class orbisius_ctc_cloud_lib {
             'timeout' => 20,
             'redirection' => 5,
             'blocking' => true,
+            //'sslverify' => false,
             'body' => $req_params,
         ];
         
@@ -711,7 +712,7 @@ class orbisius_ctc_cloud_lib {
                     Email: <?php echo $email; ?>
                 </div>
                 
-                <?php if (!empty($api_key)) : ?>
+                <?php if (0&&!empty($api_key)) : ?>
                 <div class="api_key_wrapper">
                     Orbisius API Key: <?php echo $api_key; ?>
                 </div>
