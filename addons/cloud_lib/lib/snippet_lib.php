@@ -847,7 +847,6 @@ class orbisius_ctc_cloud_lib {
             <div class="snippet_wrapper">
                 <h3>Orbisius Cloud Library</h3>
                 <?php $this->render_tabs(); ?>
-                <br/>
                 <?php
                     foreach ( $this->tabs as $tab_rec ) {
                         if (!$this->should_render_tab($tab_rec)) {
