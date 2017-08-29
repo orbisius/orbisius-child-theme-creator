@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="33">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="34">
         <file>
             <url>assets/main.js</url>
             <bookmark id="19">
@@ -16,69 +16,74 @@
                 <line>105</line>
                 <key/>
             </bookmark>
+            <bookmark id="34">
+                <name/>
+                <line>272</line>
+                <key/>
+            </bookmark>
             <bookmark id="21">
                 <name/>
-                <line>696</line>
+                <line>728</line>
                 <key/>
             </bookmark>
             <bookmark id="15">
                 <name/>
-                <line>1464</line>
+                <line>1496</line>
                 <key/>
             </bookmark>
             <bookmark id="16">
                 <name/>
-                <line>1605</line>
+                <line>1637</line>
                 <key/>
             </bookmark>
             <bookmark id="6">
                 <name/>
-                <line>1679</line>
+                <line>1711</line>
                 <key/>
             </bookmark>
             <bookmark id="14">
                 <name/>
-                <line>1757</line>
+                <line>1789</line>
                 <key/>
             </bookmark>
             <bookmark id="12">
                 <name/>
-                <line>2214</line>
+                <line>2246</line>
                 <key/>
             </bookmark>
             <bookmark id="9">
                 <name/>
-                <line>2219</line>
+                <line>2251</line>
                 <key/>
             </bookmark>
             <bookmark id="5">
                 <name/>
-                <line>2261</line>
+                <line>2293</line>
                 <key/>
             </bookmark>
             <bookmark id="18">
                 <name/>
-                <line>2271</line>
+                <line>2303</line>
                 <key/>
             </bookmark>
             <bookmark id="4">
                 <name/>
-                <line>2378</line>
+                <line>2408</line>
                 <key/>
             </bookmark>
             <bookmark id="17">
                 <name/>
-                <line>2410</line>
+                <line>2440</line>
                 <key/>
             </bookmark>
             <bookmark id="13">
                 <name/>
-                <line>2592</line>
+                <line>2621</line>
                 <key/>
             </bookmark>
             <bookmark id="3">
                 <name/>
-                <line>2637</line>
+                <line>2666</line>
                 <key/>
             </bookmark>
         </file>
@@ -86,17 +91,17 @@
             <url>addons/cloud_lib/assets/custom.js</url>
             <bookmark id="29">
                 <name/>
-                <line>285</line>
+                <line>287</line>
                 <key/>
             </bookmark>
             <bookmark id="30">
                 <name/>
-                <line>364</line>
+                <line>379</line>
                 <key/>
             </bookmark>
             <bookmark id="33">
                 <name/>
-                <line>404</line>
+                <line>419</line>
                 <key/>
             </bookmark>
         </file>
@@ -104,17 +109,17 @@
             <url>addons/cloud_lib/lib/snippet_lib.php</url>
             <bookmark id="28">
                 <name/>
-                <line>329</line>
+                <line>354</line>
                 <key/>
             </bookmark>
             <bookmark id="27">
                 <name/>
-                <line>329</line>
+                <line>354</line>
                 <key/>
             </bookmark>
             <bookmark id="26">
                 <name/>
-                <line>457</line>
+                <line>482</line>
                 <key/>
             </bookmark>
         </file>
@@ -133,12 +138,6 @@
             <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/orbisius-child-theme-creator.php</file>
             <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/readme.txt</file>
         </group>
-        <group>
-            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/addons/cloud_lib/assets/custom.js</file>
-            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/addons/cloud_lib/lib/snippet_lib.php</file>
-            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/addons/cloud_lib/assets/custom.css</file>
-            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/docs/snippets.txt</file>
-            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/lib/user.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
