@@ -271,7 +271,7 @@ function orbisius_child_theme_creator_is_live_env() {
 }
 
 add_filter('orbisius_child_theme_creator_filter_asset_src', 'orbisius_child_theme_creator_fix_asset_src', 10, 2);
-function orbisius_child_theme_creator_fix_asset_src($src, $ctx = []) {
+function orbisius_child_theme_creator_fix_asset_src($src, $ctx = array()) {
     if (!preg_match('#^(?:https?:)?//#si', $src)) // not full urls.
             {
         $new_src = $src;

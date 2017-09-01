@@ -213,9 +213,9 @@ class orbisius_ctc_cloud_lib {
         if ($req_res->is_success()) {
             $api_res = $req_res->data('result');
 
-            $ctx = [
+            $ctx = array(
                 'api_res' => $api_res,
-            ];
+            );
             
             if ($api_res->is_success()) {
                 do_action('orbisius_child_theme_creator_addon_cloud_lib_action_auth_success', $ctx);
@@ -275,22 +275,22 @@ class orbisius_ctc_cloud_lib {
         $pass = orbisius_child_theme_creator_get('orb_ctc_pass');
         $email = orbisius_child_theme_creator_get('orb_ctc_email');
         
-        $params = [
-            'orb_cloud_lib_data' => [
+        $params = array(
+            'orb_cloud_lib_data' => array(
                 'cmd' => 'user.register',
                 'pass' => $pass,
                 'email' => $email,
-            ]
-        ];
+            )
+        );
 
         $req_res = $this->call($this->api_url, $params);
         
         if ($req_res->is_success()) {
             $api_res = $req_res->data('result');
 
-            $ctx = [
+            $ctx = array(
                 'api_res' => $api_res,
-            ];
+            );
             
             if ($api_res->is_success()) {
                 do_action('orbisius_child_theme_creator_addon_cloud_lib_action_auth_success', $ctx);
@@ -905,7 +905,7 @@ class orbisius_ctc_cloud_lib {
      * 
      * @param array $ctx
      */
-    public function render_ui($ctx = []) {
+    public function render_ui($ctx = array()) {
         $place = empty($ctx['place']) ? 'left' : $ctx['place'];
         $user_api = orbisius_child_theme_creator_user::get_instance();
         $api_key = $user_api->api_key();

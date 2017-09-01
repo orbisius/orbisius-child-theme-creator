@@ -168,6 +168,7 @@ Todo
 
 = 1.4.3 =
 * Removed some of the info about other plugins
+* Using old way of defining arrays e.g. array() and not [] because some hosts still run old php :(
 * Added a notice that the initial message upon plugin activation will disappear in 24h
 
 = 1.4.2 =
