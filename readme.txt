@@ -170,6 +170,7 @@ Todo
 * Removed some of the info about other plugins
 * Using old way of defining arrays e.g. array() and not [] because some hosts still run old php :(
 * Added a notice that the initial message upon plugin activation will disappear in 24h
+* Moved the feedback box higher
 
 = 1.4.2 =
 * Corrected links to the cloud library api.

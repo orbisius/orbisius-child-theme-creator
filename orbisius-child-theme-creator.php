@@ -485,6 +485,98 @@ function orbisius_child_theme_creator_settings_page() {
                 <div id="postbox-container-1" class="postbox-container">
 
                     <div class="meta-box-sortables">
+                        <div class="postbox"> <!-- quick-contact -->
+                            <?php
+                            $current_user = wp_get_current_user();
+                            $email = empty($current_user->user_email) ? '' : $current_user->user_email;
+                            $quick_form_action = is_ssl()
+                                    ? 'https://ssl.orbisius.com/apps/quick-contact/'
+                                    : 'http://apps.orbisius.com/quick-contact/';
+
+                            if (!empty($_SERVER['DEV_ENV'])) {
+                                $quick_form_action = 'http://localhost/projects/quick-contact/';
+                            }
+                            ?>
+                            <script>
+                                var octc_quick_contact = {
+                                    validate_form : function () {
+                                        try {
+                                            var msg = jQuery('#octc_msg').val().trim();
+                                            var email = jQuery('#octc_email').val().trim();
+
+                                            email = email.replace(/\s+/, '');
+                                            email = email.replace(/\.+/, '.');
+                                            email = email.replace(/\@+/, '@');
+
+                                            if ( msg == '' ) {
+                                                alert('Enter your message.');
+                                                jQuery('#octc_msg').focus().val(msg).css('border', '1px solid red');
+                                                return false;
+                                            } else {
+                                                // all is good clear borders
+                                                jQuery('#octc_msg').css('border', '');
+                                            }
+
+                                            if ( email == '' || email.indexOf('@') <= 2 || email.indexOf('.') == -1) {
+                                                alert('Enter your email and make sure it is valid.');
+                                                jQuery('#octc_email').focus().val(email).css('border', '1px solid red');
+                                                return false;
+                                            } else {
+                                                // all is good clear borders
+                                                jQuery('#octc_email').css('border', '');
+                                            }
+
+                                            return true;
+                                        } catch(e) {};
+                                    }
+                                };
+                            </script>
+                            <h3><span>Quick Question or Suggestion</span></h3>
+                            <div class="inside">
+                                <div>
+                                    <form method="post" action="<?php echo $quick_form_action; ?>" target="_blank">
+                                        <?php
+                                            global $wp_version;
+											$plugin_data = get_plugin_data(__FILE__);
+
+                                            $hidden_data = array(
+                                                'site_url' => site_url(),
+                                                'wp_ver' => $wp_version,
+                                                'first_name' => $current_user->first_name,
+                                                'last_name' => $current_user->last_name,
+                                                'product_name' => $plugin_data['Name'],
+                                                'product_ver' => $plugin_data['Version'],
+                                                'woocommerce_ver' => defined('WOOCOMMERCE_VERSION') ? WOOCOMMERCE_VERSION : 'n/a',
+                                            );
+                                            $hid_data = http_build_query($hidden_data);
+                                            echo "<input type='hidden' name='data[sys_info]' value='$hid_data' />\n";
+                                        ?>
+                                        <textarea class="widefat" id='octc_msg' name='data[msg]' required="required"></textarea>
+                                        <br/>Your Email: <input type="text" class=""
+                                               id="octc_email" name='data[sender_email]' placeholder="Email" required="required"
+                                               value="<?php echo esc_attr($email); ?>"
+                                               />
+                                        <br/><input type="submit" class="button-primary" value="<?php _e('Send Feedback') ?>"
+                                                    onclick="return octc_quick_contact.validate_form();" />
+                                        <br/>
+                                        What data will be sent
+                                        <a href='javascript:void(0);'
+                                            onclick='jQuery(".octc_data_to_be_sent").toggle();'>(show/hide)</a>
+                                        <div class="hide-is-js app-hide octc_data_to_be_sent">
+                                            <textarea class="widefat0" rows="4" readonly="readonly" disabled="disabled"><?php
+                                            foreach ($hidden_data as $key => $val) {
+                                                if (is_array($val)) {
+                                                    $val = var_export($val, 1);
+                                                }
+
+                                                echo "$key: $val\n";
+                                            }
+                                            ?></textarea>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div> <!-- .inside -->
+                        </div> <!-- .postbox --> <!-- /quick-contact -->
 
                         <!-- Hire Us -->
                         <div class="postbox">
@@ -588,101 +680,7 @@ function orbisius_child_theme_creator_settings_page() {
                                 target="_blank" title="[new window]">Orbisius Theme Fixer</a>
                             </div>
                         </div> <!-- .postbox -->
-
-
-                        <div class="postbox"> <!-- quick-contact -->
-                            <?php
-                            $current_user = wp_get_current_user();
-                            $email = empty($current_user->user_email) ? '' : $current_user->user_email;
-                            $quick_form_action = is_ssl()
-                                    ? 'https://ssl.orbisius.com/apps/quick-contact/'
-                                    : 'http://apps.orbisius.com/quick-contact/';
-
-                            if (!empty($_SERVER['DEV_ENV'])) {
-                                $quick_form_action = 'http://localhost/projects/quick-contact/';
-                            }
-                            ?>
-                            <script>
-                                var octc_quick_contact = {
-                                    validate_form : function () {
-                                        try {
-                                            var msg = jQuery('#octc_msg').val().trim();
-                                            var email = jQuery('#octc_email').val().trim();
-
-                                            email = email.replace(/\s+/, '');
-                                            email = email.replace(/\.+/, '.');
-                                            email = email.replace(/\@+/, '@');
-
-                                            if ( msg == '' ) {
-                                                alert('Enter your message.');
-                                                jQuery('#octc_msg').focus().val(msg).css('border', '1px solid red');
-                                                return false;
-                                            } else {
-                                                // all is good clear borders
-                                                jQuery('#octc_msg').css('border', '');
-                                            }
-
-                                            if ( email == '' || email.indexOf('@') <= 2 || email.indexOf('.') == -1) {
-                                                alert('Enter your email and make sure it is valid.');
-                                                jQuery('#octc_email').focus().val(email).css('border', '1px solid red');
-                                                return false;
-                                            } else {
-                                                // all is good clear borders
-                                                jQuery('#octc_email').css('border', '');
-                                            }
-
-                                            return true;
-                                        } catch(e) {};
-                                    }
-                                };
-                            </script>
-                            <h3><span>Quick Question or Suggestion</span></h3>
-                            <div class="inside">
-                                <div>
-                                    <form method="post" action="<?php echo $quick_form_action; ?>" target="_blank">
-                                        <?php
-                                            global $wp_version;
-											$plugin_data = get_plugin_data(__FILE__);
-
-                                            $hidden_data = array(
-                                                'site_url' => site_url(),
-                                                'wp_ver' => $wp_version,
-                                                'first_name' => $current_user->first_name,
-                                                'last_name' => $current_user->last_name,
-                                                'product_name' => $plugin_data['Name'],
-                                                'product_ver' => $plugin_data['Version'],
-                                                'woocommerce_ver' => defined('WOOCOMMERCE_VERSION') ? WOOCOMMERCE_VERSION : 'n/a',
-                                            );
-                                            $hid_data = http_build_query($hidden_data);
-                                            echo "<input type='hidden' name='data[sys_info]' value='$hid_data' />\n";
-                                        ?>
-                                        <textarea class="widefat" id='octc_msg' name='data[msg]' required="required"></textarea>
-                                        <br/>Your Email: <input type="text" class=""
-                                               id="octc_email" name='data[sender_email]' placeholder="Email" required="required"
-                                               value="<?php echo esc_attr($email); ?>"
-                                               />
-                                        <br/><input type="submit" class="button-primary" value="<?php _e('Send Feedback') ?>"
-                                                    onclick="return octc_quick_contact.validate_form();" />
-                                        <br/>
-                                        What data will be sent
-                                        <a href='javascript:void(0);'
-                                            onclick='jQuery(".octc_data_to_be_sent").toggle();'>(show/hide)</a>
-                                        <div class="hide-is-js app-hide octc_data_to_be_sent">
-                                            <textarea class="widefat0" rows="4" readonly="readonly" disabled="disabled"><?php
-                                            foreach ($hidden_data as $key => $val) {
-                                                if (is_array($val)) {
-                                                    $val = var_export($val, 1);
-                                                }
-
-                                                echo "$key: $val\n";
-                                            }
-                                            ?></textarea>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div> <!-- .inside -->
-                         </div> <!-- .postbox --> <!-- /quick-contact -->
-
+                        
                     </div> <!-- .meta-box-sortables -->
 
                 </div> <!-- #postbox-container-1 .postbox-container sidebar -->
@@ -1168,9 +1166,101 @@ function orbisius_child_theme_creator_tools_action() {
                 <div id="postbox-container-1" class="postbox-container">
 
                     <div class="meta-box-sortables">
+                        <div class="postbox"> <!-- quick-contact -->
+                            <?php
+                            $current_user = wp_get_current_user();
+                            $email = empty($current_user->user_email) ? '' : $current_user->user_email;
+                            $quick_form_action = is_ssl()
+                                    ? 'https://ssl.orbisius.com/apps/quick-contact/'
+                                    : 'http://apps.orbisius.com/quick-contact/';
+
+                            if (!empty($_SERVER['DEV_ENV'])) {
+                                $quick_form_action = 'http://localhost/projects/quick-contact/';
+                            }
+                            ?>
+                            <script>
+                                var octc_quick_contact = {
+                                    validate_form : function () {
+                                        try {
+                                            var msg = jQuery('#octc_msg').val().trim();
+                                            var email = jQuery('#octc_email').val().trim();
+
+                                            email = email.replace(/\s+/, '');
+                                            email = email.replace(/\.+/, '.');
+                                            email = email.replace(/\@+/, '@');
+
+                                            if ( msg == '' ) {
+                                                alert('Enter your message.');
+                                                jQuery('#octc_msg').focus().val(msg).css('border', '1px solid red');
+                                                return false;
+                                            } else {
+                                                // all is good clear borders
+                                                jQuery('#octc_msg').css('border', '');
+                                            }
+
+                                            if ( email == '' || email.indexOf('@') <= 2 || email.indexOf('.') == -1) {
+                                                alert('Enter your email and make sure it is valid.');
+                                                jQuery('#octc_email').focus().val(email).css('border', '1px solid red');
+                                                return false;
+                                            } else {
+                                                // all is good clear borders
+                                                jQuery('#octc_email').css('border', '');
+                                            }
+
+                                            return true;
+                                        } catch(e) {};
+                                    }
+                                };
+                            </script>
+                            <h3><span>Quick Question or Suggestion</span></h3>
+                            <div class="inside">
+                                <div>
+                                    <form method="post" action="<?php echo $quick_form_action; ?>" target="_blank">
+                                        <?php
+                                            global $wp_version;
+											$plugin_data = get_plugin_data(__FILE__);
+
+                                            $hidden_data = array(
+                                                'site_url' => site_url(),
+                                                'wp_ver' => $wp_version,
+                                                'first_name' => $current_user->first_name,
+                                                'last_name' => $current_user->last_name,
+                                                'product_name' => $plugin_data['Name'],
+                                                'product_ver' => $plugin_data['Version'],
+                                                'woocommerce_ver' => defined('WOOCOMMERCE_VERSION') ? WOOCOMMERCE_VERSION : 'n/a',
+                                            );
+                                            $hid_data = http_build_query($hidden_data);
+                                            echo "<input type='hidden' name='data[sys_info]' value='$hid_data' />\n";
+                                        ?>
+                                        <textarea class="widefat" id='octc_msg' name='data[msg]' required="required"></textarea>
+                                        <br/>Your Email: <input type="text" class=""
+                                               id="octc_email" name='data[sender_email]' placeholder="Email" required="required"
+                                               value="<?php echo esc_attr($email); ?>"
+                                               />
+                                        <br/><input type="submit" class="button-primary" value="<?php _e('Send Feedback') ?>"
+                                                    onclick="return octc_quick_contact.validate_form();" />
+                                        <br/>
+                                        What data will be sent
+                                        <a href='javascript:void(0);'
+                                            onclick='jQuery(".octc_data_to_be_sent").toggle();'>(show/hide)</a>
+                                        <div class="hide app-hide octc_data_to_be_sent">
+                                            <textarea class="widefat" rows="4" readonly="readonly" disabled="disabled"><?php
+                                            foreach ($hidden_data as $key => $val) {
+                                                if (is_array($val)) {
+                                                    $val = var_export($val, 1);
+                                                }
+
+                                                echo "$key: $val\n";
+                                            }
+                                            ?></textarea>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div> <!-- .inside -->
+                        </div> <!-- .postbox --> <!-- /quick-contact -->
 
                         <div class="postbox">
-                            <h3><span>Free Staging Site?</span></h3>
+                            <h3><span>Other products of ours</span></h3>
                             <div class="inside">
                                 <?php echo orbisius_child_theme_creator_top_links('orbisius-child-theme-creator') ; ?>
                             </div> <!-- .inside -->
@@ -1276,101 +1366,7 @@ function orbisius_child_theme_creator_tools_action() {
                                 target="_blank" title="[new window]">Orbisius Theme Fixer</a>
                             </div>
                         </div> <!-- .postbox -->
-
-
-                        <div class="postbox"> <!-- quick-contact -->
-                            <?php
-                            $current_user = wp_get_current_user();
-                            $email = empty($current_user->user_email) ? '' : $current_user->user_email;
-                            $quick_form_action = is_ssl()
-                                    ? 'https://ssl.orbisius.com/apps/quick-contact/'
-                                    : 'http://apps.orbisius.com/quick-contact/';
-
-                            if (!empty($_SERVER['DEV_ENV'])) {
-                                $quick_form_action = 'http://localhost/projects/quick-contact/';
-                            }
-                            ?>
-                            <script>
-                                var octc_quick_contact = {
-                                    validate_form : function () {
-                                        try {
-                                            var msg = jQuery('#octc_msg').val().trim();
-                                            var email = jQuery('#octc_email').val().trim();
-
-                                            email = email.replace(/\s+/, '');
-                                            email = email.replace(/\.+/, '.');
-                                            email = email.replace(/\@+/, '@');
-
-                                            if ( msg == '' ) {
-                                                alert('Enter your message.');
-                                                jQuery('#octc_msg').focus().val(msg).css('border', '1px solid red');
-                                                return false;
-                                            } else {
-                                                // all is good clear borders
-                                                jQuery('#octc_msg').css('border', '');
-                                            }
-
-                                            if ( email == '' || email.indexOf('@') <= 2 || email.indexOf('.') == -1) {
-                                                alert('Enter your email and make sure it is valid.');
-                                                jQuery('#octc_email').focus().val(email).css('border', '1px solid red');
-                                                return false;
-                                            } else {
-                                                // all is good clear borders
-                                                jQuery('#octc_email').css('border', '');
-                                            }
-
-                                            return true;
-                                        } catch(e) {};
-                                    }
-                                };
-                            </script>
-                            <h3><span>Quick Question or Suggestion</span></h3>
-                            <div class="inside">
-                                <div>
-                                    <form method="post" action="<?php echo $quick_form_action; ?>" target="_blank">
-                                        <?php
-                                            global $wp_version;
-											$plugin_data = get_plugin_data(__FILE__);
-
-                                            $hidden_data = array(
-                                                'site_url' => site_url(),
-                                                'wp_ver' => $wp_version,
-                                                'first_name' => $current_user->first_name,
-                                                'last_name' => $current_user->last_name,
-                                                'product_name' => $plugin_data['Name'],
-                                                'product_ver' => $plugin_data['Version'],
-                                                'woocommerce_ver' => defined('WOOCOMMERCE_VERSION') ? WOOCOMMERCE_VERSION : 'n/a',
-                                            );
-                                            $hid_data = http_build_query($hidden_data);
-                                            echo "<input type='hidden' name='data[sys_info]' value='$hid_data' />\n";
-                                        ?>
-                                        <textarea class="widefat" id='octc_msg' name='data[msg]' required="required"></textarea>
-                                        <br/>Your Email: <input type="text" class=""
-                                               id="octc_email" name='data[sender_email]' placeholder="Email" required="required"
-                                               value="<?php echo esc_attr($email); ?>"
-                                               />
-                                        <br/><input type="submit" class="button-primary" value="<?php _e('Send Feedback') ?>"
-                                                    onclick="return octc_quick_contact.validate_form();" />
-                                        <br/>
-                                        What data will be sent
-                                        <a href='javascript:void(0);'
-                                            onclick='jQuery(".octc_data_to_be_sent").toggle();'>(show/hide)</a>
-                                        <div class="hide app-hide octc_data_to_be_sent">
-                                            <textarea class="widefat" rows="4" readonly="readonly" disabled="disabled"><?php
-                                            foreach ($hidden_data as $key => $val) {
-                                                if (is_array($val)) {
-                                                    $val = var_export($val, 1);
-                                                }
-
-                                                echo "$key: $val\n";
-                                            }
-                                            ?></textarea>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div> <!-- .inside -->
-                         </div> <!-- .postbox --> <!-- /quick-contact -->
-
+                        
                     </div> <!-- .meta-box-sortables -->
 
                 </div> <!-- #postbox-container-1 .postbox-container sidebar -->
