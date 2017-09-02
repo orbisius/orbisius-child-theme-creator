@@ -1,7 +1,7 @@
 <?php
 
 $c = new orb_ctc_addon_clipboard();
-add_action('orbisius_child_theme_creator_admin_enqueue_scripts', [ $c, 'admin_enqueue_scripts' ]);
+add_action('orbisius_child_theme_creator_admin_enqueue_scripts', array( $c, 'admin_enqueue_scripts' ) );
 
 class orb_ctc_addon_clipboard {
     function admin_enqueue_scripts() {
@@ -10,19 +10,19 @@ class orb_ctc_addon_clipboard {
             array('jquery', ),
             apply_filters('orbisius_child_theme_creator_filter_asset_src', 
                 "addons/clipboard/share/clipboard-js/dist/clipboard.min.js",
-                [ 'last_mod' => 1 ] 
+                array( 'last_mod' => 1 ) 
             ),
             true
         );
         wp_enqueue_script( 'orb_ctc_addon_clipboard' );
         
-        wp_register_script( 'orb_ctc_addon_clipboard_main', 
-            apply_filters('orbisius_child_theme_creator_filter_asset_src', "addons/clipboard/assets/main.js"), 
+        wp_register_script( 'orb_ctc_addon_clipboard_main',
+            apply_filters('orbisius_child_theme_creator_filter_asset_src', "addons/clipboard/assets/main.js"),
             array('jquery', 'orb_ctc_addon_clipboard', ),
             apply_filters('orbisius_child_theme_creator_filter_asset_src',
-                "addons/clipboard/assets/main.js", 
-                [ 'last_mod' => 1 ]
-            ), 
+                "addons/clipboard/assets/main.js",
+                array( 'last_mod' => 1 )
+            ),
             true
         );
         wp_enqueue_script( 'orb_ctc_addon_clipboard_main' );
