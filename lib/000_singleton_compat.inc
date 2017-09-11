@@ -4,7 +4,8 @@
  * Allows sub classes to have a convenient get_instance method.
  */
 class orbisius_child_theme_creator_singleton {
-
+    static $instances = [];
+    
     /**
      * Singleton pattern i.e. we have only one instance of this obj
      *
@@ -23,9 +24,13 @@ class orbisius_child_theme_creator_singleton {
             // Code doesn't reach to the version check because php's parser doesn't recognize the command
             // and fails and doesn't give php version check to take place.
             // Marius Balčytis from https://stackoverflow.com/questions/5197300/new-self-vs-new-static
-            $class = get_class($this);
-            $class = new static();
-            $instance = new $class();
+            $class = get_called_class();
+            
+            if (!empty($class)) {
+                $instance = new $class();
+            } else { // as backup so php doesn't fail.
+                $instance = new self;
+            }
         }
 
         return $instance;
