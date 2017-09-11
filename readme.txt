@@ -168,6 +168,7 @@ Todo
 
 = 1.4.4 =
 * Made the plugin more compatible with php v5.2. Why those hosting companies don't upgrade?
+* The child theme's folder is based on its name (if supplied)
 
 = 1.4.3 =
 * Removed some of the info about other plugins

@@ -844,7 +844,12 @@ function orbisius_child_theme_creator_tools_action() {
 
         if (empty($errors)) {
             try {
-                $installer = new orbisius_child_theme_creator($parent_theme_base_dirname);
+                $init_data = [ 
+                    'parent_theme_base_dirname' => $parent_theme_base_dirname,
+                    'child_theme_name' => empty($child_custom_info['name']) ? '' : $child_custom_info['name'],
+                ];
+                $installer = new orbisius_child_theme_creator();
+                $installer->init($init_data);
                 $theme_setup_params = $installer->custom_info($child_custom_info);
 
                 $installer->check_permissions();
@@ -1439,7 +1444,6 @@ function orbisius_child_theme_creator_add_plugin_credits() {
 /**
  */
 class orbisius_child_theme_creator {
-
     public $result = null;
     public $target_dir_path; // /var/www/vhosts/domain.com/www/wp-content/themes/Parent-Theme-child-01/
 
@@ -1450,25 +1454,33 @@ class orbisius_child_theme_creator {
      * @param str $parent_theme_basedir
      */
 
-    public function __construct($parent_theme_basedir = '') {
+    public function init($init_data = array()) {
         $all_themes_root = get_theme_root();
+        $parent_theme_basedir = orbisius_child_theme_creator_util::sanitize_data( $init_data['parent_theme_base_dirname'] );
 
-        $this->parent_theme_basedir = orbisius_child_theme_creator_util::sanitize_data( $parent_theme_basedir );
+        $this->parent_theme_basedir = $parent_theme_basedir;
         $this->parent_theme_dir = $all_themes_root . '/' . $this->parent_theme_basedir . '/';
 
-        $i = 0;
+        if (empty($init_data['child_theme_name'])) {
+            $child_theme_dir = $parent_theme_basedir . '-child-theme';
+        } else { // own dir based on the name the user has entered
+            $child_theme_dir = sanitize_title($init_data['child_theme_name']);
+        }
 
         // Let's create multiple folders in case the script is run multiple times.
+        $i = 0;
+        
         do {
+            $suff = empty($i) ? '' : '_' . sprintf('%02d', $i);
+            $target_dir = $all_themes_root . '/' . $child_theme_dir . $suff . '/';
             $i++;
-            $target_dir = $all_themes_root . '/' . $parent_theme_basedir . '-child-theme-' . sprintf("%02d", $i) . '/';
         } while (is_dir($target_dir));
 
         $this->target_dir_path = $target_dir;
         $this->target_base_dirname = basename($target_dir);
 
         // this is appended to the new theme's name
-        $this->target_name_suffix = 'Child ' . sprintf("%02d", $i);
+        $this->target_name_suffix = "Child theme of $parent_theme_basedir";
     }
 
     /**
@@ -1790,9 +1802,9 @@ class orbisius_child_theme_creator {
     public function create_file($file, $params = array() ) {
         if ($file == 'functions.php') {
             $parent_base_dir = $params['parent_theme_basedir'];
-            $func_prefix = $params['parent_theme_basedir'];
-            $func_prefix = strtolower( $func_prefix );
-            $func_prefix = 'orbisius_ctc_' . preg_replace( '#[^\w]+#si', '_', $func_prefix );
+            // this should be unique dir so use it for function
+            $func_prefix = strtolower( $this->target_base_dirname );
+            $func_prefix = 'orbisius_ct_' . preg_replace( '#[^\w]+#si', '_', $func_prefix );
             $func_prefix = trim( $func_prefix, '_' );
 
             $file_tpl = <<<BUFF_EOF
