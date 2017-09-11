@@ -18,7 +18,7 @@ class orbisius_child_theme_creator_user {
         // no need each sub class to define this method.
         if (is_null($instance)) {
             // We do a late static binding. i.e. the instance is the subclass of this one.
-            $instance = new static(); // leave only this line and not the hack.
+            $instance = new self(); // leave only this line and not the hack.
         }
 
         return $instance;
