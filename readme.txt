@@ -166,6 +166,9 @@ Todo
 
 == Changelog ==
 
+= 1.4.4 =
+* Made the plugin more compatibible with php v5.2. Why those hosting companies don't upgrade?
+
 = 1.4.3 =
 * Removed some of the info about other plugins
 * Using old way of defining arrays e.g. array() and not [] because some hosts still run old php :(
