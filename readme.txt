@@ -167,7 +167,7 @@ Todo
 == Changelog ==
 
 = 1.4.4 =
-* Made the plugin more compatibible with php v5.2. Why those hosting companies don't upgrade?
+* Made the plugin more compatible with php v5.2. Why those hosting companies don't upgrade?
 
 = 1.4.3 =
 * Removed some of the info about other plugins
