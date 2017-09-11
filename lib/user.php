@@ -1,10 +1,29 @@
 <?php
 
-class orbisius_child_theme_creator_user extends orbisius_child_theme_creator_singleton {
+class orbisius_child_theme_creator_user {
     private $api_meta_key = '_orb_ctc_cloud_api_key';
     private $meta_cloud_plan = '_orb_ctc_cloud_plan';
     private $meta_cloud_email = '_orb_ctc_cloud_email';
 
+    /**
+     * Singleton pattern i.e. we have only one instance of this obj
+     *
+     * @staticvar type $instance
+     * @return \cls
+     */
+    public static function get_instance() {
+        static $instance = null;
+
+        // This will make the calling class to be instantiated.
+        // no need each sub class to define this method.
+        if (is_null($instance)) {
+            // We do a late static binding. i.e. the instance is the subclass of this one.
+            $instance = new static(); // leave only this line and not the hack.
+        }
+
+        return $instance;
+    }
+    
     /**
      * 
      * @param str/opt $key
