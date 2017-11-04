@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="34">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="36">
         <file>
             <url>assets/main.js</url>
             <bookmark id="19">
@@ -13,77 +13,77 @@
             <url>orbisius-child-theme-creator.php</url>
             <bookmark id="20">
                 <name/>
-                <line>105</line>
+                <line>104</line>
                 <key/>
             </bookmark>
             <bookmark id="34">
                 <name/>
-                <line>272</line>
+                <line>271</line>
                 <key/>
             </bookmark>
             <bookmark id="21">
                 <name/>
-                <line>726</line>
+                <line>725</line>
                 <key/>
             </bookmark>
             <bookmark id="15">
                 <name/>
-                <line>1492</line>
+                <line>1503</line>
                 <key/>
             </bookmark>
             <bookmark id="16">
                 <name/>
-                <line>1633</line>
+                <line>1644</line>
                 <key/>
             </bookmark>
             <bookmark id="6">
                 <name/>
-                <line>1707</line>
+                <line>1718</line>
                 <key/>
             </bookmark>
             <bookmark id="14">
                 <name/>
-                <line>1785</line>
+                <line>1796</line>
                 <key/>
             </bookmark>
             <bookmark id="12">
                 <name/>
-                <line>2242</line>
+                <line>2253</line>
                 <key/>
             </bookmark>
             <bookmark id="9">
                 <name/>
-                <line>2247</line>
+                <line>2258</line>
                 <key/>
             </bookmark>
             <bookmark id="5">
                 <name/>
-                <line>2289</line>
+                <line>2300</line>
                 <key/>
             </bookmark>
             <bookmark id="18">
                 <name/>
-                <line>2299</line>
+                <line>2310</line>
                 <key/>
             </bookmark>
             <bookmark id="4">
                 <name/>
-                <line>2404</line>
+                <line>2415</line>
                 <key/>
             </bookmark>
             <bookmark id="17">
                 <name/>
-                <line>2436</line>
+                <line>2447</line>
                 <key/>
             </bookmark>
             <bookmark id="13">
                 <name/>
-                <line>2617</line>
+                <line>2628</line>
                 <key/>
             </bookmark>
             <bookmark id="3">
                 <name/>
-                <line>2662</line>
+                <line>2673</line>
                 <key/>
             </bookmark>
         </file>
@@ -138,11 +138,7 @@
             <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/orbisius-child-theme-creator.php</file>
             <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/readme.txt</file>
         </group>
-        <group>
-            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/readme.txt</file>
-            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/addons/clipboard/init.php</file>
-            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/addons/init.php</file>
-            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/addons/cloud_lib/lib/snippet_lib.php</file>
-        </group>
+        <group/>
+        <group name="qSandbox"/>
     </open-files>
 </project-private>

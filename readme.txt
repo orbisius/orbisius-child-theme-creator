@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: theme,child theme,childtheme,childthemes,parent theme,child themes,CSS,styling,resposive design,design,custom themeing, shared hosting,theme editor theme,themes,wp,wordpress,orbisius,theme creator,custom theme,theme generator,css,css editor
 Requires at least: 3.4
 Tested up to: 4.8
-Stable tag: 1.4.3
+Stable tag: 1.4.6
 License: GPLv2 or later
 
 Create Child Themes quickly and easily from any theme that you have currently installed on your site/blog.
@@ -165,6 +165,13 @@ Todo
 - Orbisius Edit
 
 == Changelog ==
+
+= 1.4.6 =
+* Changed the on mouse over effect to a nicer yellow.
+* Tested with latest WordPress
+
+= 1.4.5 =
+* Fixed one more section that was crashing sites running php v5.2. Why no upgrade people???
 
 = 1.4.4 =
 * Made the plugin more compatible with php v5.2. Why those hosting companies don't upgrade?
