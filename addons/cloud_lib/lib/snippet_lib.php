@@ -84,12 +84,22 @@ class orbisius_ctc_cloud_lib {
         wp_enqueue_script( 'jquery-ui-dialog' );
         wp_enqueue_script( 'jquery-ui-autocomplete' );
         wp_enqueue_script('jquery-ui-tabs');
-        
-        $wp_scripts = wp_scripts();
+
+        // We want to load the current jquiery_ui version's style.
+        $current_jquiery_ui_ver = '1.12.1';
+
+        if (function_exists('wp_scripts')) { // since WP 4.2
+            $wp_scripts = wp_scripts();
+
+            if (!empty($wp_scripts->registered['jquery-ui-core']->ver)) {
+                $current_jquiery_ui_ver = $wp_scripts->registered['jquery-ui-core']->ver;
+            }
+        }
+
         wp_enqueue_style('orbisius_ctc_cloud_lib_jquery_ui',
-            '//ajax.googleapis.com/ajax/libs/jqueryui/' . $wp_scripts->registered['jquery-ui-core']->ver . '/themes/smoothness/jquery-ui.min.css',
+            '//ajax.googleapis.com/ajax/libs/jqueryui/' . $current_jquiery_ui_ver . '/themes/smoothness/jquery-ui.min.css',
             false,
-            '1.0',
+            $current_jquiery_ui_ver,
             false
         );
 

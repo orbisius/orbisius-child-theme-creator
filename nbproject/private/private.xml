@@ -138,7 +138,11 @@
             <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/orbisius-child-theme-creator.php</file>
             <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/readme.txt</file>
         </group>
-        <group/>
         <group name="qSandbox"/>
+        <group>
+            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/assets/main.css</file>
+            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/assets/main.min.css</file>
+            <file>file:/C:/Copy/Dropbox/cloud/projects/default/htdocs/wordpress313/wp-content/plugins/orbisius-child-theme-creator/orbisius-child-theme-creator.php</file>
+        </group>
     </open-files>
 </project-private>

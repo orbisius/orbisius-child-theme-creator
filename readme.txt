@@ -3,7 +3,7 @@ Contributors: lordspace,orbisius
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7APYDVPBCSY9A
 Tags: theme,child theme,childtheme,childthemes,parent theme,child themes,CSS,styling,resposive design,design,custom themeing, shared hosting,theme editor theme,themes,wp,wordpress,orbisius,theme creator,custom theme,theme generator,css,css editor
 Requires at least: 3.4
-Tested up to: 4.8
+Tested up to: 4.9
 Stable tag: 1.4.6
 License: GPLv2 or later
 
@@ -165,6 +165,10 @@ Todo
 - Orbisius Edit
 
 == Changelog ==
+
+= 1.4.7 =
+* Made a fix so the plugin doesn't crash WP 4.2 installs wp_scripts (Thanks Leila for reporting this)
+* Tested with latest WordPress
 
 = 1.4.6 =
 * Changed the on mouse over effect to a nicer yellow.
