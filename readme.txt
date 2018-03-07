@@ -166,6 +166,9 @@ Todo
 
 == Changelog ==
 
+= 1.4.8 =
+* Fixed missing image for themes that provide screenshots in other than .png format. Thanks Nick Greaves for reporting this.
+
 = 1.4.7 =
 * Made a fix so the plugin doesn't crash WP 4.2 installs wp_scripts (Thanks Leila for reporting this)
 * Tested with latest WordPress

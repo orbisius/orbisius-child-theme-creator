@@ -3,7 +3,7 @@
   Plugin Name: Orbisius Child Theme Creator
   Plugin URI: http://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/
   Description: This plugin allows you to quickly create child themes from any theme that you have currently installed on your site/blog.
-  Version: 1.4.7
+  Version: 1.4.8
   Author: Svetoslav Marinov (Slavi)
   Author URI: http://orbisius.com
  */
@@ -930,6 +930,8 @@ function orbisius_child_theme_creator_tools_action() {
     $args = array();
     $themes = wp_get_themes($args);
 
+    $default_theme_thumbail = plugins_url('/assets/images/missing_theme_screenshot.jpg', ORBISIUS_CHILD_THEME_CREATOR_MAIN_PLUGIN_FILE);
+
     // we use the same CSS as in WP's appearances but put only the buttons we want.
     foreach ($themes as $theme_basedir_name => $theme_obj) {
         $parent_theme = $theme_obj->get('Template');
@@ -939,7 +941,25 @@ function orbisius_child_theme_creator_tools_action() {
         }
         
         // get the web uri for the current theme and go 1 level up
-        $src = dirname(get_template_directory_uri()) . "/$theme_basedir_name/screenshot.png";
+//        $src = dirname(get_template_directory_uri()) . "/$theme_basedir_name/screenshot.png";
+
+        // get the web uri for the current theme and go 1 level up
+        $web_dir = dirname(get_template_directory_uri());
+        $local_dir = dirname(get_template_directory()) . "/$theme_basedir_name/";
+
+        $src = $default_theme_thumbail;
+        $src_png = $web_dir . "/$theme_basedir_name/screenshot.png";
+        $src_jpg = $web_dir . "/$theme_basedir_name/screenshot.jpg";
+        $src_jpg2 = $web_dir . "/$theme_basedir_name/screenshot.jpeg";
+
+        if (file_exists($local_dir . basename($src_png))) {
+            $src = $src_png;
+        } elseif (file_exists($local_dir . basename($src_jpg))) {
+            $src = $src_jpg;
+        } elseif (file_exists($local_dir . basename($src_jpg2))) {
+            $src = $src_jpg2;
+        }
+
         $functions_file = dirname(get_template_directory()) . "/$theme_basedir_name/functions.php";
         $parent_theme_base_dirname_fmt = urlencode($theme_basedir_name);
         $create_url = $_SERVER['REQUEST_URI'];
@@ -1097,10 +1117,24 @@ function orbisius_child_theme_creator_tools_action() {
         }
 
         $child_themes_cnt++;
-        
+
         // get the web uri for the current theme and go 1 level up
-        $src = dirname(get_template_directory_uri()) . "/$theme_basedir_name/screenshot.png";
-       
+        $web_dir = dirname(get_template_directory_uri());
+        $local_dir = dirname(get_template_directory()) . "/$theme_basedir_name/";
+
+        $src = $default_theme_thumbail;
+        $src_png = $web_dir . "/$theme_basedir_name/screenshot.png";
+        $src_jpg = $web_dir . "/$theme_basedir_name/screenshot.jpg";
+        $src_jpg2 = $web_dir . "/$theme_basedir_name/screenshot.jpeg";
+
+        if (file_exists($local_dir . basename($src_png))) {
+            $src = $src_png;
+        } elseif (file_exists($local_dir . basename($src_jpg))) {
+            $src = $src_jpg;
+        } elseif (file_exists($local_dir . basename($src_jpg2))) {
+            $src = $src_jpg2;
+        }
+
         $author_name = $theme_obj->get('Author');
         $author_name = strip_tags($author_name);
         $author_name = empty($author_name) ? 'n/a' : $author_name;
@@ -1562,7 +1596,7 @@ class orbisius_child_theme_creator {
      * What files do we have to copy from the parent theme.
      * @var array
      */
-    private $main_files = array('screenshot.png', 'header.php', 'footer.php', );
+    private $main_files = array('screenshot.png', 'screenshot.jpg', 'screenshot.jpeg', 'header.php', 'footer.php', );
 
     /**
      * 
