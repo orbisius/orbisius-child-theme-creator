@@ -3,7 +3,7 @@
   Plugin Name: Orbisius Child Theme Creator
   Plugin URI: http://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/
   Description: This plugin allows you to quickly create child themes from any theme that you have currently installed on your site/blog.
-  Version: 1.4.8
+  Version: 1.4.9
   Author: Svetoslav Marinov (Slavi)
   Author URI: http://orbisius.com
  */
@@ -2698,50 +2698,53 @@ function orbisius_ctc_theme_editor_check_syntax($theme_file_contents) {
     $status_rec = array(
         'msg' => '',
         'status' => 0,
+	    'syntax_check_ran' => 0,
     );
 
     // Not a php file so don't do a syntax check.
     if (stripos($theme_file_contents, '<?') === false) {
         $status_rec['msg'] = 'Syntax OK.';
         $status_rec['status'] = 1;
+        $status_rec['non_php_file'] = 1;
         return $status_rec;
     }
 
+	if (function_exists('shell_exec') || function_exists('exec')) {
+	    // OK
+	} else {
+		$status_rec['msg'] = 'Syntax check: n/a. function: exec() and shell_exec() are not available.';
+		return $status_rec;
+	}
+
     $temp = tmpfile();
     fwrite($temp, $theme_file_contents);
+    $meta_data = stream_get_meta_data($temp);
+    $file = $meta_data['uri'];
+    $file = escapeshellarg($file);
+    $cmd = "php -l $file"; // what about different binaries (cpanel or other control panel)? some of them are slow or hang for 5sec
 
-    if (function_exists('shell_exec') || function_exists('exec')) {
-        $ok = 0;
-        $meta_data = stream_get_meta_data($temp);
-        $file = $meta_data['uri'];
-        $file = escapeshellarg($file);
-        $cmd = "php -l $file";
-
-        // we're relying on exec's return value so we can tell
-        // if the syntax is OK
-        if (function_exists('exec')) {
-            $exit_code = $output = 0;
-            $last_line = exec($cmd, $output, $exit_code);
-            $output = join('', $output); // this is an array with multiple lines including new lines
-
-            $ok = empty($exit_code); // in linux 0 means success
-        } else { // this relies on parsing the php output but if a non-english locale is used this will fail.
-            $output = shell_exec($cmd . " 2>&1");
-            $ok = stripos($output, 'No syntax errors detected') !== false;
-        }
-
-        $error = $output;
-
-        if ($ok) {
-            $status_rec['status'] = 1;
-            $status_rec['msg'] = 'Syntax OK.';
-        } else {
-            $status_rec['msg'] = 'Syntax check failed. Error: ' . $error;
-        }
-        $status_rec['syntax_check_ran'] = 1;
-    } else {
-        $status_rec['msg'] = 'Syntax check: n/a. functiona: exec() and shell_exec() are not available.';
+    // we're relying on exec's return value so we can tell
+    // if the syntax is OK
+    if (function_exists('exec')) {
+        $exit_code = $output = 0;
+        $last_line = exec($cmd, $output, $exit_code);
+        $output = join('', $output); // this is an array with multiple lines including new lines
+        $ok = empty($exit_code); // in linux 0 means success
+    } else { // this relies on parsing the php output but if a non-english locale is used this will fail.
+        $output = shell_exec($cmd . " 2>&1");
+        $ok = stripos($output, 'No syntax errors detected') !== false;
     }
+
+    $error = $output;
+
+    if ($ok) {
+        $status_rec['status'] = 1;
+        $status_rec['msg'] = 'Syntax OK.';
+    } else {
+        $status_rec['msg'] = 'Syntax check failed. Error: ' . $error;
+    }
+
+    $status_rec['syntax_check_ran'] = 1;
 
     fclose($temp); // this removes the file
 
