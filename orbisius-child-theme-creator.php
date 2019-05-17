@@ -999,7 +999,7 @@ function orbisius_child_theme_creator_tools_action() {
         $author_line .= " | Ver.$ver_esc\n";
 
         $edit_theme_link = orbisius_child_theme_creator_util::get_theme_editor_link( array('theme_1' => $theme_basedir_name) );
-        $author_line .= " | <a href='$edit_theme_link' title='Edit with Orbisius Theme Editor'>Edit</a>\n";
+        $author_line .= " | <a href='$edit_theme_link' title='Edit with Orbisius Theme Editor' class='button'>Edit</a>\n";
         
         $buff .= "<div class='available-theme'>\n";
         $buff .= "<form action='$create_url' method='post'>\n";
@@ -1148,11 +1148,11 @@ function orbisius_child_theme_creator_tools_action() {
 
         if ( orbisius_child_theme_creator_util::has_access() ) {
             $activate_theme_link = orbisius_child_theme_creator_util::get_theme_activation_link( array('theme_1' => $theme_basedir_name) );
-            $author_line .= " | <a href='$activate_theme_link' title='Activate this Child Theme. This will switch the site to the selected Child Theme'>Activate</a>\n";
+            $author_line .= " | <a href='$activate_theme_link' title='Activate this Child Theme. This will switch the site to the selected Child Theme' class='button'>Activate</a>\n";
         }
         
         $edit_theme_link = orbisius_child_theme_creator_util::get_theme_editor_link( array('theme_1' => $theme_basedir_name) );
-        $author_line .= " | <a href='$edit_theme_link' title='Edit with Orbisius Theme Editor'>Edit</a>\n";
+        $author_line .= " | <a href='$edit_theme_link' title='Edit with Orbisius Theme Editor' class='button'>Edit</a>\n";
 
         $buff_child_themes .= "<div class='available-theme'>\n";
         $buff_child_themes .= "<img class='screenshot' src='$src' alt='' />\n";
@@ -2695,6 +2695,7 @@ function orbisius_ctc_theme_editor_zip_theme($theme_base_dir, $to) {
  * @return array
  */
 function orbisius_ctc_theme_editor_check_syntax($theme_file_contents) {
+	$ok = 0;
     $status_rec = array(
         'msg' => '',
         'status' => 0,
@@ -2730,7 +2731,7 @@ function orbisius_ctc_theme_editor_check_syntax($theme_file_contents) {
         $last_line = exec($cmd, $output, $exit_code);
         $output = join('', $output); // this is an array with multiple lines including new lines
         $ok = empty($exit_code); // in linux 0 means success
-    } else { // this relies on parsing the php output but if a non-english locale is used this will fail.
+    } elseif (function_exists('shell_exec')) { // this relies on parsing the php output but if a non-english locale is used this will fail.
         $output = shell_exec($cmd . " 2>&1");
         $ok = stripos($output, 'No syntax errors detected') !== false;
     }
