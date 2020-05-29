@@ -1,11 +1,11 @@
 <?php
 /*
   Plugin Name: Orbisius Child Theme Creator
-  Plugin URI: http://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/
+  Plugin URI: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/
   Description: This plugin allows you to quickly create child themes from any theme that you have currently installed on your site/blog.
   Version: 1.5.0
   Author: Svetoslav Marinov (Slavi)
-  Author URI: http://orbisius.com
+  Author URI: https://orbisius.com
  */
 
 /*  Copyright 2012-2050 Svetoslav Marinov (Slavi) <slavi@orbisius.com>
@@ -157,7 +157,7 @@ function orbisius_child_theme_creator_is_pro_installed() {
  * @param string $parent Parent label (if creating a submenu item)
  *
  * @return void
- * @author Slavi Marinov <http://orbisius.com>
+ * @author Slavi Marinov <https://orbisius.com>
  * */
 function orbisius_child_theme_creator_add_admin_bar($name, $href = '', $parent = '', $custom_meta = array()) {
     global $wp_admin_bar;
@@ -693,7 +693,7 @@ function orbisius_child_theme_creator_settings_page() {
 
     <!--<h2>Support & Feature Requests</h2>
     <div class="updated"><p>
-            ** NOTE: ** Support is handled on our site: <a href="//orbisius.com/forums/forum/community-support-forum/wordpress-plugins/orbisius-child-theme-creator/?utm_source=orbisius-child-theme-editor&utm_medium=action_screen&utm_campaign=product" target="_blank" title="[new window]">http://orbisius.com/support/</a>.
+            ** NOTE: ** Support is handled on our site: <a href="//orbisius.com/forums/forum/community-support-forum/wordpress-plugins/orbisius-child-theme-creator/?utm_source=orbisius-child-theme-editor&utm_medium=action_screen&utm_campaign=product" target="_blank" title="[new window]">https://orbisius.com/support/</a>.
             Please do NOT use the WordPress forums or other places to seek support.
     </p></div>-->
     
@@ -1911,7 +1911,7 @@ class orbisius_child_theme_creator_util {
             <div class="postbox">
                 <h3><span>Curious about our other products?</span></h3>
                 <div class="inside">
-                    Visit <a href="//orbisius.com/products/" target="_blank">http://orbisius.com/products/</a>
+                    Visit <a href="//orbisius.com/products/" target="_blank">https://orbisius.com/products/</a>
                 </div> <!-- .inside -->
             </div> <!-- .postbox -->
             <!-- /Orbisius -->

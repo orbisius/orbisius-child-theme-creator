@@ -13,7 +13,7 @@ class orbisius_ctc_cloud_lib {
      * @var string	Url of remote API. The plugin will dynamically pick one
      */
     public $api_url	= '';
-    public $live_api_url = 'http://orbisius.com/cloud-lib/';
+    public $live_api_url = 'https://orbisius.com/cloud-lib/';
 //    public $dev_api_url	= 'http://orb-ctc.qsandbox.com/';
     public $dev_api_url	= 'http://orbclub.com.clients.com/';
     public $staging_api_url = 'http://orb-ctc.qsandbox.com/';
