@@ -233,7 +233,7 @@ function orbisius_ctc_theme_editor_setup() {
     });
 
     // When the admin creates a new file we'll scroll to the element so he/she can start typing
-    // http://stackoverflow.com/questions/6682451/animate-scroll-to-id-on-page-load
+    // https://stackoverflow.com/questions/6682451/animate-scroll-to-id-on-page-load
     jQuery(document).on( 'orbisius_child_theme_editor_event_new_file', function(obj, custom_data) {
         $("html, body").animate({ scrollTop: jQuery( custom_data.file_selector ).offset().top - 50 }, 1000);
     } );
@@ -850,7 +850,7 @@ function app_load(form_id, action, target_container, callback) {
                 result : result
             };
 
-            // http://stackoverflow.com/questions/2432749/jquery-delay-not-delaying
+            // https://stackoverflow.com/questions/2432749/jquery-delay-not-delaying
             if (result != '') {
                 if (jQuery(target_container).is("input,textarea")) {
                     jQuery(target_container).val(result);

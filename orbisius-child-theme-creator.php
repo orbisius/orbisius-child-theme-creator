@@ -394,13 +394,13 @@ function orbisius_child_theme_creator_settings_page() {
 
         <div class="updated"><p>
                 Some untested themes and plugin may break your site. We have launched a <strong>free</strong> service
-                (<a href="http://qsandbox.com/?utm_source=orbisius-child-theme-creator&utm_medium=settings_screen&utm_campaign=product"
-                    target="_blank" title="[new window]">http://qsandbox.com</a>)
+                (<a href="https://qsandbox.com/?utm_source=orbisius-child-theme-creator&utm_medium=settings_screen&utm_campaign=product"
+                    target="_blank" title="[new window]">https://qsandbox.com</a>)
                 that allows you to setup a test/sandbox
                 WordPress site in seconds. No technical knowledge is required.
                 <br/>Join today and test themes and plugins before you actually put them on your live site. For more info go to:
-                <a href="http://qsandbox.com/?utm_source=orbisius-child-theme-creator&utm_medium=settings_screen&utm_campaign=product"
-                   target="_blank" title="[new window]">http://qsandbox.com</a>
+                <a href="https://qsandbox.com/?utm_source=orbisius-child-theme-creator&utm_medium=settings_screen&utm_campaign=product"
+                   target="_blank" title="[new window]">https://qsandbox.com</a>
         </p></div>
 
         <div class="updated0"><p>
@@ -431,7 +431,7 @@ function orbisius_child_theme_creator_settings_page() {
                                     <li>Customize the child theme</li>
                                 </ul>
 
-                                <iframe width="560" height="315" src="http://www.youtube.com/embed/BZUVq6ZTv-o" frameborder="0" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="https://youtube.com/embed/BZUVq6ZTv-o" frameborder="0" allowfullscreen></iframe>
 
                             </div> <!-- .inside -->
 
@@ -490,10 +490,10 @@ function orbisius_child_theme_creator_settings_page() {
                             $email = empty($current_user->user_email) ? '' : $current_user->user_email;
                             $quick_form_action = is_ssl()
                                     ? 'https://ssl.orbisius.com/apps/quick-contact/'
-                                    : 'http://apps.orbisius.com/quick-contact/';
+                                    : 'https://apps.orbisius.com/quick-contact/';
 
                             if (!empty($_SERVER['DEV_ENV'])) {
-                                $quick_form_action = 'http://localhost/projects/quick-contact/';
+                                $quick_form_action = 'https://localhost/projects/quick-contact/';
                             }
                             ?>
                             <script>
@@ -599,7 +599,7 @@ function orbisius_child_theme_creator_settings_page() {
                                         $email = empty($current_user->user_email) ? '' : $current_user->user_email;
                                     ?>
 
-                                    <form action="http://WebWeb.us2.list-manage.com/subscribe/post?u=005070a78d0e52a7b567e96df&amp;id=1b83cd2093" method="post"
+                                    <form action="https://WebWeb.us2.list-manage.com/subscribe/post?u=005070a78d0e52a7b567e96df&amp;id=1b83cd2093" method="post"
                                           id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
                                         <input type="hidden" value="settings" name="SRC2" />
                                         <input type="hidden" value="orbisius-child-theme-creator" name="SRC" />
@@ -667,7 +667,7 @@ function orbisius_child_theme_creator_settings_page() {
                                     target="_blank" title="[new window]">Forums</a>
 
                                     <!--|
-                                     <a href="http://docs.google.com/viewer?url=https%3A%2F%2Fdl.dropboxusercontent.com%2Fs%2Fwz83vm9841lz3o9%2FOrbisius_LikeGate_Documentation.pdf" target="_blank">Documentation</a>
+                                     <a href="https://docs.google.com/viewer?url=https%3A%2F%2Fdl.dropboxusercontent.com%2Fs%2Fwz83vm9841lz3o9%2FOrbisius_LikeGate_Documentation.pdf" target="_blank">Documentation</a>
                                     -->
                                 </span>
                             </div>
@@ -1020,7 +1020,7 @@ function orbisius_child_theme_creator_tools_action() {
             $buff .= "<label>
                                 <input type='checkbox' id='orbisius_child_theme_creator_copy_functions_php' name='copy_functions_php' value='1' /> Copy functons.php
                                 (<span class='app-serious-notice'><strong>Danger</strong>: if the theme doesn't support
-                                <a href='http://wp.tutsplus.com/tutorials/creative-coding/understanding-wordpress-pluggable-functions-and-their-usage/'
+                                <a href='https://wp.tutsplus.com/tutorials/creative-coding/understanding-wordpress-pluggable-functions-and-their-usage/'
                                     target='_blank'>pluggable functions</a> this <strong>will crash your site</strong>. Make a backup is highly recommended. In most cases you won't need to copy functions.php</span>)
                       </label>
                     ";
@@ -1210,10 +1210,10 @@ function orbisius_child_theme_creator_tools_action() {
                             $email = empty($current_user->user_email) ? '' : $current_user->user_email;
                             $quick_form_action = is_ssl()
                                     ? 'https://ssl.orbisius.com/apps/quick-contact/'
-                                    : 'http://apps.orbisius.com/quick-contact/';
+                                    : 'https://apps.orbisius.com/quick-contact/';
 
                             if (!empty($_SERVER['DEV_ENV'])) {
-                                $quick_form_action = 'http://localhost/projects/quick-contact/';
+                                $quick_form_action = 'https://localhost/projects/quick-contact/';
                             }
                             ?>
                             <script>
@@ -1324,7 +1324,7 @@ function orbisius_child_theme_creator_tools_action() {
                                         $email = empty($current_user->user_email) ? '' : $current_user->user_email;
                                     ?>
 
-                                    <form action="http://WebWeb.us2.list-manage.com/subscribe/post?u=005070a78d0e52a7b567e96df&amp;id=1b83cd2093" method="post"
+                                    <form action="https://WebWeb.us2.list-manage.com/subscribe/post?u=005070a78d0e52a7b567e96df&amp;id=1b83cd2093" method="post"
                                           id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
                                         <input type="hidden" value="settings" name="SRC2" />
                                         <input type="hidden" value="orbisius-child-theme-creator" name="SRC" />
@@ -1392,7 +1392,7 @@ function orbisius_child_theme_creator_tools_action() {
                                     target="_blank" title="[new window]">Forums</a>
 
                                     <!--|
-                                     <a href="http://docs.google.com/viewer?url=https%3A%2F%2Fdl.dropboxusercontent.com%2Fs%2Fwz83vm9841lz3o9%2FOrbisius_LikeGate_Documentation.pdf" target="_blank">Documentation</a>
+                                     <a href="https://docs.google.com/viewer?url=https%3A%2F%2Fdl.dropboxusercontent.com%2Fs%2Fwz83vm9841lz3o9%2FOrbisius_LikeGate_Documentation.pdf" target="_blank">Documentation</a>
                                     -->
                                 </span>
                             </div>
@@ -1423,7 +1423,7 @@ function orbisius_child_theme_creator_tools_action() {
  * It seems WP intentionally adds slashes for consistency with php.
  * Please note: WordPress Core and most plugins will still be expecting slashes, and the above code will confuse and break them.
  * If you must unslash, consider only doing it to your own data which isn't used by others:
- * @see http://codex.wordpress.org/Function_Reference/stripslashes_deep
+ * @see https://codex.wordpress.org/Function_Reference/stripslashes_deep
  */
 function orbisius_child_theme_creator_get_request($key = null, $default = '') {
     $req = $_REQUEST;
@@ -1634,7 +1634,7 @@ class orbisius_child_theme_creator {
     /**
      *
      * @return bool success
-     * @see http://codex.wordpress.org/Child_Themes
+     * @see https://codex.wordpress.org/Child_Themes
      */
     public function generate_style() {
         global $wp_version;
@@ -1756,7 +1756,7 @@ class orbisius_child_theme_creator {
            $bind_params[] = $text_domain;
        }
 
-       // http://wordpress.stackexchange.com/questions/67292/how-to-use-wildcards-in-wpdb-queries-using-wpdb-get-results-wpdb-prepare
+       // https://wordpress.stackexchange.com/questions/67292/how-to-use-wildcards-in-wpdb-queries-using-wpdb-get-results-wpdb-prepare
        $sql_prep = $wpdb->prepare("
            SELECT option_name
            FROM {$wpdb->prefix}options
@@ -1849,7 +1849,7 @@ class orbisius_child_theme_creator {
 *
 * Unlike style.css, the functions.php of a child theme does not override its counterpart from the parent.
 * Instead, it is loaded in addition to the parent’s functions.php. (Specifically, it is loaded right before the parent theme's functions.php).
-* Source: http://codex.wordpress.org/Child_Themes#Using_functions.php
+* Source: https://codex.wordpress.org/Child_Themes#Using_functions.php
 *
 * Be sure not to define functions, that already exist in the parent theme!
 * A common pattern is to prefix function names with the (child) theme name.
@@ -2065,7 +2065,7 @@ class orbisius_child_theme_creator_util {
      * The native call might be quicker.
      *
      * Example: src: folder/1/ target: folder/2/
-     * @see http://stackoverflow.com/questions/5707806/recursive-copy-of-directory
+     * @see https://stackoverflow.com/questions/5707806/recursive-copy-of-directory
      */
     static public function copy($src, $dest, $perm = 0775) {
         if (!is_dir($dest)) {
