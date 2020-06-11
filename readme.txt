@@ -4,6 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: theme,child theme,childtheme,childthemes,parent theme,child themes,CSS,styling,resposive design,design,custom themeing, shared hosting,theme editor theme,themes,wp,wordpress,orbisius,theme creator,custom theme,theme generator,css,css editor
 Requires at least: 3.4
 Tested up to: 5.4
+Requires PHP: 5.3
 Stable tag: 1.5.0
 License: GPLv2 or later
 
@@ -14,7 +15,9 @@ Create Child Themes quickly and easily from any theme that you have currently in
 This plugin allows you to quickly create child themes from any theme that you have currently installed on your site/blog.
 It also creates rtl.css if exists in the parent theme.
 
-**Did you find this plugin helpful? Please consider [writing a review](https://wordpress.org/support/view/plugin-reviews/orbisius-child-theme-creator).**
+**Did you find this plugin helpful? Please consider [writing a review](https://wordpress.org/support/view/plugin-reviews/orbisius-child-theme-creator)**
+
+** [Live Demo](https://wpdemo.net/demos/plugins/orbisius-child-theme-creator)**
 
 = Child Theme Creator Features =
 * Since v1.4 store your snippets, license keys in Orbisius cloud library. Access them with a click of a button.
