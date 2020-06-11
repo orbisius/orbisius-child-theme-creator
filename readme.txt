@@ -70,7 +70,7 @@ We've just released the
 
 We have launched a **FREE** service that allows you to setup a test/sandbox WordPress site in seconds. No technical knowledge is required.
 Join today and test themes and plugins before you actually put them on your live site. For more info go to:
-<a href="http://qsandbox.com/?utm_source=orbisius-child-theme-creator&utm_medium=readme&utm_campaign=product" target="_blank" title="Free Test/Sandbox WordPress Site">http://qsandbox.com</a>
+<a href="https://qsandbox.com/?utm_source=orbisius-child-theme-creator&utm_medium=readme&utm_campaign=product" target="_blank" title="Free Test/Sandbox WordPress Site">https://qsandbox.com</a>
 
 = Usage : To create a child theme go to =
 Go to Admin > Appearance > Orbisius Child Theme Creator then click on the theme you like and the child theme will be created for you.
@@ -418,7 +418,7 @@ Todo
 = 1.0.3 =
 * Tested with wp 3.6
 * Added settings page in case users want to check it.
-* Added a few notices about <a href="http://qsandbox.com/?utm_source=orbisius-child-theme-creator&utm_medium=readme_changelog&utm_campaign=product" target="_blank" title="Free Test/Sandbox WordPress Site">http://qsandbox.com</a>
+* Added a few notices about <a href="https://qsandbox.com/?utm_source=orbisius-child-theme-creator&utm_medium=readme_changelog&utm_campaign=product" target="_blank" title="Free Test/Sandbox WordPress Site">https://qsandbox.com</a>
 
 = 1.0.2 =
 * Tested with wp 3.5.2
