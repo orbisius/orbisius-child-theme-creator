@@ -3,7 +3,7 @@ Contributors: lordspace,orbisius
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7APYDVPBCSY9A
 Tags: theme,child theme,childtheme,childthemes,parent theme,child themes,CSS,styling,resposive design,design,custom themeing, shared hosting,theme editor theme,themes,wp,wordpress,orbisius,theme creator,custom theme,theme generator,css,css editor
 Requires at least: 3.4
-Tested up to: 5.2
+Tested up to: 5.4
 Stable tag: 1.5.0
 License: GPLv2 or later
 
@@ -57,7 +57,7 @@ It features two editors and you can pick snippets from one theme and paste into 
 
 = Pro Addon is Now Available =
 We've just released the
-    <a href="http://club.orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator-pro/?utm_source=orbisius-child-theme-creator&utm_medium=readme&utm_campaign=product"
+    <a href="https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator-pro/?utm_source=orbisius-child-theme-creator&utm_medium=readme&utm_campaign=product"
                      target="_blank" title="[new window]" style="font-weight: bolder;color:red;">Pro Addon</a> which improves on the current functionality.
 
 = Important =
@@ -80,21 +80,21 @@ http://www.youtube.com/watch?v=BZUVq6ZTv-o
 
 = Premium =
 Do you want to be able to preview themes from within the 2 editors?
-Get this <a href="http://club.orbisius.com/products/wordpress-plugins/orbisius-theme-switcher/?utm_source=orbisius-child-theme-creator&utm_medium=readme_description&utm_campaign=product" target="_blank" title="[new window]">Orbisius Theme Switcher</a> plugin
+Get this <a href="https://orbisius.com/products/wordpress-plugins/orbisius-theme-switcher/?utm_source=orbisius-child-theme-creator&utm_medium=readme_description&utm_campaign=product" target="_blank" title="[new window]">Orbisius Theme Switcher</a> plugin
 
 = Support =
-> Support is handled on our site: <a href="http://club.orbisius.com/" target="_blank" title="[new window]">http://club.orbisius.com/</a>
+> Support is handled on our site: <a href="https://orbisius.com/" target="_blank" title="[new window]">https://orbisius.com/</a>
 > Please do NOT use the WordPress forums or other places to seek support.
 
 = Author =
 
 Do you need an amazing plugin created especially for your needs? Contact me.
-Svetoslav Marinov (Slavi) | <a href="http://orbisius.com" title="Custom Web Programming, Web Design, e-commerce, e-store, Wordpress Plugin Development, Facebook and Mobile App Development in Niagara Falls, St. Catharines, Ontario, Canada" target="_blank">Custom Web and Mobile Programming by Orbisius.com</a>
+Svetoslav Marinov (Slavi) | <a href="https://orbisius.com" title="Custom Web Programming, Web Design, e-commerce, e-store, Wordpress Plugin Development, Facebook and Mobile App Development in Niagara Falls, St. Catharines, Ontario, Canada" target="_blank">Custom Web and Mobile Programming by Orbisius.com</a>
 
 = Hire Us =
 Do you need any WordPress work done? e.g. WordPress tweaks, new plugin development or existing plugin improvements.
 
-Do you need a trusted <a href="http://orbisius.com/page/free-quote/?utm_source=child-theme-creator&utm_medium=plugin-linksutm_campaign=plugin-update"
+Do you need a trusted <a href="//orbisius.com/page/free-quote/?utm_source=child-theme-creator&utm_medium=plugin-linksutm_campaign=plugin-update"
                      title="If you want a custom web/mobile app or a plugin developed contact us. This opens in a new window/tab">WordPress Developer</a> to hire?
 
 == Upgrade Notice ==
@@ -148,14 +148,14 @@ Please use Orbisius Theme Editor (part of this plugin)
 
 = Troubleshooting =
 If your site becomes broken due to a child theme (mis)configuration. Please check another plugin of ours:
-<a href="http://club.orbisius.com/products/wordpress-plugins/orbisius-theme-fixer/?utm_source=orbisius-child-theme-creator&utm_medium=readme_troubleshooting&utm_campaign=product" target="_blank" title="[new window]">Orbisius Theme Fixer</a>
+<a href="https://orbisius.com/products/wordpress-plugins/orbisius-theme-fixer/?utm_source=orbisius-child-theme-creator&utm_medium=readme_troubleshooting&utm_campaign=product" target="_blank" title="[new window]">Orbisius Theme Fixer</a>
 
 = What to do next? =
-Go to http://club.orbisius.com and post suggestions in our forum for new features that you'd like to see in this plugin or its extensions.
+Go to https://orbisius.com and post suggestions in our forum for new features that you'd like to see in this plugin or its extensions.
 
 = Need a custom plugin? =
 Let's talk.
-<a href="http://orbisius.com/page/free-quote/?utm_source=orbisius-child-theme-creator&utm_medium=plugin-readme-faq&utm_campaign=product"
+<a href="https://orbisius.com/page/free-quote/?utm_source=orbisius-child-theme-creator&utm_medium=plugin-readme-faq&utm_campaign=product"
                                    title="If you want a custom web/mobile app/plugin developed contact us. This opens in a new window/tab"
                                     class="button-primary" target="_blank">Get a Free Quote</a>
 
@@ -165,6 +165,10 @@ Todo
 - Orbisius Edit
 
 == Changelog ==
+
+= 1.5.1 =
+* Updated links to be https
+* Tested with WP 5.4
 
 = 1.5.0 =
 * changed Edit & Activaate links to look like buttons.
@@ -313,7 +317,7 @@ Todo
 * Tested with WP 4.0.1
 
 = 1.2.0 =
-* Fixed: BUG - Deleting a file from Theme 1 deletes files from Theme 2. Ref: http://club.orbisius.com/forums/topic/bug-deleting-a-file-from-theme-1-deletes-files-from-theme-2/
+* Fixed: BUG - Deleting a file from Theme 1 deletes files from Theme 2. Ref: https://orbisius.com/forums/topic/bug-deleting-a-file-from-theme-1-deletes-files-from-theme-2/
 * Fixes: CSS so the themes are showing up as 3 per row like they used to be.
 * Added a link to a larger version of the theme's screenshot.
 * Tested with WP 4
@@ -321,7 +325,7 @@ Todo
 = 1.1.9 =
 * Added the buttons under the 2nd editor
 * Hid the plugin from the Tools menu
-* Integrated with <a href="http://club.orbisius.com/products/wordpress-plugins/orbisius-theme-switcher/?utm_source=orbisius-child-theme-creator&utm_medium=readme_changelog&utm_campaign=product" target="_blank" title="[new window]">Orbisius Theme Switcher</a>
+* Integrated with <a href="https://orbisius.com/products/wordpress-plugins/orbisius-theme-switcher/?utm_source=orbisius-child-theme-creator&utm_medium=readme_changelog&utm_campaign=product" target="_blank" title="[new window]">Orbisius Theme Switcher</a>
 
 
 = 1.1.8 =

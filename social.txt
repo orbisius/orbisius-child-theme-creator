@@ -2,7 +2,7 @@ New version of Orbisius Child Theme Creator has been released #free #WordPress #
 https://wordpress.org/plugins/orbisius-child-theme-creator/
 
 
-Orbisius Child Theme Creator (http://club.orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/) allows you to quickly create child themes from any theme that you have currently installed on your site/blog.
+Orbisius Child Theme Creator (https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/) allows you to quickly create child themes from any theme that you have currently installed on your site/blog.
 It also creates rtl.css if exists in the parent theme.
 
 = Features =
@@ -17,7 +17,7 @@ It also creates rtl.css if exists in the parent theme.
 Go to Admin / Tools / Orbisius Child Theme Creator then click on the theme you like and the child theme will be created for you.
 
 = Support =
-* Support is handled on our site: http://club.orbisius.com/support/
+* Support is handled on our site: https://orbisius.com/support/
 * Please do NOT use the WordPress forums or other places to seek support.
 
 
@@ -25,5 +25,5 @@ Go to Admin / Tools / Orbisius Child Theme Creator then click on the theme you l
 
 
 Do you want to create #wordpress child #themes with a click of a button? Check this free #plugin (incl. video demo)
-http://club.orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/
+https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/
 
