@@ -266,7 +266,7 @@ function orbisius_child_theme_creator_set_options($opts = array(), $override = 0
 }
 
 function orbisius_child_theme_creator_is_live_env() {
-    return empty($_SERVER['DEV_ENV']);
+    return !empty($_SERVER['DEV_ENV']);
 }
 
 add_filter('orbisius_child_theme_creator_filter_asset_src', 'orbisius_child_theme_creator_fix_asset_src', 10, 2);
@@ -2221,6 +2221,7 @@ class orbisius_child_theme_creator_html {
 
     // generates HTML select
     public static function html_select($name = '', $sel = null, $options = array(), $attr = '') {
+        
         $name = trim($name);
         $elem_name = $name;
         $elem_name = strtolower($elem_name);
@@ -2259,7 +2260,26 @@ class orbisius_child_theme_creator_html {
 
         return $html;
     }
+
+    public static function html_files_tree( $class = '', $files = array() ) {
+
+        $html = '<ul class="orbisius_folder_list">';
+
+        foreach ( $files as $item => $value ) {
+
+            $is_folder = is_array($value) ? true : false;
+
+            $folder_checkbox = $is_folder ? '<label class="orbisius_folder_label"><input type="checkbox"name="'.$class.'_folder_checkbox[]" value="'.$item.'" ><span class="dashicons dashicons-category"></span>'.$item.'</label>' : '';
+            $list_class = $is_folder ? 'orbisius_folder' : 'orbisius_file';
+            $html .= '<li class="'.$list_class.'">' .$folder_checkbox . ( $is_folder ? orbisius_child_theme_creator_html::html_files_tree($class, $value) : '<label class="orbisius_file_label"><input type="checkbox" class="orb_files" name="'.$class.'_files_checkbox[]" value="'.$value.'" ><span class="dashicons dashicons-text-page"></span>'.$item.'</label>' ) . '</li>';
+        }
+        $html .= '</ul>';
+
+        return $html;
+
+    }
 }
+
 
 /**
  * This method creates 2 panes that the user is able to use to edit theme files.
@@ -2368,12 +2388,22 @@ function orbisius_ctc_theme_editor() {
                             <button type='submit' class='button button-primary' id="theme_1_submit" name="theme_1_submit">Save Changes</button>
                             <span class="status"></span>
                         </div>
+
                     </form>
 
+                    <form id="orbisius_ctc_copy_files_theme_1_form" class="orbisius_ctc_copy_files_theme_1_form">
+                        <div class="orbisius_ctc_theme_editor_theme_1_files_list" style="display:none">
+                            <div id="orbisius_copy_response_theme_1"></div>
+                            <div class="orbisius_ctc_theme_editor_theme_1_files_list_container orbisius_files_list"></div>
+                            <button type='submit' class='button button-primary' id="theme_1_copy_files" name="theme_1_copy_files">Copy Files</button>
+                            <button type='submit' class='button button-primary' id="theme_1_copy_files_cancel" name="theme_1_copy_files_cancel">Cancel</button>
+                        </div>
+                    </form>
 
                     <hr />
                     <div class="orbisius_ctc_theme_editor_theme_1_secondary_buttons secondary_buttons">
                         <button type="button" class='button' id="theme_1_new_file_btn" name="theme_1_new_file_btn">New File</button>
+                        <button type="button" class='button' id="theme_1_copy_file_btn" name="theme_1_copy_file_btn">Copy file(s)</button>
                         <button type="button" class='button' id="theme_1_syntax_chk_btn" name="theme_1_syntax_chk_btn">PHP Syntax Check</button>
                         <button type="button" class='button' id="theme_1_send_btn" name="theme_1_send_btn">Send</button>
                         <a href="<?php echo site_url('/');?>" class='button' target="_blank" title="new tab/window"
@@ -2490,12 +2520,23 @@ function orbisius_ctc_theme_editor() {
                             <button type='submit' class='button button-primary' id="theme_2_submit" name="theme_2_submit">Save Changes</button>
                             <span class="status"></span>
                         </div>
+                    </form>
+
+                    <form id="orbisius_ctc_copy_files_theme_2_form" class="orbisius_ctc_copy_files_theme_2_form">
+                        <div class="orbisius_ctc_theme_editor_theme_2_files_list" style="display:none">
+                            <div id="orbisius_copy_response_theme_2"></div>
+                            <div class="orbisius_ctc_theme_editor_theme_2_files_list_container orbisius_files_list"></div>
+                            <button type='submit' class='button button-primary' id="theme_2_copy_files" name="theme_2_copy_files">Copy Files</button>
+                            <button type='submit' class='button button-primary' id="theme_2_copy_files_cancel" name="theme_2_copy_files_cancel">Cancel</button>
+                        </div>
+                    </form>
 
                         <hr />
                         <div class="orbisius_ctc_theme_editor_theme_2_secondary_buttons secondary_buttons">
                             <!-- If you're looking at this code. Slavi says Hi to the curious developer! :) -->
                             
                             <button type="button" class='button' id="theme_2_new_file_btn" name="theme_2_new_file_btn">New File</button>
+                            <button type="button" class='button' id="theme_2_copy_file_btn" name="theme_2_copy_file_btn">Copy file(s)</button>
                             <button type="button" class='button' id="theme_2_syntax_chk_btn" name="theme_2_syntax_chk_btn">PHP Syntax Check</button>
                             <button type="button" class='button' id="theme_2_send_btn" name="theme_2_send_btn">Send</button>
                             <a href="<?php echo site_url('/');?>" class='button' target="_blank" title="new tab/window"
@@ -2531,7 +2572,7 @@ function orbisius_ctc_theme_editor() {
                             </div>
                             <!-- /send -->
                         </div>
-                    </form>
+                    <!-- </form> -->
                 </td>
             </tr>
         </table>
@@ -2583,6 +2624,15 @@ function orbisius_ctc_theme_editor_ajax() {
         case 'send_theme':
             $buff = orbisius_ctc_theme_editor_manage_file(5);
 
+            break;
+
+        case 'copy_files':
+            $buff = orbisius_ctc_theme_editor_manage_file(6);
+
+            break;
+
+        case 'get_files':
+            $buff = orbisius_ctc_theme_editor_generate_files_tree();
             break;
 
         default:
@@ -2758,11 +2808,81 @@ function orbisius_ctc_theme_editor_check_syntax($theme_file_contents) {
  * @return string
  */
 function orbisius_ctc_theme_editor_generate_dropdown() {
-    $theme_base_dir = $theme_1_file = '';
+    $req = orbisius_child_theme_creator_get_request();
+    $html_dropdown_theme_1_files = generate_list_of_theme_files($req);
+    $buff = orbisius_child_theme_creator_html::html_select($select_name, $theme_1_file, $html_dropdown_theme_1_files);
+
+    return $buff;
+}
+
+function orbisius_ctc_theme_editor_generate_files_tree() {
+
     $req = orbisius_child_theme_creator_get_request();
 
-    $select_name = 'theme_1_file';
+    $paths = generate_list_of_theme_files($req);
 
+    $tree = explodeTree( $paths, "/" );
+
+    if (!empty($req['theme_1'])) {
+        $name = 'theme_1_files';
+    } elseif (!empty($req['theme_2'])) {
+        $name = 'theme_2_files';
+    }
+    $buff = orbisius_child_theme_creator_html::html_files_tree($name, $tree);
+
+    return $buff;
+}
+
+// https://kvz.io/convert-anything-to-tree-structures-in-php.html
+function explodeTree($array, $delimiter = '_', $baseval = false)
+{
+	if(!is_array($array)) return false;
+	$splitRE   = '/' . preg_quote($delimiter, '/') . '/';
+	$returnArr = array();
+	foreach ($array as $key => $val) {
+		// Get parent parts and the current leaf
+		$parts	= preg_split($splitRE, $key, -1, PREG_SPLIT_NO_EMPTY);
+		$leafPart = array_pop($parts);
+
+		// Build parent structure
+		// Might be slow for really deep and large structures
+		$parentArr = &$returnArr;
+		foreach ($parts as $part) {
+			if (!isset($parentArr[$part])) {
+				$parentArr[$part] = array();
+			} elseif (!is_array($parentArr[$part])) {
+				if ($baseval) {
+					$parentArr[$part] = array('__base_val' => $parentArr[$part]);
+				} else {
+					$parentArr[$part] = array();
+				}
+			}
+			$parentArr = &$parentArr[$part];
+		}
+
+		// Add the final part to the structure
+		if (empty($parentArr[$leafPart])) {
+			$parentArr[$leafPart] = $val;
+		} elseif ($baseval && is_array($parentArr[$leafPart])) {
+			$parentArr[$leafPart]['__base_val'] = $val;
+		}
+    }
+    
+	return $returnArr;
+}
+
+
+/**
+ * This returns array of theme files
+
+ * @return array
+ */
+function generate_list_of_theme_files($req) {
+
+    $theme_base_dir = $theme_1_file = '';
+
+    $select_name = 'theme_1_file';
+    
     if (!empty($req['theme_1'])) {
         $theme_base_dir = empty($req['theme_1']) ? '' : preg_replace('#[^\w-]#si', '', $req['theme_1']);
         $theme_1_file = empty($req['theme_1_file']) ? 'style.css' : $req['theme_1_file'];
@@ -2790,10 +2910,7 @@ function orbisius_ctc_theme_editor_generate_dropdown() {
     }
 
     // we're going to make values to be keys as well.
-    $html_dropdown_theme_1_files = array_combine($files, $files);
-    $buff = orbisius_child_theme_creator_html::html_select($select_name, $theme_1_file, $html_dropdown_theme_1_files);
-
-    return $buff;
+    return array_combine($files, $files);
 }
 
 /**
@@ -2894,6 +3011,39 @@ function orbisius_ctc_theme_editor_manage_file( $cmd_id = 1 ) {
             @header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
             $buff = json_encode($status_rec);
         }
+    }
+    elseif ($cmd_id == 6) { // copye
+        // $to = empty($req['email']) ? '' : preg_replace('#[^\w-\.@,\'"]#si', '', $req['email']);
+        // $status_rec = orbisius_ctc_theme_editor_zip_theme($theme_base_dir, $to);
+
+        // if (function_exists('wp_send_json')) { // since WP 3.5
+        //     wp_send_json($status_rec);
+        // } else {
+        //     @header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
+        //     $buff = json_encode($status_rec);
+        // }
+
+        
+        
+        if ( $req['copy'] === '[]' || empty($req['copy_to']) ) {
+            return 'Missing data!';
+        }
+        
+        
+        $files = json_decode($req['copy'], true);
+
+        $theme_2_base_dir = empty($req['copy_to']) ? '______________' : preg_replace( $theme_dir_regex, '', $req['copy_to']);
+        $theme_2_dir = $theme_root . "$theme_2_base_dir/";
+
+        foreach ( $files as $file ) {
+            $srcfile = $theme_dir . $file;
+            $dstfile = $theme_2_dir . $file;
+            mkdir(dirname($dstfile), 0777, true);
+            copy($srcfile, $dstfile);
+        }
+
+        $buff = 'Files Copied!';
+
     }
     
     else {
