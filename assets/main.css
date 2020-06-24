@@ -151,6 +151,18 @@
     max-height: 400px;
 }
 
+.orbisius_copy_response {
+    padding-bottom: 1em;
+}
+
+.orbisius_copy_response.error {
+    color: red;
+}
+
+.orbisius_copy_response.success {
+    color: green;
+}
+
 .orbisius_folder_list .bold {
     font-weight: bold;
 }

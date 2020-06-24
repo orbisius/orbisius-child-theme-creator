@@ -184,6 +184,7 @@ function orbisius_ctc_theme_editor_setup() {
 
 
     $('#theme_1_copy_file_btn').on("click", function () {
+        $('#orbisius_copy_response_theme_1').html('').removeClass('updated').removeClass('error');
         $('.orbisius_ctc_theme_editor_theme_1_files_list').toggle();
         if ($('.orbisius_ctc_theme_editor_theme_1_files_list').is(":visible")) {
             app_load('#orbisius_ctc_theme_editor_theme_1_form', 'get_files', '.orbisius_ctc_theme_editor_theme_1_files_list_container', app_handle_theme_change);
@@ -192,6 +193,7 @@ function orbisius_ctc_theme_editor_setup() {
     });
 
     $('#theme_2_copy_file_btn').on("click", function () {
+        $('#orbisius_copy_response_theme_2').html('').removeClass('updated').removeClass('error');
         $('.orbisius_ctc_theme_editor_theme_2_files_list').toggle();
         if ($('.orbisius_ctc_theme_editor_theme_2_files_list').is(":visible")) {
             app_load('#orbisius_ctc_theme_editor_theme_2_form', 'get_files', '.orbisius_ctc_theme_editor_theme_2_files_list_container', app_handle_theme_change);
@@ -210,11 +212,13 @@ function orbisius_ctc_theme_editor_setup() {
 
     $('#theme_1_copy_files_cancel').on("click", function (e) {
         e.preventDefault();
+        $('#orbisius_copy_response_theme_1').html('').removeClass('updated').removeClass('error');
         $('.orbisius_ctc_theme_editor_theme_1_files_list').toggle();
     });
 
     $('#theme_2_copy_files_cancel').on("click", function (e) {
         e.preventDefault();
+        $('#orbisius_copy_response_theme_2').html('').removeClass('updated').removeClass('error');
         $('.orbisius_ctc_theme_editor_theme_2_files_list').toggle();
     });
 
@@ -909,12 +913,11 @@ function app_load(form_id, action, target_container, callback) {
         var files = jQuery(target_container).parent().find('.orb_files:checked').map(function () {
             return jQuery(this).val();
         }).get();
-
         var secondTheme = target_container.substr(-1) === '1' ? '#theme_2' : '#theme_1';
 
-        files = JSON.stringify(files);
+        files = encodeURIComponent(JSON.stringify(files));
         data += '&copy=' + files;
-        data += '&copy_to=' + jQuery(secondTheme).val();
+        data += '&copy_to=' + encodeURIComponent(jQuery(secondTheme).val());
     }
 
     jQuery.ajax({
@@ -932,6 +935,14 @@ function app_load(form_id, action, target_container, callback) {
 
             // https://stackoverflow.com/questions/2432749/jquery-delay-not-delaying
             if (result != '') {
+
+                if (action === 'copy_files' && result !== 'Missing data!') {
+                    result = JSON.parse(result);
+                    var status_class = result.status ? 'updated' : 'error';
+                    jQuery(target_container).removeClass('success').removeClass('error').addClass(status_class);
+                    jQuery(target_container).html(result.message);
+                    return;
+                }
                 if (jQuery(target_container).is("input,textarea")) {
                     jQuery(target_container).val(result);
 
