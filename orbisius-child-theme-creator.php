@@ -3,7 +3,7 @@
   Plugin Name: Orbisius Child Theme Creator
   Plugin URI: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/
   Description: This plugin allows you to quickly create child themes from any theme that you have currently installed on your site/blog.
-  Version: 1.5.0
+  Version: 1.5.2
   Author: Svetoslav Marinov (Slavi)
   Author URI: https://orbisius.com
  */
@@ -2366,6 +2366,9 @@ function orbisius_ctc_theme_editor() {
             <tr>
                 <td width="50%">
                     <form id="orbisius_ctc_theme_editor_theme_1_form" class="orbisius_ctc_theme_editor_theme_1_form">
+
+                        <?php wp_nonce_field( 'orbisius_ctc_nonce' ); ?>
+
                         <strong>Theme #1:</strong>
                         <?php echo orbisius_child_theme_creator_html::html_select('theme_1', $theme_1, $html_dropdown_themes); ?>
 
@@ -2383,6 +2386,7 @@ function orbisius_ctc_theme_editor() {
                         <div id="theme_1_file_contents_container">
                             <textarea id="theme_1_file_contents" name="theme_1_file_contents" rows="16" class="widefat"></textarea>
                         </div>
+                        
 
                         <div class="orbisius_ctc_theme_editor_theme_1_primary_buttons primary_buttons">
                             <button type='submit' class='button button-primary' id="theme_1_submit" name="theme_1_submit">Save Changes</button>
@@ -2498,6 +2502,9 @@ function orbisius_ctc_theme_editor() {
                 </td>
                 <td width="50%">
                     <form id="orbisius_ctc_theme_editor_theme_2_form" class="orbisius_ctc_theme_editor_theme_2_form">
+
+                        <?php wp_nonce_field( 'orbisius_ctc_nonce' ); ?>
+
                         <strong>Theme #2:</strong>
                         <?php echo orbisius_child_theme_creator_html::html_select('theme_2', $theme_2, $html_dropdown_themes); ?>
 
@@ -2591,6 +2598,10 @@ function orbisius_ctc_theme_editor_no_auth_ajax() {
  * This is called via ajax. Depending on the sub_cmd param a different method will be called.
  */
 function orbisius_ctc_theme_editor_ajax() {
+
+    check_ajax_referer( 'orbisius_ctc_nonce' );
+
+
     $buff = 'INVALID AJAX SUB_CMD';
 
     $req = orbisius_child_theme_creator_get_request();

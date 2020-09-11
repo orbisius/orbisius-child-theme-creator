@@ -933,6 +933,8 @@ function app_load(form_id, action, target_container, callback) {
                 result: result
             };
 
+            console.log(result)
+
             // https://stackoverflow.com/questions/2432749/jquery-delay-not-delaying
             if (result != '') {
 
