@@ -318,7 +318,11 @@ function orbisius_child_theme_creator_admin_enqueue_scripts($current_page = '') 
     wp_enqueue_script( 'jquery' );
     wp_register_script( 'orbisius_child_theme_creator', plugins_url("/assets/main{$suffix}.js", __FILE__), array('jquery', ),
             filemtime( plugin_dir_path( __FILE__ ) . "/assets/main{$suffix}.js" ), true);
-    wp_enqueue_script( 'orbisius_child_theme_creator' );
+
+    if (strpos($current_page, 'orbisius_child_theme_creator_theme_editor_action') !== false) {
+        wp_enqueue_script( 'orbisius_child_theme_creator' );
+    }
+    
     
     do_action( 'orbisius_child_theme_creator_admin_enqueue_scripts', array( 'suffix' => $suffix, ) );
 }
@@ -2396,6 +2400,7 @@ function orbisius_ctc_theme_editor() {
                     </form>
 
                     <form id="orbisius_ctc_copy_files_theme_1_form" class="orbisius_ctc_copy_files_theme_1_form">
+                        <?php wp_nonce_field( 'orbisius_ctc_nonce' ); ?>
                         <div class="orbisius_ctc_theme_editor_theme_1_files_list" style="display:none">
                             <div class="orbisius_ctc_theme_editor_theme_1_files_list_container orbisius_files_list"></div>
                             <div id="orbisius_copy_response_theme_1" class="orbisius_copy_response"></div>
@@ -2530,6 +2535,7 @@ function orbisius_ctc_theme_editor() {
                     </form>
 
                     <form id="orbisius_ctc_copy_files_theme_2_form" class="orbisius_ctc_copy_files_theme_2_form">
+                        <?php wp_nonce_field( 'orbisius_ctc_nonce' ); ?>
                         <div class="orbisius_ctc_theme_editor_theme_2_files_list" style="display:none">
                             <div class="orbisius_ctc_theme_editor_theme_2_files_list_container orbisius_files_list"></div>
                             <div id="orbisius_copy_response_theme_2" class="orbisius_copy_response"></div>
@@ -2598,12 +2604,11 @@ function orbisius_ctc_theme_editor_no_auth_ajax() {
  * This is called via ajax. Depending on the sub_cmd param a different method will be called.
  */
 function orbisius_ctc_theme_editor_ajax() {
-
     check_ajax_referer( 'orbisius_ctc_nonce' );
-
-
+    
+    
     $buff = 'INVALID AJAX SUB_CMD';
-
+    
     $req = orbisius_child_theme_creator_get_request();
     $sub_cmd = empty($req['sub_cmd']) ? '' : $req['sub_cmd'];
 
