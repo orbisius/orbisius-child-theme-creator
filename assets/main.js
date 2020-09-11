@@ -61,7 +61,11 @@ var orbisius_child_theme_creator = {
                 // theme_1_ or theme_2_
                 jQuery("#theme_" + form_num + "_file option:selected").remove();
                 jQuery("#theme_" + form_num + "_file").trigger('change');
+            },
+            error: function () {
+                alert('Cheating?');
             }
+
         });
     }
 };
@@ -428,6 +432,10 @@ function orbisius_ctc_theme_editor_setup() {
                 orbisius_child_theme_creator.loader(0);
             },
 
+            error: function () {
+                alert('Cheating?');
+            },
+
             success: function (json) {
                 jQuery(target_container)
                     .empty()
@@ -471,6 +479,10 @@ function orbisius_ctc_theme_editor_setup() {
 
             complete: function () {
                 orbisius_child_theme_creator.loader(0);
+            },
+
+            error: function () {
+                alert('Cheating?');
             },
 
             success: function (json) {
@@ -538,6 +550,10 @@ function orbisius_ctc_theme_editor_setup() {
                 orbisius_child_theme_creator.loader(0);
             },
 
+            error: function () {
+                alert('Cheating?');
+            },
+
             success: function (json) {
                 jQuery(target_container)
                     .empty()
@@ -601,6 +617,10 @@ function orbisius_ctc_theme_editor_setup() {
 
             complete: function () {
                 orbisius_child_theme_creator.loader(0);
+            },
+
+            error: function () {
+                alert('Cheating?');
             },
 
             success: function (json) {
@@ -933,8 +953,6 @@ function app_load(form_id, action, target_container, callback) {
                 result: result
             };
 
-            console.log(result)
-
             // https://stackoverflow.com/questions/2432749/jquery-delay-not-delaying
             if (result != '') {
 
@@ -993,7 +1011,10 @@ function app_load(form_id, action, target_container, callback) {
                     jQuery(target_container).removeAttr('readonly');
                 }
             }
+        },
 
+        error: function () {
+            alert('Cheating?');
         }
     });
 }
