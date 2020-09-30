@@ -417,7 +417,7 @@ function orbisius_child_theme_creator_settings_page() {
                             <div class="inside">
 
                                 <ul>
-                                    <li>Download a Theme that you like</li>
+                                    <li>Download/install a theme that you like</li>
                                     <li>Create a child theme based on it</li>
                                     <li>Activate the child theme</li>
                                     <li>Customize the child theme</li>

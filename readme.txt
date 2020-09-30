@@ -169,6 +169,9 @@ Todo
 
 == Changelog ==
 
+= 1.5.2 =
+* Simplified settings page
+
 = 1.5.1 =
 * Updated links to be https
 * Tested with WP 5.4
