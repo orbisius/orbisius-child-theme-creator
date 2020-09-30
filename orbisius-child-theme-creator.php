@@ -427,7 +427,6 @@ function orbisius_child_theme_creator_settings_page() {
                             <h3><span>Usage / Help</span></h3>
                             <div class="inside">
 
-                                <strong>Process</strong><br/>
                                 <ul>
                                     <li>Download a Theme that you like</li>
                                     <li>Create a child theme based on it</li>
