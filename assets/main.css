@@ -1,4 +1,5 @@
-/* Product of Orbisius.com. Visit https://orbisius.com/ */
+/* Product of Orbisius.com. Visit http://club.orbisius.com/ */
+
 .orbisius_child_theme_creator_container .app-hide {
     display: none;
 }
@@ -17,6 +18,7 @@
 }
 
 /* Common */
+
 .orbisius_child_theme_creator_container .app-alert-error {
     background: #D54E21;
     border: 1px solid #eee;
@@ -63,6 +65,7 @@
 }
 
 /* dlg button colouring */
+
 .orbisius_child_theme_creator_container .app-dialog-button-ok {
     background: green !important;
     color: white !important;
@@ -73,7 +76,7 @@
     color: white !important;
 }
 
-.orbisius_child_theme_creator_container .app-button-left, .app-align-left{
+.orbisius_child_theme_creator_container .app-button-left, .app-align-left {
     float: left;
 }
 
@@ -82,17 +85,19 @@
 }
 
 .orbisius_child_theme_creator_container .app-button-container {
-    padding:10px;
+    padding: 10px;
     background: #ccc;
     margin-top: 15px;
     margin-bottom: 15px;
 }
 
 .orbisius_child_theme_creator_container .available-theme {
-    padding:10px;
-    margin:5px;
-    border: 2px solid white; /* we need this because there is a shift otherwise on hover. */
-    display:inline-block; /* so 3 themes fit on one row */
+    padding: 10px;
+    margin: 5px;
+    border: 2px solid white;
+    /* we need this because there is a shift otherwise on hover. */
+    display: inline-block;
+    /* so 3 themes fit on one row */
     width: 28%;
 }
 
@@ -111,6 +116,7 @@
 }
 
 /* Theme Editor */
+
 .orbisius_ctc_theme_editor_container .highlight {
     background: #FFFF33;
 }
@@ -126,16 +132,54 @@
 }
 
 /* The dropdowns move to a new line when files are longer */
-.orbisius_ctc_theme_editor_container #theme_1, .orbisius_ctc_theme_editor_container #theme_2, 
-	.orbisius_ctc_theme_editor_container #theme_1_file, .orbisius_ctc_theme_editor_container #theme_2_file {
-	max-width:35%;
+
+.orbisius_ctc_theme_editor_container #theme_1, .orbisius_ctc_theme_editor_container #theme_2, .orbisius_ctc_theme_editor_container #theme_1_file, .orbisius_ctc_theme_editor_container #theme_2_file {
+    max-width: 35%;
 }
 
 .orbisius_ctc_theme_editor_container .primary_buttons {
-    margin-top:5px;
+    margin-top: 5px;
 }
 
-.orbisius_ctc_theme_editor_theme_1_form .modified_content,
-.orbisius_ctc_theme_editor_theme_2_form .modified_content {
-    border: 1px dashed #D54E21/* !important*/;
+.orbisius_ctc_theme_editor_theme_1_form .modified_content, .orbisius_ctc_theme_editor_theme_2_form .modified_content {
+    border: 1px dashed #D54E21/* !important*/
+    ;
+}
+
+.orbisius_files_list {
+    overflow: auto;
+    max-height: 400px;
+}
+
+.orbisius_copy_response {
+    padding-bottom: 1em;
+}
+
+.orbisius_copy_response.error {
+    color: red;
+}
+
+.orbisius_copy_response.success {
+    color: green;
+}
+
+.orbisius_folder_list .bold {
+    font-weight: bold;
+}
+
+.orbisius_folder .orbisius_folder_list {
+    display: none;
+}
+
+.orbisius_folder_list li ul li {
+    padding-left: 1em;
+}
+
+.orbisius_folder_list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.orbisius_folder_list li {
+    min-width: 40%;
 }
