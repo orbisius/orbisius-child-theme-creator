@@ -3028,7 +3028,6 @@ function orbisius_ctc_theme_editor_manage_file( $cmd_id = 1 ) {
         }
     }
     elseif ($cmd_id == 6) { // copy
-
         $status = array(
             'status' => 0,
             'message' => '',
@@ -3048,22 +3047,20 @@ function orbisius_ctc_theme_editor_manage_file( $cmd_id = 1 ) {
         $files = json_decode($req['copy'], true);
 
         $theme_2_base_dir = preg_replace( $theme_dir_regex, '', $req['copy_to']);
-        
-        $theme_2_dir = $theme_root . "$theme_2_base_dir/";
+        $theme_2_dir = $theme_root . trailingslashit($theme_2_base_dir);
 
         foreach ( $files as $file ) {
-            $srcfile = $theme_dir . $file;
-            $dstfile = $theme_2_dir . $file;
+            $src_file = $theme_dir . $file;
+            $target_file = $theme_2_dir . $file;
+            $target_dir = dirname($target_file);
+            $stat = wp_mkdir_p($target_dir);
 
-            mkdir(dirname($dstfile), 0777, true);
-            
-            if ( !copy($srcfile, $dstfile) ) {
+            if ( !copy($src_file, $target_file) ) {
                 if ( $req['copy'] === '[]' ) {
                     $status['message'] = 'Cannot copy selected files!';
                     return json_encode($status);
                 }
             }
-            
         }
 
         $status = array(
@@ -3073,8 +3070,6 @@ function orbisius_ctc_theme_editor_manage_file( $cmd_id = 1 ) {
         );
 
         return json_encode($status);
-
-
     }
     
     else {
