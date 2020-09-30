@@ -429,7 +429,7 @@ function orbisius_child_theme_creator_settings_page() {
 
                         </div> <!-- .postbox -->
 
-<div class="postbox">
+                        <div class="postbox">
                             <?php
                                 $plugin_data = orbisius_child_theme_creator_get_plugin_data();
 
@@ -571,9 +571,20 @@ function orbisius_child_theme_creator_settings_page() {
 
                         <!-- Hire Us -->
                         <div class="postbox">
+                            <h3><span>Need a test WordPress site?</span></h3>
+                            <div class="inside">
+                                Try <a
+                                        href="https://qsandbox.com/?utm_source=orbisius-child-theme-creator&utm_medium=settings_screen&utm_campaign=product"
+                                   target="_blank" title="[new window]">qSandbox.com</a> today (has a free plan)
+                            </div> <!-- .inside -->
+                        </div> <!-- .postbox -->
+                        <!-- /Hire Us -->
+
+                        <!-- Hire Us -->
+                        <div class="postbox">
                             <h3><span>Hire Us</span></h3>
                             <div class="inside">
-                                Hire us to create a plugin/web/mobile app
+                                Hire us to create a plugin/web/SaaS app
                                 <br/><a href="//orbisius.com/page/free-quote/?utm_source=<?php echo str_replace('.php', '', basename(__FILE__));?>&utm_medium=plugin-settings&utm_campaign=product"
                                    title="If you want a custom web/mobile app/plugin developed contact us. This opens in a new window/tab"
                                     class="button-primary" target="_blank">Get a Free Quote</a>
