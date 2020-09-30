@@ -31,6 +31,7 @@ It also creates rtl.css if exists in the parent theme.
 * Edit theme files with our two theme editors.
 * Automatically creates rtl.css if it exists in the parent theme
 * The plugin uses minified css/js to make sure it loads quicker.
+* Copy files from one theme to another
 
 This plugin allows you to quickly edit theme files from Appearance &gt; Orbisius Theme Editor (entry added by the same plugin)
 It features two editors and you can pick snippets from one theme and paste into another.
@@ -170,7 +171,10 @@ Todo
 == Changelog ==
 
 = 1.5.2 =
+* Copy files from one theme to another
 * Simplified settings page
+* Tested with WP 5.5
+* Fixes and improvements
 
 = 1.5.1 =
 * Updated links to be https
