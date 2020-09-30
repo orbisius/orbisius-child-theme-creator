@@ -921,6 +921,8 @@ class orbisius_ctc_cloud_lib {
         $user_api = orbisius_child_theme_creator_user::get_instance();
         $api_key = $user_api->api_key();
         ?>
+        <br/>
+        <br/>
         <div id="orb_cloud_lib_wrapper_<?php echo $place;?>" class="orb_cloud_lib_wrapper orb_cloud_lib_wrapper_<?php echo $place;?>">
             <div class="snippet_wrapper">
                 <h3>Orbisius Cloud Library</h3>
