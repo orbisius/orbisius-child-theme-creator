@@ -396,19 +396,8 @@ function orbisius_child_theme_creator_settings_page() {
         <div id="icon-options-general" class="icon32"></div>
         <h2>Orbisius Child Theme Creator</h2>
 
-        <div class="updated"><p>
-                Some untested themes and plugin may break your site. We have launched a <strong>free</strong> service
-                (<a href="https://qsandbox.com/?utm_source=orbisius-child-theme-creator&utm_medium=settings_screen&utm_campaign=product"
-                    target="_blank" title="[new window]">https://qsandbox.com</a>)
-                that allows you to setup a test/sandbox
-                WordPress site in seconds. No technical knowledge is required.
-                <br/>Join today and test themes and plugins before you actually put them on your live site. For more info go to:
-                <a href="https://qsandbox.com/?utm_source=orbisius-child-theme-creator&utm_medium=settings_screen&utm_campaign=product"
-                   target="_blank" title="[new window]">https://qsandbox.com</a>
-        </p></div>
-
         <div class="updated0"><p>
-                This plugin doesn't currently have any configuration options. To use it go to 
+                This plugin doesn't currently have any options. To use it go to
                 <a href='<?php echo $just_link;?>'><strong>Appearance &rarr; Orbisius Child Theme Creator</strong></a>
         </p></div>
 
@@ -424,7 +413,7 @@ function orbisius_child_theme_creator_settings_page() {
 
                         <div class="postbox">
 
-                            <h3><span>Usage / Help</span></h3>
+                            <h3><span>Usage / Help</span> - <a href='<?php echo $just_link;?>'><strong>Appearance &rarr; Orbisius Child Theme Creator</strong></a></h3>
                             <div class="inside">
 
                                 <ul>
