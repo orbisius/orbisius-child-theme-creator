@@ -3068,7 +3068,7 @@ function orbisius_ctc_theme_editor_manage_file( $cmd_id = 1 ) {
 
         $status = array(
             'status' => 1,
-            'message' => 'All files has been succesfully copied!',
+            'message' => 'All files have been successfully copied.',
             'files'    => $files
         );
 
