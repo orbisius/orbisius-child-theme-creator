@@ -933,11 +933,11 @@ function app_load(form_id, action, target_container, callback) {
         var files = jQuery(target_container).parent().find('.orb_files:checked').map(function () {
             return jQuery(this).val();
         }).get();
-        var secondTheme = target_container.substr(-1) === '1' ? '#theme_2' : '#theme_1';
+        var second_theme = target_container.substr(-1) === '1' ? '#theme_2' : '#theme_1';
 
         files = encodeURIComponent(JSON.stringify(files));
         data += '&copy=' + files;
-        data += '&copy_to=' + encodeURIComponent(jQuery(secondTheme).val());
+        data += '&copy_to=' + encodeURIComponent(jQuery(second_theme).val());
     }
 
     jQuery.ajax({
@@ -953,16 +953,29 @@ function app_load(form_id, action, target_container, callback) {
                 result: result
             };
 
+
+
             // https://stackoverflow.com/questions/2432749/jquery-delay-not-delaying
             if (result != '') {
 
+                // copy files result
                 if (action === 'copy_files' && result !== 'Missing data!') {
                     result = JSON.parse(result);
                     var status_class = result.status ? 'updated' : 'error';
                     jQuery(target_container).removeClass('success').removeClass('error').addClass(status_class);
                     jQuery(target_container).html(result.message);
+
+                    var second_target = target_container.substr(-1) === '1' ? '2' : '1';
+
+                    // this cause files list  and dropdown to refresh..to be done
+                    app_load('#orbisius_ctc_theme_editor_theme_' + second_target + '_form', 'generate_dropdown', '#theme_' + second_target + '_file', app_handle_theme_change);
+
+                    if (jQuery('.orbisius_ctc_theme_editor_theme_' + second_target + '_files_list').is(":visible")) {
+                        app_load('#orbisius_ctc_theme_editor_theme_' + second_target + '_form', 'get_files', '.orbisius_ctc_theme_editor_theme_' + second_target + '_files_list_container', app_handle_theme_change);
+                    }
                     return;
                 }
+
                 if (jQuery(target_container).is("input,textarea")) {
                     jQuery(target_container).val(result);
 
@@ -989,6 +1002,8 @@ function app_load(form_id, action, target_container, callback) {
                     jQuery(document).trigger('orbisius_child_theme_editor_event_content_saved', [custm_event_data]);
 
                 }
+
+
             } else if (is_save_action) { // save action
                 jQuery('.status', jQuery(target_container).parent()).html('Oops. Cannot save.').addClass('app-alert-error');
             }
