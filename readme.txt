@@ -170,6 +170,9 @@ Todo
 
 == Changelog ==
 
+= 1.5.3 =
+* Added priority to the enqueued style so the child theme can override the parent theme's css styles
+
 = 1.5.2 =
 * Copy files from one theme to another
 * Simplified settings page
