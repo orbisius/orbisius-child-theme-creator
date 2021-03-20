@@ -1879,7 +1879,7 @@ function {$func_prefix}_child_theme_enqueue_styles() {
     );
 }
 
-add_action( 'wp_enqueue_scripts', '{$func_prefix}_child_theme_enqueue_styles' );
+add_action( 'wp_enqueue_scripts', '{$func_prefix}_child_theme_enqueue_styles', 25 );
 
 BUFF_EOF;
 
