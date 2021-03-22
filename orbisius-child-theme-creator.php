@@ -1861,6 +1861,7 @@ class orbisius_child_theme_creator {
 
 /**
  * Loads parent and child themes' style.css
+ * @todo use version last mod
  */
 function {$func_prefix}_child_theme_enqueue_styles() {
     \$parent_style = '{$func_prefix}_parent_style';
