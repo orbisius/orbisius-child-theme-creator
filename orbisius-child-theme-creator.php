@@ -2846,6 +2846,7 @@ function orbisius_ctc_theme_editor_generate_files_tree() {
     } elseif (!empty($req['theme_2'])) {
         $name = 'theme_2_files';
     }
+
     $buff = orbisius_child_theme_creator_html::html_files_tree($name, $tree);
 
     return $buff;
