@@ -820,7 +820,11 @@ function orbisius_child_theme_creator_tools_action() {
                 $installer->copy_main_files();
                 $installer->generate_style();
 	            $installer->create_file( 'functions.php', $theme_setup_params );
-	            $installer->create_file( 'index.html', $theme_setup_params );
+
+	            if (!empty($_REQUEST['create_index'])) {
+		            $installer->create_file( 'index.html', $theme_setup_params );
+	            }
+
 	            $installer->copy_parent_themes_options();
 
                 // Does the user want to copy the functions.php?
@@ -1008,6 +1012,9 @@ function orbisius_child_theme_creator_tools_action() {
                     . "Switch theme to the new theme after it is created</label></li>\n";
         }
 
+	    $buff .= "<li><label><input type='checkbox' id='orbisius_child_theme_creator_create_index' name='create_index' value='1' checked='checked' /> "
+	             . "Create index.html placeholder to prevent file listing in child theme directory</label></li>\n";
+
         // This allows the users to specify title and description of the target child theme
         $customize_info_container_id = 'orbisius_ctc_cust_info_' . md5($src);
         
@@ -1051,7 +1058,7 @@ function orbisius_child_theme_creator_tools_action() {
                     <tr>
                         <td>Version</td>
                         <td><input type='text' id='cust_child_theme_ver_$customize_info_container_id' name='child_custom_info[ver]' value='' placeholder='$ver' /></td>
-                    </tr>
+                    </tr>             
                   </table>
                 </div> <!-- /$customize_info_container_id -->
         ";
@@ -1818,7 +1825,7 @@ class orbisius_child_theme_creator {
 BUFF_EOF;
 
 	        $file_tpl = empty($params['buff']) ? $default_buff : $params['buff'];
-            $full_file = $this->target_dir_path . '/' . ltrim($file, '/\\');
+            $full_file = $this->target_dir_path . ltrim($file, '/\\');
 	        $file_tpl = trim($file_tpl);
 
 	        if (!file_exists($full_file) || !empty($params['override'])) {
