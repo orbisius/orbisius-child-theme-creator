@@ -2648,7 +2648,6 @@ function orbisius_ctc_theme_editor_no_auth_ajax() {
 function orbisius_ctc_theme_editor_ajax() {
     check_ajax_referer( 'orbisius_ctc_nonce' );
     
-    
     $buff = 'INVALID AJAX SUB_CMD';
     
     $req = orbisius_child_theme_creator_get_request();
