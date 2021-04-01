@@ -1871,14 +1871,21 @@ function {$func_prefix}_child_theme_enqueue_styles() {
 
 	// WP enqueues the child style automatically. We want to dequeue it so we can load parent first and child theme's css later
 	// We'll also append the last modified times for versions and for better cache clean up.
-	if (!empty($wp_styles->queue)) {
-		foreach ( $wp_styles->queue as $registered_style_id ) {
-			if ( $registered_style_id != $child_dir_id ) {
-				continue;
-			}
+	if ( ! empty( $wp_styles->queue ) ) {
+		$srch_arr = [
+			$parent_base_dir,
+			$parent_base_dir . '-style',
+			$parent_base_dir . '_style',
+			$child_dir_id,
+			$child_dir_id . '-style',
+			$child_dir_id . '_style',
+		];
 
-			wp_dequeue_style( $registered_style_id );
-			wp_deregister_style( $registered_style_id );
+		foreach ( $wp_styles->queue as $registered_style_id ) {
+			if ( in_array( $registered_style_id, $srch_arr ) ) {
+				wp_dequeue_style( $registered_style_id );
+				wp_deregister_style( $registered_style_id );
+			}
 		}
 	}
 
