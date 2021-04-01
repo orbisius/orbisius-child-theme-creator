@@ -2837,11 +2837,8 @@ function orbisius_ctc_theme_editor_generate_dropdown() {
 }
 
 function orbisius_ctc_theme_editor_generate_files_tree() {
-
     $req = orbisius_child_theme_creator_get_request();
-
     $paths = orbisius_ctc_generate_list_of_theme_files($req);
-
     $tree = orbisius_ctc_explode_tree( $paths, "/" );
 
     if (!empty($req['theme_1'])) {
