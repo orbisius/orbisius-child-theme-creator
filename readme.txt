@@ -163,7 +163,7 @@ Let's talk.
                                    title="If you want a custom web/mobile app/plugin developed contact us. This opens in a new window/tab"
                                     class="button-primary" target="_blank">Get a Free Quote</a>
 
-Todo
+@Todo
 - Add buttons in the WP's Theme listing page near Customize
 - Orbisius Create
 - Orbisius Edit
@@ -171,7 +171,9 @@ Todo
 == Changelog ==
 
 = 1.5.3 =
+* Update code to ensure that parent theme css is loaded first and then child theme's css file next.
 * Added priority to the enqueued style so the child theme can override the parent theme's css styles
+* Using last modified time for the parent and child themes' css files so the browsers load the files as soon as they are updated
 
 = 1.5.2 =
 * Copy files from one theme to another
