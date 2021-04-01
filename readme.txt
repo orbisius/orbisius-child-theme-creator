@@ -175,6 +175,7 @@ Let's talk.
 * Added priority to the enqueued style so the child theme can override the parent theme's css styles
 * Using last modified time for the parent and child themes' css files so the browsers load the files as soon as they are updated
 * Removed some social sharing widgets
+* Added an index.html file to prevent file listing when child theme folder is directly accessed
 
 = 1.5.2 =
 * Copy files from one theme to another
