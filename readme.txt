@@ -174,6 +174,7 @@ Let's talk.
 * Update code to ensure that parent theme css is loaded first and then child theme's css file next.
 * Added priority to the enqueued style so the child theme can override the parent theme's css styles
 * Using last modified time for the parent and child themes' css files so the browsers load the files as soon as they are updated
+* Removed some social sharing widgets
 
 = 1.5.2 =
 * Copy files from one theme to another
