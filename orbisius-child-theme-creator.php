@@ -2831,8 +2831,9 @@ function orbisius_ctc_theme_editor_check_syntax($theme_file_contents) {
 function orbisius_ctc_theme_editor_generate_dropdown() {
     $req = orbisius_child_theme_creator_get_request();
     $html_dropdown_theme_1_files = orbisius_ctc_generate_list_of_theme_files($req);
+	$select_name = '';
+	$theme_1_file = '';
     $buff = orbisius_child_theme_creator_html::html_select($select_name, $theme_1_file, $html_dropdown_theme_1_files);
-
     return $buff;
 }
 
@@ -2854,10 +2855,13 @@ function orbisius_ctc_theme_editor_generate_files_tree() {
 
 // https://kvz.io/convert-anything-to-tree-structures-in-php.html
 function orbisius_ctc_explode_tree($array, $delimiter = '_', $baseval = false) {
-    if ( !is_array($array) ) return false;
+    if ( !is_array($array) ) {
+        return false;
+    }
     
 	$split   = '/' . preg_quote($delimiter, '/') . '/';
 	$return_array = array();
+
 	foreach ($array as $key => $val) {
 		// Get parent parts and the current leaf
 		$parts	= preg_split($split, $key, -1, PREG_SPLIT_NO_EMPTY);
@@ -2890,23 +2894,21 @@ function orbisius_ctc_explode_tree($array, $delimiter = '_', $baseval = false) {
 	return $return_array;
 }
 
-
 /**
  * This returns array of theme files
 
  * @return array
  */
 function orbisius_ctc_generate_list_of_theme_files($req) {
-
-    $theme_base_dir = $theme_1_file = '';
-
-    $select_name = 'theme_1_file';
+	$theme_1_file = '';
+	$theme_base_dir = '';
+	$select_name = 'theme_1_file';
     
     if (!empty($req['theme_1'])) {
-        $theme_base_dir = empty($req['theme_1']) ? '' : preg_replace('#[^\w-]#si', '', $req['theme_1']);
+        $theme_base_dir = empty($req['theme_1']) ? '' : preg_replace('#[^\w\-]#si', '', $req['theme_1']);
         $theme_1_file = empty($req['theme_1_file']) ? 'style.css' : $req['theme_1_file'];
     } elseif (!empty($req['theme_2'])) {
-        $theme_base_dir = empty($req['theme_2']) ? '' : preg_replace('#[^\w-]#si', '', $req['theme_2']);
+        $theme_base_dir = empty($req['theme_2']) ? '' : preg_replace('#[^\w\-]#si', '', $req['theme_2']);
         $theme_1_file = empty($req['theme_2_file']) ? 'style.css' : $req['theme_2_file'];
         $select_name = 'theme_2_file';
     } else {
