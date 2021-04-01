@@ -793,14 +793,14 @@ function orbisius_child_theme_creator_tools_action() {
     $child_custom_info = empty($_REQUEST['child_custom_info']) ? array() : $_REQUEST['child_custom_info'];
 
     $parent_theme_base_dirname = trim($parent_theme_base_dirname);
-    $parent_theme_base_dirname = preg_replace('#[^\w-]#si', '-', $parent_theme_base_dirname);
-    $parent_theme_base_dirname = preg_replace('#[_-]+#si', '-', $parent_theme_base_dirname);
+    $parent_theme_base_dirname = preg_replace('#[^\w\-]#si', '-', $parent_theme_base_dirname);
+    $parent_theme_base_dirname = preg_replace('#[_\-]+#si', '-', $parent_theme_base_dirname);
     $parent_theme_base_dirname = trim($parent_theme_base_dirname, '-');
 
     if (!empty($_POST) || !empty($parent_theme_base_dirname)) {
         if (!wp_verify_nonce($orbisius_child_theme_creator_nonce, basename(__FILE__) . '-action')) {
             $errors[] = "Invalid action";
-        } elseif (empty($parent_theme_base_dirname) || !preg_match('#^[\w-]+$#si', $parent_theme_base_dirname)) {
+        } elseif (empty($parent_theme_base_dirname) || !preg_match('#^[\w\-]+$#si', $parent_theme_base_dirname)) {
             $errors[] = "Parent theme's directory is invalid. May contain only [a-z0-9-]";
         } elseif (strlen($parent_theme_base_dirname) > 70) {
             $errors[] = "Parent theme's directory should be fewer than 70 characters long.";
