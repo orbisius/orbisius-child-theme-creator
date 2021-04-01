@@ -2310,7 +2310,6 @@ class orbisius_child_theme_creator_html {
     }
 
     public static function html_files_tree( $class = '', $files = array() ) {
-
         $html = '<ul class="orbisius_folder_list">';
 
         foreach ( $files as $item => $value ) {
@@ -2321,13 +2320,12 @@ class orbisius_child_theme_creator_html {
             $list_class = $is_folder ? 'orbisius_folder' : 'orbisius_file';
             $html .= '<li class="'.$list_class.'">' .$folder_checkbox . ( $is_folder ? orbisius_child_theme_creator_html::html_files_tree($class, $value) : '<label class="orbisius_file_label"><input type="checkbox" class="orb_files" name="'.$class.'_files_checkbox[]" value="'.$value.'" ><span class="dashicons dashicons-text-page"></span>'.$item.'</label>' ) . '</li>';
         }
+
         $html .= '</ul>';
 
         return $html;
-
     }
 }
-
 
 /**
  * This method creates 2 panes that the user is able to use to edit theme files.
