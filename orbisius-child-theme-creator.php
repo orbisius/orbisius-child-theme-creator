@@ -2890,6 +2890,7 @@ function orbisius_ctc_theme_editor_generate_files_tree() {
     return $buff;
 }
 
+
 // https://kvz.io/convert-anything-to-tree-structures-in-php.html
 function orbisius_ctc_explode_tree($array, $delimiter = '_', $baseval = false) {
     if ( !is_array($array) ) {
@@ -2927,11 +2928,11 @@ function orbisius_ctc_explode_tree($array, $delimiter = '_', $baseval = false) {
 			$parent_arr[$leaf]['__base_val'] = $val;
 		}
     }
-
-    var_dump($return_array);
     
 	return $return_array;
 }
+
+$test = &$return_array;
 
 /**
  * This returns array of theme files
