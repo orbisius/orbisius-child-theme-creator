@@ -2870,9 +2870,7 @@ function orbisius_ctc_theme_editor_check_syntax($theme_file_contents) {
 function orbisius_ctc_theme_editor_generate_dropdown() {
     $req = orbisius_child_theme_creator_get_request();
     $html_dropdown_theme_1_files = orbisius_ctc_generate_list_of_theme_files($req);
-	$select_name = '';
-	$theme_1_file = '';
-    $buff = orbisius_child_theme_creator_html::html_select($select_name, $theme_1_file, $html_dropdown_theme_1_files);
+    $buff = orbisius_child_theme_creator_html::html_select('', null, $html_dropdown_theme_1_files);
     return $buff;
 }
 
@@ -2929,6 +2927,8 @@ function orbisius_ctc_explode_tree($array, $delimiter = '_', $baseval = false) {
 			$parent_arr[$leaf]['__base_val'] = $val;
 		}
     }
+
+    var_dump($return_array);
     
 	return $return_array;
 }
