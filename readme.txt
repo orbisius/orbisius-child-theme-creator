@@ -80,7 +80,7 @@ Go to Admin > Appearance > Orbisius Child Theme Creator then click on the theme 
 Go to Admin > Appearance > Orbisius Theme Editor then click on the theme you like and the child theme will be created for you.
 
 = Demo =
-http://www.youtube.com/watch?v=BZUVq6ZTv-o
+https://www.youtube.com/watch?v=BZUVq6ZTv-o
 
 = Premium =
 Do you want to be able to preview themes from within the 2 editors?
@@ -172,6 +172,7 @@ Let's talk.
 
 = 1.5.4 =
 * Tested with WP 5.9
+* Fixed some https links
 
 = 1.5.3 =
 * Update code to ensure that parent theme css is loaded first and then child theme's css file next.
