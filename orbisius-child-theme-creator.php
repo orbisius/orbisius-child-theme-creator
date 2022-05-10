@@ -2982,10 +2982,12 @@ function orbisius_ctc_theme_editor_manage_file( $cmd_id = 1 ) {
         return 'Missing data!';
     }
 
-    $buff = $theme_base_dir = $theme_dir = $theme_file = '';
+    $buff = '';
+	$theme_dir = '';
+	$theme_file = '';
+	$theme_base_dir = '';
 
     $req = orbisius_child_theme_creator_get_request();
-
     $theme_root = trailingslashit( get_theme_root() );
 
     $theme_dir_regex = '#[^\w\-]#si';
