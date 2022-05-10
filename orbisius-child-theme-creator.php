@@ -2295,7 +2295,7 @@ class orbisius_child_theme_creator_html {
             // This makes certain options to have certain CSS class
             // which can be used to highlight the row
             // the key must start with __sys_CLASS_NAME
-            if (preg_match('#__sys_([\w-]+)#si', $label, $matches)) {
+            if (preg_match('#__sys_([\w\-]+)#si', $label, $matches)) {
                 $label = str_replace($matches[0], '', $label);
                 $selected .= " class='$matches[1]' ";
             }
@@ -3060,7 +3060,7 @@ function orbisius_ctc_theme_editor_manage_file( $cmd_id = 1 ) {
     }
 
     elseif ($cmd_id == 5) { // zip
-        $to = empty($req['email']) ? '' : preg_replace('#[^\w-\.@,\'"]#si', '', $req['email']);
+        $to = empty($req['email']) ? '' : preg_replace('#[^\w\-\.@,\'"]#si', '', $req['email']);
         $status_rec = orbisius_ctc_theme_editor_zip_theme($theme_base_dir, $to);
 
         if (function_exists('wp_send_json')) { // since WP 3.5
