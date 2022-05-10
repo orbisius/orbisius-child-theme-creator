@@ -3,7 +3,7 @@ Contributors: lordspace,orbisius
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7APYDVPBCSY9A
 Tags: theme,child theme,childtheme,childthemes,parent theme,child themes,CSS,styling,resposive design,design,custom themeing, shared hosting,theme editor theme,themes,wp,wordpress,orbisius,theme creator,custom theme,theme generator,css,css editor
 Requires at least: 3.4
-Tested up to: 5.5
+Tested up to: 5.9
 Requires PHP: 5.6
 Stable tag: 1.5.2
 License: GPLv2 or later
