@@ -2009,7 +2009,7 @@ class orbisius_child_theme_creator_util {
 
     /**
      * Uses wp_kses to sanitize the data
-     * @param  str/array $value
+     * @param  string|array $value
      * @return mixed: str/array
      * @throws Exception
      */
