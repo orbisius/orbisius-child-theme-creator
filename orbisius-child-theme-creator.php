@@ -3018,7 +3018,7 @@ function orbisius_ctc_theme_editor_manage_file( $cmd_id = 1 ) {
     }
 
     if ($cmd_id == 1) {
-        $buff = file_get_contents($theme_file, LOCK_SH);
+        $buff = file_get_contents($theme_file);
     } elseif ($cmd_id == 2) {
         $suff = '';
 
