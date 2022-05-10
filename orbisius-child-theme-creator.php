@@ -1993,6 +1993,13 @@ class orbisius_child_theme_creator_util {
         $file_name = preg_replace('#(?:\/+|\\+)#si', '/', $file_name);
         $file_name = ltrim($file_name, '/'); // rm leading /
 
+        // it seems sanitize_file_name confuses .min the WP sanitizer.
+        // /assets/css/boxicons.min_.css
+        if (stripos($file_name, '.min_.') !== false) {
+	        $file_name = str_replace('.min_.js', '.min.js', $file_name);
+	        $file_name = str_replace('.min_.css', '.min.css', $file_name);
+        }
+
         if (!empty($jail_root)) {
             $file_name = $jail_root . $file_name;
         }

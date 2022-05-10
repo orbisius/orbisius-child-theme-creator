@@ -174,6 +174,7 @@ Let's talk.
 * Tested with WP 5.9
 * Fixed some https links
 * Fix: file get contents do not receive LOCK_EX flag
+* Fix: the .min files weren't loaded
 
 = 1.5.3 =
 * Update code to ensure that parent theme css is loaded first and then child theme's css file next.
