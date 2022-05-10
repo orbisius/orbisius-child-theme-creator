@@ -5,7 +5,7 @@ Tags: theme,child theme,childtheme,childthemes,parent theme,child themes,CSS,sty
 Requires at least: 3.4
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 1.5.2
+Stable tag: 1.5.4
 License: GPLv2 or later
 
 Create Child Themes quickly and easily from any theme that you have currently installed on your site/blog.
