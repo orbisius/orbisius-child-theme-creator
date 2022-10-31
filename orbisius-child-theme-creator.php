@@ -171,7 +171,7 @@ function orbisius_child_theme_creator_add_admin_bar($name, $href = '', $parent =
 
     // Generate ID based on the current filename and the name supplied.
     $id = str_replace('.php', '', basename(__FILE__)) . '-' . $name;
-    $id = preg_replace('#[^\w-]#si', '-', $id);
+    $id = preg_replace('#[^\w\-]#si', '-', $id);
     $id = strtolower($id);
     $id = trim($id, '-');
 
