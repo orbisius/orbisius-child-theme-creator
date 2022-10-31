@@ -180,7 +180,7 @@ function orbisius_child_theme_creator_add_admin_bar($name, $href = '', $parent =
     // Generate the ID of the parent.
     if (!empty($parent)) {
         $parent = str_replace('.php', '', basename(__FILE__)) . '-' . $parent;
-        $parent = preg_replace('#[^\w-]#si', '-', $parent);
+        $parent = preg_replace('#[^\w\-]#si', '-', $parent);
         $parent = strtolower($parent);
         $parent = trim($parent, '-');
     }
