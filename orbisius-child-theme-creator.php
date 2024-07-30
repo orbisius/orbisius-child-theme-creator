@@ -936,8 +936,8 @@ function orbisius_child_theme_creator_tools_action() {
         $create_url = esc_url($create_url);
 
         // cleanup old links or refreshes.
-        $create_url = preg_replace('#&parent_theme_base_dirname=[\w-]+#si', '', $create_url);
-        $create_url = preg_replace('#&orbisius_child_theme_creator_nonce=[\w-]+#si', '', $create_url);
+        $create_url = preg_replace('#&parent_theme_base_dirname=[\w\-]+#si', '', $create_url);
+        $create_url = preg_replace('#&orbisius_child_theme_creator_nonce=[\w\-]+#si', '', $create_url);
 
         $create_url .= '&parent_theme_base_dirname=' . $parent_theme_base_dirname_fmt;
         $create_url .= '&orbisius_child_theme_creator_nonce=' . $nonce;
