@@ -932,12 +932,17 @@ function orbisius_child_theme_creator_tools_action() {
         $functions_file = dirname(get_template_directory()) . "/$theme_basedir_name/functions.php";
         $parent_theme_base_dirname_fmt = urlencode($theme_basedir_name);
         $create_url = $_SERVER['REQUEST_URI'];
-        $create_url = strip_tags($create_url);
+        $create_url = orbisius_child_theme_creator_util::sanitize_data($create_url);
         $create_url = esc_url($create_url);
 
         // cleanup old links or refreshes.
-        $create_url = preg_replace('#&parent_theme_base_dirname=[\w\-]+#si', '', $create_url);
-        $create_url = preg_replace('#&orbisius_child_theme_creator_nonce=[\w\-]+#si', '', $create_url);
+        if (strpos($create_url, '&parent_theme_base_dirname=') !== false) {
+            $create_url = preg_replace('#&parent_theme_base_dirname=[\w\-]+#si', '', $create_url);
+        }
+
+        if (strpos($create_url, '&orbisius_child_theme_creator_nonce=') !== false) {
+            $create_url = preg_replace('#&orbisius_child_theme_creator_nonce=[\w\-]+#si', '', $create_url);
+        }
 
         $create_url .= '&parent_theme_base_dirname=' . $parent_theme_base_dirname_fmt;
         $create_url .= '&orbisius_child_theme_creator_nonce=' . $nonce;
