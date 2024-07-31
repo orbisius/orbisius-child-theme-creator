@@ -1,7 +1,7 @@
 === Child Theme Creator by Orbisius ===
 Contributors: lordspace,orbisius
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7APYDVPBCSY9A
-Tags: theme,child theme,childtheme,childthemes,parent theme,child themes,CSS,styling,resposive design,design,custom themeing, shared hosting,theme editor theme,themes,wp,wordpress,orbisius,theme creator,custom theme,theme generator,css,css editor
+Tags: child theme, child themes, design, theme generator, theme creator
 Requires at least: 3.4
 Tested up to: 6.5
 Requires PHP: 5.6
@@ -169,6 +169,9 @@ Let's talk.
 - Orbisius Edit
 
 == Changelog ==
+
+= 1.5.6 =
+* reduced the number of tags. WP org complained about having more than 5 tags
 
 = 1.5.5 =
 * Maintenance release
