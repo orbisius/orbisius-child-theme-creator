@@ -9,7 +9,7 @@ class orbisius_child_theme_creator_user {
      * Singleton pattern i.e. we have only one instance of this obj
      *
      * @staticvar type $instance
-     * @return \cls
+     * @return static
      */
     public static function get_instance() {
         static $instance = null;
@@ -26,8 +26,8 @@ class orbisius_child_theme_creator_user {
     
     /**
      * 
-     * @param str/opt $key
-     * @return str
+     * @param string $key
+     * @return mixed
      */
     public function api_key($key = null) {
         static $val = null;
@@ -53,8 +53,8 @@ class orbisius_child_theme_creator_user {
     
     /**
      * 
-     * @param str/opt $data
-     * @return str
+     * @param mixed $data
+     * @return mixed
      */
     public function plan($data = null) {
         static $val = null;
@@ -80,8 +80,8 @@ class orbisius_child_theme_creator_user {
     
     /**
      * 
-     * @param str/opt $key
-     * @return str
+     * @param string $key
+     * @return string
      */
     public function email($key = null) {
         static $val = null;
@@ -122,6 +122,46 @@ class orbisius_child_theme_creator_user {
         $this->plan('');
         $this->email('');
         $this->api_key('');
+    }
+
+    /**
+     * Checks if user has sufficient permissions to manage child themes
+     * Requires either edit_themes or install_themes capability
+     *
+     * @param int|WP_User $user
+     * @return bool
+     */
+    public function has_access($user = null)
+    {
+        if (empty($user)) {
+            $user = wp_get_current_user();
+        } elseif (is_numeric($user)) {
+            $user = get_user_by('id', $user);
+        } elseif (is_string($user)) {
+            if (strpos($user, '@') !== false) {
+                $user = get_user_by('email', $user);
+            } else {
+                $user = get_user_by('login', $user);
+            }
+        }
+
+        if (empty($user)) {
+            return false;
+        }
+
+        // Allow filtering of required capabilities
+        $required_caps = apply_filters('orbisius_ctc_required_caps', [
+            'edit_themes',
+            'install_themes',
+        ]);
+
+        foreach ($required_caps as $cap) {
+            if (user_can($user, $cap)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }
