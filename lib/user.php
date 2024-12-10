@@ -150,7 +150,7 @@ class orbisius_child_theme_creator_user {
         }
 
         // Allow filtering of required capabilities
-        $required_caps = apply_filters('orbisius_ctc_required_caps', [
+        $required_caps = apply_filters('orbisius_child_theme_creator_filter_required_caps', [
             'edit_themes',
             'install_themes',
         ]);
