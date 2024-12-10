@@ -128,7 +128,7 @@ class orbisius_child_theme_creator_user {
      * Checks if user has sufficient permissions to manage child themes
      * Requires either edit_themes or install_themes capability
      *
-     * @param int|WP_User $user
+     * @param int|string|WP_User $user
      * @return bool
      */
     public function has_access($user = null)
