@@ -172,7 +172,7 @@ Let's talk.
 
 = 1.5.6 =
 * reduced the number of tags. WP org complained about having more than 5 tags
-* fixes in the cloud library
+* removed cloud library
 
 = 1.5.5 =
 * Maintenance release
