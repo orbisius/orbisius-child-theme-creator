@@ -165,22 +165,22 @@ class orbisius_ctc_cloud_lib {
 
     /**
      * Makes a request to API and get response
-     * @return JSON array	response from the api
+     * @return orbisius_child_theme_creator_result
      */
     public function call($url, $req_params = array()) {
         // Prepend user's api key if any.
         if (empty($req_params['orb_cloud_lib_data']['api_key'])) {
             $user_api = orbisius_child_theme_creator_user::get_instance();
             $api_key = $user_api->api_key();
-            
+
             if (!empty($api_key)) {
                 $req_params['orb_cloud_lib_data']['api_key'] = $api_key;
             }
         }
-        
+
         $res = new orbisius_child_theme_creator_result();
-        
-        $wp_req_params =array(
+
+        $wp_req_params = array(
             'method' => 'POST',
             'timeout' => 20,
             'redirection' => 5,
@@ -189,9 +189,9 @@ class orbisius_ctc_cloud_lib {
             //'sslverify' => false,
             'body' => $req_params,
         );
-        
+
         $response = wp_remote_post($url, $wp_req_params);
-        
+
         if ( is_wp_error( $response ) ) {
            $res->msg( $response->get_error_message() );
         } else {
@@ -210,7 +210,7 @@ class orbisius_ctc_cloud_lib {
     public function process_login() {
         $pass = orbisius_child_theme_creator_get('orb_ctc_pass');
         $email = orbisius_child_theme_creator_get('orb_ctc_email');
-        
+
         $params =array(
             'orb_cloud_lib_data' => array(
                 'cmd' => 'user.login',
@@ -227,14 +227,14 @@ class orbisius_ctc_cloud_lib {
             $ctx = array(
                 'api_res' => $api_res,
             );
-            
+
             if ($api_res->is_success()) {
                 do_action('orbisius_child_theme_creator_addon_cloud_lib_action_auth_success', $ctx);
             } else {
                 do_action('orbisius_child_theme_creator_addon_cloud_lib_action_auth_error', $ctx);
             }
         }
-        
+
         wp_send_json($req_res->is_success() ? $req_res->data('result') : $req_res->to_array());
     }
 
@@ -257,14 +257,14 @@ class orbisius_ctc_cloud_lib {
         if ( !empty($email)) {
             $user_api->email($email);
         }
-        
+
         $plan_data = $api_res->data('plan_data');
-        
+
         if (!empty($plan_data)) {
             $plan_data = $user_api->plan($plan_data);
         }
     }
-    
+
     /**
      * Deletes the api key saved in the current user's meta
      */
@@ -275,7 +275,7 @@ class orbisius_ctc_cloud_lib {
         $req_res = new orbisius_child_theme_creator_result();
         $req_res->status(1);
         $req_res->data('result', new orbisius_child_theme_creator_result(1));
-        
+
         wp_send_json($req_res->is_success() ? $req_res->data('result') : $req_res->to_array());
     }
 
@@ -285,7 +285,7 @@ class orbisius_ctc_cloud_lib {
     public function process_signup() {
         $pass = orbisius_child_theme_creator_get('orb_ctc_pass');
         $email = orbisius_child_theme_creator_get('orb_ctc_email');
-        
+
         $params = array(
             'orb_cloud_lib_data' => array(
                 'cmd' => 'user.register',
@@ -295,21 +295,21 @@ class orbisius_ctc_cloud_lib {
         );
 
         $req_res = $this->call($this->api_url, $params);
-        
+
         if ($req_res->is_success()) {
             $api_res = $req_res->data('result');
 
             $ctx = array(
                 'api_res' => $api_res,
             );
-            
+
             if ($api_res->is_success()) {
                 do_action('orbisius_child_theme_creator_addon_cloud_lib_action_auth_success', $ctx);
             } else {
                 do_action('orbisius_child_theme_creator_addon_cloud_lib_action_auth_error', $ctx);
             }
         }
-        
+
         wp_send_json($req_res->is_success() ? $req_res->data('result') : $req_res->to_array());
     }
 
@@ -320,7 +320,8 @@ class orbisius_ctc_cloud_lib {
     public function cloud_autocomplete() {
         if (!empty($_REQUEST['term'])) {
             $search_for = sanitize_text_field($_REQUEST['term']);
-            
+            $search_for = trim($search_for);
+
             $params = array(
                 'orb_cloud_lib_data' => array(
                     'cmd' => 'item.list',
@@ -335,16 +336,17 @@ class orbisius_ctc_cloud_lib {
 
     /**
      * Sends search request to API
-     *@return	JSON API's response
+     *@return JSON API's response
     */
     public function cloud_search() {
-        if (!empty($_REQUEST['search'])) {
-            $search_for	= sanitize_text_field($_REQUEST['search']);
+        $search_kwd = empty($_REQUEST['search']) ? '' : sanitize_text_field($_REQUEST['search']);
+        $search_kwd = trim($search_kwd);
 
+        if (!empty($search_kwd)) {
             $params = array(
                 'orb_cloud_lib_data' => array(
                     'cmd' => 'item.list',
-                    'query' => $search_for,
+                    'query' => $search_kwd,
                 )
             );
 
@@ -356,34 +358,55 @@ class orbisius_ctc_cloud_lib {
     /**
      * Updates a snippet by ID
      * MUST send an ID to the API
-     * @return	JSON array with API's response
+     * @returnJSON array with API's response
      */
     public function cloud_update() {
-        $snippet_id = (int) orbisius_child_theme_creator_get('id');
-        $snippet_title = orbisius_child_theme_creator_get('title');
-        $snippet_text = orbisius_child_theme_creator_get('text');
+        try {
+            $req_res = new orbisius_child_theme_creator_result();
 
-        $params = array(
-            'orb_cloud_lib_data' => array(
-                'cmd' => $snippet_id ? 'item.update' : 'item.add',
-                'id' => $snippet_id,
-                'title' => $snippet_title,
-                'content' => $snippet_text,
-            )
-        );
+            do_action('orbisius_child_theme_creator_addon_cloud_lib_action_auth_error', array());
+            $user_api_obj = orbisius_child_theme_creator_user::get_instance();
 
-        $req_res = $this->call($this->api_url, $params);
-        wp_send_json($req_res->is_success() ? $req_res->data('result') : $req_res->to_array());
+            if (!is_user_logged_in()) {
+                throw new Exception('You need to be logged in to save a snippet.');
+            }
+
+            $snippet_id = (int) orbisius_child_theme_creator_get('id');
+            $snippet_title = orbisius_child_theme_creator_get('title');
+            $snippet_text = orbisius_child_theme_creator_get('text');
+
+            $params = array(
+                'orb_cloud_lib_data' => array(
+                    'cmd' => $snippet_id ? 'item.update' : 'item.add',
+                    'id' => $snippet_id,
+                    'title' => $snippet_title,
+                    'content' => $snippet_text,
+                )
+            );
+
+            $req_res = $this->call($this->api_url, $params);
+        } catch (Exception $e) {
+            $req_res->msg($e->getMessage());
+        } finally {
+            wp_send_json($req_res->is_success() ? $req_res->data('result') : $req_res->to_array());
+        }
     }
 
     /**
      * Deletes snippet by id
-     * 
+     *
      * MUST send an ID to the API
      */
     public function cloud_delete() {
-    	if (!empty($_REQUEST['id'])) {
-            $id	= sanitize_text_field($_REQUEST['id']);
+        try {
+            $req_res = new orbisius_child_theme_creator_result();
+
+            $id = empty($_REQUEST['id']) ? 0 : (int) sanitize_text_field($_REQUEST['id']);
+
+            if ($id <= 0) {
+                throw new Exception('Invalid snippet ID.');
+            }
+
             $params = array(
                 'orb_cloud_lib_data' => array(
                     'cmd' => 'item.delete',
@@ -392,50 +415,52 @@ class orbisius_ctc_cloud_lib {
             );
 
             $req_res = $this->call($this->api_url, $params);
-            wp_send_json($req_res->is_success() ? $req_res->data('result') : $req_res);
-    	}
+        } catch (Exception $e) {
+            $req_res->msg($e->getMessage());
+        } finally {
+            wp_send_json($req_res->is_success() ? $req_res->data('result') : $req_res->to_array());
+        }
     }
 
     /**
-     * 
+     *
      * @return string
      */
     public function get_current_tab_id() {
-        // $this->tabs[0]['id']
         $cur_tab_id = empty($_REQUEST['tab']) ? '' : wp_kses( $_REQUEST['tab'], array() );
- 
+
         if (empty($cur_tab_id)) {
             $user_api = orbisius_child_theme_creator_user::get_instance();
             $api_key = $user_api->api_key();
-            
+
             if (empty($api_key)) {
                 $cur_tab_id = 'orb_ctc_ext_cloud_lib_about';
             } else {
                 $cur_tab_id = 'orb_ctc_ext_cloud_lib_manage';
             }
         }
-        
+
         return $cur_tab_id;
     }
-    
+
     /**
-     * 
+     *
      */
     public function render_tabs() {
         $url = admin_url( 'themes.php?page=orbisius_child_theme_creator_theme_editor_action' );
         $cur_tab_id = $this->get_current_tab_id();
         ?>
         <div id="orb_ctc_addon_cloud_lib_tabs" class="orb_ctc_addon_cloud_lib_tabs">
-             <div class="nav-tab-wrapper"> 
+             <div class="nav-tab-wrapper">
                 <ul>
                     <?php foreach ( $this->tabs as $tab_rec ) : ?>
                         <?php
                         if (!$this->should_render_tab($tab_rec)) {
                             continue;
                         }
-                        
+
                         $tab_url = add_query_arg( 'tab', $tab_rec['id'], $url );
-                        $extra_tab_css = $tab_rec['id'] == $cur_tab_id ? 'ui-state-default ui-tabs-active' : ''; // nav-tab-active 
+                        $extra_tab_css = $tab_rec['id'] == $cur_tab_id ? 'ui-state-default ui-tabs-active' : ''; // nav-tab-active
                         ?>
                         <li class="nav-tab2 <?php echo $extra_tab_css;?>"><a href="<?php echo '#' . $tab_rec['id']; ?>"><?php echo $tab_rec['label'];?></a></li>
                     <?php endforeach; ?>
@@ -443,10 +468,10 @@ class orbisius_ctc_cloud_lib {
              </div>
         <?php
     }
-    
+
     /**
-     * 
-     * @param str $tab_id
+     *
+     * @param string $tab_id
      */    
     public function render_tab_content( $tab_id = '' ) {
     	$tab_id = empty($tab_id) ? $this->get_current_tab_id() : $tab_id; 
